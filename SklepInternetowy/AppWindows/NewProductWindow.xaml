@@ -1,0 +1,85 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SklepInternetowy.AppWindows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:FluentWPF="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF" x:Class="SklepInternetowy.AppWindows.NewProductWindow"
+        mc:Ignorable="d"
+     DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="NewProductWindow" Height="450" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+
+
+
+            <ColumnDefinition Width="146*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+
+
+        </Grid.RowDefinitions>
+        <Button Content="Wystaw" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Center" Width="151" Height="28" Margin="15,0,0,0" Cursor="Hand"/>
+        <ComboBox Height="28" Margin="10,0,10,0" Grid.Column="1" Grid.Row="3"/>
+        <Label Content="Nazwa Produktu" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Cena Netto" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Podatek VAT" HorizontalAlignment="Center" Height="29" Grid.Row="2" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Cena Brutto" HorizontalAlignment="Center" Height="28" Grid.Row="3" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Typ Płatności" HorizontalAlignment="Center" Height="28" Grid.Row="4" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Stan produktu" HorizontalAlignment="Center" Height="28" Grid.Row="5" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Typ Gwarancji" HorizontalAlignment="Center" Height="29" Grid.Row="6" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Ilość gwarancji" HorizontalAlignment="Center" Height="28" Grid.Row="7" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Marka Produktu" HorizontalAlignment="Center" Height="28" Grid.Row="8" VerticalAlignment="Center" Width="140"/>
+        <Label Content="Opis" Grid.Column="4" HorizontalAlignment="Center" Height="28" Grid.Row="3" VerticalAlignment="Top" Width="140" Margin="0,7,0,0"/>
+        <Label Content="Zdjęcie" Grid.Column="4" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="140" RenderTransformOrigin="0.485,-0.046"/>
+        <Button Content="Podwierdzenie" Grid.Column="4" HorizontalAlignment="Center" Height="30" Grid.Row="2" VerticalAlignment="Top" Width="140" Margin="0,11,0,0" Background="#FF51B73A" Cursor="Hand"/>
+        <Button  Content="Wprowadz" Grid.Column="4" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="140"/>
+        <TextBox  Grid.Column="1" HorizontalAlignment="Center" Height="28" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Cursor="IBeam" Margin="0,8,0,0"/>
+        <TextBox ToolTip="podać tylko liczbę" Text="10" Grid.Column="1" HorizontalAlignment="Center" Height="30" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Margin="0,10,0,0"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Height="28" Grid.Row="1" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="140" Cursor="IBeam"/>
+        <TextBox Background="AliceBlue" ToolTip="Tutaj wstawić dokładny opis produktu" Grid.Column="5" HorizontalAlignment="Center" Height="269" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="323" Cursor="IBeam" Margin="0,10,0,0" Grid.RowSpan="6"/>
+        <ComboBox  Background="AliceBlue" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top"/>
+        <ComboBox ItemsSource="{Binding Path=TempListCondition}" x:Name="ComboCondition"  Background="AliceBlue" ToolTip="Wybrać stan produktu" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="5" VerticalAlignment="Top"/>
+
+
+
+        <ComboBox Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="5,0,16,0" Grid.Column="1" Grid.Row="6"/>
+        <ComboBox ItemsSource="{Binding Path=TempListVat}" x:Name="ComboVAT" Background="AliceBlue" Height="28" Margin="10,0,10,0" Grid.Column="1" Grid.Row="2"/>
+
+        <Label Content="Data wystawienia" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151"/>
+        <Label Content="Data Wygaszenia" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="151" Margin="0,7,0,0" Grid.Row="1"/>
+        <Label Content="Ilość produktu" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="2"/>
+        <Label Content="Ilość dni wystawienia" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="3"/>
+        <Label Content="Rodzaj Dostawa" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="4"/>
+        <Label Content="Czas Dostawy" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="5"/>
+        <Label Content="Parametr nazwa" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="6"/>
+        <Label Content="Dodatkowy" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="151" Margin="0,11,0,0" Grid.Row="7"/>
+        <Label Content="Kategoria" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="151" Margin="0,7,0,0" Grid.Row="8"/>
+        <Image ToolTip="Przykładowe zdjęcie" Grid.Column="5" HorizontalAlignment="Left" Height="114" Margin="10,8,0,0" Grid.RowSpan="3" VerticalAlignment="Top" Width="173" Source="/AppWindows/Energooszczędy komputer.jpg" RenderTransformOrigin="3.074,2.824"/>
+        <TextBox Background="AliceBlue" Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Margin="0,7,0,0"/>
+        <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="7" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Margin="0,11,0,0"/>
+        <ComboBox Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,13,10,0" Grid.Column="3" Grid.Row="8" VerticalAlignment="Top"/>
+        <ComboBox Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,7,9,0" Grid.Column="3" Grid.Row="4" VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="ComboBrand" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="10,13,10,0" Grid.Column="1" Grid.Row="8" VerticalAlignment="Top"/>
+        <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="6" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="152"/>
+        <TextBox  ToolTip="podać tylko liczbę" Text="szt" Grid.Column="3" HorizontalAlignment="Center" Height="30" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="151" Cursor="IBeam"/>
+
+
+    </Grid>
+</Window>
