@@ -245,6 +245,31 @@ namespace SklepInternetowy
             }
         }
 
+        public void AddUser(string valueNick,byte[]valueHash,string valueName,string valueSurname,
+                            string valueEmail,string numberPhone,string valueAdress,string valueCity,
+                            string commandText) 
+        {
+            using (_con = new SqlConnection(sqlConnection))
+            {
+                _con.Open();
+                using (var cmd = _con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueNick", valueNick);
+                    cmd.Parameters.AddWithValue("@valueHash", valueHash);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueSurname", valueSurname);
+                    cmd.Parameters.AddWithValue("@valueEmail", valueEmail);
+                    cmd.Parameters.AddWithValue("@numberPhone", numberPhone);
+                    cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
+                    cmd.Parameters.AddWithValue("@valueCity", valueCity);
+                    cmd.ExecuteNonQuery();
+                }
+                _con.Close();
+            }
+        }
+
         public void Delete(int valueId,string commandText) 
         {
             using (_con = new SqlConnection(sqlConnection))

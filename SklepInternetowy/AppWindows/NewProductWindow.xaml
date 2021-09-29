@@ -53,12 +53,12 @@
         <TextBox ToolTip="podać tylko liczbę" Text="10" Grid.Column="1" HorizontalAlignment="Center" Height="30" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Margin="0,10,0,0"/>
         <TextBox Grid.Column="1" HorizontalAlignment="Center" Height="28" Grid.Row="1" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="140" Cursor="IBeam"/>
         <TextBox Background="AliceBlue" ToolTip="Tutaj wstawić dokładny opis produktu" Grid.Column="5" HorizontalAlignment="Center" Height="269" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="323" Cursor="IBeam" Margin="0,10,0,0" Grid.RowSpan="6"/>
-        <ComboBox  Background="AliceBlue" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding Path=TempListCondition}" x:Name="ComboCondition"  Background="AliceBlue" ToolTip="Wybrać stan produktu" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="5" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ComboTypePayment"  Background="AliceBlue" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ComboCondition" ItemsSource="{Binding Path=TempListCondition}"  Background="AliceBlue" ToolTip="Wybrać stan produktu" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="5" VerticalAlignment="Top"/>
 
 
 
-        <ComboBox Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="5,0,16,0" Grid.Column="1" Grid.Row="6"/>
+        <ComboBox x:Name="ComboWarranty" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="5,0,16,0" Grid.Column="1" Grid.Row="6"/>
         <ComboBox ItemsSource="{Binding Path=TempListVat}" x:Name="ComboVAT" Background="AliceBlue" Height="28" Margin="10,0,10,0" Grid.Column="1" Grid.Row="2"/>
 
         <Label Content="Data wystawienia" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151"/>
@@ -73,8 +73,8 @@
         <Image ToolTip="Przykładowe zdjęcie" Grid.Column="5" HorizontalAlignment="Left" Height="114" Margin="10,8,0,0" Grid.RowSpan="3" VerticalAlignment="Top" Width="173" Source="/AppWindows/Energooszczędy komputer.jpg" RenderTransformOrigin="3.074,2.824"/>
         <TextBox Background="AliceBlue" Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Margin="0,7,0,0"/>
         <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="7" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Margin="0,11,0,0"/>
-        <ComboBox Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,13,10,0" Grid.Column="3" Grid.Row="8" VerticalAlignment="Top"/>
-        <ComboBox Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,7,9,0" Grid.Column="3" Grid.Row="4" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ComboCategory" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,13,10,0" Grid.Column="3" Grid.Row="8" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ComboDelivery" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,7,9,0" Grid.Column="3" Grid.Row="4" VerticalAlignment="Top"/>
 
         <ComboBox x:Name="ComboBrand" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="10,13,10,0" Grid.Column="1" Grid.Row="8" VerticalAlignment="Top"/>
         <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="6" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="152"/>

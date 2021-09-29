@@ -16,6 +16,7 @@ using System.Management;
 using System.Data.SqlClient;
 using System.Data;
 using SklepInternetowy.AppWindows;
+using System.Security.Cryptography;
 
 namespace SklepInternetowy
 {
@@ -35,10 +36,10 @@ namespace SklepInternetowy
         public MainWindow()
         {
             InitializeComponent();
-            
+
             windowAuthentication = new Authentication();
             userPanel = new UserPanel();
-            sqlConnect =new SQLConnect();
+            sqlConnect = new SQLConnect();
             adminPanel = new AdminPanel();
 
             //TODO: PRZENIEŚĆ WSZYSTKIE DODAWANIA DO ADMINISTARTORA POZA DODAWANIEM PRODUKTU 
@@ -53,8 +54,19 @@ namespace SklepInternetowy
             //sqlConnect.Add("EA", "AddBrand");
             //sqlConnect.Add("Intel", "AddBrand");
             //sqlConnect.Add("Konto bankowe",26,"AddTypePayment");
-            
 
+            sqlConnect.AddUser("125Kowalski", makeHash("test"), "Jan", "Kowalski", "pa@wp.pl", "8888888", "Zielona 14a", "Opole", "AddUser");
+
+        }
+
+        byte[] makeHash(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                return bytes;
+            }
         }
 
         /// <summary>
@@ -64,12 +76,12 @@ namespace SklepInternetowy
         /// <returns>void</returns>
         private void Log_Open(object sender, RoutedEventArgs e)
         {
-            if (windowAuthentication.IsVisible== false) 
+            if (windowAuthentication.IsVisible == false)
             {
                 windowAuthentication = new Authentication();
                 windowAuthentication.Show();
             }
-            
+
         }
 
         /// <summary>
@@ -77,30 +89,25 @@ namespace SklepInternetowy
         /// </summary>
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            textSearch=TextSearch.Text;
-            
+            textSearch = TextSearch.Text;
+            //TODO: zrobić wyszukiwanie produktów
         }
 
         private void CloseApp(object sender, RoutedEventArgs e)
         {
-           
             this.Close();
             sqlConnect.Con.Close();
             Application.Current.Shutdown();
-
         }
 
-
-        private void Admin_Open(object sender, RoutedEventArgs e) 
+        private void Admin_Open(object sender, RoutedEventArgs e)
         {
-            if (adminPanel.IsVisible == false) 
+            if (adminPanel.IsVisible == false)
             {
                 adminPanel = new AdminPanel();
                 adminPanel.Show();
             }
-
         }
-
 
         private void MenuUser_Click(object sender, RoutedEventArgs e)
         {
@@ -109,13 +116,10 @@ namespace SklepInternetowy
                 userPanel = new UserPanel();
                 userPanel.Show();
             }
-        
-
         }
 
         private void CloseApp(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
             Application.Current.Shutdown();
         }
     }

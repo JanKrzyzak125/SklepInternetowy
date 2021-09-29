@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="AdminPanel" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="Button" Height="60" Margin="314,157,336,217" Width="150" Cursor="Hand"/>
+        <ComboBox  Height="46" Margin="30,164,621,0"  Width="149" VerticalAlignment="Top" />
+
     </Grid>
 </Window>

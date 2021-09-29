@@ -81,6 +81,9 @@ namespace SklepInternetowy.AppWindows
             ComboVAT.ItemsSource = tempListVat;
             ComboBrand.ItemsSource = tempListBrand;
             ComboCondition.ItemsSource = tempListCondition;
+            ComboCategory.ItemsSource = tempListCategory;
+            ComboDelivery.ItemsSource = tempListDelivery;
+            ComboWarranty.ItemsSource = tempListWarranty;
         }
 
 
@@ -92,20 +95,37 @@ namespace SklepInternetowy.AppWindows
             }
             ComboVAT.SelectedIndex=0;
 
+            foreach (DataRow row in sqlConnect.ReadTable("Condition", "Condition", "ValuesOne").Rows)
+            {
+                tempListCondition.Add(row[0].ToString());
+            }
+            ComboCondition.SelectedIndex = 0;
+
             foreach (DataRow row in sqlConnect.ReadTable("NameBrand", "Brand", "ValuesOne").Rows)
             {
                 tempListBrand.Add(row[0].ToString());
             }
             ComboBrand.SelectedIndex = 0;
 
-
-            foreach (DataRow row in sqlConnect.ReadTable("ValuesCondition").Rows ) 
+            foreach (DataRow row in sqlConnect.ReadTable("NameCategory", "Category", "ValuesOne").Rows)
             {
-                tempListCondition.Add(row[0].ToString());
+                tempListCategory.Add(row[0].ToString());
             }
-            ComboCondition.SelectedIndex = 0;
+            ComboCategory.SelectedIndex = 0;
 
+            foreach (DataRow row in sqlConnect.ReadTable("NameDelivery", "Delivery", "ValuesOne").Rows)
+            {
+                tempListDelivery.Add(row[0].ToString());
+            }
+            ComboDelivery.SelectedIndex = 0;
 
+            foreach (DataRow row in sqlConnect.ReadTable("TypeWarranty", "Warranty", "ValuesOne").Rows)
+            {
+                tempListWarranty.Add(row[0].ToString());
+            }
+            ComboWarranty.SelectedIndex = 0;
+
+            
 
 
 
