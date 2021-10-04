@@ -89,37 +89,37 @@ namespace SklepInternetowy.AppWindows
 
         public void FillingDate()
         {
-            foreach (DataRow row in sqlConnect.ReadTable("Vat_rate","VAT","ValuesOne").Rows)
+            foreach (DataRow row in sqlConnect.ReadTable("ValuesVat").Rows)
             {
                 tempListVat.Add(row[0].ToString() + "%");
             }
             ComboVAT.SelectedIndex=0;
 
-            foreach (DataRow row in sqlConnect.ReadTable("Condition", "Condition", "ValuesOne").Rows)
+            foreach (DataRow row in sqlConnect.ReadTable("ValuesCondition").Rows)
             {
                 tempListCondition.Add(row[0].ToString());
             }
             ComboCondition.SelectedIndex = 0;
 
-            foreach (DataRow row in sqlConnect.ReadTable("NameBrand", "Brand", "ValuesOne").Rows)
+            foreach (DataRow row in sqlConnect.ReadTable("ValuesBrand").Rows)
             {
                 tempListBrand.Add(row[0].ToString());
             }
             ComboBrand.SelectedIndex = 0;
 
-            foreach (DataRow row in sqlConnect.ReadTable("NameCategory", "Category", "ValuesOne").Rows)
+            foreach (DataRow row in sqlConnect.ReadTable("ValuesCategory").Rows)
             {
                 tempListCategory.Add(row[0].ToString());
             }
             ComboCategory.SelectedIndex = 0;
 
-            foreach (DataRow row in sqlConnect.ReadTable("NameDelivery", "Delivery", "ValuesOne").Rows)
+            foreach (DataRow row in sqlConnect.ReadTable("ValuesDelivery").Rows)
             {
                 tempListDelivery.Add(row[0].ToString());
             }
             ComboDelivery.SelectedIndex = 0;
 
-            foreach (DataRow row in sqlConnect.ReadTable("TypeWarranty", "Warranty", "ValuesOne").Rows)
+            foreach (DataRow row in sqlConnect.ReadTable("ValuesWarranty").Rows)
             {
                 tempListWarranty.Add(row[0].ToString());
             }

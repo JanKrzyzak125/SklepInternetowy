@@ -48,10 +48,10 @@ namespace SklepInternetowy
                         da.SelectCommand.CommandText = commandText;
                         DataTable ds = new DataTable(); //conn is opened by dataadapter
                         da.Fill(ds);
+                        _con.Close();
                         return ds;
                     }
                 }
-                _con.Close();
             }
         }
         
@@ -70,10 +70,11 @@ namespace SklepInternetowy
                         da.SelectCommand.Parameters.AddWithValue("@Table", nameTable);
                         DataTable ds = new DataTable(); //conn is opened by dataadapter
                         da.Fill(ds);
+                        _con.Close();
                         return ds;
                     }
                 }
-                _con.Close();
+                
             }
         }
 
@@ -245,6 +246,30 @@ namespace SklepInternetowy
             }
         }
 
+        public void AddCompany(string valueName,string valueNIP,string valueEmail, int valuePhone, 
+                               string valueAdress, string valueCity,int valueUser,string commandText) 
+        {
+            using (_con = new SqlConnection(sqlConnection))
+            {
+                _con.Open();
+                using (var cmd = _con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
+                    cmd.Parameters.AddWithValue("@valueCity", valueCity);
+                    cmd.Parameters.AddWithValue("@valuePhone", valuePhone);
+                    cmd.Parameters.AddWithValue("@valueEmail", valueEmail);
+                    cmd.Parameters.AddWithValue("@valueNip", valueNIP);
+                    cmd.Parameters.AddWithValue("@valueUser", valueUser);
+                    cmd.ExecuteNonQuery();
+                }
+                _con.Close();
+            }
+        }
+
+
         public void AddUser(string valueNick,byte[]valueHash,string valueName,string valueSurname,
                             string valueEmail,string numberPhone,string valueAdress,string valueCity,
                             string commandText) 
@@ -264,6 +289,40 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@numberPhone", numberPhone);
                     cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
                     cmd.Parameters.AddWithValue("@valueCity", valueCity);
+                    cmd.ExecuteNonQuery();
+                }
+                _con.Close();
+            }
+        }
+
+        public void Update(int valueId, string valueName, string commandText) 
+        {
+            using (_con = new SqlConnection(sqlConnection))
+            {
+                _con.Open();
+                using (var cmd = _con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("valueName", valueName);
+                    cmd.ExecuteNonQuery();
+                }
+                _con.Close();
+            }
+        }
+
+        public void Update(int valueId,int value, string commandText)
+        {
+            using (_con = new SqlConnection(sqlConnection))
+            {
+                _con.Open();
+                using (var cmd = _con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("value", value);
                     cmd.ExecuteNonQuery();
                 }
                 _con.Close();
