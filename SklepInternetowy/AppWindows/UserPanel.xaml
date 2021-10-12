@@ -10,24 +10,33 @@
         Width="1000">
 
     <Grid>
-        <DataGrid x:Name="UsersDataGrid" HorizontalAlignment="Center" Height="702" Margin="0,10,0,0" VerticalAlignment="Top" Width="980" MouseDoubleClick="DoubleClickUsersDataGrid" />
+        <DataGrid x:Name="UsersDataGrid" HorizontalAlignment="Center" Height="541" Margin="0,10,0,0" VerticalAlignment="Top" Width="980" MouseDoubleClick="DoubleClickUsersDataGrid" />
         <Button Content="Dodaj produkt" 
                 HorizontalAlignment="Left" 
-                Height="53" Margin="28,732,0,0" Width="165"
+                Height="53" Margin="10,556,0,199" Width="165"
                 Click="NewProduct_Click"/>
 
         <Button x:Name="ButtonAddRetailSales"
-                Content="Wystaw na sprzedaz" Height="50" Width="200" Margin="208,741,592,17"  
-                >
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-1.685"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="0.471"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+                Content="Wystaw na sprzedaz" 
+                Height="50" Width="200"  
+                Cursor="Hand" Margin="457,559,343,199"  
+                />
+        <Button x:Name="ButtonShowUserProduct" 
+                    Content="Pokaż produkty"
+                    Height="40" Margin="209,569,593,199" 
+        />
+        <ComboBox x:Name="ComboBoxViews" 
+                  Margin="36,653,718,0" VerticalAlignment="Top"
+                  
+        />
+
+        <Button x:Name="ButtonChangeViews" 
+                Click="ClickChangeViews" 
+                Margin="319,649,487,127" 
+                Content="Zmiana widoku"
+                />
+
+
 
 
     </Grid>

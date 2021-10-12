@@ -49,7 +49,7 @@ namespace SklepInternetowy
                 }
             }
         }
-        
+        /*
         public DataTable ReadTable(string nameColumns, string nameTable,string commandText)
         {
             using (_con = new SqlConnection(sqlConnection))
@@ -72,78 +72,45 @@ namespace SklepInternetowy
                 
             }
         }
+        */
+        public DataTable ShowProduct(int valueIdUser, string commandText) 
+        {
+            using (_con = new SqlConnection(sqlConnection))
+            {
+                _con.Open();
+                using (SqlDataAdapter da = new SqlDataAdapter())
+                {
+                    using (da.SelectCommand = _con.CreateCommand())
+                    {
+                        da.SelectCommand.CommandText = commandText;
+                        da.SelectCommand.Parameters.AddWithValue("@valueId", valueIdUser);
+                        DataTable ds = new DataTable(); //conn is opened by dataadapter
+                        da.SelectCommand.Parameters.Add("@Table_Var", new SqlDbType());
+                        da.SelectCommand.Parameters["@Table_Var"].Direction = ParameterDirection.ReturnValue;
+                        var result = da.SelectCommand.ExecuteReader();
+                       // da.Fill(ds);
+                        _con.Close();
+                        return ds;
+                    }
+                }
+            }
+            
+        }
 
 
         public void ShowProduct(MainWindow window, int Id_Product) // TODO: narazie to były różne próby i trzeba zrobić wpierw dodawanie
         {
 
 
-            /*
-            using (var cmd = _con.CreateCommand())
-            {
-                cmd.CommandText = "TCupom";
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
-
-                Random rand = new Random();
-                for (int i = 0; i < 1; i++)
-                {
-                    SqlParameter code = new SqlParameter("@cupom", SqlDbType.Int);
-                    code.Value = rand.Next();
-                    sqlParams.Add(code);
-                }
-
-                foreach (var cmdParam in sqlParams)
-                {
-                    cmd.Parameters.Add(cmdParam);
-                }
-
-
-                var retValParam = new SqlParameter("RetVal", SqlDbType.Int)
-                {
-                    //Set this property as return value
-                    Direction = ParameterDirection.ReturnValue
-                };
-
-                cmd.Parameters.Add(retValParam);
-                cmd.ExecuteScalar();
-
-                var retVal = retValParam.Value;
-                MessageBox.Show("Wynik" + retVal);
-            }
-
-            */
-
             /* 
-            using (var cmd = _con.CreateCommand())
-            {
-                cmd.CommandText = "ViewImages";
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Name,Image From Image", _con);
-
-                DataSet image = new DataSet();
-
-                adapter.Fill(image, "Image");
-                //window.MainGrid.ItemsSource = image.Tables["Image"].DefaultView;
-
-                int i = 0;
-
-                foreach (DataRow tempImage in image.Tables["Image"].Rows)
-                {
-                   
-
+       
                     byte[] img = (byte[])tempImage.ItemArray[1];
                     
                     using (MemoryStream stream = new MemoryStream(img))
-                    {
+                    
                         window.ImageProduct.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
                         
-                    }
-
-                    i++;
-                }
-                window.MainGrid.ItemsSource = image.Tables["Image"].DefaultView;
+                
             }
             */
         }
