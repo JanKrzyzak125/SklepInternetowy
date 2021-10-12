@@ -17,10 +17,7 @@ namespace SklepInternetowy
     class SQLConnect
     {
         private SqlConnection _con;
-        //private SqlCommand _com;
         private string sqlConnection = @"Data source=GŁÓWNY\SQLEXPRESS;Initial Catalog=StoreDatabase;Integrated Security=True;";
-
-        private List<Users> listUsers = new List<Users>();
 
         public SqlConnection Con
         {
@@ -33,8 +30,6 @@ namespace SklepInternetowy
             _con = new SqlConnection(sqlConnection);//czy jest to w tym miejscu potrzebne?
         }
 
-
-        
 
         public DataTable ReadTable(string commandText)
         {
@@ -78,26 +73,6 @@ namespace SklepInternetowy
             }
         }
 
-        /* TODO: zastanowić się co lepsze to czy rozwiązanie bez <T>
-        public DataTable Read1<T>(string query) where T : IDbConnection, new()
-        {
-            using (var conn = new T())
-            {
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = query;
-                    cmd.Connection.ConnectionString = sqlConnection;
-
-
-                    cmd.Connection.Open();
-                    DataTable table = new DataTable();
-                    table.Load(cmd.ExecuteReader());
-                    return table;
-                }
-            }
-        }
-
-        */
 
         public void ShowProduct(MainWindow window, int Id_Product) // TODO: narazie to były różne próby i trzeba zrobić wpierw dodawanie
         {
@@ -168,14 +143,9 @@ namespace SklepInternetowy
 
                     i++;
                 }
-
                 window.MainGrid.ItemsSource = image.Tables["Image"].DefaultView;
-
             }
             */
-
-
-
         }
 
         /// <summary>
@@ -295,6 +265,43 @@ namespace SklepInternetowy
             }
         }
 
+
+
+        public void AddProduct(int valueSeller, string valueName, string valueDescription,
+                               double valuePrice, int valueVat, int valueCondition, 
+                               int valueMaxQuantity,string valueNameParameter,
+                               string valueParameter,int valueWarranty, int valueWarrantyDays,
+                               int valueBrand, int valueCategory,byte[] valueImage, string commandText) 
+        {
+            using (_con = new SqlConnection(sqlConnection))
+            {
+                _con.Open();
+                using (var cmd = _con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueSeller", valueSeller);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueDescription", valueDescription);
+                    cmd.Parameters.AddWithValue("@valuePrice", valuePrice);
+                    cmd.Parameters.AddWithValue("@valueVat", valueVat);
+                    cmd.Parameters.AddWithValue("@valueCondition", valueCondition);
+                    cmd.Parameters.AddWithValue("@valueMaxQuantity", valueMaxQuantity);
+                    cmd.Parameters.AddWithValue("@valueNameParameter", valueNameParameter);
+                    cmd.Parameters.AddWithValue("@valueParameter", valueParameter);
+                    cmd.Parameters.AddWithValue("@valueWarranty", valueWarranty);
+                    cmd.Parameters.AddWithValue("@valueWarrantyDays", valueWarrantyDays);
+                    cmd.Parameters.AddWithValue("@valueBrand", valueBrand);
+                    cmd.Parameters.AddWithValue("@valueCategory", valueCategory);
+                    cmd.Parameters.AddWithValue("@valueImage", valueImage);
+                    cmd.ExecuteNonQuery();
+                }
+                _con.Close();
+            }
+        }
+
+        //TODO: czy aktualizacje robić dla tych mniejszych tabel czy tylko i wyłącznie do produktów/użytkownika/firmy ?
+
         public void Update(int valueId, string valueName, string commandText) 
         {
             using (_con = new SqlConnection(sqlConnection))
@@ -312,6 +319,7 @@ namespace SklepInternetowy
             }
         }
 
+       
         public void Update(int valueId,int value, string commandText)
         {
             using (_con = new SqlConnection(sqlConnection))
@@ -345,98 +353,12 @@ namespace SklepInternetowy
             }
         }
 
-
-        /*
-        /// <summary>
-        /// Methods 
-        /// </summary>
-        public void AddBrand(string brand) 
-        {
-            using (_con)
-            {
-                using (var cmd = _con.CreateCommand())
-                {
-                    cmd.CommandText = "AddBrand";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@valueName", brand);
-                    cmd.ExecuteNonQuery();
-                }
-
-            }
-        }
-
-
-        public void AddCondition(string condition)
-        {
-            using (_con)
-            {
-                using (var cmd = _con.CreateCommand())
-                {
-                    cmd.CommandText = "AddCondition";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@condition", condition);
-                    cmd.ExecuteNonQuery();
-                }
-
-            }
-        }
-
-
-        public void AddCategory(string nameCategory) 
-        {
-            using (_con) 
-            {
-                using(var cmd = _con.CreateCommand()) 
-                {
-                    cmd.CommandText = "AddCategory";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@valueName", nameCategory);
-                    cmd.ExecuteNonQuery();
-                }
-
-            }
-        }
-
-        public void AddWarranty(string typeWarranty)//TODO: usunąć dni w dodatku zmienic zapytanie w sql
-        {
-            using (_con)
-            {
-                using (var cmd = _con.CreateCommand())
-                {
-                    cmd.CommandText = "AddWarranty";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@valueType", typeWarranty);
-                    cmd.ExecuteNonQuery();
-                }
-
-            }
-        }
-
-
-        public void AddVatValue(int valueVat) 
-        {
-            using (_con) 
-            {
-                using (var cmd = _con.CreateCommand()) 
-                {
-                    cmd.CommandText = "AddVat";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Value",valueVat);
-                    cmd.ExecuteNonQuery();
-                }
-
-            }
-        }
-        */
-
+        /* TODO dodać dodawanie zdjęcia do samego produktu oraz pomoc przy tworzeniu połączeń
         public void AddImage()
         {
             using (_con)
             {
                 int number = 0;
-
-
-
                 string text = "DyskAdata";//TODO: dodać pole do wprowadzania 
                 using (var cmd = _con.CreateCommand())
                 {
@@ -468,6 +390,7 @@ namespace SklepInternetowy
                 }
             }
         }
+        */
 
     }
 }

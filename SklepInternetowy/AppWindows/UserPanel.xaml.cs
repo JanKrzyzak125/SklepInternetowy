@@ -25,32 +25,16 @@ namespace SklepInternetowy
             InitializeComponent();
         }
 
-        private void ClickSellingProduct(object sender, RoutedEventArgs e) 
+        private void DoubleClickUsersDataGrid(object sender, RoutedEventArgs e)
         {
             windowProducts = new WindowProduct();
-
-        }
-        private void ClickBuyedProducts(object sender, RoutedEventArgs e)
-        {
-            windowProducts = new WindowProduct();
-        }
-
-        private void Test_Click(object sender, RoutedEventArgs e)
-        {
-            WindowProduct windowProduct = new WindowProduct();
-            windowProduct.Show();
         }
 
         private void NewProduct_Click(object sender, RoutedEventArgs e)
         {
             NewProductWindow newProductWindow = new NewProductWindow();
             newProductWindow.Show();
-
         }
 
-        private void SelectUser_Click(object sender, RoutedEventArgs e) //Todo: do usunięcia gdy autoryzacja się pojawi
-        {
-
-        }
     }
 }

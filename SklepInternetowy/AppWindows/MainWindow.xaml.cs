@@ -17,6 +17,8 @@ using System.Data.SqlClient;
 using System.Data;
 using SklepInternetowy.AppWindows;
 using System.Security.Cryptography;
+using Microsoft.Win32;
+using System.IO;
 
 namespace SklepInternetowy
 {
@@ -56,10 +58,20 @@ namespace SklepInternetowy
             //sqlConnect.Add("Konto bankowe",26,"AddTypePayment");
             //sqlConnect.Add("Kurier", "AddDelivery");
             //sqlConnect.Add("Użytkownik","AddTypeUser");
+            /*
+            OpenFileDialog OpenDialog = new OpenFileDialog();
+            if (OpenDialog.ShowDialog() == true)
+            {
+                byte[] imageData = File.ReadAllBytes(OpenDialog.FileName);
+                sqlConnect.AddProduct(0, "Komputer", "Do grania", 124.15, 4, 1, 10, "", 
+                                      "", 0, 10, 0, 0, imageData, "AddProduct");
+            }
+            */
             //sqlConnect.AddCompany("Kebab","8888888888","ktotam.wp.pl",888888,"ul.Slaska 25a","Opole",0,"AddCompany");//TODO: Zrobić dodawanie do konkretnego zalogowanego! usera
             //sqlConnect.AddUser("125Kowalski", makeHash("test"), "Jan", "Kowalski", "pa@wp.pl", "8888888", "Zielona 14a", "Opole", "AddUser");
             //sqlConnect.Delete(0, "DeleteCompany");
-            //sqlConnect.Update(1,"SONY XPERIA","UpdateBrand");
+            sqlConnect.Delete(0, "DeleteProduct");
+            //sqlConnect.Update(1,"SONY XPERIA","UpdateBrand");//TODO CZY TO POTRZEBNE?
             //sqlConnect.Update(4,25,"UpdateVat");
         }
 

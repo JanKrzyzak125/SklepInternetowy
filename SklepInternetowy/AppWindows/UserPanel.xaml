@@ -5,27 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
-        Title="UserPanel" Height="824" Width="1000">
+        Title="UserPanel" 
+        Height="824" 
+        Width="1000">
 
     <Grid>
-        <DataGrid x:Name="GridSell" HorizontalAlignment="Left" Height="556" Margin="568,196,0,0" VerticalAlignment="Top" Width="395" MouseDoubleClick="ClickSellingProduct"/>
-        <DataGrid x:Name="GridBuy" HorizontalAlignment="Left" Height="556" Margin="148,196,0,0" VerticalAlignment="Top" Width="402" MouseDoubleClick="ClickBuyedProducts" />
-        <Label Content="Lista produktów kupionych" Background="BlanchedAlmond" HorizontalAlignment="Left" Height="33" Margin="148,158,0,0" VerticalAlignment="Top" Width="402" TextBlock.FontSize="20"  />
-        <Label Content="Lista produktów sprzedawanych" TextBlock.LineHeight="41"  TextBlock.TextAlignment="Left" Background="Violet"  FontSize="20"  HorizontalAlignment="Left" Height="36" Margin="568,156,0,0" VerticalAlignment="Top" Width="395" FontStyle="Italic" FontStretch="Normal" FontWeight="Light">
-            <Label.OpacityMask>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Orange"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Label.OpacityMask>
-            <Label.Effect>
-                <DropShadowEffect></DropShadowEffect>
-            </Label.Effect>
+        <DataGrid x:Name="UsersDataGrid" HorizontalAlignment="Center" Height="702" Margin="0,10,0,0" VerticalAlignment="Top" Width="980" MouseDoubleClick="DoubleClickUsersDataGrid" />
+        <Button Content="Dodaj produkt" 
+                HorizontalAlignment="Left" 
+                Height="53" Margin="28,732,0,0" Width="165"
+                Click="NewProduct_Click"/>
 
-        </Label>
-        <Button Content="Test" HorizontalAlignment="Left" Height="49" Margin="10,100,0,0" VerticalAlignment="Top" Width="133" Click="Test_Click"/>
-        <Button Content="Wystaw produkt/y" HorizontalAlignment="Left" Height="53" Margin="10,174,0,0" VerticalAlignment="Top" Width="133" Click="NewProduct_Click"/>
-        <Button Content="Wybierz użytkownika" HorizontalAlignment="Left" Height="58" Margin="703,66,0,0" VerticalAlignment="Top" Width="175" Cursor="Hand" Click="SelectUser_Click"/>
+        <Button x:Name="ButtonAddRetailSales"
+                Content="Wystaw na sprzedaz" Height="50" Width="200" Margin="208,741,592,17"  
+                >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-1.685"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.471"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+
 
     </Grid>
 </Window>
