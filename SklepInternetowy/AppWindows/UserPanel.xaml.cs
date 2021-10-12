@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 
 namespace SklepInternetowy
 {
-
     /// <summary>
     /// Logika interakcji dla klasy UserPanel.xaml
     /// </summary>
@@ -51,28 +50,45 @@ namespace SklepInternetowy
 
         }
 
+        //TODO w jaki sposób zmieniać nazwy taki czy w skrypcie?
+        void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch (e.PropertyName) 
+            {
+                case "Name":
+                    e.Column.Header = "Nazwa";
+                    break;
+                case "Description":
+                    e.Column.Header = "Opis";
+                    break;
+
+               
+                    
+
+            }
+        }
+
         private void ClickChangeViews(object sender, RoutedEventArgs e)
         {
             string tempViews = ComboBoxViews.SelectedItem.ToString();
-
+            DataTable tempTable;
             switch (tempViews)
             {
                 case "Widok zakupionych produktów":
 
                     break;
                 case "Widok dodanych produktów":
-                    DataTable tempTable =sqlConnect.ShowProduct(0, "FillBy");
-                    DataSet1.UsersProductDataTable dtc = new DataSet1.UsersProductDataTable();
+                    tempTable =sqlConnect.ShowProduct(0, "ViewUsersProducts");
+
+                    
+                    UsersDataGrid.ItemsSource = tempTable.DefaultView;
+
+          
 
 
 
-                   /*
-                    foreach (DataRow row in sqlConnect.ReadTable("ValuesCondition").Rows)
-                    {
-                        tempListCondition.Add(.ToString());
-                    }
-                    ComboCondition.SelectedIndex = 0;
-                   */
+
+
                     break;
                 case "Widok akutalnych sprzedaży":
 

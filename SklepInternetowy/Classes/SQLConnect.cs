@@ -83,12 +83,10 @@ namespace SklepInternetowy
                     using (da.SelectCommand = _con.CreateCommand())
                     {
                         da.SelectCommand.CommandText = commandText;
+                        da.SelectCommand.CommandType= CommandType.StoredProcedure;
                         da.SelectCommand.Parameters.AddWithValue("@valueId", valueIdUser);
                         DataTable ds = new DataTable(); //conn is opened by dataadapter
-                        da.SelectCommand.Parameters.Add("@Table_Var", new SqlDbType());
-                        da.SelectCommand.Parameters["@Table_Var"].Direction = ParameterDirection.ReturnValue;
-                        var result = da.SelectCommand.ExecuteReader();
-                       // da.Fill(ds);
+                        da.Fill(ds);
                         _con.Close();
                         return ds;
                     }
