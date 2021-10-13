@@ -47,7 +47,6 @@ namespace SklepInternetowy
             tempListViews.Add("Widok zakończonych sprzedaży");
             tempListViews.Add("Widok kupionych produktów");
 
-
         }
 
         //TODO w jaki sposób zmieniać nazwy taki czy w skrypcie?
