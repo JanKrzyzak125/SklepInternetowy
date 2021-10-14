@@ -21,6 +21,10 @@ namespace SklepInternetowy
 namespace SklepInternetowy
 {
 }
+
+namespace SklepInternetowy
+{
+}
 namespace SklepInternetowy.DataSet1TableAdapters {
     
     
