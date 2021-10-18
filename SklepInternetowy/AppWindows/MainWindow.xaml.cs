@@ -55,7 +55,7 @@ namespace SklepInternetowy
             //sqlConnect.Add("Genesis","AddBrand");
             //sqlConnect.Add("EA", "AddBrand");
             //sqlConnect.Add("Intel", "AddBrand");
-
+            /*
             string tempStringBank="54165465645644651454662465";
             int tempLimitString = sqlConnect.valueStringBank(0,"valueMaxStringBank");
             if (tempStringBank.Length==tempLimitString) 
@@ -68,6 +68,7 @@ namespace SklepInternetowy
             {
                 MessageBox.Show("nie udalo sie");
             }
+            */
             //sqlConnect.Add("Konto bankowe",26,"AddTypePayment");
             //sqlConnect.Add("Kurier", "AddDelivery");
             //sqlConnect.Add("Użytkownik","AddTypeUser");
