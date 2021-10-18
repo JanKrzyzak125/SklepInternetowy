@@ -60,7 +60,7 @@ namespace SklepInternetowy
                 case "Description":
                     e.Column.Header = "Opis";
                     break;
-
+                   
                
                     
 

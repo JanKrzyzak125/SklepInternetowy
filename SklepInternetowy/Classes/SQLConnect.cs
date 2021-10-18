@@ -14,105 +14,79 @@ using System.Collections.ObjectModel;
 
 namespace SklepInternetowy
 {
+    /// <summary>
+    /// Main class to connect with Database store
+    /// </summary>
     class SQLConnect
     {
-        private SqlConnection _con;
+        private SqlConnection con;
         private string sqlConnection = @"Data source=GŁÓWNY\SQLEXPRESS;Initial Catalog=StoreDatabase;Integrated Security=True;";
 
         public SqlConnection Con
         {
-            get => _con;
+            get => con;
         }
 
-
+        /// <summary>
+        /// Constructor class of SQLConnect
+        /// </summary>
         public SQLConnect()
         {
-            _con = new SqlConnection(sqlConnection);//czy jest to w tym miejscu potrzebne?
+            //con = new SqlConnection(sqlConnection);//czy jest to w tym miejscu potrzebne?
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="commandText"></param>
+        /// <returns></returns>
 
         public DataTable ReadTable(string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
+                con.Open();
                 using (SqlDataAdapter da = new SqlDataAdapter())
                 {
-                    using (da.SelectCommand = _con.CreateCommand())
+                    using (da.SelectCommand = con.CreateCommand())
                     {
                         da.SelectCommand.CommandText = commandText;
                         DataTable ds = new DataTable(); //conn is opened by dataadapter
                         da.Fill(ds);
-                        _con.Close();
+                        con.Close();
                         return ds;
                     }
                 }
             }
         }
-        /*
-        public DataTable ReadTable(string nameColumns, string nameTable,string commandText)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueIdUser"></param>
+        /// <param name="commandText"></param>
+        /// <returns></returns>
+        public DataTable ShowProduct(int valueIdUser, string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
+                con.Open();
                 using (SqlDataAdapter da = new SqlDataAdapter())
                 {
-                    using (da.SelectCommand = _con.CreateCommand())
+                    using (da.SelectCommand = con.CreateCommand())
                     {
                         da.SelectCommand.CommandText = commandText;
                         da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                        da.SelectCommand.Parameters.AddWithValue("@NameValue", nameColumns);
-                        da.SelectCommand.Parameters.AddWithValue("@Table", nameTable);
-                        DataTable ds = new DataTable(); //conn is opened by dataadapter
-                        da.Fill(ds);
-                        _con.Close();
-                        return ds;
-                    }
-                }
-                
-            }
-        }
-        */
-        public DataTable ShowProduct(int valueIdUser, string commandText) 
-        {
-            using (_con = new SqlConnection(sqlConnection))
-            {
-                _con.Open();
-                using (SqlDataAdapter da = new SqlDataAdapter())
-                {
-                    using (da.SelectCommand = _con.CreateCommand())
-                    {
-                        da.SelectCommand.CommandText = commandText;
-                        da.SelectCommand.CommandType= CommandType.StoredProcedure;
                         da.SelectCommand.Parameters.AddWithValue("@valueId", valueIdUser);
                         DataTable ds = new DataTable(); //conn is opened by dataadapter
                         da.Fill(ds);
-                        _con.Close();
+                        con.Close();
                         return ds;
                     }
                 }
             }
-            
+
         }
-
-
-        public void ShowProduct(MainWindow window, int Id_Product) // TODO: narazie to były różne próby i trzeba zrobić wpierw dodawanie
-        {
-
-
-            /* 
-       
-                    byte[] img = (byte[])tempImage.ItemArray[1];
-                    
-                    using (MemoryStream stream = new MemoryStream(img))
-                    
-                        window.ImageProduct.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-                        
-                
-            }
-            */
-        }
-
         /// <summary>
         /// universal methods that add to database
         /// </summary>
@@ -121,10 +95,10 @@ namespace SklepInternetowy
 
         public void Add(string valueName, string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -132,7 +106,7 @@ namespace SklepInternetowy
                     cmd.ExecuteNonQuery();
 
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
@@ -144,32 +118,33 @@ namespace SklepInternetowy
 
         public void Add(int value, string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@value", value);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
+
         /// <summary>
         /// universal methods that add to database
         /// </summary>
         /// <param name="valueName">String with name</param>
         /// <param name="value">int with value</param>
         /// <param name="commandText">Name of Command</param>
-        public void Add(string valueName, int value, string commandText) 
+        public void Add(string valueName, int value, string commandText)
         {
 
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -177,17 +152,47 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@value", value);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
-        public void AddCompany(string valueName,string valueNIP,string valueEmail, int valuePhone, 
-                               string valueAdress, string valueCity,int valueUser,string commandText) 
+        public void AddPayment(int valueIdUser,int valueIdType,string valueString,string valueName,string commandText)  
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
+                    cmd.Parameters.AddWithValue("@valueIdType", valueIdType);
+                    cmd.Parameters.AddWithValue("@valueString", valueString);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueName"></param>
+        /// <param name="valueNIP"></param>
+        /// <param name="valueEmail"></param>
+        /// <param name="valuePhone"></param>
+        /// <param name="valueAdress"></param>
+        /// <param name="valueCity"></param>
+        /// <param name="valueUser"></param>
+        /// <param name="commandText"></param>
+        public void AddCompany(string valueName, string valueNIP, string valueEmail, int valuePhone,
+                               string valueAdress, string valueCity, int valueUser, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -200,19 +205,30 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@valueUser", valueUser);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
-
-        public void AddUser(string valueNick,byte[]valueHash,string valueName,string valueSurname,
-                            string valueEmail,string numberPhone,string valueAdress,string valueCity,
-                            string commandText) 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueNick"></param>
+        /// <param name="valueHash"></param>
+        /// <param name="valueName"></param>
+        /// <param name="valueSurname"></param>
+        /// <param name="valueEmail"></param>
+        /// <param name="numberPhone"></param>
+        /// <param name="valueAdress"></param>
+        /// <param name="valueCity"></param>
+        /// <param name="commandText"></param>
+        public void AddUser(string valueNick, byte[] valueHash, string valueName, string valueSurname,
+                            string valueEmail, string numberPhone, string valueAdress, string valueCity,
+                            string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -226,22 +242,39 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@valueCity", valueCity);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueSeller"></param>
+        /// <param name="valueName"></param>
+        /// <param name="valueDescription"></param>
+        /// <param name="valuePrice"></param>
+        /// <param name="valueVat"></param>
+        /// <param name="valueCondition"></param>
+        /// <param name="valueMaxQuantity"></param>
+        /// <param name="valueNameParameter"></param>
+        /// <param name="valueParameter"></param>
+        /// <param name="valueWarranty"></param>
+        /// <param name="valueWarrantyDays"></param>
+        /// <param name="valueBrand"></param>
+        /// <param name="valueCategory"></param>
+        /// <param name="valueImage"></param>
+        /// <param name="commandText"></param>
         public void AddProduct(int valueSeller, string valueName, string valueDescription,
-                               double valuePrice, int valueVat, int valueCondition, 
-                               int valueMaxQuantity,string valueNameParameter,
-                               string valueParameter,int valueWarranty, int valueWarrantyDays,
-                               int valueBrand, int valueCategory,byte[] valueImage, string commandText) 
+                               double valuePrice, int valueVat, int valueCondition,
+                               int valueMaxQuantity, string valueNameParameter,
+                               string valueParameter, int valueWarranty, int valueWarrantyDays,
+                               int valueBrand, int valueCategory, byte[] valueImage, string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -261,18 +294,47 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@valueImage", valueImage);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
-        //TODO: czy aktualizacje robić dla tych mniejszych tabel czy tylko i wyłącznie do produktów/użytkownika/firmy ?
-
-        public void Update(int valueId, string valueName, string commandText) 
+        public int valueStringBank(int valueId,string commandText) 
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    var valueResult = new SqlParameter("valueResult", SqlDbType.Int)
+                    {
+                        //Set this property as return value
+                        Direction = ParameterDirection.ReturnValue
+                    };
+                    cmd.Parameters.Add(valueResult);
+                    cmd.ExecuteScalar();
+                    return (int)valueResult.Value;
+                }
+                con.Close();
+            }
+
+        }
+
+        //TODO: czy aktualizacje robić dla tych mniejszych tabel czy tylko i wyłącznie do produktów/użytkownika/firmy ?
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueId"></param>
+        /// <param name="valueName"></param>
+        /// <param name="commandText"></param>
+        public void Update(int valueId, string valueName, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -280,17 +342,22 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("valueName", valueName);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
-       
-        public void Update(int valueId,int value, string commandText)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueId"></param>
+        /// <param name="value"></param>
+        /// <param name="commandText"></param>
+        public void Update(int valueId, int value, string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -298,34 +365,40 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("value", value);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
-        public void Delete(int valueId,string commandText) 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueId"></param>
+        /// <param name="commandText"></param>
+        public void Delete(int valueId, string commandText)
         {
-            using (_con = new SqlConnection(sqlConnection))
+            using (con = new SqlConnection(sqlConnection))
             {
-                _con.Open();
-                using (var cmd = _con.CreateCommand())
+                con.Open();
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@valueId", valueId);
                     cmd.ExecuteNonQuery();
                 }
-                _con.Close();
+                con.Close();
             }
         }
 
         /* TODO dodać dodawanie zdjęcia do samego produktu oraz pomoc przy tworzeniu połączeń
         public void AddImage()
         {
-            using (_con)
+            using (con)
             {
                 int number = 0;
                 string text = "DyskAdata";//TODO: dodać pole do wprowadzania 
-                using (var cmd = _con.CreateCommand())
+                using (var cmd = con.CreateCommand())
                 {
                     cmd.CommandText = "ImageCount";
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -356,6 +429,14 @@ namespace SklepInternetowy
             }
         }
         */
+        /*
+       public void ShowProduct(MainWindow window, int Id_Product) // TODO: narazie to były różne próby i trzeba zrobić wpierw dodawanie
+       {
+           byte[] img = (byte[])tempImage.ItemArray[1];
+           using (MemoryStream stream = new MemoryStream(img))
+               window.ImageProduct.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+       }
 
+       */
     }
 }
