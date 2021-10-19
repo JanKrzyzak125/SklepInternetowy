@@ -391,6 +391,42 @@ namespace SklepInternetowy
             }
         }
 
+        public List<string> listTables()
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                List<string> tempTables = new List<string>();
+                DataTable dataTables = con.GetSchema("Tables");
+                foreach (DataRow row in dataTables.Rows)
+                {
+                    string tableName = (string)row[2];
+                    string temp = (string)row[3];
+                    if (temp.Equals("BASE TABLE") & !tableName.Equals("sysdiagrams"))tempTables.Add(tableName);
+                }
+                
+                tempTables.Sort();
+                con.Close();
+                return tempTables;
+            }
+        }
+
+        public List<string> listViews()
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                List<string> tempViews = new List<string>();
+                DataTable dataTables = con.GetSchema("Views");
+                foreach (DataRow row in dataTables.Rows)
+                {
+                    string tablename = (string)row[2];
+                    tempViews.Add(tablename);
+                }
+                con.Close();
+                return tempViews;
+            }
+        }
         /* TODO dodać dodawanie zdjęcia do samego produktu oraz pomoc przy tworzeniu połączeń
         public void AddImage()
         {

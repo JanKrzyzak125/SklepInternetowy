@@ -43,7 +43,7 @@ namespace SklepInternetowy
 
             tempListViews.Add("Widok zakupionych produktów");
             tempListViews.Add("Widok dodanych produktów");
-            tempListViews.Add("Widok akutalnych sprzedaży");
+            tempListViews.Add("Widok aktualnych sprzedaży");
             tempListViews.Add("Widok zakończonych sprzedaży");
             tempListViews.Add("Widok kupionych produktów");
 
@@ -60,9 +60,6 @@ namespace SklepInternetowy
                 case "Description":
                     e.Column.Header = "Opis";
                     break;
-                   
-               
-                    
 
             }
         }
@@ -78,18 +75,10 @@ namespace SklepInternetowy
                     break;
                 case "Widok dodanych produktów":
                     tempTable =sqlConnect.ShowProduct(0, "ViewUsersProducts");
-
-                    
                     UsersDataGrid.ItemsSource = tempTable.DefaultView;
 
-          
-
-
-
-
-
                     break;
-                case "Widok akutalnych sprzedaży":
+                case "Widok aktualnych sprzedaży":
 
                     break;
                 case "Widok zakończonych sprzedaży":
