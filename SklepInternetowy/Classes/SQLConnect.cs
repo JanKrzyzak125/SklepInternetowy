@@ -341,7 +341,6 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@valueId", valueId);
                     var valueResult = new SqlParameter("valueResult", SqlDbType.Int)
                     {
-                        //Set this property as return value
                         Direction = ParameterDirection.ReturnValue
                     };
                     cmd.Parameters.Add(valueResult);
@@ -371,7 +370,7 @@ namespace SklepInternetowy
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@valueId", valueId);
-                    cmd.Parameters.AddWithValue("valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
@@ -394,7 +393,7 @@ namespace SklepInternetowy
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@valueId", valueId);
-                    cmd.Parameters.AddWithValue("value", value);
+                    cmd.Parameters.AddWithValue("@value", value);
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
@@ -411,12 +410,35 @@ namespace SklepInternetowy
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@valueId", valueId);
-                    cmd.Parameters.AddWithValue("valueName", valueName);
-                    cmd.Parameters.AddWithValue("value", value);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@value", value);
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
             }
+        }
+
+        public int IsCanBeDeleted(int valueId,string commandText) 
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    var valueResult = new SqlParameter("@valueResult", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.ReturnValue
+                    };
+                    cmd.Parameters.Add(valueResult);
+                    cmd.ExecuteScalar();
+                    return (int)valueResult.Value;
+                }
+                con.Close();
+            }
+
         }
 
         /// <summary>

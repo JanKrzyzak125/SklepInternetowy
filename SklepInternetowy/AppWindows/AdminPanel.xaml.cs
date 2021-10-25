@@ -117,6 +117,9 @@ namespace SklepInternetowy.AppWindows
                     break;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateTypePayment()
         {
             DataView tempChange = DataGridAdmin.ItemsSource as DataView;
@@ -135,7 +138,7 @@ namespace SklepInternetowy.AppWindows
                 {
                     if (!item.Equals(tempListShow[i]))
                     {
-                            sqlConnect.Update(i, item[0].ToString(),(int)item[1], "Update" + currentTab);
+                        sqlConnect.Update(i, item[0].ToString(), (int)item[1], "Update" + currentTab);
                     }
                 }
                 else
@@ -146,6 +149,9 @@ namespace SklepInternetowy.AppWindows
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateDataBase()
         {
             DataView tempChange = DataGridAdmin.ItemsSource as DataView;
@@ -166,9 +172,17 @@ namespace SklepInternetowy.AppWindows
                     {
                         if (item[0] is string)
                         {
-                            sqlConnect.Update(i, item[0].ToString(), "Update" + currentTab);
+                            if (item[0].Equals(""))
+                            {
+                                if(sqlConnect.IsCanBeDeleted(i, "IsCanBeDeleted" + currentTab) == 1)
+                                    sqlConnect.Delete(i,"Delete"+currentTab);
+                            }
+                            else
+                            {
+                                sqlConnect.Update(i, item[0].ToString(), "Update" + currentTab);
+                            }
                         }
-                        else
+                        else if (item[0] is int)
                         {
                             sqlConnect.Update(i, (int)item[0], "Update" + currentTab);
                         }
@@ -180,14 +194,16 @@ namespace SklepInternetowy.AppWindows
                     {
                         sqlConnect.Add(item[0].ToString(), "Add" + currentTab);
                     }
-                    else
+                    else if (item[0] is int)
                     {
                         sqlConnect.Add((int)item[0], "Add" + currentTab);
                     }
+
                 }
                 i++;
             }
         }
+
         private void WindowAdminClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (isChangeDataGridAdmin)
