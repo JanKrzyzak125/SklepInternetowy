@@ -63,6 +63,37 @@ namespace SklepInternetowy
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="commandText"></param>
+        /// <returns></returns>
+        public List<object> ReadTable2(string commandText)
+        {
+            List<object> tempList = new List<object>();
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (SqlDataAdapter da = new SqlDataAdapter())
+                {
+                    using (da.SelectCommand = con.CreateCommand())
+                    {
+                        da.SelectCommand.CommandText = commandText;
+                        DataTable ds = new DataTable(); //conn is opened by dataadapter
+                        da.Fill(ds);
+                        foreach (DataRow item in ds.Rows)
+                        {
+                            tempList.Add(item.ItemArray);
+
+                        }
+
+                        con.Close();
+                        return tempList;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="valueIdUser"></param>
         /// <param name="commandText"></param>
         /// <returns></returns>
@@ -315,9 +346,10 @@ namespace SklepInternetowy
                     };
                     cmd.Parameters.Add(valueResult);
                     cmd.ExecuteScalar();
+                    con.Close();
                     return (int)valueResult.Value;
                 }
-                con.Close();
+                
             }
 
         }
@@ -369,6 +401,23 @@ namespace SklepInternetowy
             }
         }
 
+        public void Update(int valueId,string valueName, int value, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("valueName", valueName);
+                    cmd.Parameters.AddWithValue("value", value);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
 
         /// <summary>
         /// 
