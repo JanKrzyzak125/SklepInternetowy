@@ -360,7 +360,7 @@ namespace SklepInternetowy
         /// <param name="valueId"></param>
         /// <param name="valueName"></param>
         /// <param name="commandText"></param>
-        public void Update(int valueId, string valueName, string commandText)
+        public void Update(int valueId, string valueName,int valueStatus, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -371,6 +371,7 @@ namespace SklepInternetowy
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@valueId", valueId);
                     cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
@@ -383,7 +384,7 @@ namespace SklepInternetowy
         /// <param name="valueId"></param>
         /// <param name="value"></param>
         /// <param name="commandText"></param>
-        public void Update(int valueId, int value, string commandText)
+        public void Update(int valueId, int value,int valueStatus, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -394,13 +395,14 @@ namespace SklepInternetowy
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@valueId", valueId);
                     cmd.Parameters.AddWithValue("@value", value);
+                    cmd.Parameters.AddWithValue("valueStatus", valueStatus);
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
             }
         }
 
-        public void Update(int valueId,string valueName, int value, string commandText)
+        public void Update(int valueId,string valueName, int value,int valueStatus, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -412,34 +414,14 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@valueId", valueId);
                     cmd.Parameters.AddWithValue("@valueName", valueName);
                     cmd.Parameters.AddWithValue("@value", value);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
             }
         }
 
-        public int IsCanBeDeleted(int valueId,string commandText) 
-        {
-            using (con = new SqlConnection(sqlConnection))
-            {
-                con.Open();
-                using (var cmd = con.CreateCommand())
-                {
-                    cmd.CommandText = commandText;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@valueId", valueId);
-                    var valueResult = new SqlParameter("@valueResult", SqlDbType.Int)
-                    {
-                        Direction = ParameterDirection.ReturnValue
-                    };
-                    cmd.Parameters.Add(valueResult);
-                    cmd.ExecuteScalar();
-                    return (int)valueResult.Value;
-                }
-                con.Close();
-            }
-
-        }
+        
 
         /// <summary>
         /// 

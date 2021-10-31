@@ -21,10 +21,9 @@
                   MouseDoubleClick="DataGridAdminMouseDoubleClick"
                   CanUserDeleteRows="False"
                   Background="Wheat"
+                  
 
                   CellEditEnding= "DataGridAdminCellEditEnding"
-
-                  
                   >
 
 

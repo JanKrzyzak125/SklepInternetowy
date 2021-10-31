@@ -84,7 +84,7 @@ namespace SklepInternetowy
             //sqlConnect.AddCompany("Kebab","8888888888","ktotam.wp.pl",888888,"ul.Slaska 25a","Opole",0,"AddCompany");//TODO: Zrobić dodawanie do konkretnego zalogowanego! usera
             //sqlConnect.AddUser("125Kowalski", makeHash("test"), "Jan", "Kowalski", "pa@wp.pl", "8888888", "Zielona 14a", "Opole", "AddUser");
             //sqlConnect.Delete(0, "DeleteCompany");
-            sqlConnect.Delete(0, "DeleteProduct");
+            //sqlConnect.Delete(0, "DeleteProduct");
             //sqlConnect.Update(1,"SONY XPERIA","UpdateBrand");//TODO CZY TO POTRZEBNE?
             //sqlConnect.Update(4,25,"UpdateVat");
         }

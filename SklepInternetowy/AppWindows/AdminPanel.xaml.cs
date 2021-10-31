@@ -20,25 +20,22 @@ namespace SklepInternetowy.AppWindows
     public partial class AdminPanel : Window
     {
         private List<string> tempListTabs;
-        private List<object> tempListShow;
+        
         private List<string> tempListViews;
 
         private SQLConnect sqlConnect;
         private bool isChangeDataGridAdmin;
         private string currentTab;
-        private DataTable oldTable;
         private DataTable currentDataTable;
+        private int oldTabCount;
 
-        private List<string> tempListCommands = new List<string>();
+        
         public List<string> TempListTabs
         {
             get => tempListTabs;
         }
 
-        public List<object> TempListShow
-        {
-            get => tempListShow;
-        }
+
 
         public List<string> TempListViews
         {
@@ -71,11 +68,8 @@ namespace SklepInternetowy.AppWindows
 
             currentTab = ComboBoxTabs.Text;
             string tempCommand = "values" + currentTab;
-
-            tempListShow = new List<object>();
-            tempListShow = sqlConnect.ReadTable2(tempCommand);
             currentDataTable = sqlConnect.ReadTable(tempCommand);
-            oldTable = currentDataTable.Copy();
+            oldTabCount = currentDataTable.Rows.Count;
             DataGridAdmin.ItemsSource = currentDataTable.DefaultView;
             ComboBoxShow.SelectedIndex = 0;
         }
@@ -97,6 +91,7 @@ namespace SklepInternetowy.AppWindows
         {
             int temp = DataGridAdmin.SelectedIndex;
             MessageBox.Show("Element zawiera=" + DataGridAdmin);
+            //TODO: dla niektórych widoku pokazać szczegóły jak produkty,Faktury
 
         }
 
@@ -105,8 +100,24 @@ namespace SklepInternetowy.AppWindows
             switch (currentTab)
             {
                 case "Users":
+                    
+                    break;
+                    
                 case "Company":
-                    MessageBox.Show("Nie możesz zmieniać tabeli "+currentTab);
+                    
+                    break;
+                case "RetailSales":
+
+                    break;
+                case "Transation":
+
+                    break;
+                case "Product":
+
+                    break;
+
+                case "Invoice":
+
                     break;
 
                 case "TypePayment":
@@ -134,12 +145,9 @@ namespace SklepInternetowy.AppWindows
             int i = 0;
             foreach (object[] item in tempListObjects.ToArray())
             {
-                if (i < tempListShow.Count)
+                if (i < oldTabCount)
                 {
-                    if (!item.Equals(tempListShow[i]))
-                    {
-                        sqlConnect.Update(i, item[0].ToString(), (int)item[1], "Update" + currentTab);
-                    }
+                    sqlConnect.Update(i, item[0].ToString(), (int)item[1], (int)item[2], "Update" + currentTab);
                 }
                 else
                 {
@@ -148,6 +156,8 @@ namespace SklepInternetowy.AppWindows
                 i++;
             }
         }
+
+
 
         /// <summary>
         /// 
@@ -166,27 +176,18 @@ namespace SklepInternetowy.AppWindows
             int i = 0;
             foreach (object[] item in tempListObjects.ToArray())
             {
-                if (i < tempListShow.Count)
+                if (i < oldTabCount)
                 {
-                    if (!item.Equals(tempListShow[i]))
+
+                    if (item[0] is string)
                     {
-                        if (item[0] is string)
-                        {
-                            if (item[0].Equals(""))
-                            {
-                                if(sqlConnect.IsCanBeDeleted(i, "IsCanBeDeleted" + currentTab) == 1)
-                                    sqlConnect.Delete(i,"Delete"+currentTab);
-                            }
-                            else
-                            {
-                                sqlConnect.Update(i, item[0].ToString(), "Update" + currentTab);
-                            }
-                        }
-                        else if (item[0] is int)
-                        {
-                            sqlConnect.Update(i, (int)item[0], "Update" + currentTab);
-                        }
+                        sqlConnect.Update(i, item[0].ToString(), (int)item[1], "Update" + currentTab);
                     }
+                    else if (item[0] is int)
+                    {
+                        sqlConnect.Update(i, (int)item[0], (int)item[1], "Update" + currentTab);
+                    }
+
                 }
                 else
                 {

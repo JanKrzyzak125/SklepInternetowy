@@ -56,6 +56,7 @@ namespace SklepInternetowy
             {
                 case "Name":
                     e.Column.Header = "Nazwa";
+                    
                     break;
                 case "Description":
                     e.Column.Header = "Opis";
