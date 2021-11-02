@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.IO;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows;
-using System.Data.Sql;
-using Microsoft.Win32;
-using System.Data.Common;
-using System.Collections.ObjectModel;
 
 namespace SklepInternetowy
 {
