@@ -20,7 +20,6 @@ namespace SklepInternetowy.AppWindows
     public partial class AdminPanel : Window
     {
         private List<string> tempListTabs;
-        
         private List<string> tempListViews;
 
         private SQLConnect sqlConnect;
@@ -71,7 +70,6 @@ namespace SklepInternetowy.AppWindows
             currentDataTable = sqlConnect.ReadTable(tempCommand);
             oldTabCount = currentDataTable.Rows.Count;
             DataGridAdmin.ItemsSource = currentDataTable.DefaultView;
-            ComboBoxShow.SelectedIndex = 0;
         }
 
         private void ChangeViewsClick(object sender, RoutedEventArgs e)

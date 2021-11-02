@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,11 +18,13 @@ namespace SklepInternetowy
     /// </summary>
     public partial class Authentication : Window
     {
-        private Registration _registrationWindow;
+        private Registration registrationWindow;
+        private SQLConnect sqlConnect;
         public Authentication()
         {
             InitializeComponent();
-            _registrationWindow = new Registration();
+            registrationWindow = new Registration(this);
+            sqlConnect = new SQLConnect();
         }
 
         /// <summary>
@@ -29,18 +32,40 @@ namespace SklepInternetowy
         /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(NickText.Text);
-
+            string tempNick=NickText.Text;
+            byte[] tempHash= makeHash(PasswordBox.Password);
+            object[] tempUsers=sqlConnect.VerLogin(tempNick,tempHash,"Login");
+            if (tempUsers != null)
+            {
+                Users tempUser = new Users(tempUsers);
+                MessageBox.Show("Udało się zalogować użytkownikowi" + Users.LogUser.Nick);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Spróbuj ponownie wpisać dane");
+            }
         }
+
+        public byte[] makeHash(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                return bytes;
+            }
+        }
+
         /// <summary>
         /// Open Window Registration
         /// </summary>
         private void Registration_Open(object sender, RoutedEventArgs e)
         {
-            if(_registrationWindow.IsVisible == false)
+            if(registrationWindow.IsVisible == false)
             {
-                _registrationWindow = new Registration();
-                _registrationWindow.Show();
+                registrationWindow = new Registration(this);
+                registrationWindow.Show();
             }
         }
     }

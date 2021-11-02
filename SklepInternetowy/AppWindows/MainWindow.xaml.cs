@@ -32,17 +32,21 @@ namespace SklepInternetowy
         private SQLConnect sqlConnect;
         private UserPanel userPanel;
         private AdminPanel adminPanel;
+        
         /// <summary>
         /// 
         /// </summary>
+
         public MainWindow()
         {
+            
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             windowAuthentication = new Authentication();
             userPanel = new UserPanel();
             sqlConnect = new SQLConnect();
             adminPanel = new AdminPanel();
+            
 
             //TODO: PRZENIEŚĆ WSZYSTKIE DODAWANIA DO ADMINISTARTORA POZA DODAWANIEM PRODUKTU 
             //sqlConnect.ShowProduct(this,15); //zmienić całkowicie metodę
@@ -89,15 +93,6 @@ namespace SklepInternetowy
             //sqlConnect.Update(4,25,"UpdateVat");
         }
 
-        byte[] makeHash(string password)
-        {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-                return bytes;
-            }
-        }
 
         /// <summary>
         /// Open Window Authentication
@@ -109,6 +104,7 @@ namespace SklepInternetowy
             if (windowAuthentication.IsVisible == false)
             {
                 windowAuthentication = new Authentication();
+                windowAuthentication.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 windowAuthentication.Show();
             }
 
@@ -135,6 +131,7 @@ namespace SklepInternetowy
             if (adminPanel.IsVisible == false)
             {
                 adminPanel = new AdminPanel();
+                adminPanel.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 adminPanel.Show();
             }
         }
@@ -144,6 +141,7 @@ namespace SklepInternetowy
             if (userPanel.IsVisible == false)
             {
                 userPanel = new UserPanel();
+                userPanel.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 userPanel.Show();
             }
         }

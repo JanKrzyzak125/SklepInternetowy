@@ -35,11 +35,40 @@ namespace SklepInternetowy
             //con = new SqlConnection(sqlConnection);//czy jest to w tym miejscu potrzebne?
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="commandText"></param>
         /// <returns></returns>
+
+        public object[] VerLogin(string valueNick, byte[] valueHash, string commandText)
+        {
+            object[] tempObject;
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (SqlDataAdapter da = new SqlDataAdapter())
+                {
+                    using (da.SelectCommand = con.CreateCommand())
+                    {
+                        da.SelectCommand.CommandText = commandText;
+                        da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        da.SelectCommand.Parameters.AddWithValue("@valueNick",valueNick);
+                        da.SelectCommand.Parameters.AddWithValue("@valueHash",valueHash);
+                        DataTable ds = new DataTable(); 
+                        da.Fill(ds);
+                        if (ds.Rows.Count == 0) 
+                        {
+                            return null;
+                        }
+                        tempObject=ds.Rows[0].ItemArray;
+                        con.Close();
+                        return tempObject;
+                    }
+                }
+            }
+        }
 
         public DataTable ReadTable(string commandText)
         {
@@ -60,6 +89,7 @@ namespace SklepInternetowy
             }
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -76,7 +106,7 @@ namespace SklepInternetowy
                     using (da.SelectCommand = con.CreateCommand())
                     {
                         da.SelectCommand.CommandText = commandText;
-                        DataTable ds = new DataTable(); //conn is opened by dataadapter
+                        DataTable ds = new DataTable(); 
                         da.Fill(ds);
                         foreach (DataRow item in ds.Rows)
                         {
@@ -109,7 +139,7 @@ namespace SklepInternetowy
                         da.SelectCommand.CommandText = commandText;
                         da.SelectCommand.CommandType = CommandType.StoredProcedure;
                         da.SelectCommand.Parameters.AddWithValue("@valueId", valueIdUser);
-                        DataTable ds = new DataTable(); //conn is opened by dataadapter
+                        DataTable ds = new DataTable(); 
                         da.Fill(ds);
                         con.Close();
                         return ds;
@@ -187,7 +217,7 @@ namespace SklepInternetowy
             }
         }
 
-        public void AddPayment(int valueIdUser,int valueIdType,string valueString,string valueName,string commandText)  
+        public void AddPayment(int valueIdUser, int valueIdType, string valueString, string valueName, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -253,7 +283,7 @@ namespace SklepInternetowy
         /// <param name="valueCity"></param>
         /// <param name="commandText"></param>
         public void AddUser(string valueNick, byte[] valueHash, string valueName, string valueSurname,
-                            string valueEmail, string numberPhone, string valueAdress, string valueCity,
+                            string valueEmail, int numberPhone, string valueAdress, string valueCity,
                             string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
@@ -329,7 +359,7 @@ namespace SklepInternetowy
             }
         }
 
-        public int valueStringBank(int valueId,string commandText) 
+        public int valueStringBank(int valueId, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -348,7 +378,31 @@ namespace SklepInternetowy
                     con.Close();
                     return (int)valueResult.Value;
                 }
-                
+
+            }
+
+        }
+
+        public object[] valueCompany(int valueIdCompany,string commandText) 
+        {
+            object[] tempObject;
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (SqlDataAdapter da = new SqlDataAdapter())
+                {
+                    using (da.SelectCommand = con.CreateCommand())
+                    {
+                        da.SelectCommand.CommandText = commandText;
+                        da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        da.SelectCommand.Parameters.AddWithValue("@valueIdCompany", valueIdCompany);
+                        DataTable ds = new DataTable();
+                        da.Fill(ds);
+                        tempObject = ds.Rows[0].ItemArray;
+                        con.Close();
+                        return tempObject;
+                    }
+                }
             }
 
         }
@@ -360,7 +414,7 @@ namespace SklepInternetowy
         /// <param name="valueId"></param>
         /// <param name="valueName"></param>
         /// <param name="commandText"></param>
-        public void Update(int valueId, string valueName,int valueStatus, string commandText)
+        public void Update(int valueId, string valueName, int valueStatus, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -384,7 +438,7 @@ namespace SklepInternetowy
         /// <param name="valueId"></param>
         /// <param name="value"></param>
         /// <param name="commandText"></param>
-        public void Update(int valueId, int value,int valueStatus, string commandText)
+        public void Update(int valueId, int value, int valueStatus, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -402,7 +456,7 @@ namespace SklepInternetowy
             }
         }
 
-        public void Update(int valueId,string valueName, int value,int valueStatus, string commandText)
+        public void Update(int valueId, string valueName, int value, int valueStatus, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -421,7 +475,7 @@ namespace SklepInternetowy
             }
         }
 
-        
+
 
         /// <summary>
         /// 
@@ -455,9 +509,9 @@ namespace SklepInternetowy
                 {
                     string tableName = (string)row[2];
                     string temp = (string)row[3];
-                    if (temp.Equals("BASE TABLE") & !tableName.Equals("sysdiagrams"))tempTables.Add(tableName);
+                    if (temp.Equals("BASE TABLE") & !tableName.Equals("sysdiagrams")) tempTables.Add(tableName);
                 }
-                
+
                 tempTables.Sort();
                 con.Close();
                 return tempTables;
