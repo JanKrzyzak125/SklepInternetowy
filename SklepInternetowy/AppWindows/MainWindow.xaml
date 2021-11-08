@@ -36,7 +36,7 @@
         <DataGrid  x:Name="MainGrid" HorizontalAlignment="Center" Height="735" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1180" Visibility="Visible" />
         <TextBox  x:Name="TextSearch" Background="Aqua" Text="Wyszukaj" HorizontalAlignment="Left" Height="38" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="590" Grid.Row="1" />
         <Button  Style="{StaticResource ButtonRoundAccentRevealStyle}"  x:Name="Search" Content="Szukaj" HorizontalAlignment="Left" Height="44" Margin="605,0,0,0" VerticalAlignment="Center" Width="90" Click="Search_Click" Grid.Row="1"/>
-        <Button x:Name="MenuUser" Content="Panel Uzytkownika" HorizontalAlignment="Left" Height="44" Margin="700,0,0,0" VerticalAlignment="Center" Width="164" Click="MenuUser_Click" Grid.Row="1" />
+        <Button x:Name="MenuUser" Content="Panel Uzytkownika" HorizontalAlignment="Left" Height="44" Margin="700,0,0,0" VerticalAlignment="Center" Width="164" Click="MenuUser_Click" Grid.Row="1" Cursor="Hand" />
         <Image x:Name="ImageProduct" HorizontalAlignment="Left" Height="143" Margin="66,54,0,0" Grid.Row="2" VerticalAlignment="Top" Width="179"/>
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
+using System;
 
 namespace SklepInternetowy
 {
@@ -207,6 +208,25 @@ namespace SklepInternetowy
             }
         }
 
+        public void AddComment(string valueComment,int valueStars,int valueIdUser, int valueIdProduct,string commandText) 
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueComment", valueComment);
+                    cmd.Parameters.AddWithValue("@valueStars", valueStars);
+                    cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
+                    cmd.Parameters.AddWithValue("@valueIdProduct", valueIdProduct);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
         public void AddPayment(int valueIdUser, int valueIdType, string valueString, string valueName, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
@@ -220,6 +240,30 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@valueIdType", valueIdType);
                     cmd.Parameters.AddWithValue("@valueString", valueString);
                     cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+
+        public void AddInvoice(int valueIdTransation,DataSetDateTime valueDateOfMakeInvoice,
+                               DataSetDateTime valueDateOfPay, DataSetDateTime valueDateOfService, 
+                                int valueCodeInvoice, int valueStatus, string commandText) 
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueIdTransation", valueIdTransation);
+                    cmd.Parameters.AddWithValue("@valueDateOfMakeInvoice", valueDateOfMakeInvoice);
+                    cmd.Parameters.AddWithValue("@valueDateOfPay", valueDateOfPay);
+                    cmd.Parameters.AddWithValue("@valueDateOfService", valueDateOfService);
+                    cmd.Parameters.AddWithValue("@valueCodeInvoice", valueCodeInvoice);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
@@ -348,6 +392,67 @@ namespace SklepInternetowy
                 con.Close();
             }
         }
+        public void AddRetailSales(int valueIdProduct,int valueQuantity,DataSetDateTime valueDateStartSales,
+                                   DataSetDateTime valueDateClosing, DataSetDateTime valueDateClosed ,int valueDayReturn,
+                                   int valueDayDelivery, int valueIdDelivery,string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueIdProduct", valueIdProduct);
+                    cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
+                    cmd.Parameters.AddWithValue("@valueDateStartSales", valueDateStartSales);
+                    cmd.Parameters.AddWithValue("@valueDateClosing", valueDateClosing);
+                    cmd.Parameters.AddWithValue("@valueDateClosed", valueDateClosed);
+                    cmd.Parameters.AddWithValue("@valueDayReturn", valueDayReturn);
+                    cmd.Parameters.AddWithValue("@valueDayDelivery", valueDayDelivery);
+                    cmd.Parameters.AddWithValue("@valueDayDelivery", valueIdDelivery);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+
+        public void AddProductsBuyed(int valueIdRetailSalers, int valueIdTransation,int valueQuantity,
+                                    string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueIdRetailSalers", valueIdRetailSalers);
+                    cmd.Parameters.AddWithValue("@valueIdTransation", valueIdTransation);
+                    cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void AddTransation(int valuePayment, int valueIdUser,string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valuePayment", valuePayment);
+                    cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
 
         public int valueStringBank(int valueId, string commandText)
         {
@@ -397,7 +502,7 @@ namespace SklepInternetowy
 
         }
 
-        //TODO: czy aktualizacje robić dla tych mniejszych tabel czy tylko i wyłącznie do produktów/użytkownika/firmy ?
+
         /// <summary>
         /// 
         /// </summary>
@@ -465,7 +570,230 @@ namespace SklepInternetowy
             }
         }
 
+        public void UpdateComment(int valueIdComment, string valueComment, Int16 valueStars,
+                                 int valueStatus, string commandText) 
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueIdComment", valueIdComment);
+                    cmd.Parameters.AddWithValue("@valueCommenty", valueComment);
+                    cmd.Parameters.AddWithValue("@valueStars", valueStars);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
 
+        public void UpdateCompany(int valueId, string valueNameCompany, string valueAdress,
+                                 string valueCity ,int valuePhone,string valueEmail,string valueNIP,
+                                 int valueStatus, string commandText) 
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueNameCompany", valueNameCompany);
+                    cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
+                    cmd.Parameters.AddWithValue("@valueCity", valueCity);
+                    cmd.Parameters.AddWithValue("@valuePhone", valuePhone);
+                    cmd.Parameters.AddWithValue("@valueEmail", valueEmail);
+                    cmd.Parameters.AddWithValue("@valueNIP", valueNIP);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void UpdatePayment(int valueIdUser, int valueIdType, string valueString,
+                                 string valueName,int valueStatus, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
+                    cmd.Parameters.AddWithValue("@valueIdType", valueIdType);
+                    cmd.Parameters.AddWithValue("@valueString", valueString);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void UpdateProductsBuyed(int valueId, int valueIdRetailSalers,int valueTransation,int valueQuantity,
+                                        int valueStatus, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueIdRetailSalers", valueIdRetailSalers);
+                    cmd.Parameters.AddWithValue("@valueTransation", valueTransation);
+                    cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
+                    cmd.Parameters.AddWithValue("valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void UpdateInvoice(int valueId, DataSetDateTime valueDateOfMakeInvoice,
+                             DataSetDateTime valueDateOfPay,DataSetDateTime valueDateOfService, int valueStatus,
+                             int valueCodeInvoice, string commandText) 
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueDateOfMakeInvoice", valueDateOfMakeInvoice);
+                    cmd.Parameters.AddWithValue("@valueDateOfPay", valueDateOfPay);
+                    cmd.Parameters.AddWithValue("@valueDateOfService", valueDateOfService);
+                    cmd.Parameters.AddWithValue("valueCodeInvoice", valueCodeInvoice);
+                    cmd.Parameters.AddWithValue("valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void UpdateProduct(int valueId,int valueSeller, string valueName, string valueDescription,
+                              decimal valuePrice, int valueVat, int valueCondition,
+                              int valueMaxQuantity, string valueNameParameter,
+                              string valueParameter, int valueWarranty, int valueWarrantyDays,
+                              int valueBrand, int valueCategory, byte[] valueImage,int valueStatus, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueSeller", valueSeller);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueDescription", valueDescription);
+                    cmd.Parameters.AddWithValue("@valuePrice", valuePrice);
+                    cmd.Parameters.AddWithValue("@valueVat", valueVat);
+                    cmd.Parameters.AddWithValue("@valueCondition", valueCondition);
+                    cmd.Parameters.AddWithValue("@valueMaxQuantity", valueMaxQuantity);
+                    cmd.Parameters.AddWithValue("@valueNameParameter", valueNameParameter);
+                    cmd.Parameters.AddWithValue("@valueParameter", valueParameter);
+                    cmd.Parameters.AddWithValue("@valueWarranty", valueWarranty);
+                    cmd.Parameters.AddWithValue("@valueWarrantyDays", valueWarrantyDays);
+                    cmd.Parameters.AddWithValue("@valueBrand", valueBrand);
+                    cmd.Parameters.AddWithValue("@valueCategory", valueCategory);
+                    cmd.Parameters.AddWithValue("@valueImage", valueImage);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void UpdateRetailSales(int valueId,int valueIdProduct, int valueQuantity, DataSetDateTime valueDateStartSales,
+                                   DataSetDateTime valueDateClosing, DataSetDateTime valueDateClosed, int valueDayReturn,
+                                   int valueDayDelivery, int valueIdDelivery,int valueVisitors,int valueStatus, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueIdProduct", valueIdProduct);
+                    cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
+                    cmd.Parameters.AddWithValue("@valueDateStartSales", valueDateStartSales);
+                    cmd.Parameters.AddWithValue("@valueDateClosing", valueDateClosing);
+                    cmd.Parameters.AddWithValue("@valueDateClosed", valueDateClosed);
+                    cmd.Parameters.AddWithValue("@valueDayReturn", valueDayReturn);
+                    cmd.Parameters.AddWithValue("@valueDayDelivery", valueDayDelivery);
+                    cmd.Parameters.AddWithValue("@valueDayDelivery", valueIdDelivery);
+                    cmd.Parameters.AddWithValue("@valueVisitors", valueVisitors);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void UpdateUser(int valueId,Int16 valueIsActive,string valueNick, string valueName, 
+                           string valueSurname,string valueEmail, int numberPhone, string valueAdress, string valueCity,
+                           int valueCountVisitors, object valueIdCompany,string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueIsActive", valueIsActive);
+                    cmd.Parameters.AddWithValue("@valueNick", valueNick);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueSurname", valueSurname);
+                    cmd.Parameters.AddWithValue("@valueEmail", valueEmail);
+                    cmd.Parameters.AddWithValue("@numberPhone", numberPhone);
+                    cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
+                    cmd.Parameters.AddWithValue("@valueCity", valueCity);
+                    cmd.Parameters.AddWithValue("@valueCountVisitors", valueCountVisitors);
+                    if (valueIdCompany is int)
+                        cmd.Parameters.AddWithValue("@valueIdCompany",(int)valueIdCompany);
+                    else
+                        cmd.Parameters.AddWithValue("@valueIdCompany", valueIdCompany);
+
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void UpdateTransation(int valueId,int valuePayment, int valueIdUser,decimal valueSumPay, int valueStatus, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valuePayment", valuePayment);
+                    cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
+                    cmd.Parameters.AddWithValue("@valueSumPay", valueSumPay);
+                    cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
 
         /// <summary>
         /// 

@@ -131,24 +131,6 @@ namespace SklepInternetowy
             logUser = this;
         }
 
-        /*
-        public Users(int valueIdUser, int valueIsActive, string valueNick, string valueName,
-                    string valueSurname, string valueEmail, int valuePhone, string valueAdress,
-                    string valueCity, int valueCountVisitors, Company objectCompany)
-        {
-            id_User = valueIdUser;
-            isActive = valueIsActive;
-            nick = valueNick;
-            name = valueName;
-            surname = valueSurname;
-            email = valueEmail;
-            phone = valuePhone;
-            adress = valueAdress;
-            city = valueCity;
-            countVisitors = valueCountVisitors;
-            company = objectCompany;
-        }
-
-        */
+     
     }
 }

@@ -65,21 +65,6 @@ namespace SklepInternetowy.Classes
             set => status = value;
         }
 
-
-        public Company(int valueId_Company, string valueNameCompany, string valueAdress,
-                     string valueCity, int valuePhone, string valueEmail, string valueNIP,
-                      int valueStatus)
-        {
-            id_Company = valueId_Company;
-            nameCompany = valueNameCompany;
-            adress = valueAdress;
-            city = valueCity;
-            phone = valuePhone;
-            email = valueEmail;
-            nip = valueNIP;
-            status = valueStatus;
-        }
-
         public Company(object[] tempCompany)
         {
             int tempId_Company = (int)tempCompany[0];
