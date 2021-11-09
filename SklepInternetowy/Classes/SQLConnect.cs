@@ -208,6 +208,23 @@ namespace SklepInternetowy
             }
         }
 
+        public void AddUserPermission(string valueNick,string valueNameTypeUser, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueNick", valueNick);
+                    cmd.Parameters.AddWithValue("@valueNameTypeUser", valueNameTypeUser);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
         public void AddComment(string valueComment,int valueStars,int valueIdUser, int valueIdProduct,string commandText) 
         {
             using (con = new SqlConnection(sqlConnection))
@@ -615,8 +632,8 @@ namespace SklepInternetowy
             }
         }
 
-        public void UpdatePayment(int valueIdUser, int valueIdType, string valueString,
-                                 string valueName,int valueStatus, string commandText)
+        public void UpdatePayment(int valueId, int valueIdTypePayment, string valuePaymentString,
+                                 string valueNameBank,int valueStatus, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
             {
@@ -625,10 +642,10 @@ namespace SklepInternetowy
                 {
                     cmd.CommandText = commandText;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
-                    cmd.Parameters.AddWithValue("@valueIdType", valueIdType);
-                    cmd.Parameters.AddWithValue("@valueString", valueString);
-                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueIdTypePayment", valueIdTypePayment);
+                    cmd.Parameters.AddWithValue("@valuePaymentString", valuePaymentString);
+                    cmd.Parameters.AddWithValue("@valueNameBank", valueNameBank);
                     cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
                     cmd.ExecuteNonQuery();
                 }

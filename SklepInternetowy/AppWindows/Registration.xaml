@@ -8,16 +8,89 @@
         Title="Rejestracja" Height="555" Width="420">
     <Grid>
 
-        <Button x:Name="RegisterButton" Content="Rejestruj" HorizontalAlignment="Center" Height="52" Margin="0,467,0,0" VerticalAlignment="Top" Width="380" Click="RegisterButton_Click" Cursor="Hand"/>
-        <TextBox x:Name="TextBoxNick" HorizontalAlignment="Center" Height="36" Margin="0,10,0,0" Text="Nick" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
-        <PasswordBox x:Name="PasswordBox1"  Password="Password"  HorizontalAlignment="Center" Height="31" Margin="0,59,0,0" VerticalAlignment="Top" Width="380" Cursor="IBeam"/>
-        <PasswordBox x:Name="PasswordBox2"  Password="Password" HorizontalAlignment="Center" Height="31" Margin="0,107,0,0" VerticalAlignment="Top" Width="380"/>
-        <TextBox x:Name="TextBoxName"  HorizontalAlignment="Center" Height="36" Margin="0,152,0,0" Text="Imię" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
-        <TextBox x:Name="TextBoxSurname"  HorizontalAlignment="Center" Height="36" Margin="0,205,0,0" Text="Nazwisko" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
-        <TextBox x:Name="TextBoxEmail"  HorizontalAlignment="Center" Height="36" Margin="0,256,0,0" Text="Poczta Email" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
-        <TextBox x:Name="TextBoxPhone"  HorizontalAlignment="Center" Height="36" Margin="0,308,0,0" Text="Telefon" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
-        <TextBox x:Name="TextBoxAdress"  HorizontalAlignment="Center" Height="36" Margin="0,361,0,0" Text="Adres" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
-        <TextBox x:Name="TextBoxCity"  HorizontalAlignment="Center" Height="36" Margin="0,414,0,0" Text="Miasto" TextWrapping="Wrap" VerticalAlignment="Top" Width="380"/>
+        <Button x:Name="RegisterButton"
+                Content="Rejestruj" 
+                HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Height="52" Margin="0,467,0,0"  Width="380"
+                Click="RegisterButton_Click"
+                Cursor="Hand"/>
+        <TextBox x:Name="TextBoxNick"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36" Margin="0,10,0,0" Width="380"
+                 Text="Nick" 
+                 TextWrapping="Wrap" 
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+                 Cursor="IBeam"
+                 ToolTip="Podaj nick"
+                 />
+        <PasswordBox x:Name="PasswordBox1"  
+                     Password="Password" 
+                     HorizontalAlignment="Center" VerticalAlignment="Top"
+                     Height="31" Margin="0,59,0,0" Width="380"
+                     Cursor="IBeam"
+                     ToolTip="Podaj Hasło"
+                     />
+        <PasswordBox x:Name="PasswordBox2"  
+                     Password="Password" 
+                     HorizontalAlignment="Center" VerticalAlignment="Top"
+                     Height="31" Margin="0,107,0,0"  Width="380" 
+                     Cursor="IBeam"
+                     ToolTip="Podaj powtórnie Hasło"
+                     />
+        <TextBox x:Name="TextBoxName" 
+                 CharacterCasing="Upper"  
+                 HorizontalAlignment="Center" VerticalAlignment="Top" 
+                 Text="Imię" 
+                 TextWrapping="Wrap" 
+                 Width="380" Height="36" Margin="0,152,0,0" 
+                 Cursor="IBeam" 
+                 TextChanged="NameChange"
+                 ToolTip="Podaj imię"
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                 />
+        <TextBox x:Name="TextBoxSurname" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36"  Width="380" Margin="0,205,0,0" 
+                 Text="Nazwisko" 
+                 TextWrapping="Wrap"  
+                 ToolTip="Podaj Nazwisko"
+                 TextChanged="NameChange"
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                 />
+        <TextBox x:Name="TextBoxEmail" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36" Margin="0,256,0,0"  Width="380"
+                 Text="Poczta Email" 
+                 TextWrapping="Wrap"
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                 ToolTip="Podaj Email"
+                 />
+        <TextBox x:Name="TextBoxPhone" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top" 
+                 Height="36" Margin="0,308,0,0" Width="380"
+                 Text="Telefon" 
+                 TextWrapping="Wrap" 
+                 ToolTip="Podaj Numer Telefonu"
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                  PreviewTextInput="OnlyNumeric"
+                 />
+        <TextBox x:Name="TextBoxAdress" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36" Margin="0,361,0,0" Width="380"
+                 Text="Adres"
+                 TextWrapping="Wrap" 
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                 ToolTip="Podaj Adres"
+                 />
+        <TextBox x:Name="TextBoxCity"  
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36" Margin="0,414,0,0" Width="380"
+                 Text="Miasto" 
+                 TextWrapping="Wrap" 
+                 TextChanged="NameChange"
+                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                 ToolTip="Podaj Miasto"
+                 />
         
 
 

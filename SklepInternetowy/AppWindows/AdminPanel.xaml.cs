@@ -99,7 +99,7 @@ namespace SklepInternetowy.AppWindows
                     break;
 
                 case "Payment":
-                    //UpdatePayment();
+                    UpdatePayment();
                     break;
                 case "Company":
                     UpdateCompany();
@@ -128,11 +128,38 @@ namespace SklepInternetowy.AppWindows
                 case "TypePayment":
                     UpdateTypePayment();
                     break;
+
+                case "UserPermission":
+                    AddUserPermission();
+                    break;
                 default:
                     UpdateDataBase();
                     break;
             }
         }
+
+        private void AddUserPermission() 
+        {
+            DataView tempChange = DataGridAdmin.ItemsSource as DataView;
+            DataTable tempDataTable = tempChange.ToTable();
+            List<object> tempListObjects = new List<object>();
+
+            foreach (DataRow item in tempDataTable.Rows)
+            {
+                tempListObjects.Add(item.ItemArray);
+            }
+            int i = 0;
+
+            foreach (object[] item in tempListObjects.ToArray())
+            {
+                if (i >= oldTabCount)
+                {
+                    sqlConnect.AddUserPermission((string)item[0], (string)item[1],  "Add" + currentTab);
+                }
+                i++;
+            }
+        }
+
         private void UpdateRetailSales()
         {
             DataView tempChange = DataGridAdmin.ItemsSource as DataView;
