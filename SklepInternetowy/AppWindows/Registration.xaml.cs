@@ -13,7 +13,7 @@ namespace SklepInternetowy
 	{
 		private Authentication windowAuthentication;
 		private SQLConnect sqlConnect;
-		private bool failed=false;
+		
 
 		public Registration(Authentication authentication)
 		{
