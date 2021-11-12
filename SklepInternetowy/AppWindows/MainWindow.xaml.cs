@@ -91,9 +91,9 @@ namespace SklepInternetowy
 
 		}
 
-		private void Log_Close(object sender, RoutedEventArgs e) 
+		private void Log_Close(object sender, RoutedEventArgs e)
 		{
-			MenuItemLoginOut.IsEnabled=false;
+			MenuItemLoginOut.IsEnabled = false;
 			MenuItemLogin.IsEnabled = true;
 			Users.LogUser = null;
 			ButtonUser.Visibility = Visibility.Hidden;
@@ -114,7 +114,6 @@ namespace SklepInternetowy
 		private void CloseApp(object sender, RoutedEventArgs e)
 		{
 			this.Close();
-			sqlConnect.Con.Close();
 			Application.Current.Shutdown();
 		}
 
