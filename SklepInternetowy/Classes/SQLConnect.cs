@@ -27,6 +27,34 @@ namespace SklepInternetowy
         }
 
 
+        public List<object> ReadUserPermision(int valueId,string commandText) 
+        {
+            List<object> tempList = new List<object>();
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (SqlDataAdapter da = new SqlDataAdapter())
+                {
+                    using (da.SelectCommand = con.CreateCommand())
+                    {
+                        da.SelectCommand.CommandText = commandText;
+                        da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
+                        DataTable ds = new DataTable();
+                        da.Fill(ds);
+                        foreach (DataRow item in ds.Rows)
+                        {
+                            tempList.Add(item.ItemArray);
+                        }
+                        con.Close();
+                        return tempList;
+                    }
+                }
+            }
+        }
+
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -71,7 +99,7 @@ namespace SklepInternetowy
                     using (da.SelectCommand = con.CreateCommand())
                     {
                         da.SelectCommand.CommandText = commandText;
-                        DataTable ds = new DataTable(); //conn is opened by dataadapter
+                        DataTable ds = new DataTable(); 
                         da.Fill(ds);
                         con.Close();
                         return ds;
@@ -334,7 +362,7 @@ namespace SklepInternetowy
         /// <param name="valueCity"></param>
         /// <param name="commandText"></param>
         public void AddUser(string valueNick, byte[] valueHash, string valueName, string valueSurname,
-                            string valueEmail, int numberPhone, string valueAdress, string valueCity,
+                            string valueEmail, long numberPhone, string valueAdress, string valueCity,
                             string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
@@ -760,8 +788,37 @@ namespace SklepInternetowy
             }
         }
 
+        public void UpdateUser(int valueId, Int16 valueIsActive, string valueNick, string valueName,
+                           string valueSurname, string valueEmail, long numberPhone, string valueAdress, string valueCity,
+                           int valueCountVisitors, string commandText)
+        {
+            using (con = new SqlConnection(sqlConnection))
+            {
+                con.Open();
+                using (var cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = commandText;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@valueId", valueId);
+                    cmd.Parameters.AddWithValue("@valueIsActive", valueIsActive);
+                    cmd.Parameters.AddWithValue("@valueNick", valueNick);
+                    cmd.Parameters.AddWithValue("@valueName", valueName);
+                    cmd.Parameters.AddWithValue("@valueSurname", valueSurname);
+                    cmd.Parameters.AddWithValue("@valueEmail", valueEmail);
+                    cmd.Parameters.AddWithValue("@numberPhone", numberPhone);
+                    cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
+                    cmd.Parameters.AddWithValue("@valueCity", valueCity);
+                    cmd.Parameters.AddWithValue("@valueCountVisitors", valueCountVisitors);
+
+                 
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
         public void UpdateUser(int valueId,Int16 valueIsActive,string valueNick, string valueName, 
-                           string valueSurname,string valueEmail, int numberPhone, string valueAdress, string valueCity,
+                           string valueSurname,string valueEmail, long numberPhone, string valueAdress, string valueCity,
                            int valueCountVisitors, object valueIdCompany,string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
@@ -781,11 +838,12 @@ namespace SklepInternetowy
                     cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
                     cmd.Parameters.AddWithValue("@valueCity", valueCity);
                     cmd.Parameters.AddWithValue("@valueCountVisitors", valueCountVisitors);
+                    
                     if (valueIdCompany is int)
                         cmd.Parameters.AddWithValue("@valueIdCompany",(int)valueIdCompany);
                     else
-                        cmd.Parameters.AddWithValue("@valueIdCompany", valueIdCompany);
-
+                        cmd.Parameters.AddWithValue("@valueIdCompany", -1);
+                    
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();

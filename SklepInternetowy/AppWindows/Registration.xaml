@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
-        Title="Rejestracja" Height="555" Width="420">
+        Title="Rejestracja" 
+        Height="575" Width="420">
     <Grid>
 
         <Button x:Name="RegisterButton"
                 Content="Rejestruj" 
                 HorizontalAlignment="Center" VerticalAlignment="Top" 
-                Height="52" Margin="0,467,0,0"  Width="380"
+                Height="52" Margin="0,497,0,0"  Width="380"
                 Click="RegisterButton_Click"
                 Cursor="Hand"/>
         <TextBox x:Name="TextBoxNick"
@@ -91,7 +92,8 @@
                   IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
                  ToolTip="Podaj Miasto"
                  />
-        
+        <CheckBox x:Name="CheckBoxIsActive" Content="Dezaktywuj konto" HorizontalAlignment="Center" Height="37" Margin="0,455,0,0" VerticalAlignment="Top" Width="380"/>
+
 
 
     </Grid>

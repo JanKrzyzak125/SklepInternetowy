@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,9 +13,13 @@ namespace SklepInternetowy
     {
         private Registration registrationWindow;
         private SQLConnect sqlConnect;
-        public Authentication()
+        private MainWindow mainWindow;
+
+        private readonly string[] namePersmision = { "Użytkownik", "Administrator" };
+        public Authentication(MainWindow tempMainWindow)
         {
             InitializeComponent();
+            mainWindow = tempMainWindow;
             registrationWindow = new Registration(this);
             sqlConnect = new SQLConnect();
         }
@@ -30,12 +35,47 @@ namespace SklepInternetowy
             if (tempUsers != null)
             {
                 Users tempUser = new Users(tempUsers);
-                MessageBox.Show("Udało się zalogować użytkownikowi" + Users.LogUser.Nick);
-                this.Close();
+                if (Users.LogUser.IsActive==0)
+                {
+                    MessageBox.Show("Konto nieaktywne. Spróbuj założyć nowe konto lub skonsultować się z administracja");
+                }
+                else
+                {
+                    MessageBox.Show("Udało się zalogować użytkownikowi" + Users.LogUser.Nick);
+                    List<object> tempPermission= sqlConnect.ReadUserPermision(Users.LogUser.Id_User, "ValueUserPermision");
+                    makePermision(tempPermission);
+
+
+                    mainWindow.ButtonLog.Visibility = Visibility.Hidden;
+                    mainWindow.MenuItemLogin.IsEnabled = false; 
+                    mainWindow.MenuItemLoginOut.IsEnabled=true;
+
+                    this.Close();
+                }
             }
             else
             {
                 MessageBox.Show("Spróbuj ponownie wpisać dane");
+            }
+        }
+
+        public void makePermision(List<object> tempPermission) 
+        {
+            mainWindow.ButtonUser.Visibility = Visibility.Hidden;
+            mainWindow.ButtonAdmin.Visibility = Visibility.Hidden;
+
+            foreach (object[] temp in tempPermission) 
+            {
+                string tempValuePermission = temp[0] as string;
+                if (tempValuePermission.Equals(namePersmision[0])) 
+                {
+                    mainWindow.ButtonUser.Visibility = Visibility.Visible;
+                }
+				if (tempValuePermission.Equals(namePersmision[1])) 
+                {
+                    mainWindow.ButtonAdmin.Visibility = Visibility.Visible;
+                }
+
             }
         }
 

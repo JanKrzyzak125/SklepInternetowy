@@ -14,7 +14,7 @@ namespace SklepInternetowy
         private string name;
         private string surname;
         private string email;
-        private int phone;
+        private long  phone;
         private string adress;
         private string city;
         private int countVisitors;
@@ -24,7 +24,7 @@ namespace SklepInternetowy
         public static Users LogUser 
         {
             get => logUser;
-            
+            set => logUser = value;
         }
 
         public int Id_User
@@ -63,7 +63,7 @@ namespace SklepInternetowy
             set => email = value;
         }
 
-        public int Phone
+        public long Phone
         {
             get => phone;
             set => phone = value;
@@ -101,7 +101,7 @@ namespace SklepInternetowy
             string valueName= (string)tempUser[3];
             string valueSurname= (string)tempUser[4];
             string valueEmail= (string)tempUser[5];
-            int valuePhone= (int)tempUser[6];
+            long valuePhone = (long)tempUser[6];
             string valueAdress= (string)tempUser[7];
             string valueCity= (string)tempUser[8];
             int valueCountVisitors= (int)tempUser[9];

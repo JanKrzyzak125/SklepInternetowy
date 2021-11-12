@@ -32,26 +32,46 @@
 
         </Grid.RowDefinitions>
 
-        <Button Background="{x:Static fw:AccentColors.ImmersiveSystemAccentDark2Brush}" x:Name="ButtonLog" Content="Logowanie"  HorizontalAlignment="Left" Height="43" Margin="1041,0,0,0" VerticalAlignment="Center" Width="149" Click="Log_Open" Cursor="Hand" Grid.Row="1"/>
+        <Button Background="{x:Static fw:AccentColors.ImmersiveSystemAccentDark2Brush}" x:Name="ButtonLog" Content="Logowanie"  HorizontalAlignment="Left" Height="43" Margin="1051,0,0,0" VerticalAlignment="Center" Width="149" Click="Log_Open" Cursor="Hand" Grid.Row="1"/>
+
+
         <DataGrid  x:Name="MainGrid" HorizontalAlignment="Center" Height="735" Margin="0,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1180" Visibility="Visible" />
         <TextBox  x:Name="TextSearch" Background="Aqua" Text="Wyszukaj" HorizontalAlignment="Left" Height="38" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="590" Grid.Row="1" />
-        <Button  Style="{StaticResource ButtonRoundAccentRevealStyle}"  x:Name="Search" Content="Szukaj" HorizontalAlignment="Left" Height="44" Margin="605,0,0,0" VerticalAlignment="Center" Width="90" Click="Search_Click" Grid.Row="1"/>
-        <Button x:Name="MenuUser" Content="Panel Uzytkownika" HorizontalAlignment="Left" Height="44" Margin="700,0,0,0" VerticalAlignment="Center" Width="164" Click="MenuUser_Click" Grid.Row="1" Cursor="Hand" />
+        <Button  Style="{StaticResource ButtonRoundAccentRevealStyle}"  x:Name="Search" Content="Szukaj" HorizontalAlignment="Left" Height="44" Margin="615,0,0,0" VerticalAlignment="Center" Width="90" Click="Search_Click" Grid.Row="1"/>
+        <Button x:Name="ButtonUser" 
+                Content="Panel Uzytkownika" 
+                HorizontalAlignment="Left" VerticalAlignment="Center"
+                Height="44" Margin="710,0,0,0" Width="164" 
+                Click="MenuUser_Click" 
+                Grid.Row="1" 
+                Cursor="Hand" 
+                />
+
+
         <Image x:Name="ImageProduct" HorizontalAlignment="Left" Height="143" Margin="66,54,0,0" Grid.Row="2" VerticalAlignment="Top" Width="179"/>
 
 
 
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="26" Margin="0,0,0,0">
-                <MenuItem Header="_Dane" Height="26">
-                    <MenuItem Header="_Close" Click="CloseApp"/>
+                <MenuItem Header="Profil" Height="26">
+                    <MenuItem x:Name="MenuItemLogin" Header="Zaloguj się" IsEnabled="True" Click="Log_Open"/>
+                    <MenuItem x:Name="MenuItemLoginOut" Header="Wyloguj się" IsEnabled="False" Click="Log_Close"/>
+                    <MenuItem Header="Close" Click="CloseApp"/>
                 </MenuItem>
                 <MenuItem Header="Widok" Height="26"/>
                 <MenuItem Header="_Pomoc" Height="26"/>
             </Menu>
 
         </DockPanel>
-        <Button Click="Admin_Open" Content="Panel Administatora" HorizontalAlignment="Left" Height="44" Margin="869,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="167" Cursor="Hand"/>
+        <Button 
+            x:Name="ButtonAdmin"
+            Click="Admin_Open" 
+            Content="Panel Administatora" 
+            HorizontalAlignment="Left" VerticalAlignment="Center"
+            Height="44" Margin="879,0,0,0" Width="167"
+            Grid.Row="1" 
+            Cursor="Hand"/>
     </Grid>
 
 

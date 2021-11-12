@@ -26,7 +26,7 @@
                   IsReadOnly="True"
                  AutoGeneratingColumn="dataGrid_AutoGeneratingColumn"
             />
-            <Button Content="Dodaj produkt" 
+        <Button Content="Dodaj produkt" 
                 
                 Margin="10,17,787,22"
                 Height="60" Width="200"
@@ -34,19 +34,19 @@
                 Cursor="Hand" 
                 Grid.Row="1"/>
 
-            <Button x:Name="ButtonAddRetailSales"
+        <Button x:Name="ButtonAddRetailSales"
                 Content="Wystaw na sprzedaz" 
                 Margin="466,17,334,22"
                 Height="60" Width="200"  
                 Cursor="Hand"  Grid.Row="1"  
                 />
-            <Button x:Name="ButtonShowUserProduct" 
+        <Button x:Name="ButtonShowUserProduct" 
                     Content="Pokaż produkty"
                     Height="60" Width="200" 
                      Margin="239,17,561,22" 
                 Grid.Row="1" 
         />
-            <ComboBox x:Name="ComboBoxViews" 
+        <ComboBox x:Name="ComboBoxViews" 
                   Background="Violet"
                   Margin="14,71,787,0"
                   Height="60" Width="200"
@@ -55,13 +55,26 @@
                   BorderBrush="AliceBlue"
         />
 
-            <Button x:Name="ButtonChangeViews" 
+        <Button x:Name="ButtonChangeViews" 
                 Click="ClickChangeViews"
                   Height="60" Width="200"
                 Margin="259,71,541,22" 
                 Content="Zmiana widoku" 
                 Grid.Row="2"
         />
+        <Button Content="Edycja profilu" 
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Height="60" Margin="483,71,0,0"  Width="183"
+                Grid.Row="2" 
+                Click="ClickChangeProfile" Cursor="Hand"
+                />
+        <Button Content="Firma" 
+                x:Name="ButtonCompany"
+                HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Height="60" Margin="692,71,0,0" Width="135"
+                Grid.Row="2" 
+                Click="CompanyClick"
+                />
 
     </Grid>
 </Window>

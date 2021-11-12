@@ -1,0 +1,78 @@
+﻿<Window x:Class="SklepInternetowy.AppWindows.RegistrationCompany"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SklepInternetowy.AppWindows"
+        mc:Ignorable="d"
+        Title="RejestracjaFirmy" 
+        
+        Height="455" Width="420">
+    <Grid>
+        <TextBox x:Name="TextBoxNameCompany"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36" Margin="0,10,0,0" Width="380"
+                 Text="Nazwa Firmy" 
+                 TextWrapping="Wrap" 
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+                 Cursor="IBeam"
+                 ToolTip="Podaj Nazwę firmy"
+                 />
+
+        <TextBox x:Name="TextBoxPhone" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top" 
+                 Height="36" Margin="0,163,0,0" Width="380"
+                 Text="Telefon" 
+                 TextWrapping="Wrap" 
+                 ToolTip="Podaj Numer Telefonu"
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                  PreviewTextInput="OnlyNumeric"
+                 />
+
+        <Button x:Name="RegisterButton"
+                Content="Rejestruj" 
+                HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Height="52" Margin="0,360,0,0"  Width="380"
+                Click="RegisterButton_Click"
+                Cursor="Hand"/>
+        <TextBox x:Name="TextBoxNameCompany_Copy"
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            Height="36" Margin="0,60,0,0" Width="380"
+            Text="Adres" 
+            TextWrapping="Wrap" 
+            IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+            Cursor="IBeam"
+            ToolTip="Podaj Nazwę firmy"
+                 />
+        <TextBox x:Name="TextBoxNameCompany_Copy1"
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            Height="36" Margin="0,113,0,0" Width="380"
+            Text="Miasto" 
+            TextWrapping="Wrap" 
+            IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+            Cursor="IBeam"
+            ToolTip="Podaj Nazwę firmy"
+                 />
+        <TextBox x:Name="TextBoxNameCompany_Copy2"
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            Height="36" Margin="0,276,0,0" Width="380"
+            Text="Email" 
+            TextWrapping="Wrap" 
+            IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+            Cursor="IBeam"
+            ToolTip="Podaj Nazwę firmy"
+                 />
+        <TextBox x:Name="TextBoxNameCompany_Copy3"
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            Height="36" Width="380"
+            Text="NIP" 
+            TextWrapping="Wrap" 
+            IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+            Cursor="IBeam"
+            ToolTip="Podaj Nazwę firmy" Margin="0,217,0,0"
+                 />
+        <CheckBox Content="Dezaktywować" HorizontalAlignment="Center" Height="38" Margin="0,317,0,0" VerticalAlignment="Top" Width="380"/>
+
+
+    </Grid>
+</Window>
