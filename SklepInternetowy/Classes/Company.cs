@@ -10,7 +10,7 @@ namespace SklepInternetowy.Classes
         private string nameCompany;
         private string adress;
         private string city;
-        private int phone;
+        private long phone;
         private string email;
         private string nip;
         private int status;
@@ -41,7 +41,7 @@ namespace SklepInternetowy.Classes
             set => city = value;
         }
 
-        public int Phone
+        public long Phone
         {
             get => phone;
             set => phone = value;
@@ -71,7 +71,7 @@ namespace SklepInternetowy.Classes
             string tempNameCompany = (string)tempCompany[1];
             string tempAdress = (string)tempCompany[2];
             string tempCity = (string)tempCompany[3];
-            int tempPhone = (int)tempCompany[4];
+            long tempPhone = (long)tempCompany[4];
             string tempEmail = (string)tempCompany[5];
             string tempNIP = (string)tempCompany[6];
             int tempStatus = (int)tempCompany[7];

@@ -37,7 +37,7 @@ namespace SklepInternetowy
 			TextBoxPhone.Text  = Users.LogUser.Phone.ToString();
 			TextBoxAdress.Text = Users.LogUser.Adress;
 			TextBoxCity.Text = Users.LogUser.City;
-			this.Name = "Zmiana danych użytkownika";
+			this.Title = "Zmiana danych użytkownika";
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace SklepInternetowy
 			CheckBoxIsActive.Visibility = Visibility.Hidden;
 			RegisterButton.Click -= EditButton_Click;
 			RegisterButton.Click += RegisterButton_Click;
-			this.Name = "Rejestracja";
+			this.Title = "Rejestracja";
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -110,8 +110,8 @@ namespace SklepInternetowy
 			else
 			{
 				codeFailed++;
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
 			}
-			MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
 
 		}
 
@@ -174,9 +174,8 @@ namespace SklepInternetowy
 				codeFailed++;
 				PasswordBox1.Background = System.Windows.Media.Brushes.Red;
 				PasswordBox2.Background = System.Windows.Media.Brushes.Red;
-
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
 			}
-			MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
 		}
 
 

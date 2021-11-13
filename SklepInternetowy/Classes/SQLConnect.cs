@@ -326,7 +326,7 @@ namespace SklepInternetowy
         /// <param name="valueCity"></param>
         /// <param name="valueUser"></param>
         /// <param name="commandText"></param>
-        public void AddCompany(string valueName, string valueNIP, string valueEmail, int valuePhone,
+        public void AddCompany(string valueName, string valueNIP, string valueEmail, long valuePhone,
                                string valueAdress, string valueCity, int valueUser, string commandText)
         {
             using (con = new SqlConnection(sqlConnection))
@@ -636,7 +636,7 @@ namespace SklepInternetowy
         }
 
         public void UpdateCompany(int valueId, string valueNameCompany, string valueAdress,
-                                 string valueCity ,int valuePhone,string valueEmail,string valueNIP,
+                                 string valueCity ,long valuePhone,string valueEmail,string valueNIP,
                                  int valueStatus, string commandText) 
         {
             using (con = new SqlConnection(sqlConnection))
