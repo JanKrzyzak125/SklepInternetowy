@@ -27,6 +27,7 @@ namespace SklepInternetowy
 			PasswordBox1.ToolTip = "Edycja hasła odbywa się w okienku logowania";
 			PasswordBox2.ToolTip = "Edycja hasła odbywa się w okienku logowania";
 			RegisterButton.Click -= RegisterButton_Click;
+			RegisterButton.Click -= EditPassword_Click;
 			RegisterButton.Click += EditButton_Click;
 			CheckBoxIsActive.Visibility = Visibility.Visible;
 
@@ -38,6 +39,7 @@ namespace SklepInternetowy
 			TextBoxAdress.Text = Users.LogUser.Adress;
 			TextBoxCity.Text = Users.LogUser.City;
 			this.Title = "Zmiana danych użytkownika";
+			RegisterButton.Content = "Edytuj";
 		}
 
 		/// <summary>
@@ -51,8 +53,56 @@ namespace SklepInternetowy
 			sqlConnect = new SQLConnect();
 			CheckBoxIsActive.Visibility = Visibility.Hidden;
 			RegisterButton.Click -= EditButton_Click;
+			RegisterButton.Click -= EditPassword_Click;
 			RegisterButton.Click += RegisterButton_Click;
 			this.Title = "Rejestracja";
+			RegisterButton.Content = "Zarejestruj";
+		}
+
+		public Registration(string valueNick,Authentication authentication) 
+		{
+			InitializeComponent();
+			sqlConnect = new SQLConnect();
+			windowAuthentication = authentication;
+			CheckBoxIsActive.Visibility = Visibility.Hidden;
+			TextBoxNick.Text = valueNick;
+			TextBoxNick.IsEnabled = false;
+			RegisterButton.Click -= EditButton_Click;
+			RegisterButton.Click -= RegisterButton_Click;
+			RegisterButton.Click += EditPassword_Click;
+			this.Title = "Zmiana hasła";
+			RegisterButton.Content = "Zmień Hasło";
+			TextBoxAdress.IsEnabled = false;
+			TextBoxCity.IsEnabled = false;
+			TextBoxEmail.IsEnabled = false;
+			TextBoxName.IsEnabled = false;
+			TextBoxPhone.IsEnabled = false;
+			TextBoxSurname.IsEnabled = false;
+		
+		}
+
+		private void EditPassword_Click(object sender, RoutedEventArgs e) 
+		{
+			string tempHash1 = PasswordBox1.Password;
+			string tempHash2 = PasswordBox2.Password;
+			string tempNick = TextBoxNick.Text;
+
+			if (tempHash1.Equals(tempHash2) && (tempHash1.Length>3))
+			{
+				PasswordBox1.Background = System.Windows.Media.Brushes.Green;
+				PasswordBox2.Background = System.Windows.Media.Brushes.Green;
+				byte[] tempHash = windowAuthentication.makeHash(tempHash1);
+				sqlConnect.NewPassword(tempNick, tempHash,"NewPassword");
+
+				MessageBox.Show("Udalo się zmienić hasło");
+				this.Close();
+			}
+			else
+			{
+				PasswordBox1.Background = System.Windows.Media.Brushes.Red;
+				PasswordBox2.Background = System.Windows.Media.Brushes.Red;
+				MessageBox.Show("Hasła się róznią lub za krótkie hasło");
+			}
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)

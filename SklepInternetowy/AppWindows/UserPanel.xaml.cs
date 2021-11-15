@@ -35,7 +35,7 @@ namespace SklepInternetowy
 		{
 			InitializeComponent();
 			sqlConnect = new SQLConnect();
-			windowEditProfile = new Registration(null);
+			windowEditProfile = new Registration((Authentication)null);
 			newProductWindow = new NewProductWindow();
 			windowRegistrationCompany = new RegistrationCompany();
 			AddListViews();

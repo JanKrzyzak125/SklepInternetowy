@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
         Title="Rejestracja" 
-        Height="575" Width="420">
+        Height="585" Width="420">
     <Grid>
 
         <Button x:Name="RegisterButton"
                 Content="Rejestruj" 
                 HorizontalAlignment="Center" VerticalAlignment="Top" 
-                Height="52" Margin="0,497,0,0"  Width="380"
+                Height="52" Margin="0,492,0,0"  Width="380"
                 Click="RegisterButton_Click"
                 Cursor="Hand"/>
         <TextBox x:Name="TextBoxNick"
