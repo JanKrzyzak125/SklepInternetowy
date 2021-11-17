@@ -84,7 +84,6 @@ namespace SklepInternetowy
 			using (SHA256 sha256Hash = SHA256.Create())
 			{
 				byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-
 				return bytes;
 			}
 		}
@@ -99,6 +98,7 @@ namespace SklepInternetowy
 			{
 				registrationWindow = new Registration(this);
 				registrationWindow.Show();
+				this.IsEnabled = false;
 			}
 		}
 
@@ -109,7 +109,7 @@ namespace SklepInternetowy
 
 			if (registrationWindow.IsVisible == false && okey == 1)
 			{
-				registrationWindow = new Registration(tempNick,this);
+				registrationWindow = new Registration(tempNick, this);
 				registrationWindow.Show();
 			}
 			else
@@ -130,6 +130,16 @@ namespace SklepInternetowy
 			LoginButton.Click -= PasswordChange_Open;
 			LoginButton.Click += LoginButton_Click;
 			LoginButton.Content = "Zalogować";
+		}
+
+		private void TextBoxAuthenticationIsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			TextBox temp = sender as TextBox;
+
+			if (temp.Text.Equals("Nick") || temp.Text.Equals("Telefon"))
+			{
+				temp.Text = "";
+			}
 		}
 
 	}

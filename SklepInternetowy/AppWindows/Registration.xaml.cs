@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +34,7 @@ namespace SklepInternetowy
 			TextBoxName.Text = Users.LogUser.Name;
 			TextBoxSurname.Text = Users.LogUser.Surname;
 			TextBoxEmail.Text = Users.LogUser.Email;
-			TextBoxPhone.Text  = Users.LogUser.Phone.ToString();
+			TextBoxPhone.Text = Users.LogUser.Phone.ToString();
 			TextBoxAdress.Text = Users.LogUser.Adress;
 			TextBoxCity.Text = Users.LogUser.City;
 			this.Title = "Zmiana danych użytkownika";
@@ -59,7 +58,7 @@ namespace SklepInternetowy
 			RegisterButton.Content = "Zarejestruj";
 		}
 
-		public Registration(string valueNick,Authentication authentication) 
+		public Registration(string valueNick, Authentication authentication)
 		{
 			InitializeComponent();
 			sqlConnect = new SQLConnect();
@@ -78,23 +77,24 @@ namespace SklepInternetowy
 			TextBoxName.IsEnabled = false;
 			TextBoxPhone.IsEnabled = false;
 			TextBoxSurname.IsEnabled = false;
-		
+
 		}
 
-		private void EditPassword_Click(object sender, RoutedEventArgs e) 
+		private void EditPassword_Click(object sender, RoutedEventArgs e)
 		{
 			string tempHash1 = PasswordBox1.Password;
 			string tempHash2 = PasswordBox2.Password;
 			string tempNick = TextBoxNick.Text;
 
-			if (tempHash1.Equals(tempHash2) && (tempHash1.Length>3))
+			if (tempHash1.Equals(tempHash2) && (tempHash1.Length > 3))
 			{
 				PasswordBox1.Background = System.Windows.Media.Brushes.Green;
 				PasswordBox2.Background = System.Windows.Media.Brushes.Green;
 				byte[] tempHash = windowAuthentication.makeHash(tempHash1);
-				sqlConnect.NewPassword(tempNick, tempHash,"NewPassword");
+				sqlConnect.NewPassword(tempNick, tempHash, "NewPassword");
 
 				MessageBox.Show("Udalo się zmienić hasło");
+
 				this.Close();
 			}
 			else
@@ -142,14 +142,14 @@ namespace SklepInternetowy
 			if (codeFailed == 0)
 			{
 				int tempId = Users.LogUser.Id_User;
-				Int16 tempIsActive=1;
-				if (CheckBoxIsActive.IsChecked==true) tempIsActive = 0;
+				Int16 tempIsActive = 1;
+				if (CheckBoxIsActive.IsChecked == true) tempIsActive = 0;
 				int tempCountVisitors = Users.LogUser.CountVisitors;
 				object tempObjectCompany = Users.LogUser.Company;
 
-				if(tempObjectCompany==null)
-				sqlConnect.UpdateUser(tempId, tempIsActive,tempNick, tempName, tempSurname, tempEmail, tempPhone,
-							  tempAdress, tempCity,tempCountVisitors, "UpdateUsers2");
+				if (tempObjectCompany == null)
+					sqlConnect.UpdateUser(tempId, tempIsActive, tempNick, tempName, tempSurname, tempEmail, tempPhone,
+								  tempAdress, tempCity, tempCountVisitors, "UpdateUsers2");
 				else
 					sqlConnect.UpdateUser(tempId, tempIsActive, tempNick, tempName, tempSurname, tempEmail, tempPhone,
 							  tempAdress, tempCity, tempCountVisitors, tempObjectCompany, "UpdateUsers");
@@ -215,7 +215,7 @@ namespace SklepInternetowy
 				byte[] tempHash = windowAuthentication.makeHash(tempHash1);
 				sqlConnect.AddUser(tempNick, tempHash, tempName, tempSurname, tempEmail, tempPhone,
 							  tempAdress, tempCity, "AddUser");
-
+				windowAuthentication.IsEnabled = true;
 				MessageBox.Show("Udalo się zajestrować");
 				this.Close();
 			}
@@ -234,8 +234,8 @@ namespace SklepInternetowy
 		{
 			string tempString = tempTextBox.Text;
 			if (tempString.Length < 2 || tempString.Equals("Imię") || tempString.Equals("Nazwisko") ||
-				tempString.Equals("Nick") || tempString.Equals("Poczta Email")|| tempString.Equals("Adres")||
-				tempString.Equals("Miasto") )
+				tempString.Equals("Nick") || tempString.Equals("Poczta Email") || tempString.Equals("Adres") ||
+				tempString.Equals("Miasto"))
 			{
 				MessageBox.Show("Złe " + nameTextBox(tempTextBox.Name));
 				tempTextBox.Background = System.Windows.Media.Brushes.Red;
@@ -300,5 +300,9 @@ namespace SklepInternetowy
 			e.Handled = regex.IsMatch(e.Text);
 		}
 
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (windowAuthentication != null) windowAuthentication.IsEnabled = true;
+		}
 	}
 }

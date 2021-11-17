@@ -5,13 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
-        Title="Logowanie" Height="300" Width="400">
+        Title="Logowanie" 
+        Height="300" Width="400"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanMinimize"
+        >
     <Grid>
-        <Button x:Name="LoginButton" Content="Zalogowac" HorizontalAlignment="Left" Height="53" Margin="10,195,0,0" VerticalAlignment="Top" Width="143" Click="LoginButton_Click" Cursor="Hand"/>
-        <Button x:Name="Registration" Content="Rejestracja" HorizontalAlignment="Left" Height="53" Margin="168,195,0,0" VerticalAlignment="Top" Width="148" Click="Registration_Open"/>
-        <CheckBox Unchecked="Password_Uncheck" Checked="Password_Check" x:Name="CheckBoxPassword" Content="Zapomniałem Hasła" HorizontalAlignment="Left" Height="24" Margin="22,153,0,0" VerticalAlignment="Top" Width="293"/>
-        <TextBox x:Name="NickText" HorizontalAlignment="Left" Height="41" Margin="22,24,0,0" Text="Nick" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Height="40" Margin="22,89,0,0" VerticalAlignment="Top" Width="293"/>
+        <Button x:Name="LoginButton" 
+                Content="Zalogować" 
+                HorizontalAlignment="Left"  VerticalAlignment="Top"
+                Height="53" Margin="53,195,0,0" Width="130" 
+                Click="LoginButton_Click" 
+                Cursor="Hand"
+                
+                />
+        <Button x:Name="Registration" 
+                Content="Rejestracja" 
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Height="53" Margin="216,195,0,0" Width="130" 
+                Click="Registration_Open"
+                />
+        <CheckBox Unchecked="Password_Uncheck" 
+                  Checked="Password_Check" 
+                  x:Name="CheckBoxPassword" 
+                  Content="Zapomniałem hasła" 
+                  HorizontalAlignment="Center" VerticalAlignment="Top"
+                  Height="24" Margin="0,150,0,0" Width="293"
+                  />
+        <TextBox x:Name="NickText" 
+                 HorizontalAlignment="Center"  VerticalAlignment="Top"
+                 Height="41" Margin="0,18,0,0"  Width="293"
+                 Text="Nick" 
+                 TextWrapping="Wrap" 
+                 Background="AliceBlue" 
+                 Cursor="IBeam"
+                 IsKeyboardFocusWithinChanged="TextBoxAuthenticationIsKeyboardFocusWithinChanged"
+                 ToolTip="Wprowadź swój nick"
+                 />
+        <PasswordBox x:Name="PasswordBox" 
+                     HorizontalAlignment="Center" VerticalAlignment="Top"
+                     Height="40" Margin="0,89,0,0"  Width="293"
+                     Background="AliceBlue"
+                     Cursor="IBeam"
+                     ToolTip="Wprowadź hasło"
+                     />
 
     </Grid>
 </Window>

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
         Title="Rejestracja" 
-        Height="585" Width="420">
+        Height="585" Width="420"
+        Closing="Window_Closing"
+        >
     <Grid>
 
         <Button x:Name="RegisterButton"

@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SklepInternetowy.AppWindows
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewProductWindow.xaml
-    /// </summary>
-    /// 
+	/// <summary>
+	/// Logika interakcji dla klasy NewProductWindow.xaml
+	/// </summary>
+	/// 
 
-    public partial class NewProductWindow : Window
+	public partial class NewProductWindow : Window
     {
         private SQLConnect sqlConnect=new SQLConnect();
         private List<string> tempListVat;
@@ -131,6 +120,9 @@ namespace SklepInternetowy.AppWindows
 
         }
 
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
 
-    }
+		}
+	}
 }

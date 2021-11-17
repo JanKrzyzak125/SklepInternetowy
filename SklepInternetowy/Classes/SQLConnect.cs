@@ -850,8 +850,6 @@ namespace SklepInternetowy
 					cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
 					cmd.Parameters.AddWithValue("@valueCity", valueCity);
 					cmd.Parameters.AddWithValue("@valueCountVisitors", valueCountVisitors);
-
-
 					cmd.ExecuteNonQuery();
 				}
 				con.Close();
@@ -885,6 +883,25 @@ namespace SklepInternetowy
 					else
 						cmd.Parameters.AddWithValue("@valueIdCompany", -1);
 
+					cmd.ExecuteNonQuery();
+				}
+				con.Close();
+			}
+		}
+		public void Update(int valueId, string valuePaymentString, string valueNameBank, int valueStatus,
+						   string commandText)
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueId", valueId);
+					cmd.Parameters.AddWithValue("@valuePaymentString", valuePaymentString);
+					cmd.Parameters.AddWithValue("@valueNameBank", valueNameBank);
+					cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
 					cmd.ExecuteNonQuery();
 				}
 				con.Close();

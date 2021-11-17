@@ -73,7 +73,8 @@
                 HorizontalAlignment="Left" VerticalAlignment="Top" 
                 Height="60" Margin="692,71,0,0" Width="135"
                 Grid.Row="2" 
-                Click="CompanyClick"
+                Click="CompanyClick" 
+                Cursor="Hand"
                 />
         
 

@@ -1,16 +1,8 @@
 ﻿using SklepInternetowy.AppWindows;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SklepInternetowy
 {
@@ -39,7 +31,15 @@ namespace SklepInternetowy
 			newProductWindow = new NewProductWindow();
 			windowRegistrationCompany = new RegistrationCompany();
 			AddListViews();
-			ButtonCompany.Content = "Dodaj firmę";
+			if (Users.LogUser!=null)
+			{
+				if (Users.LogUser.Company == null) 
+					ButtonCompany.Content = "Dodaj firmę";
+				else
+				{
+					ButtonCompany.Content = "Edytuj firmę";
+				}
+			}
 		}
 
 		public void CompanyClick(object sender, RoutedEventArgs e)

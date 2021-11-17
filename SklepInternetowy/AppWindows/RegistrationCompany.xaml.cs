@@ -41,7 +41,7 @@ namespace SklepInternetowy.AppWindows
 			TextBoxCity.Text = tempCompany.City;
 			TextBoxAdress.Text = tempCompany.Adress;
 			TextBoxEmail.Text = tempCompany.Email;
-			if (tempCompany.Status == 0) 
+			if (tempCompany.Status == 0)
 			{
 				CheckBoxIsActive.IsChecked = true;
 			}
@@ -83,7 +83,7 @@ namespace SklepInternetowy.AppWindows
 				int tempIsActive = 1;
 				if (CheckBoxIsActive.IsChecked == true) tempIsActive = 0;
 				sqlConnect.UpdateCompany(actualIdCompany, tempNameCompany, tempAdress, tempCity, tempPhone,
-										 tempEmail,tempNIP, tempIsActive, "UpdateCompany");
+										 tempEmail, tempNIP, tempIsActive, "UpdateCompany");
 				MessageBox.Show("Udało się zaktualizować dane o firmie");
 				this.Close();
 			}
@@ -127,9 +127,10 @@ namespace SklepInternetowy.AppWindows
 			if (codeFailed == 0)
 			{
 				int tempIdUser = Users.LogUser.Id_User;
-				sqlConnect.AddCompany(tempNameCompany,tempNIP,tempEmail,tempPhone,
-									  tempAdress,tempCity, tempIdUser,"AddCompany");
+				sqlConnect.AddCompany(tempNameCompany, tempNIP, tempEmail, tempPhone,
+									  tempAdress, tempCity, tempIdUser, "AddCompany");
 				MessageBox.Show("Udało się dodać dane o firmie");
+
 				this.Close();
 			}
 			else

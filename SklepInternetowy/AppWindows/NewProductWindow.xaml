@@ -34,7 +34,7 @@
 
 
         </Grid.RowDefinitions>
-        <Button Content="Wystaw" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Center" Width="151" Height="28" Margin="15,0,0,0" Cursor="Hand"/>
+        <Button Content="Wystaw" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Center" Width="151" Height="28" Margin="15,0,0,0" Cursor="Hand" Click="Button_Click"/>
         <ComboBox Height="28" Margin="10,0,10,0" Grid.Column="1" Grid.Row="3"/>
         <Label Content="Nazwa Produktu" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="140"/>
         <Label Content="Cena Netto" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="140"/>
