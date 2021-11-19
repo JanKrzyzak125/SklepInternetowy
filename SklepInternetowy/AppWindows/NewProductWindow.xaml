@@ -34,52 +34,56 @@
 
 
         </Grid.RowDefinitions>
-        <Button Content="Wystaw" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Center" Width="151" Height="28" Margin="15,0,0,0" Cursor="Hand" Click="Button_Click"/>
-        <ComboBox Height="28" Margin="10,0,10,0" Grid.Column="1" Grid.Row="3"/>
-        <Label Content="Nazwa Produktu" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="140"/>
-        <Label Content="Cena Netto" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="140"/>
-        <Label Content="Podatek VAT" HorizontalAlignment="Center" Height="29" Grid.Row="2" VerticalAlignment="Center" Width="140"/>
-        <Label Content="Cena Brutto" HorizontalAlignment="Center" Height="28" Grid.Row="3" VerticalAlignment="Center" Width="140"/>
-        <Label Content="Typ Płatności" HorizontalAlignment="Center" Height="28" Grid.Row="4" VerticalAlignment="Center" Width="140"/>
-        <Label Content="Stan produktu" HorizontalAlignment="Center" Height="28" Grid.Row="5" VerticalAlignment="Center" Width="140"/>
+
+        <Label Content="Nazwa Produktu" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151"/>
+        <Label Content="Cena Netto" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="151" Grid.Column="2"/>
+        <Label Content="Podatek VAT" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="161" Grid.Column="2" Margin="10,5,0,0"/>
+        <Label Content="Cena Brutto" HorizontalAlignment="Center" Height="28" Grid.Row="2" VerticalAlignment="Top" Width="151" Grid.Column="2" Margin="0,12,0,0"/>
+        <Label Content="Stan produktu" HorizontalAlignment="Center" Height="28" Grid.Row="3" VerticalAlignment="Center" Width="151"/>
         <Label Content="Typ Gwarancji" HorizontalAlignment="Center" Height="29" Grid.Row="6" VerticalAlignment="Center" Width="140"/>
         <Label Content="Ilość gwarancji" HorizontalAlignment="Center" Height="28" Grid.Row="7" VerticalAlignment="Center" Width="140"/>
-        <Label Content="Marka Produktu" HorizontalAlignment="Center" Height="28" Grid.Row="8" VerticalAlignment="Center" Width="140"/>
-        <Label Content="Opis" Grid.Column="4" HorizontalAlignment="Center" Height="28" Grid.Row="3" VerticalAlignment="Top" Width="140" Margin="0,7,0,0"/>
+        <Label Content="Marka Produktu" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="151"/>
+        <Label Content="Opis" Grid.Column="4" HorizontalAlignment="Center" Height="28" Grid.Row="2" VerticalAlignment="Top" Width="140" Margin="0,12,0,0"/>
         <Label Content="Zdjęcie" Grid.Column="4" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="140" RenderTransformOrigin="0.485,-0.046"/>
-        <Button Content="Podwierdzenie" Grid.Column="4" HorizontalAlignment="Center" Height="30" Grid.Row="2" VerticalAlignment="Top" Width="140" Margin="0,11,0,0" Background="#FF51B73A" Cursor="Hand"/>
-        <Button  Content="Wprowadz" Grid.Column="4" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="140"/>
-        <TextBox  Grid.Column="1" HorizontalAlignment="Center" Height="28" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Cursor="IBeam" Margin="0,8,0,0"/>
-        <TextBox ToolTip="podać tylko liczbę" Text="10" Grid.Column="1" HorizontalAlignment="Center" Height="30" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Margin="0,10,0,0"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Height="28" Grid.Row="1" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="140" Cursor="IBeam"/>
-        <TextBox Background="AliceBlue" ToolTip="Tutaj wstawić dokładny opis produktu" Grid.Column="5" HorizontalAlignment="Center" Height="269" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="323" Cursor="IBeam" Margin="0,10,0,0" Grid.RowSpan="6"/>
-        <ComboBox x:Name="ComboTypePayment"  Background="AliceBlue" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ComboCondition" ItemsSource="{Binding Path=TempListCondition}"  Background="AliceBlue" ToolTip="Wybrać stan produktu" Height="28" Margin="10,7,10,0" Grid.Column="1" Grid.Row="5" VerticalAlignment="Top"/>
+        <Label Content="Ilość produktu" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="151" Grid.Row="3" Margin="0,8,0,0"/>
+        <Label Content="Rodzaj Dostawa" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="4"/>
+        <Label Content="Czas Dostawy" HorizontalAlignment="Left" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="5" Margin="5,0,0,0"/>
+        <Label Content="Parametr nazwa" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="4"/>
+        <Label Content="Parametr Dodatkowy" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="5"/>
+        <Label Content="Kategoria" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="2"/>
 
 
-
-        <ComboBox x:Name="ComboWarranty" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="5,0,16,0" Grid.Column="1" Grid.Row="6"/>
-        <ComboBox ItemsSource="{Binding Path=TempListVat}" x:Name="ComboVAT" Background="AliceBlue" Height="28" Margin="10,0,10,0" Grid.Column="1" Grid.Row="2"/>
-
-        <Label Content="Data wystawienia" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151"/>
-        <Label Content="Data Wygaszenia" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="151" Margin="0,7,0,0" Grid.Row="1"/>
-        <Label Content="Ilość produktu" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="2"/>
-        <Label Content="Ilość dni wystawienia" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="3"/>
-        <Label Content="Rodzaj Dostawa" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="4"/>
-        <Label Content="Czas Dostawy" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="5"/>
-        <Label Content="Parametr nazwa" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Center" Width="151" Grid.Row="6"/>
-        <Label Content="Dodatkowy" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="151" Margin="0,11,0,0" Grid.Row="7"/>
-        <Label Content="Kategoria" Grid.Column="2" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="151" Margin="0,7,0,0" Grid.Row="8"/>
-        <Image ToolTip="Przykładowe zdjęcie" Grid.Column="5" HorizontalAlignment="Left" Height="114" Margin="10,8,0,0" Grid.RowSpan="3" VerticalAlignment="Top" Width="173" Source="/AppWindows/Energooszczędy komputer.jpg" RenderTransformOrigin="3.074,2.824"/>
+        <TextBox x:Name="TextBoxNameProduct" 
+                 Grid.Column="1" 
+                 HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top"
+                 Height="28" Width="151"  Margin="0,8,0,0"
+                 Cursor="IBeam"
+                 Text=""
+                 ToolTip="Podaj nazwę produktu"
+                 />
+        <TextBox ToolTip="podać tylko liczbę" Text="10" Grid.Column="1" HorizontalAlignment="Center" Height="30" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Margin="0,10,0,0"/>
+        <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="28" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="154" Cursor="IBeam"/>
+        <TextBox Background="AliceBlue" ToolTip="Tutaj wstawić dokładny opis produktu" Grid.Column="4" HorizontalAlignment="Left" Height="269" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="494" Cursor="IBeam" Margin="10,10,0,0" Grid.RowSpan="6" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Column="3" HorizontalAlignment="Left" Height="29" Grid.Row="4" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="152" Margin="12,0,0,0"/>
+        <TextBox  ToolTip="podać tylko liczbę" 
+                  Text="szt" Grid.Column="3" HorizontalAlignment="Center" Height="30" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="151" Cursor="IBeam"/>
         <TextBox Background="AliceBlue" Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Margin="0,7,0,0"/>
-        <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="7" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Margin="0,11,0,0"/>
-        <ComboBox x:Name="ComboCategory" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,13,10,0" Grid.Column="3" Grid.Row="8" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ComboDelivery" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="11,7,9,0" Grid.Column="3" Grid.Row="4" VerticalAlignment="Top"/>
-
-        <ComboBox x:Name="ComboBrand" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="10,13,10,0" Grid.Column="1" Grid.Row="8" VerticalAlignment="Top"/>
-        <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="6" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="152"/>
-        <TextBox  ToolTip="podać tylko liczbę" Text="szt" Grid.Column="3" HorizontalAlignment="Center" Height="30" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="151" Cursor="IBeam"/>
+        <TextBox Grid.Column="3" HorizontalAlignment="Center" Height="29" Grid.Row="5" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="151"/>
 
 
+        <ComboBox x:Name="ComboWarranty" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="8,0,8,0" Grid.Column="1" Grid.Row="6"/>
+        <ComboBox ItemsSource="{Binding Path=TempListVat}" x:Name="ComboVAT" Background="AliceBlue" Height="28" Margin="11,8,8,0" Grid.Column="3" VerticalAlignment="Top"/>
+
+       
+        
+        <ComboBox x:Name="ComboCategory" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="8,0,8,0" Grid.Column="1" Grid.Row="2"/>
+        <ComboBox x:Name="ComboDelivery" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="6,0,10,0" Grid.Column="1" Grid.Row="4"/>
+        <ComboBox x:Name="ComboTypePayment" Visibility="Hidden"  Background="AliceBlue" Height="28" Margin="10,7,7,0" Grid.Column="2" Grid.Row="4" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ComboCondition" ItemsSource="{Binding Path=TempListCondition}"  Background="AliceBlue" ToolTip="Wybrać stan produktu" Height="28" Margin="8,0,8,0" Grid.Column="1" Grid.Row="3"/>
+        <ComboBox x:Name="ComboBrand" Background="AliceBlue" ToolTip="Przykładowo szt" Height="28" Margin="10,6,10,0" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+
+        <Image x:Name="ImageProduct" ToolTip="Przykładowe zdjęcie" Grid.Column="5" HorizontalAlignment="Left" Height="126" Margin="10,8,0,0" Grid.RowSpan="3" VerticalAlignment="Top" Width="176" Source="/AppWindows/brak.png" RenderTransformOrigin="3.074,2.824"/>
+        <Button x:Name="ButtonAddImage" Click="ButtonAddImage_Click" Content="Wprowadz" Grid.Column="4" HorizontalAlignment="Center" Height="28" Grid.Row="1" VerticalAlignment="Center" Width="140"/>
+        <Button Content="Wystaw" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Center" Width="151" Height="28" Margin="5,0,0,0" Cursor="Hand" Click="Button_Click"/>
     </Grid>
 </Window>
