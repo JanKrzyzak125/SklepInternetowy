@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace SklepInternetowy.AppWindows
@@ -22,6 +23,7 @@ namespace SklepInternetowy.AppWindows
 		private List<string> tempListDelivery;
 		private List<string> tempListWarranty;
 		private byte[] tempImageData;
+		private ImageSource defaultSource;
 
 		public List<string> TempListVat
 		{
@@ -59,7 +61,7 @@ namespace SklepInternetowy.AppWindows
 			InitializeComponent();
 			makeList();
 			FillingDate();
-			defaultImage();
+			defaultSource = ImageProduct.Source.Clone();
 		}
 
 		private void makeList()
@@ -143,10 +145,7 @@ namespace SklepInternetowy.AppWindows
 			return img;
 		}
 
-		private void defaultImage() 
-		{
-			//todo domyślne zrobić lub brak
-		}
+
 
 		private void ButtonAddImage_Click(object sender, RoutedEventArgs e)
 		{
