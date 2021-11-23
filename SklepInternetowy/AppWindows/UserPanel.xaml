@@ -82,5 +82,13 @@
             </Menu>
 
         </DockPanel>
+        <ComboBox x:Name="ComboBoxListBuyed" 
+                  Visibility="Hidden" 
+                  Background="Violet"
+                  HorizontalAlignment="Left"  VerticalAlignment="Top" 
+                  Height="33" Margin="449,15,0,0"  Width="207"
+                  Grid.Row="2"
+                  ToolTip="Pokazuje liste produktów konkretnej sprzedaży"
+                  />
     </Grid>
 </Window>

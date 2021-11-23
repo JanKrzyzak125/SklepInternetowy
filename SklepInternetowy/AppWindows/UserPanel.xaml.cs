@@ -28,7 +28,7 @@ namespace SklepInternetowy
 			get => tempListViews;
 		}
 
-		public UserPanel() 
+		public UserPanel()
 		{
 			InitializeComponent();
 		}
@@ -78,8 +78,8 @@ namespace SklepInternetowy
 
 			tempListViews.Add("Widok zakupionych produktów");
 			tempListViews.Add("Widok dodanych produktów");
-			tempListViews.Add("Widok aktualnych sprzedaży");
-			tempListViews.Add("Widok zakończonych sprzedaży");
+			tempListViews.Add("Widok sprzedaży");
+			tempListViews.Add("????");
 			tempListViews.Add("Widok kupionych produktów");
 
 		}
@@ -99,6 +99,7 @@ namespace SklepInternetowy
 
 			}
 		}
+		//todo: dodać nazwy odpowiednich procedur
 
 		private void ClickChangeViews(object sender, RoutedEventArgs e)
 		{
@@ -111,26 +112,39 @@ namespace SklepInternetowy
 				{
 					case "Widok zakupionych produktów":
 						actualView = 1;
+						//tempTable = sqlConnect.ShowProduct(tempidUser, "");
+						//UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						ComboBoxListBuyed.Visibility = Visibility.Hidden;
 						break;
 					case "Widok dodanych produktów":
+						actualView = 2;
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUsersProducts");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
-						actualView = 2;
+						ComboBoxListBuyed.Visibility = Visibility.Hidden;	
 						break;
-					case "Widok aktualnych sprzedaży":
+					case "Widok sprzedaży":
 						actualView = 3;
+						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserSalers");
+						UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						ComboBoxListBuyed.Visibility = Visibility.Hidden;
 						break;
-					case "Widok zakończonych sprzedaży":
+					case "????":
 						actualView = 4;
+						//tempTable = sqlConnect.ShowProduct(tempidUser, "");
+						//UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						ComboBoxListBuyed.Visibility = Visibility.Hidden;
 						break;
 					case "Widok kupionych produktów":
 						actualView = 5;
+						//tempTable = sqlConnect.ShowProduct(tempidUser, "");
+						//UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						ComboBoxListBuyed.Visibility = Visibility.Visible;
 						break;
 					default:
 						break;
 				}
 			}
-			else 
+			else
 			{
 				MessageBox.Show("Proszę wybrać z listy widok");
 			}
@@ -151,6 +165,10 @@ namespace SklepInternetowy
 		{
 			switch (actualView)
 			{
+				case 1:
+
+
+					break;
 				case 2:
 					if (newProductWindow.IsVisible == false)
 					{
@@ -161,9 +179,21 @@ namespace SklepInternetowy
 						newProductWindow.Show();
 					}
 					break;
+
+				case 3:
+					break;
+
+				case 4:
+					break;
+
+				case 5:
+					break;
+				default:
+					MessageBox.Show("Brak wybranego widoku");
+					break;
 			}
 
-			//windowProducts = new WindowProduct();
+
 		}
 
 		private void NewProduct_Click(object sender, RoutedEventArgs e)
@@ -185,7 +215,7 @@ namespace SklepInternetowy
 				object[] tempObject = temp.Row.ItemArray as object[];
 				if (windowSales.IsVisible == false)
 				{
-					windowSales = new WindowSales(this,tempObject);
+					windowSales = new WindowSales(this, tempObject);
 					windowSales.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 					windowSales.Show();
 				}
@@ -198,7 +228,7 @@ namespace SklepInternetowy
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if(windowMainWindow!=null) 
+			if (windowMainWindow != null)
 				windowMainWindow.IsEnabled = true;
 		}
 	}
