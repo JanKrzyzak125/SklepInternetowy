@@ -131,7 +131,7 @@ namespace SklepInternetowy
 		{
 			if (userPanel.IsVisible == false)
 			{
-				userPanel = new UserPanel();
+				userPanel = new UserPanel(this);
 				userPanel.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				userPanel.Show();
 			}

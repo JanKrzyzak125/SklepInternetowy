@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 
+
 namespace SklepInternetowy
 {
 	/// <summary>
@@ -11,35 +12,48 @@ namespace SklepInternetowy
 	/// </summary>
 	public partial class UserPanel : Window
 	{
-		private WindowProduct windowProducts;
+		//private WindowProduct windowProducts;
 		private List<string> tempListViews;
 		private SQLConnect sqlConnect;
 		private Registration windowEditProfile;
 		private NewProductWindow newProductWindow;
 		private RegistrationCompany windowRegistrationCompany;
+		private int actualView;
+		private WindowSales windowSales;
+		private MainWindow windowMainWindow;
+
 
 		public List<string> TempListViews
 		{
 			get => tempListViews;
 		}
 
-		public UserPanel()
+		public UserPanel() 
+		{
+			InitializeComponent();
+		}
+
+		public UserPanel(MainWindow WindowMainWindow)
 		{
 			InitializeComponent();
 			sqlConnect = new SQLConnect();
 			windowEditProfile = new Registration((Authentication)null);
 			newProductWindow = new NewProductWindow();
 			windowRegistrationCompany = new RegistrationCompany();
+			windowSales = new WindowSales();
 			AddListViews();
-			if (Users.LogUser!=null)
+			if (Users.LogUser != null)
 			{
-				if (Users.LogUser.Company == null) 
+				if (Users.LogUser.Company == null)
 					ButtonCompany.Content = "Dodaj firmę";
 				else
 				{
 					ButtonCompany.Content = "Edytuj firmę";
 				}
 			}
+			actualView = -1;
+			windowMainWindow = WindowMainWindow;
+			windowMainWindow.IsEnabled = false;
 		}
 
 		public void CompanyClick(object sender, RoutedEventArgs e)
@@ -88,29 +102,37 @@ namespace SklepInternetowy
 
 		private void ClickChangeViews(object sender, RoutedEventArgs e)
 		{
-			string tempViews = ComboBoxViews.SelectedItem.ToString();
-			DataTable tempTable;
-			switch (tempViews)
+			if (ComboBoxViews.SelectedItem != null)
 			{
-				case "Widok zakupionych produktów":
-
-					break;
-				case "Widok dodanych produktów":
-					tempTable = sqlConnect.ShowProduct(0, "ViewUsersProducts");
-					UsersDataGrid.ItemsSource = tempTable.DefaultView;
-
-					break;
-				case "Widok aktualnych sprzedaży":
-
-					break;
-				case "Widok zakończonych sprzedaży":
-
-					break;
-				case "Widok kupionych produktów":
-
-					break;
-				default:
-					break;
+				string tempViews = ComboBoxViews.SelectedItem.ToString();
+				DataTable tempTable;
+				int tempidUser = Users.LogUser.Id_User;
+				switch (tempViews)
+				{
+					case "Widok zakupionych produktów":
+						actualView = 1;
+						break;
+					case "Widok dodanych produktów":
+						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUsersProducts");
+						UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						actualView = 2;
+						break;
+					case "Widok aktualnych sprzedaży":
+						actualView = 3;
+						break;
+					case "Widok zakończonych sprzedaży":
+						actualView = 4;
+						break;
+					case "Widok kupionych produktów":
+						actualView = 5;
+						break;
+					default:
+						break;
+				}
+			}
+			else 
+			{
+				MessageBox.Show("Proszę wybrać z listy widok");
 			}
 		}
 
@@ -127,7 +149,21 @@ namespace SklepInternetowy
 
 		private void DoubleClickUsersDataGrid(object sender, RoutedEventArgs e)
 		{
-			windowProducts = new WindowProduct();
+			switch (actualView)
+			{
+				case 2:
+					if (newProductWindow.IsVisible == false)
+					{
+						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
+						object[] tempObject = temp.Row.ItemArray as object[];
+						newProductWindow = new NewProductWindow(tempObject);
+						newProductWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+						newProductWindow.Show();
+					}
+					break;
+			}
+
+			//windowProducts = new WindowProduct();
 		}
 
 		private void NewProduct_Click(object sender, RoutedEventArgs e)
@@ -141,5 +177,29 @@ namespace SklepInternetowy
 
 		}
 
+		private void ButtonAddRetailSales_Click(object sender, RoutedEventArgs e)
+		{
+			if (UsersDataGrid.SelectedItem != null && actualView == 2)
+			{
+				DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
+				object[] tempObject = temp.Row.ItemArray as object[];
+				if (windowSales.IsVisible == false)
+				{
+					windowSales = new WindowSales(this,tempObject);
+					windowSales.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+					windowSales.Show();
+				}
+			}
+			else
+			{
+				MessageBox.Show("Musi być wybrany produkt", "tralalala", MessageBoxButton.OK);
+			}
+		}
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if(windowMainWindow!=null) 
+				windowMainWindow.IsEnabled = true;
+		}
 	}
 }

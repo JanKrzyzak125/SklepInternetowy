@@ -6,77 +6,81 @@
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
         Title="UserPanel" 
-        Height="824" 
-        Width="1000">
+        Height="824" Width="1000"
+        ResizeMode="CanMinimize"
+        Closing="Window_Closing"
+        >
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="556*"/>
-            <RowDefinition Height="99*"/>
-            <RowDefinition Height="153*"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="320*"/>
+            <RowDefinition Height="67*"/>
+
         </Grid.RowDefinitions>
         <DataGrid x:Name="UsersDataGrid" 
                   HorizontalAlignment="Center" 
-                  Height="541" Width="980"
-                  Margin="0,10,0,0" 
-                  VerticalAlignment="Top"  
+                  Height="620" Width="980" 
+                  VerticalAlignment="Center"  
                   MouseDoubleClick="DoubleClickUsersDataGrid" 
                   Background="AliceBlue"
                   AutoGenerateColumns="True"
                   IsReadOnly="True"
-                 AutoGeneratingColumn="dataGrid_AutoGeneratingColumn"
+                 AutoGeneratingColumn="dataGrid_AutoGeneratingColumn" Grid.Row="1"
+                  
             />
         <Button Content="Dodaj produkt" 
+                x:Name="ButtonAddProduct"
                 
-                Margin="10,17,787,22"
-                Height="60" Width="200"
                 Click="NewProduct_Click" 
-                Cursor="Hand" 
-                Grid.Row="1"/>
+                Cursor="Hand" Grid.Row="2" Margin="227,6,573,78" Width="200" Height="50"/>
 
         <Button x:Name="ButtonAddRetailSales"
                 Content="Wystaw na sprzedaz" 
-                Margin="466,17,334,22"
-                Height="60" Width="200"  
-                Cursor="Hand"  Grid.Row="1"  
+                Margin="227,67,573,27"  
+                Cursor="Hand" Grid.Row="2" Height="40" 
+                Click="ButtonAddRetailSales_Click"  
+                
                 />
-        <Button x:Name="ButtonShowUserProduct" 
-                    Content="Pokaż produkty"
-                    Height="60" Width="200" 
-                     Margin="239,17,561,22" 
-                Grid.Row="1" 
-        />
         <ComboBox x:Name="ComboBoxViews" 
                   Background="Violet"
-                  Margin="14,71,787,0"
-                  Height="60" Width="200"
-                  VerticalAlignment="Top"  
-                  Grid.Row="2"
-                  BorderBrush="AliceBlue"
+                  Margin="10,7,790,0"
+                  Height="47"
+                  VerticalAlignment="Top"
+                  BorderBrush="AliceBlue" Grid.Row="2"
         />
 
         <Button x:Name="ButtonChangeViews" 
                 Click="ClickChangeViews"
-                  Height="60" Width="200"
-                Margin="259,71,541,22" 
-                Content="Zmiana widoku" 
-                Grid.Row="2"
+                Margin="10,68,790,24" 
+               Height="40"
+
+                Content="Zmiana widoku" Grid.Row="2" Cursor="Hand"
         />
         <Button Content="Edycja profilu" 
                 HorizontalAlignment="Left" VerticalAlignment="Top"
-                Height="60" Margin="483,71,0,0"  Width="183"
-                Grid.Row="2" 
-                Click="ClickChangeProfile" Cursor="Hand"
+                Height="30" Margin="807,64,0,0"  Width="151" 
+                Click="ClickChangeProfile" Cursor="Hand" Grid.Row="2"
                 />
         <Button Content="Firma" 
                 x:Name="ButtonCompany"
                 HorizontalAlignment="Left" VerticalAlignment="Top" 
-                Height="60" Margin="692,71,0,0" Width="135"
-                Grid.Row="2" 
+                Height="32" Margin="807,22,0,0" Width="151" 
                 Click="CompanyClick" 
-                Cursor="Hand"
+                Cursor="Hand" Grid.Row="2"
                 />
-        
 
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="26" Margin="0,0,0,0">
+                <MenuItem Header="Profil" Height="26">
+                    <MenuItem x:Name="MenuItemLogin"/>
+                    <MenuItem x:Name="MenuItemLoginOut" />
+                    <MenuItem Header="Close"/>
+                </MenuItem>
+                <MenuItem Header="Widok" Height="26"/>
+                <MenuItem Header="_Pomoc" Height="26"/>
+            </Menu>
+
+        </DockPanel>
     </Grid>
 </Window>

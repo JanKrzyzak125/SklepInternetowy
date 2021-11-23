@@ -478,6 +478,41 @@ namespace SklepInternetowy
 				con.Close();
 			}
 		}
+
+		public void AddUserProduct(int valueSeller, string valueName, string valueDescription,
+								   double valuePrice, int valueVat, string valueCondition,
+								   int valueMaxQuantity, string valueNameParameter,
+								   string valueParameter, string valueWarranty,
+								   int valueWarrantyDays, string valueBrand, string valueCategory,
+								   byte[] valueImage, string commandText)
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueSeller", valueSeller);
+					cmd.Parameters.AddWithValue("@valueName", valueName);
+					cmd.Parameters.AddWithValue("@valueDescription", valueDescription);
+					cmd.Parameters.AddWithValue("@valuePrice", valuePrice);
+					cmd.Parameters.AddWithValue("@valueVat", valueVat);
+					cmd.Parameters.AddWithValue("@valueCondition", valueCondition);
+					cmd.Parameters.AddWithValue("@valueMaxQuantity", valueMaxQuantity);
+					cmd.Parameters.AddWithValue("@valueNameParameter", valueNameParameter);
+					cmd.Parameters.AddWithValue("@valueParameter", valueParameter);
+					cmd.Parameters.AddWithValue("@valueWarranty", valueWarranty);
+					cmd.Parameters.AddWithValue("@valueWarrantyDays", valueWarrantyDays);
+					cmd.Parameters.AddWithValue("@valueBrand", valueBrand);
+					cmd.Parameters.AddWithValue("@valueCategory", valueCategory);
+					cmd.Parameters.AddWithValue("@valueImage", valueImage);
+					cmd.ExecuteNonQuery();
+				}
+				con.Close();
+			}
+
+		}
 		public void AddRetailSales(int valueIdProduct, int valueQuantity, DataSetDateTime valueDateStartSales,
 								   DataSetDateTime valueDateClosing, DataSetDateTime valueDateClosed, int valueDayReturn,
 								   int valueDayDelivery, int valueIdDelivery, string commandText)
@@ -908,6 +943,41 @@ namespace SklepInternetowy
 			}
 		}
 
+		public void UpdateProduct2(int valueId, int valueSeller, string valueName, string valueDescription,
+							  double valuePrice, int valueVat, string valueCondition,
+							  int valueMaxQuantity, string valueNameParameter,
+							  string valueParameter, string valueWarranty, int valueWarrantyDays,
+							  string valueBrand, string valueCategory, byte[] valueImage, int valueStatus, string commandText) 
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueId", valueId);
+					cmd.Parameters.AddWithValue("@valueSeller", valueSeller);
+					cmd.Parameters.AddWithValue("@valueName", valueName);
+					cmd.Parameters.AddWithValue("@valueDescription", valueDescription);
+					cmd.Parameters.AddWithValue("@valuePrice", valuePrice);
+					cmd.Parameters.AddWithValue("@valueVat", valueVat);
+					cmd.Parameters.AddWithValue("@valueCondition", valueCondition);
+					cmd.Parameters.AddWithValue("@valueMaxQuantity", valueMaxQuantity);
+					cmd.Parameters.AddWithValue("@valueNameParameter", valueNameParameter);
+					cmd.Parameters.AddWithValue("@valueParameter", valueParameter);
+					cmd.Parameters.AddWithValue("@valueWarranty", valueWarranty);
+					cmd.Parameters.AddWithValue("@valueWarrantyDays", valueWarrantyDays);
+					cmd.Parameters.AddWithValue("@valueBrand", valueBrand);
+					cmd.Parameters.AddWithValue("@valueCategory", valueCategory);
+					cmd.Parameters.AddWithValue("@valueImage", valueImage);
+					cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+					cmd.ExecuteNonQuery();
+				}
+				con.Close();
+			}
+		}
+
 		public void UpdateTransation(int valueId, int valuePayment, int valueIdUser, decimal valueSumPay, int valueStatus, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
@@ -985,6 +1055,36 @@ namespace SklepInternetowy
 				return tempViews;
 			}
 		}
+
+		public object[] valueProduct(int valueId,string valueName,string commandText )
+		{
+			object[] tempObject;
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (SqlDataAdapter da = new SqlDataAdapter())
+				{
+					using (da.SelectCommand = con.CreateCommand())
+					{
+						da.SelectCommand.CommandText = commandText;
+
+						da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
+						da.SelectCommand.Parameters.AddWithValue("@valueName", valueName);
+						DataTable ds = new DataTable();
+						da.Fill(ds);
+						if (ds.Rows.Count == 0)
+						{
+							return null;
+						}
+						tempObject = ds.Rows[0].ItemArray;
+						con.Close();
+						return tempObject;
+					}
+				}
+
+			}
+		}
+
 		/* TODO dodać dodawanie zdjęcia do samego produktu oraz pomoc przy tworzeniu połączeń
         public void AddImage()
         {
