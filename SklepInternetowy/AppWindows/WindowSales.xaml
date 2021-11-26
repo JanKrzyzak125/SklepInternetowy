@@ -1,14 +1,57 @@
 ﻿<Window x:Class="SklepInternetowy.AppWindows.WindowSales"
+        
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SklepInternetowy.AppWindows"
+        xmlns:MyControl="clr-namespace:WpfControlLibrary;assembly=WpfControlLibrary"
         mc:Ignorable="d"
         Title="WindowSales" 
         Height="450" Width="600"
         ResizeMode="CanMinimize"
+    
         >
+    <Window.Resources>
+        <Style TargetType="Label" x:Key="MyLabel">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+        </Style>
+
+        <Style TargetType="DatePicker" x:Key="MyDatePicker">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+        </Style>
+
+        <Style TargetType="ComboBox" x:Key="MyComboBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="MyTextBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="MyButton">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Background" Value="DarkViolet"/>
+            
+        </Style>
+
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="73*"/>
@@ -27,64 +70,69 @@
         </Grid.RowDefinitions>
 
         <Label Content="Ilość wystawiona*" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
+               Style="{StaticResource MyLabel}"
                Grid.Row="0"/>
         <Label Content="Data Startu" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
+               Style="{StaticResource MyLabel}"
                Grid.Row="1"/>
         <Label Content="Data zakończenia" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
+               Style="{StaticResource MyLabel}"
                Grid.Row="2"/>
         <Label Content="Dni zwrotu" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
+               Style="{StaticResource MyLabel}"
                Grid.Row="3"/>
-        <Label Content="Rodzaj dostawy" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
-               Grid.Row="4"/>
         <Label Content="Zobacz produkt" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
-               Grid.Row="5"/>
-        <Label Content="Liczba wizytacji" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
+               Style="{StaticResource MyLabel}" 
+               Grid.Row="4"/>
+        <Label Content="*Należy obowiązkowo wypełnić" 
+               Style="{StaticResource MyLabel}" 
+               Grid.Row="5" Grid.ColumnSpan="2"/>
+        <Label Content="Wybór dostawy" 
+               Style="{StaticResource MyLabel}" 
                Grid.Column="2"/>
-        <Label Content="Data wyłączenia" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
+        <Label Content="Dni dostawy" 
+               Style="{StaticResource MyLabel}"
                Grid.Column="2" Grid.Row="1"/>
-        <Label Content="??" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
+        <Label Content="Ilość wyświetleń" 
+               Style="{StaticResource MyLabel}" 
                Grid.Column="2" Grid.Row="2"/>
-        <Label Content="???" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
-               Grid.Column="2" Grid.Row="3"/>
         <Label Content="Status" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
-               Grid.Column="2" Grid.Row="4"/>
-        <Label Content="Zatwierdź" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="33" Width="130" 
-               Grid.Column="2" Grid.Row="5"/>
-       
+               Style="{StaticResource MyLabel}" 
+               Grid.Column="2" Grid.Row="3"/>
+        <Label Content="?" 
+               Style="{StaticResource MyLabel}" 
+               Grid.Column="2" Grid.Row="5" 
+               Visibility="Hidden"/>
 
 
-        <Button Content="Button" Grid.Column="3" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Height="33" Width="130" Margin="0,4,0,0"/>
-        <Button Content="Produkt"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                Height="35" Width="130" 
-                Grid.Column="1" Grid.Row="5"
-                ToolTip="Włącz podgląd produktu" Click="ButtonProduct_Click"
+
+        <Button Content="Zatwierdź"
+                x:Name="ButtonAccept"
+                Grid.Column="2" 
+                Grid.Row="4"
+                Style="{StaticResource MyButton}" 
+                Grid.ColumnSpan="2" 
                 />
-        <DatePicker Grid.Column="1" HorizontalAlignment="Center" Height="33" Grid.Row="1" Width="130"/>
+        <Button Content="Produkt"
+                 Style="{StaticResource MyButton}" 
+                Grid.Column="1" Grid.Row="4"
+                ToolTip="Włącz podgląd produktu" 
+                Click="ButtonProduct_Click"
+                />
+
+
+        <ComboBox x:Name="ComboBoxQuantity"
+                  Style="{StaticResource MyComboBox}" 
+                  Grid.Column="1"       
+                  Grid.Row="0"
+                  />
+        <DatePicker Grid.Column="1" 
+                    x:Name="DateStart"
+                    Style="{StaticResource MyDatePicker}" 
+                    Grid.Row="1" />
+        <DatePicker Grid.Column="1" 
+                    Style="{StaticResource MyDatePicker}" 
+                    Grid.Row="2"/>
 
 
 

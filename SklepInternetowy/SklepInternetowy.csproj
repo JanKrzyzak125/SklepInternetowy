@@ -21,6 +21,7 @@
     <PackageReference Include="FluentWPF" Version="0.9.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+   
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +52,11 @@
   
   <ItemGroup>
     <Page Include="App.xaml" />
+  </ItemGroup>
+
+  
+  <ItemGroup>
+    <ProjectReference Include="..\WpfControlLibrary\WpfControlLibrary.csproj" />
   </ItemGroup>
 
   

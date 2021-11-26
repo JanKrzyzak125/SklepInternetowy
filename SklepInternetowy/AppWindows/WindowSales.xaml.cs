@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace SklepInternetowy.AppWindows
 {
 	/// <summary>
@@ -38,6 +39,7 @@ namespace SklepInternetowy.AppWindows
 			actualSales = null;
 			windowUserPanel.IsEnabled = false;
 			windowNewProductWindow = new NewProductWindow();
+			
 		}
 
 		public WindowSales(UserPanel windowUserPanel,object[] product, object[] sales)
