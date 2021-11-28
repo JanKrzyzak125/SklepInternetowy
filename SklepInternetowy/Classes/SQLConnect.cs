@@ -113,6 +113,30 @@ namespace SklepInternetowy
 			}
 		}
 
+		public int ReadQuantity(int valueId,string commandText)
+		{
+			int resultVar;
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueId", valueId);
+					var retValParam = new SqlParameter("resultVar", SqlDbType.Int)
+					{
+						Direction = ParameterDirection.ReturnValue
+					};
+					cmd.Parameters.Add(retValParam);
+					cmd.ExecuteScalar();
+					resultVar = (int)retValParam.Value;
+				}
+				con.Close();
+				return resultVar;
+			}
+		}
+
 		public void NewPassword(string valueNick, byte[] valuePassword, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
@@ -513,9 +537,9 @@ namespace SklepInternetowy
 			}
 
 		}
-		public void AddRetailSales(int valueIdProduct, int valueQuantity, DataSetDateTime valueDateStartSales,
-								   DataSetDateTime valueDateClosing, DataSetDateTime valueDateClosed, int valueDayReturn,
-								   int valueDayDelivery, int valueIdDelivery, string commandText)
+		public void AddRetailSales(int valueIdProduct, int valueQuantity, DateTime valueDateStartSales,
+								   DateTime valueDateClosing, int valueDayReturn,int valueDayDelivery, 
+								   string valueNameDelivery, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -528,10 +552,9 @@ namespace SklepInternetowy
 					cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
 					cmd.Parameters.AddWithValue("@valueDateStartSales", valueDateStartSales);
 					cmd.Parameters.AddWithValue("@valueDateClosing", valueDateClosing);
-					cmd.Parameters.AddWithValue("@valueDateClosed", valueDateClosed);
 					cmd.Parameters.AddWithValue("@valueDayReturn", valueDayReturn);
 					cmd.Parameters.AddWithValue("@valueDayDelivery", valueDayDelivery);
-					cmd.Parameters.AddWithValue("@valueDayDelivery", valueIdDelivery);
+					cmd.Parameters.AddWithValue("@valueNameDelivery", valueNameDelivery);
 					cmd.ExecuteNonQuery();
 				}
 				con.Close();

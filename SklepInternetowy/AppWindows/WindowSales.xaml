@@ -6,50 +6,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SklepInternetowy.AppWindows"
         xmlns:MyControl="clr-namespace:WpfControlLibrary;assembly=WpfControlLibrary"
+        xmlns:Material="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
         mc:Ignorable="d"
         Title="WindowSales" 
         Height="450" Width="600"
         ResizeMode="CanMinimize"
-    
+        Closing="WindowSales_Closing"
+        
         >
     <Window.Resources>
-        <Style TargetType="Label" x:Key="MyLabel">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="130"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Label" x:Key="MyLabel">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
+            </Style>
 
-        <Style TargetType="DatePicker" x:Key="MyDatePicker">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="130"/>
-        </Style>
+            <Style TargetType="DatePicker" x:Key="MyDatePicker">
+                <Setter Property="CalendarStyle" Value="{StaticResource MaterialDesignDatePickerCalendarPortrait}" />
+                <Setter Property="IsTodayHighlighted" Value="True" />
+                <Setter Property="SelectedDateFormat" Value="Short" />
+                <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+                <Setter Property="BorderThickness" Value="0 0 0 1" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
+            </Style>
 
-        <Style TargetType="ComboBox" x:Key="MyComboBox">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="130"/>
-        </Style>
+            <Style TargetType="ComboBox" x:Key="MyComboBox">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
 
-        <Style TargetType="TextBox" x:Key="MyTextBox">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="130"/>
-        </Style>
+            </Style>
 
-        <Style TargetType="Button" x:Key="MyButton">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="130"/>
-            <Setter Property="Background" Value="DarkViolet"/>
-            
-        </Style>
+            <Style TargetType="TextBox" x:Key="MyTextBox">
 
+
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="MyButton">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
+
+                <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+
+            </Style>
+
+            <Style TargetType="CheckBox" x:Key="MyCheckBox">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="Width" Value="130"/>
+
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
@@ -86,6 +113,7 @@
                Grid.Row="4"/>
         <Label Content="*Należy obowiązkowo wypełnić" 
                Style="{StaticResource MyLabel}" 
+               Width="250"
                Grid.Row="5" Grid.ColumnSpan="2"/>
         <Label Content="Wybór dostawy" 
                Style="{StaticResource MyLabel}" 
@@ -99,10 +127,10 @@
         <Label Content="Status" 
                Style="{StaticResource MyLabel}" 
                Grid.Column="2" Grid.Row="3"/>
-        <Label Content="?" 
+        <Label Content="Data końcowa" 
                Style="{StaticResource MyLabel}" 
                Grid.Column="2" Grid.Row="5" 
-               Visibility="Hidden"/>
+               />
 
 
 
@@ -110,11 +138,14 @@
                 x:Name="ButtonAccept"
                 Grid.Column="2" 
                 Grid.Row="4"
+                Width="200"
                 Style="{StaticResource MyButton}" 
-                Grid.ColumnSpan="2" 
+                Grid.ColumnSpan="2"
+               
                 />
         <Button Content="Produkt"
-                 Style="{StaticResource MyButton}" 
+                x:Name="ButtonProduct" 
+                Style="{StaticResource MyButton}" 
                 Grid.Column="1" Grid.Row="4"
                 ToolTip="Włącz podgląd produktu" 
                 Click="ButtonProduct_Click"
@@ -126,14 +157,54 @@
                   Grid.Column="1"       
                   Grid.Row="0"
                   />
+        <!-- Style="{StaticResource MaterialDesignDatePicker}" -->
         <DatePicker Grid.Column="1" 
                     x:Name="DateStart"
-                    Style="{StaticResource MyDatePicker}" 
-                    Grid.Row="1" />
+                    Style="{StaticResource MyDatePicker}"
+                    ToolTip="Brak wybranego oznacza domyślą czyli od dnia dzisiejszego"
+                    Grid.Row="1" 
+                    />
         <DatePicker Grid.Column="1" 
+                    x:Name="DateEnding"
                     Style="{StaticResource MyDatePicker}" 
+                    ToolTip="Brak wybranego oznacza domyślą długość sprzedaży czyli 7 dni"
                     Grid.Row="2"/>
 
+        <ComboBox x:Name="ComboBoxDelivery"
+                  Style="{StaticResource MyComboBox}" 
+                  Grid.Column="3"
+                   />
+        <TextBox x:Name="TextBoxDaysReturn" 
+                 Grid.Column="1" Grid.Row="3"
+                 PreviewTextInput="OnlyNumeric"
+                 Style="{StaticResource MyTextBox}"  />
+        <TextBox x:Name="TextBoxDaysDelivery"
+                 Grid.Column="3" Grid.Row="1"
+                 PreviewTextInput="OnlyNumeric"
+                 Style="{StaticResource MyTextBox}" />
+        <TextBox x:Name="TextBoxViews" 
+                 IsEnabled="False" 
+                 Grid.Column="3" Grid.Row="2"
+                 Style="{StaticResource MyTextBox}"  />
+        <CheckBox Content="Dezaktywuj"
+                  x:Name="CheckBoxStatus"
+                  Grid.Column="3" 
+                  Grid.Row="3" 
+                  ToolTip="Czy chcesz dezaktywować sprzedaż"
+                  Style="{StaticResource MyCheckBox}"
+                  />
+        <DatePicker Grid.Column="3" 
+                    x:Name="DateEnd"
+                    Style="{StaticResource MyDatePicker}" 
+                    ToolTip="Wyłączona została w dniu"
+                    Grid.Row="5"
+                    IsEnabled="false"
+                    />
+
+
+
+        <!-- <MyControl:UserControl1 Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,25,0,0" Grid.Row="3" VerticalAlignment="Top" Width="101"/>
+-->
 
 
 

@@ -64,7 +64,7 @@
 
     </UserControl.Resources>
 
-        <Grid>
+    <Grid>
         <TextBox  Background="AliceBlue" Name="textblock1" />
         <Button Grid.Row="2" Grid.ColumnSpan="2" Name="submitName"
         Background="Green" Height="20">View message</Button>
