@@ -118,14 +118,48 @@ namespace SklepInternetowy.AppWindows
 
 		private void CheckBox_Checked(object sender, RoutedEventArgs e)
 		{
-
+			//Czy to potrzebne?
 		}
 
 
-
+		//TODO
 		private void ButtonAcceptEdit_Click(object sender, RoutedEventArgs e)
 		{
+			int codeFailed = 0;
+			int tempQuantity;
 
+			if (!test(ComboBoxQuantity)) codeFailed++;
+			int.TryParse(ComboBoxQuantity.Text, out tempQuantity);
+
+			DateTime tempDateStartSales = (DateTime)DateStart.SelectedDate;
+
+			int tempDaysReturn;
+			if (!test(TextBoxDaysReturn)) codeFailed++;
+			int.TryParse(TextBoxDaysReturn.Text, out tempDaysReturn);
+
+			DateTime tempDateClosingSales = (DateTime)DateEnding.SelectedDate;
+
+			int tempDaysDelivery;
+			if (!test(TextBoxDaysDelivery)) codeFailed++;
+			int.TryParse(TextBoxDaysDelivery.Text, out tempDaysDelivery);
+
+			string tempNameDelivery;
+			if (!test(ComboBoxDelivery)) codeFailed++;
+			tempNameDelivery = ComboBoxDelivery.Text;
+
+
+			if (codeFailed == 0)
+			{
+				int tempId = (int)actualObject[0];
+				//sqlConnect.UpdateRetailSales(tempId, tempQuantity, tempDateStartSales, tempDateClosingSales,
+				//						  tempDaysReturn, tempDaysDelivery, tempNameDelivery, "AddRetailSales");
+				MessageBox.Show("Udało się zaktualizować sprzedaż");
+				this.Close();
+			}
+			else
+			{
+				MessageBox.Show("Wystąpiło=" + codeFailed + " tyle błędów w formularzu");
+			}
 		}
 
 		private void ButtonAcceptNew_Click(object sender, RoutedEventArgs e)

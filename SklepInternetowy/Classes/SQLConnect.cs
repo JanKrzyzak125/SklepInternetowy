@@ -859,8 +859,8 @@ namespace SklepInternetowy
 			}
 		}
 
-		public void UpdateRetailSales(int valueId, int valueIdProduct, int valueQuantity, DataSetDateTime valueDateStartSales,
-								   DataSetDateTime valueDateClosing, DataSetDateTime valueDateClosed, int valueDayReturn,
+		public void UpdateRetailSales(int valueId, int valueIdProduct, int valueQuantity, DateTime valueDateStartSales,
+								   DateTime valueDateClosing, DateTime valueDateClosed, int valueDayReturn,
 								   int valueDayDelivery, int valueIdDelivery, int valueVisitors, int valueStatus, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
