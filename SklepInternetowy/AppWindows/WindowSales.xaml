@@ -124,12 +124,15 @@
         <Label Content="Ilość wyświetleń" 
                Style="{StaticResource MyLabel}" 
                Grid.Column="2" Grid.Row="2"/>
-        <Label Content="Status" 
+        <Label Content="Status"
+               x:Name="LabelStatus"
                Style="{StaticResource MyLabel}" 
                Grid.Column="2" Grid.Row="3"/>
         <Label Content="Data końcowa" 
+               x:Name="LabelDateEnd"
                Style="{StaticResource MyLabel}" 
                Grid.Column="2" Grid.Row="5" 
+               
                />
 
 

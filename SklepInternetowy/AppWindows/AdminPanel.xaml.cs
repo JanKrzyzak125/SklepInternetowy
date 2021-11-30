@@ -177,8 +177,8 @@ namespace SklepInternetowy.AppWindows
 			{
 				if (i < oldTabCount)
 				{
-					sqlConnect.UpdateRetailSales(i, (int)item[0], (int)item[1], (DataSetDateTime)item[2],
-									(DataSetDateTime)item[3], (DataSetDateTime)item[4], (int)item[5], (int)item[6],
+					sqlConnect.UpdateRetailSales(i, (int)item[0], (int)item[1], (DateTime)item[2],
+									(DateTime)item[3], (DateTime)item[4], (int)item[5], (int)item[6],
 									(int)item[7], (int)item[8], (int)item[9], "Update" + currentTab);
 				}
 				else
@@ -262,7 +262,7 @@ namespace SklepInternetowy.AppWindows
 			{
 				if (i < oldTabCount)
 				{
-					sqlConnect.UpdatePayment(i, (int)item[0], (string)item[1], (string)item[2], (int)item[3],
+					sqlConnect.UpdatePaymentAdmin(i, (int)item[0], (string)item[1], (string)item[2], (int)item[3],
 											 "Update" + currentTab);
 				}
 				else

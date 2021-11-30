@@ -56,9 +56,14 @@ namespace SklepInternetowy.AppWindows
 			windowNewProductWindow = new NewProductWindow();
 			makeList();
 			fillingDate();
+			
 			DateTime thisDay = DateTime.Today;
 			DateEnding.DataContext = thisDay.Date.ToShortDateString();
 
+			LabelStatus.Visibility = Visibility.Hidden;
+			CheckBoxStatus.Visibility = Visibility.Hidden;
+			DateEnd.Visibility = Visibility.Hidden;
+			LabelDateEnd.Visibility = Visibility.Hidden;
 			TextBoxViews.Visibility = Visibility.Hidden;
 			ButtonAccept.Click -= ButtonAcceptEdit_Click;
 			ButtonAccept.Click += ButtonAcceptNew_Click;
@@ -82,12 +87,47 @@ namespace SklepInternetowy.AppWindows
 			windowUserPanel.IsEnabled = false;
 			windowNewProductWindow = new NewProductWindow();
 			makeList();
-			fillingDate();
+			fillingDate2();
 
-			this.Title = "Edytuj sprzedaż";
+			ComboBoxQuantity.Text = actualSales[1].ToString();
+			ComboBoxQuantity.IsEnabled = false;
+
+			DateStart.Text = actualSales[2].ToString();
+			DateStart.IsEnabled = false;
+
+			DateEnding.Text = actualSales[3].ToString();
+			DateEnding.IsEnabled = false;
+
+			TextBoxDaysReturn.Text = actualSales[5].ToString();
+			ComboBoxDelivery.Text = actualSales[6].ToString();
+			TextBoxDaysDelivery.Text = actualSales[7].ToString();
+			TextBoxViews.Text = actualSales[8].ToString();
 			TextBoxViews.Visibility = Visibility.Visible;
-			ButtonAccept.Click -= ButtonAcceptNew_Click;
-			ButtonAccept.Click += ButtonAcceptEdit_Click;
+
+			if ((int)actualSales[9] == 0)
+			{
+				DateEnd.Text = actualSales[4].ToString();
+				DateEnd.Visibility = Visibility.Visible;
+				LabelDateEnd.Visibility = Visibility.Visible;
+				TextBoxDaysReturn.IsEnabled = false;
+				ComboBoxDelivery.IsEnabled = false;
+				TextBoxDaysDelivery.IsEnabled = false;
+				CheckBoxStatus.IsChecked = true;
+				CheckBoxStatus.IsEnabled = false;
+				this.Title = "Pogląd zakończonej sprzedaży";
+				ButtonAccept.IsEnabled = false;
+				ButtonAccept.ToolTip = "Nie mozna zaakceptować bo sprzedaż zakończona";
+			}
+			else 
+			{
+				DateEnd.Visibility = Visibility.Hidden;
+				LabelDateEnd.Visibility = Visibility.Hidden;
+				this.Title = "Edytuj sprzedaż";
+				ButtonAccept.Click -= ButtonAcceptNew_Click;
+				ButtonAccept.Click += ButtonAcceptEdit_Click;
+			}
+			
+
 		}
 
 		private void makeList()
@@ -113,6 +153,17 @@ namespace SklepInternetowy.AppWindows
 				tempListQuantity.Add(i);
 			}
 
+		}
+
+		private void fillingDate2()
+		{
+			foreach (DataRow row in sqlConnect.ReadTable("ValuesDelivery").Rows)
+			{
+				if ((int)row[1] == 1) tempListDelivery.Add(row[0].ToString());
+			}
+
+			tempListQuantity.Add((int)actualSales[1] - 1);
+			tempListQuantity.Add((int)actualSales[1]);
 		}
 
 

@@ -28,6 +28,8 @@ namespace SklepInternetowy.AppWindows
 		private byte[] tempImageData;
 		private ImageSource defaultSource;
 		private object[] actualProduct;
+		private WindowRating windowRating;
+
 		public List<string> TempListVat
 		{
 			get => tempListVat;
@@ -58,6 +60,7 @@ namespace SklepInternetowy.AppWindows
 			InitializeComponent();
 			makeList();
 			FillingDate();
+			windowRating = new WindowRating();
 			defaultSource = ImageProduct.Source.Clone();
 			this.Title = "Edycja produktu";
 			ButtonProduct.Click -= NewButton_Click;
@@ -78,6 +81,8 @@ namespace SklepInternetowy.AppWindows
 			ComboCategory.Text = Product[12].ToString();
 			tempImageData = (byte[])Product[13];
 			ImageProduct.Source = ConvertByteToImage(tempImageData);
+			LabelRating.Visibility = Visibility.Visible;
+			ButtonRating.Visibility = Visibility.Visible;
 		}
 
 
@@ -91,6 +96,8 @@ namespace SklepInternetowy.AppWindows
 			ButtonProduct.Click -= EditButton_Click;
 			ButtonProduct.Click += NewButton_Click;
 			ButtonProduct.Content = "Dodaj produkt";
+			LabelRating.Visibility = Visibility.Hidden;
+			ButtonRating.Visibility = Visibility.Hidden;
 		}
 
 		private void makeList()
@@ -362,6 +369,19 @@ namespace SklepInternetowy.AppWindows
 			{
 				temp.CharacterCasing = CharacterCasing.Lower;
 			}
+		}
+
+		private void Rating_Click(object sender, RoutedEventArgs e)
+		{
+			if (windowRating.IsVisible == false)
+			{
+				int tempId = (int)actualProduct[0];
+				windowRating = new WindowRating(tempId);
+				windowRating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowRating.Show();
+			}
+
+
 		}
 	}
 }

@@ -10,67 +10,82 @@
         ResizeMode="CanMinimize"
         Closing="Window_Closing"
         >
+    <Window.Resources>
+        <Style TargetType="ComboBox" x:Key="MyComboBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="MyButton">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+        </Style>
+    </Window.Resources>
+
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230*"/>
+            <ColumnDefinition Width="230*"/>
+            <ColumnDefinition Width="230*"/>
+            <ColumnDefinition Width="230*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="17*"/>
             <RowDefinition Height="320*"/>
-            <RowDefinition Height="67*"/>
-
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
         <DataGrid x:Name="UsersDataGrid" 
-                  HorizontalAlignment="Center" 
+                  HorizontalAlignment="Left" 
                   Height="620" Width="980" 
                   VerticalAlignment="Center"  
                   MouseDoubleClick="DoubleClickUsersDataGrid" 
                   Background="AliceBlue"
                   AutoGenerateColumns="True"
                   IsReadOnly="True"
-                 AutoGeneratingColumn="dataGrid_AutoGeneratingColumn" Grid.Row="1"
+                  AutoGeneratingColumn="dataGrid_AutoGeneratingColumn" 
+                  Grid.Row="1" Grid.ColumnSpan="4" 
+                  Margin="10,0,0,0"
                   
             />
-        <Button Content="Dodaj produkt" 
-                x:Name="ButtonAddProduct"
-                
-                Click="NewProduct_Click" 
-                Cursor="Hand" Grid.Row="2" Margin="227,6,573,78" Width="200" Height="50"/>
 
-        <Button x:Name="ButtonAddRetailSales"
-                Content="Wystaw na sprzedaz" 
-                Margin="227,67,573,27"  
-                Cursor="Hand" Grid.Row="2" Height="40" 
-                Click="ButtonAddRetailSales_Click"  
-                
+        <Button x:Name="ButtonAdd"
+                Content="Dodaj" 
+                Style="{DynamicResource MyButton}"
+                Grid.Row="3" Grid.Column="1" 
+     
                 />
         <ComboBox x:Name="ComboBoxViews" 
                   Background="Violet"
-                  Margin="10,7,790,0"
-                  Height="47"
-                  VerticalAlignment="Top"
+                  Style="{DynamicResource MyComboBox}"
                   BorderBrush="AliceBlue" Grid.Row="2"
         />
 
         <Button x:Name="ButtonChangeViews" 
                 Click="ClickChangeViews"
-                Margin="10,68,790,24" 
-               Height="40"
-
-                Content="Zmiana widoku" Grid.Row="2" Cursor="Hand"
+                Style="{DynamicResource MyButton}"
+                Content="Zmiana widoku" Grid.Row="3" Cursor="Hand"
         />
         <Button Content="Edycja profilu" 
-                HorizontalAlignment="Left" VerticalAlignment="Top"
-                Height="30" Margin="807,64,0,0"  Width="151" 
-                Click="ClickChangeProfile" Cursor="Hand" Grid.Row="2"
+                Style="{DynamicResource MyButton}"
+                Click="ClickChangeProfile" Cursor="Hand" Grid.Row="3" Grid.Column="3"
                 />
         <Button Content="Firma" 
                 x:Name="ButtonCompany"
-                HorizontalAlignment="Left" VerticalAlignment="Top" 
-                Height="32" Margin="807,22,0,0" Width="151" 
+                Style="{DynamicResource MyButton}"
                 Click="CompanyClick" 
-                Cursor="Hand" Grid.Row="2"
+                Cursor="Hand" Grid.Row="2" Grid.Column="3"
                 />
 
-        <DockPanel>
+        <DockPanel Grid.ColumnSpan="4">
             <Menu DockPanel.Dock="Top" Height="26" Margin="0,0,0,0">
                 <MenuItem Header="Profil" Height="26">
                     <MenuItem x:Name="MenuItemLogin"/>
@@ -85,10 +100,15 @@
         <ComboBox x:Name="ComboBoxListBuyed" 
                   Visibility="Hidden" 
                   Background="Violet"
-                  HorizontalAlignment="Left"  VerticalAlignment="Top" 
-                  Height="33" Margin="449,15,0,0"  Width="207"
+                  Style="{DynamicResource MyComboBox}"
                   Grid.Row="2"
-                  ToolTip="Pokazuje liste produktów konkretnej sprzedaży"
+                  ToolTip="Pokazuje liste produktów konkretnej sprzedaży" Grid.Column="1"
                   />
+        <Button x:Name="ButtonViewListBuyed"
+                Content="Zobacz wybraną listę" 
+                Style="{DynamicResource MyButton}"
+                Grid.Row="3" Grid.Column="2"
+                Click="ViewListBuyed_Click"
+                />
     </Grid>
 </Window>

@@ -174,6 +174,27 @@ namespace SklepInternetowy
 		}
 
 
+		public DataTable ShowRating(int valueId,string commandText) 
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (SqlDataAdapter da = new SqlDataAdapter())
+				{
+					using (da.SelectCommand = con.CreateCommand())
+					{
+						da.SelectCommand.CommandText = commandText;
+						da.SelectCommand.CommandType = CommandType.StoredProcedure;
+						da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
+						DataTable ds = new DataTable();
+						da.Fill(ds);
+						con.Close();
+						return ds;
+					}
+				}
+			}
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -337,7 +358,7 @@ namespace SklepInternetowy
 			}
 		}
 
-		public void AddPayment(int valueIdUser, int valueIdType, string valueString, string valueName, string commandText)
+		public void AddPayment(int valueIdUser, string valueNameType, string valueString, string valueName, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -347,7 +368,7 @@ namespace SklepInternetowy
 					cmd.CommandText = commandText;
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
-					cmd.Parameters.AddWithValue("@valueIdType", valueIdType);
+					cmd.Parameters.AddWithValue("@valueNameType", valueNameType);
 					cmd.Parameters.AddWithValue("@valueString", valueString);
 					cmd.Parameters.AddWithValue("@valueName", valueName);
 					cmd.ExecuteNonQuery();
@@ -759,7 +780,28 @@ namespace SklepInternetowy
 			}
 		}
 
-		public void UpdatePayment(int valueId, int valueIdTypePayment, string valuePaymentString,
+		public void UpdatePayment(int valueId, string valueNameTypePayment, string valuePaymentString,
+								 string valueNameBank, int valueStatus, string commandText)
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueId", valueId);
+					cmd.Parameters.AddWithValue("@valueNameTypePayment", valueNameTypePayment);
+					cmd.Parameters.AddWithValue("@valuePaymentString", valuePaymentString);
+					cmd.Parameters.AddWithValue("@valueNameBank", valueNameBank);
+					cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+					cmd.ExecuteNonQuery();
+				}
+				con.Close();
+			}
+		}
+
+		public void UpdatePaymentAdmin(int valueId, int valueIdTypePayment, string valuePaymentString,
 								 string valueNameBank, int valueStatus, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
