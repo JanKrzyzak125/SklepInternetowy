@@ -1,17 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="SklepInternetowy.Classes.Brand">
-    <Position X="5.25" Y="1.75" Width="1.75" />
+  <Class Name="SklepInternetowy.SQLConnect">
+    <Position X="6" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAACCAAAAgAAA=</HashCode>
-      <FileName>Classes\Brand.cs</FileName>
+      <HashCode>AAYABAQKgCAAAAAIEFAAUQLIAQEAEAMiQIACALUABwg=</HashCode>
+      <FileName>Classes\SQLConnect.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SklepInternetowy.SQLConnect">
-    <Position X="10.25" Y="2" Width="2.5" />
+  <Class Name="SklepInternetowy.Classes.Company">
+    <Position X="9" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYABAAAgAAAQAAAAEAAQQIAAAEAEAAiAAAAAIAAAQg=</HashCode>
-      <FileName>Classes\SQLConnect.cs</FileName>
+      <HashCode>AAQIAAAECCCAAAAoAAAACAAAAggAAAIoAAAAIAAAAAI=</HashCode>
+      <FileName>Classes\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SklepInternetowy.Classes.Product">
+    <Position X="13.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SklepInternetowy.Users">
+    <Position X="11" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAACAgAAAoEAgECBQABRgEAAE4IAAAJCAAAAQ=</HashCode>
+      <FileName>Classes\Users.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
