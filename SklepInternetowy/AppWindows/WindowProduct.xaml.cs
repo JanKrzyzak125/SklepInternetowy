@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SklepInternetowy.Classes;
+using System.Windows;
 
 namespace SklepInternetowy
 {
@@ -8,10 +9,21 @@ namespace SklepInternetowy
 	public partial class WindowProduct : Window
 	{
 		private WindowPay windowPay;
+		private MainWindow mainWindow;
+		private Product currentProduct;
 		public WindowProduct()
 		{
 			InitializeComponent();
 		}
+
+		public WindowProduct(MainWindow tempMainWindow,object[]tempProduct)
+		{
+			InitializeComponent();
+			mainWindow = tempMainWindow;
+			currentProduct =new Product( tempProduct);//TODO
+		}
+
+
 
 		private void Click_Pay(object sender, RoutedEventArgs e)
 		{

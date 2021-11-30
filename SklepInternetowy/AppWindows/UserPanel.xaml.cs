@@ -90,7 +90,7 @@ namespace SklepInternetowy
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+		private void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
 		{
 			switch (e.PropertyName)
 			{

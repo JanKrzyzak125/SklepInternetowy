@@ -8,6 +8,11 @@ namespace SklepInternetowy.Classes
 {
 	class Product
 	{
-		
+		public Product(object[] tempProduct)
+		{
+			TempProduct = tempProduct;
+		}
+
+		public object[] TempProduct { get; }
 	}
 }

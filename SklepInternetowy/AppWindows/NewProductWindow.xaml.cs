@@ -91,7 +91,7 @@ namespace SklepInternetowy.AppWindows
 			InitializeComponent();
 			makeList();
 			FillingDate();
-			defaultSource = ImageProduct.Source.Clone();
+			if(ImageProduct.Source!=null) defaultSource = ImageProduct.Source.Clone();
 			this.Title = "Dodaj nowy produkt";
 			ButtonProduct.Click -= EditButton_Click;
 			ButtonProduct.Click += NewButton_Click;

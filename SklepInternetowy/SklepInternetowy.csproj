@@ -6,6 +6,8 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Picture\TextTemplate.ico</ApplicationIcon>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <AssemblyName>Sklep</AssemblyName>
+    <RootNamespace>Sklep</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
