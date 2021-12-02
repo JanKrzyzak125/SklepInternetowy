@@ -6,16 +6,190 @@
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
         ShowInTaskbar="false"
-        Title="WindowProduct" Height="600" Width="800">
+        Title="WindowProduct" 
+        Height="600" Width="1000">
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="MyLabel">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="100"/>
+            </Style>
+
+            <Style TargetType="TextBox" x:Key="MyTextBox">
+                
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="MyButton">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
+                <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+
+            </Style>
+
+            <Style TargetType="CheckBox" x:Key="MyCheckBox">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="Width" Value="130"/>
+
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
-        <Image x:Name="PhotoProduct"  HorizontalAlignment="Left" Height="187" Margin="40,30,0,0" VerticalAlignment="Top" Width="228"/>
-        <Button x:Name="EditProduct" Content="Edytuj" HorizontalAlignment="Center" Height="41" Margin="0,477,0,0" VerticalAlignment="Top" Width="152" Click="EditProduct_Click"/>
-        <TextBox x:Name="NameProduct" Text="Nazwa Produktu" HorizontalAlignment="Left" Height="34" Margin="456,82,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="206"  IsReadOnly="True"/>
-        <TextBox x:Name="Category"  Text="Nazwa Kategorii" HorizontalAlignment="Left" Height="41" Margin="456,141,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <TextBox x:Name="Description"  HorizontalAlignment="Left" Height="163" Margin="456,0,0,0" Text="Opis Produktu" TextWrapping="Wrap" VerticalAlignment="Center" Width="206" IsReadOnly="True"/>
-        <Button x:Name="Pay" Content="Zapłać" HorizontalAlignment="Left" Height="41" Margin="476,477,0,0" VerticalAlignment="Top" Width="132" Click="Click_Pay"/>
-        <TextBox x:Name="Brand" Text="Marka produktu" HorizontalAlignment="Left" Height="41" Margin="608,141,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="128"  IsReadOnly="True"/>
-        <Button x:Name="ChangePhoto"  Content="Zmień Zdjęcie" HorizontalAlignment="Left" Height="43" Margin="85,234,0,0" VerticalAlignment="Top" Width="151" Click="ChangePhoto_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="130*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="130*"/>
+
+
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+
+        </Grid.RowDefinitions>
+        <Image x:Name="ImageProduct" 
+               Grid.Row="1"  Grid.RowSpan="2"
+               
+               />
+        <TextBox x:Name="TextBoxNameProduct" 
+                 Style="{DynamicResource MyTextBox}" 
+
+                 FontFamily="Century Gothic"
+                 FontSize="12"
+                 FontStretch="UltraExpanded"
+                 FontStyle="Italic"
+                 FontWeight="UltraBold"
+                 Text="Nazwa Produktu" 
+                 IsReadOnly="True" 
+                 Cursor="IBeam" Width="274"/>
+        <TextBox x:Name="TextBoxCategory"  
+                 Text="Nazwa Kategorii"
+                 Grid.Column="2"
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox x:Name="Description"
+                 Style="{DynamicResource MyTextBox}"
+                 Height="163"  Width="280"
+                 ToolTip="Opis Produktu" HorizontalAlignment="Left" Margin="17,10,0,0" Grid.RowSpan="3" Grid.Row="3" VerticalAlignment="Top"
+                 />
+        <Button x:Name="ButtonPay" 
+                Content="Zapłać/Kup" 
+                Style="{DynamicResource MyButton}" 
+                Click="Click_Pay" 
+                Grid.Column="2" Grid.Row="5"
+                />
+        <Button x:Name="ButtonMoreDetails" 
+                Content="Więcej szczegółów" 
+                Style="{DynamicResource MyButton}" 
+                Click="ButtonMoreDetails_Click" 
+                Grid.Column="2" Grid.Row="6"
+                />
+
+        <TextBox x:Name="TextBoxBrand" 
+                 Text="Marka produktu" 
+                 Style="{DynamicResource MyTextBox}"  
+                 Cursor="IBeam" 
+                 Grid.Column="2" Grid.Row="1"
+                 />
+        <Label Content="Nazwa Kategorii" 
+               Grid.Column="1" 
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Marka produktu" 
+               Grid.Column="1" Grid.Row="1" 
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Ilość do kupienia" 
+               Grid.Column="1" Grid.Row="2"
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="1" Grid.Row="3"
+               Style="{DynamicResource MyLabel}"/>
+        <Label Content="Label" 
+               Grid.Column="1" Grid.Row="4" 
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="1" Grid.Row="5" 
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="1" Grid.Row="6" 
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="1" Grid.Row="7" 
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="1" Grid.Row="8" 
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="3" 
+               Style="{DynamicResource MyLabel}" 
+               />
+        <Label Content="Label" 
+               Grid.Column="3" Grid.Row="1"
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="3" Grid.Row="2"
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="3" Grid.Row="3"
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="3" Grid.Row="4"
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="3" Grid.Row="5"
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label"
+               Grid.Column="3" Grid.Row="6"
+               Style="{DynamicResource MyLabel}"
+               />
+        <Label Content="Label" 
+               Grid.Column="3" Grid.Row="7" 
+               Style="{DynamicResource MyLabel}" 
+               />
+        <Label Content="Label" 
+               Style="{DynamicResource MyLabel}"
+               Grid.Column="3" Grid.Row="8"
+               />
 
     </Grid>
 </Window>

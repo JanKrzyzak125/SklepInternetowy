@@ -1,5 +1,7 @@
 ﻿using SklepInternetowy.Classes;
 using System.Windows;
+using System.Windows.Controls;
+using SklepInternetowy.AppWindows;
 
 namespace SklepInternetowy
 {
@@ -11,16 +13,18 @@ namespace SklepInternetowy
 		private WindowPay windowPay;
 		private MainWindow mainWindow;
 		private Product currentProduct;
+		private NewProductWindow newProductWindow;
 		public WindowProduct()
 		{
 			InitializeComponent();
 		}
 
-		public WindowProduct(MainWindow tempMainWindow,object[]tempProduct)
+		public WindowProduct(MainWindow tempMainWindow, object[] tempProduct)
 		{
 			InitializeComponent();
 			mainWindow = tempMainWindow;
-			currentProduct =new Product( tempProduct);//TODO
+			newProductWindow = new NewProductWindow();
+			currentProduct = new Product(tempProduct);//TODO
 		}
 
 
@@ -33,24 +37,22 @@ namespace SklepInternetowy
 
 		void ShowBuyerProduct()
 		{
-			EditProduct.Visibility = Visibility.Hidden;
 			windowPay.Visibility = Visibility.Visible;
 		}
 
 		void ShowSellerProduct()
 		{
-			EditProduct.Visibility = Visibility.Visible;
 			windowPay.Visibility = Visibility.Hidden;
 		}
 
-		private void EditProduct_Click(object sender, RoutedEventArgs e)
+		private void ButtonMoreDetails_Click(object sender, RoutedEventArgs e)
 		{
-
-		}
-
-		private void ChangePhoto_Click(object sender, RoutedEventArgs e)
-		{
-
+			if (newProductWindow.IsVisible == false)
+			{
+				newProductWindow = new NewProductWindow();
+				newProductWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				newProductWindow.Show();
+			}
 		}
 	}
 }

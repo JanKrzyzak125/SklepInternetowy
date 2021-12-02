@@ -61,7 +61,7 @@ namespace SklepInternetowy.AppWindows
 			makeList();
 			FillingDate();
 			windowRating = new WindowRating();
-			defaultSource = ImageProduct.Source.Clone();
+
 			this.Title = "Edycja produktu";
 			ButtonProduct.Click -= NewButton_Click;
 			ButtonProduct.Click += EditButton_Click;
@@ -83,6 +83,7 @@ namespace SklepInternetowy.AppWindows
 			ImageProduct.Source = ConvertByteToImage(tempImageData);
 			LabelRating.Visibility = Visibility.Visible;
 			ButtonRating.Visibility = Visibility.Visible;
+			if (ImageProduct.Source != null) defaultSource = ImageProduct.Source.Clone();
 		}
 
 
@@ -91,13 +92,14 @@ namespace SklepInternetowy.AppWindows
 			InitializeComponent();
 			makeList();
 			FillingDate();
-			if(ImageProduct.Source!=null) defaultSource = ImageProduct.Source.Clone();
+
 			this.Title = "Dodaj nowy produkt";
 			ButtonProduct.Click -= EditButton_Click;
 			ButtonProduct.Click += NewButton_Click;
 			ButtonProduct.Content = "Dodaj produkt";
 			LabelRating.Visibility = Visibility.Hidden;
 			ButtonRating.Visibility = Visibility.Hidden;
+			if (ImageProduct.Source != null) defaultSource = ImageProduct.Source.Clone();
 		}
 
 		private void makeList()

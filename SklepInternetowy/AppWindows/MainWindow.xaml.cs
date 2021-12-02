@@ -120,7 +120,6 @@ namespace SklepInternetowy
 				case "Image":
 				case "StatusTypePayment":
 				case "LimitString":
-					//case "Status":
 					e.Column.Visibility = Visibility.Hidden;
 					break;
 				case "Name":
