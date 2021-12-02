@@ -168,7 +168,7 @@ namespace SklepInternetowy
 						//UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ComboBoxListBuyed.Visibility = Visibility.Visible;
 						ButtonViewListBuyed.Visibility = Visibility.Visible;
-						
+						ButtonAdd2.Visibility = Visibility.Hidden;
 						ButtonAdd.Click -= AddRetailSales_Click;
 						ButtonAdd.Click -= AddPayment_Click;
 						ButtonAdd.Click -= AddProduct_Click;
@@ -181,6 +181,7 @@ namespace SklepInternetowy
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUsersProducts");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ComboBoxListBuyed.Visibility = Visibility.Hidden;
+						ButtonAdd2.Visibility = Visibility.Visible;
 						ButtonViewListBuyed.Visibility = Visibility.Hidden;
 						ButtonAdd.Click -= AddRetailSales_Click;
 						ButtonAdd.Click -= AddPayment_Click;
@@ -194,12 +195,13 @@ namespace SklepInternetowy
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserSalers");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ComboBoxListBuyed.Visibility = Visibility.Hidden;
+						ButtonAdd2.Visibility = Visibility.Hidden;
 						ButtonViewListBuyed.Visibility = Visibility.Hidden;
 						ButtonAdd.Click -= AddProduct_Click;
 						ButtonAdd.Click -= AddPayment_Click;
 						ButtonAdd.Click -= AddInvoice_Click;
 						ButtonAdd.Click += AddRetailSales_Click;
-						ButtonAdd.Content = "Dodaj Sprzedaż";
+						ButtonAdd.Content = "??";
 						ButtonAdd.ToolTip = "Musisz zaznaczyć jeszcze na widoku jaki produkt chcesz";
 						break;
 					case "Widok form płatności":
@@ -208,6 +210,7 @@ namespace SklepInternetowy
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ComboBoxListBuyed.Visibility = Visibility.Hidden;
 						ButtonViewListBuyed.Visibility = Visibility.Hidden;
+						ButtonAdd2.Visibility = Visibility.Hidden;
 						ButtonAdd.Click -= AddRetailSales_Click;
 						ButtonAdd.Click -= AddProduct_Click;
 						ButtonAdd.Click -= AddInvoice_Click;

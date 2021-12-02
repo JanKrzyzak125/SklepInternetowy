@@ -110,5 +110,13 @@
                 Grid.Row="3" Grid.Column="2"
                 Click="ViewListBuyed_Click"
                 />
+        <Button x:Name="ButtonAdd2"
+                Content="Dodaj Sprzedaż" 
+                Style="{DynamicResource MyButton}"
+                Grid.Row="2" Grid.Column="2" 
+                Cursor="Hand" 
+                Click="AddRetailSales_Click"
+     
+                />
     </Grid>
 </Window>
