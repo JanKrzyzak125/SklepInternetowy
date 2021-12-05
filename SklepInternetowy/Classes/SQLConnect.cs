@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using System;
+using SklepInternetowy.Classes;
 
 namespace SklepInternetowy
 {
@@ -113,7 +114,7 @@ namespace SklepInternetowy
 			}
 		}
 
-		public int ReadQuantity(int valueId,string commandText)
+		public int ReadQuantity(int valueId, string commandText)
 		{
 			int resultVar;
 			using (con = new SqlConnection(sqlConnection))
@@ -174,7 +175,7 @@ namespace SklepInternetowy
 		}
 
 
-		public DataTable ShowRating(int valueId,string commandText) 
+		public DataTable ShowRating(int valueId, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -190,6 +191,33 @@ namespace SklepInternetowy
 						da.Fill(ds);
 						con.Close();
 						return ds;
+					}
+				}
+			}
+		}
+
+		public object[] RefreshUser(int valueId, string commandText)
+		{
+			object[] tempObject;
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (SqlDataAdapter da = new SqlDataAdapter())
+				{
+					using (da.SelectCommand = con.CreateCommand())
+					{
+						da.SelectCommand.CommandText = commandText;
+						da.SelectCommand.CommandType = CommandType.StoredProcedure;
+						da.SelectCommand.Parameters.AddWithValue("@valueIdUser", valueId);
+						DataTable ds = new DataTable();
+						da.Fill(ds);
+						if (ds.Rows.Count == 0)
+						{
+							return null;
+						}
+						tempObject = ds.Rows[0].ItemArray;
+						con.Close();
+						return tempObject;
 					}
 				}
 			}
@@ -559,7 +587,7 @@ namespace SklepInternetowy
 
 		}
 		public void AddRetailSales(int valueIdProduct, int valueQuantity, DateTime valueDateStartSales,
-								   DateTime valueDateClosing, int valueDayReturn,int valueDayDelivery, 
+								   DateTime valueDateClosing, int valueDayReturn, int valueDayDelivery,
 								   string valueNameDelivery, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
@@ -958,7 +986,7 @@ namespace SklepInternetowy
 
 		public void UpdateUser(int valueId, Int16 valueIsActive, string valueNick, string valueName,
 						   string valueSurname, string valueEmail, long numberPhone, string valueAdress, string valueCity,
-						   int valueCountVisitors, object valueIdCompany, string commandText)
+						   int valueCountVisitors, Company valueCompany, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -977,11 +1005,9 @@ namespace SklepInternetowy
 					cmd.Parameters.AddWithValue("@valueAdress", valueAdress);
 					cmd.Parameters.AddWithValue("@valueCity", valueCity);
 					cmd.Parameters.AddWithValue("@valueCountVisitors", valueCountVisitors);
+					int valueIdCompany = valueCompany.Id_Company;
+					cmd.Parameters.AddWithValue("@valueIdCompany", (int)valueIdCompany);
 
-					if (valueIdCompany is int)
-						cmd.Parameters.AddWithValue("@valueIdCompany", (int)valueIdCompany);
-					else
-						cmd.Parameters.AddWithValue("@valueIdCompany", -1);
 
 					cmd.ExecuteNonQuery();
 				}
@@ -1012,7 +1038,7 @@ namespace SklepInternetowy
 							  double valuePrice, int valueVat, string valueCondition,
 							  int valueMaxQuantity, string valueNameParameter,
 							  string valueParameter, string valueWarranty, int valueWarrantyDays,
-							  string valueBrand, string valueCategory, byte[] valueImage, int valueStatus, string commandText) 
+							  string valueBrand, string valueCategory, byte[] valueImage, int valueStatus, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -1121,7 +1147,7 @@ namespace SklepInternetowy
 			}
 		}
 
-		public object[] valueProduct(int valueId,string valueName,string commandText )
+		public object[] valueProduct(int valueId, string valueName, string commandText)
 		{
 			object[] tempObject;
 			using (con = new SqlConnection(sqlConnection))

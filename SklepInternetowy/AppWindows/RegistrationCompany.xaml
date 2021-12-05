@@ -72,7 +72,9 @@
                  />
         <CheckBox x:Name="CheckBoxIsActive" Content="Dezaktywować"
                   HorizontalAlignment="Center" VerticalAlignment="Top"
-                  Height="38" Margin="0,317,0,0" Width="380"/>
+                  Height="38" Margin="0,317,0,0" Width="380"
+                  Style="{StaticResource MaterialDesignFilterChipCheckBox}"
+                  />
 
         <Button x:Name="RegisterButton"
                 Content="Rejestruj" 

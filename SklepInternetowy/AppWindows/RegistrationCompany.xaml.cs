@@ -81,9 +81,11 @@ namespace SklepInternetowy.AppWindows
 			if (codeFailed == 0)
 			{
 				int tempIsActive = 1;
+				int tempId = Users.LogUser.Id_User;
 				if (CheckBoxIsActive.IsChecked == true) tempIsActive = 0;
 				sqlConnect.UpdateCompany(actualIdCompany, tempNameCompany, tempAdress, tempCity, tempPhone,
 										 tempEmail, tempNIP, tempIsActive, "UpdateCompany");
+				Users.LogUser= new Users( sqlConnect.RefreshUser(tempId, "RefreshUser"));
 				MessageBox.Show("Udało się zaktualizować dane o firmie");
 				this.Close();
 			}
@@ -129,6 +131,7 @@ namespace SklepInternetowy.AppWindows
 				int tempIdUser = Users.LogUser.Id_User;
 				sqlConnect.AddCompany(tempNameCompany, tempNIP, tempEmail, tempPhone,
 									  tempAdress, tempCity, tempIdUser, "AddCompany");
+				Users.LogUser = new Users(sqlConnect.RefreshUser(tempIdUser, "RefreshUser"));
 				MessageBox.Show("Udało się dodać dane o firmie");
 
 				this.Close();

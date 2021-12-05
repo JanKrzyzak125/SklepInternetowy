@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SklepInternetowy.Classes;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -92,7 +93,6 @@ namespace SklepInternetowy
 				PasswordBox2.Background = System.Windows.Media.Brushes.Green;
 				byte[] tempHash = windowAuthentication.makeHash(tempHash1);
 				sqlConnect.NewPassword(tempNick, tempHash, "NewPassword");
-
 				MessageBox.Show("Udalo się zmienić hasło");
 
 				this.Close();
@@ -145,15 +145,15 @@ namespace SklepInternetowy
 				Int16 tempIsActive = 1;
 				if (CheckBoxIsActive.IsChecked == true) tempIsActive = 0;
 				int tempCountVisitors = Users.LogUser.CountVisitors;
-				object tempObjectCompany = Users.LogUser.Company;
+				Company tempCompany = Users.LogUser.Company;
 
-				if (tempObjectCompany == null)
+				if (tempCompany == null)
 					sqlConnect.UpdateUser(tempId, tempIsActive, tempNick, tempName, tempSurname, tempEmail, tempPhone,
 								  tempAdress, tempCity, tempCountVisitors, "UpdateUsers2");
 				else
 					sqlConnect.UpdateUser(tempId, tempIsActive, tempNick, tempName, tempSurname, tempEmail, tempPhone,
-							  tempAdress, tempCity, tempCountVisitors, tempObjectCompany, "UpdateUsers");
-
+							  tempAdress, tempCity, tempCountVisitors, tempCompany, "UpdateUsers");
+				Users.LogUser = new Users(sqlConnect.RefreshUser(tempId, "RefreshUser"));
 				MessageBox.Show("Udalo się zmienić dane");
 				this.Close();
 			}

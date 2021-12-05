@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SklepInternetowy.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows;
@@ -207,7 +208,7 @@ namespace SklepInternetowy.AppWindows
 				{
 					sqlConnect.UpdateUser(i, (Int16)item[1], (string)item[0], (string)item[2],
 									(string)item[3], (string)item[4], (int)item[5], (string)item[6],
-									(string)item[7], (int)item[8], item[9], "Update" + currentTab);
+									(string)item[7], (int)item[8], (Company)item[9], "Update" + currentTab);
 				}
 				else
 				{

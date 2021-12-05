@@ -173,7 +173,7 @@ namespace SklepInternetowy
 
 		private void MainGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			if (MainGrid.SelectedItem != null && windowProduct.IsVisible==false)
+			if (MainGrid.SelectedItem != null && windowProduct.IsVisible == false)
 			{
 				DataRowView tempDataRow = MainGrid.SelectedItem as DataRowView;
 				object[] tempObject = tempDataRow.Row.ItemArray;
@@ -201,14 +201,11 @@ namespace SklepInternetowy
 		{
 			if (MainGrid.SelectedItem != null)
 			{
-				DataRowView tempDataRow= MainGrid.SelectedItem as DataRowView;
+				DataRowView tempDataRow = MainGrid.SelectedItem as DataRowView;
 				object[] tempObject = tempDataRow.Row.ItemArray;
 				byte[] tempImage = (byte[])tempObject[24];
 				ImageProduct.Source = ConvertByteToImage(tempImage);
 			}
-			
-
-			
 		}
 	}
 }
