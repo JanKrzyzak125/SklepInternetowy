@@ -14,7 +14,7 @@
         <Button x:Name="LoginButton" 
                 Content="Zalogować" 
                 HorizontalAlignment="Left"  VerticalAlignment="Top"
-                Height="53" Margin="53,195,0,0" Width="130" 
+                Height="53" Margin="54,195,0,0" Width="130" 
                 Click="LoginButton_Click" 
                 Cursor="Hand"
                 
@@ -30,7 +30,7 @@
                   x:Name="CheckBoxPassword" 
                   Content="Zapomniałem hasła" 
                   HorizontalAlignment="Center" VerticalAlignment="Top"
-                  Height="24" Margin="0,150,0,0" Width="293"
+                  Height="24" Margin="0,142,0,0" Width="292"
                   />
         <TextBox x:Name="NickText" 
                  HorizontalAlignment="Center"  VerticalAlignment="Top"

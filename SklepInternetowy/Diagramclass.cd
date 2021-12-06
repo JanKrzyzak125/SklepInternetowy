@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="SklepInternetowy.SQLConnect">
-    <Position X="5.5" Y="0.5" Width="2.5" />
+    <Position X="0.5" Y="0.5" Width="21.25" />
     <TypeIdentifier>
-      <HashCode>AAYABQQKgCAAAAAIEFAAUQLIAQEAUAMiQIACALUABwg=</HashCode>
+      <HashCode>AAYABQQKgCBAAAAIEFAAUQLIAQEAUAMiQIACALUABwg=</HashCode>
       <FileName>Classes\SQLConnect.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SklepInternetowy.Classes.Company">
-    <Position X="9.25" Y="3.25" Width="1.5" />
+    <Position X="10.5" Y="1.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAQIAAAECCCAAAAoAAAACAAAAggAAAIoAAAAIAAAAAI=</HashCode>
       <FileName>Classes\Company.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SklepInternetowy.Classes.Product">
-    <Position X="13.25" Y="0.5" Width="2" />
+    <Position X="13.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>EAQrGCAFB0AgAQcAIgBRCFYC0EBUApCQEACEgBAArgA=</HashCode>
       <FileName>Classes\Product.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SklepInternetowy.Users">
-    <Position X="11" Y="1.25" Width="1.5" />
+    <Position X="7.5" Y="1.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAACAgAAAoEAgECBQABRgEAAE4IAAAJCAAAAQ=</HashCode>
       <FileName>Classes\Users.cs</FileName>

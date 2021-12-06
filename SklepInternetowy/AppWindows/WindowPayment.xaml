@@ -17,6 +17,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Height" Value="33"/>
                 <Setter Property="Width" Value="130"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
             </Style>
 
             <Style TargetType="ComboBox" x:Key="MyComboBox">
@@ -24,6 +25,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Height" Value="33"/>
                 <Setter Property="Width" Value="130"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
 
             </Style>
 
@@ -32,6 +34,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Height" Value="33"/>
                 <Setter Property="Width" Value="130"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
             </Style>
 
             <Style TargetType="Button" x:Key="MyButton">
@@ -41,6 +44,7 @@
                 <Setter Property="Width" Value="130"/>
                 <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
 
             </Style>
 
@@ -49,6 +53,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="Width" Value="130"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
 
             </Style>
         </ResourceDictionary>

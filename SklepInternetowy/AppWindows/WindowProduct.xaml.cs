@@ -47,6 +47,10 @@ namespace SklepInternetowy
 			TextBoxNameProduct.IsEnabled = false;
 			TextBoxDescription.Text = currentProduct.Description;
 			TextBoxDescription.IsEnabled = false;
+			TextBoxVat.Text = currentProduct.Vat_rate + "%";
+			TextBoxVat.IsEnabled = false;
+			TextBoxVisitors.Text = currentProduct.Visitors.ToString();
+			TextBoxVisitors.IsEnabled = false;
 
 			byte[] tempImageData = currentProduct.Image;
 			ImageProduct.Source = NewProductWindow.ConvertByteToImage(tempImageData);
@@ -58,10 +62,9 @@ namespace SklepInternetowy
 			if (Users.LogUser == null)
 			{
 				ButtonPay.IsEnabled = false;
-				//ButtonPay.ToolTipService.ShowOnDisabled = "True";
 				ButtonPay.ToolTip = "Zaloguj się by kupić produkt";
 			}
-			else if (Users.LogUser.Id_User == currentProduct.Id_Seller) 
+			else if (Users.LogUser.Id_User == currentProduct.Id_Seller)
 			{
 				ButtonPay.IsEnabled = false;
 				ButtonPay.ToolTip = "Jesteś sprzedającym więc nie możesz kupić";
@@ -70,6 +73,18 @@ namespace SklepInternetowy
 			{
 				ButtonPay.IsEnabled = true;
 				ButtonPay.Content = "Kup produkt";
+			}
+			DateTime temp = new DateTime();
+			if (currentProduct.DateClosed != temp)
+			{
+				LabelEnd.Visibility = Visibility.Visible;
+				DateEnd.Visibility = Visibility.Visible;
+				DateEnd.Text = currentProduct.DateClosed.ToShortDateString();
+				DateEnd.IsEnabled = false;
+				ButtonPay.IsEnabled = false;
+				ComboBoxAvailableQuantity.IsEnabled = false;
+				ButtonPay.ToolTip = "Zakończona sprzedaż";
+
 			}
 		}
 
@@ -104,6 +119,17 @@ namespace SklepInternetowy
 				newProductWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				newProductWindow.Show();
 			}
+		}
+
+
+		private void ComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			decimal tempPrice, tempSum;
+			decimal.TryParse(TextBoxPrice.Text, out tempPrice);
+			int tempCurrentyQuantity;
+			int.TryParse(ComboBoxAvailableQuantity.SelectedValue.ToString(), out tempCurrentyQuantity);
+			tempSum = tempPrice * tempCurrentyQuantity;
+			TextBoxSumPay.Text = tempSum.ToString();
 		}
 	}
 }

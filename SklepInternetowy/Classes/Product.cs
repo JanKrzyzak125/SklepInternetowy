@@ -213,7 +213,7 @@ namespace SklepInternetowy.Classes
 			quantity = (int)tempProduct[1];
 			dateStartSales = (DateTime)tempProduct[2];
 			dateClosing = (DateTime)tempProduct[3];
-			if (tempProduct[4] == null) dateClosed = (DateTime)tempProduct[4];
+			DateTime.TryParse(tempProduct[4].ToString(), out dateClosed);
 			dayDelivery = (int)tempProduct[5];
 			dayReturn = (int)tempProduct[6];
 			visitors = (int)tempProduct[7];

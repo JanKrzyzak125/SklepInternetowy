@@ -21,6 +21,8 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="Height" Value="33"/>
                 <Setter Property="Width" Value="100"/>
+                <Setter Property="ToolTipService.ShowDuration" Value="20000" />
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
             </Style>
 
             <Style TargetType="ComboBox" x:Key="MyComboBox">
@@ -35,9 +37,10 @@
                 <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
                 <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
                 <Setter Property="Template" Value="{StaticResource MaterialDesignFloatingHintComboBoxTemplate}" />
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
             </Style>
-                    <Style TargetType="TextBox" x:Key="MyTextBox">
-                
+            <Style TargetType="TextBox" x:Key="MyTextBox">
+                <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -45,6 +48,7 @@
                 <Setter Property="Height" Value="33"/>
                 <Setter Property="Width" Value="130"/>
                 <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
             </Style>
 
             <Style TargetType="Button" x:Key="MyButton">
@@ -54,6 +58,7 @@
                 <Setter Property="Width" Value="130"/>
                 <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
 
             </Style>
 
@@ -62,10 +67,11 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="Width" Value="130"/>
+                <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
 
             </Style>
         </ResourceDictionary>
-        
+
     </Window.Resources>
 
     <Grid>
@@ -90,9 +96,11 @@
 
 
         </Grid.RowDefinitions>
+
         <Image x:Name="ImageProduct" 
                Grid.Row="1"  Grid.RowSpan="2"
-               
+               ToolTip="Zdjęcie produktu"
+               ToolTipService.ShowOnDisabled="True"
                />
         <TextBox x:Name="TextBoxNameProduct" 
                  Style="{DynamicResource MyTextBox}" 
@@ -104,7 +112,7 @@
                  Text="Nazwa Produktu" 
                  IsReadOnly="True" 
                  Cursor="IBeam" Width="274"/>
-        
+
         <TextBox x:Name="TextBoxCategory"  
                  Text="Nazwa Kategorii"
                  Grid.Column="2"
@@ -113,8 +121,8 @@
         <TextBox x:Name="TextBoxDescription"
                  ToolTip="Szczegółowy Opis produktu"
                  Style="{DynamicResource MyTextBox}"
-                 Height="163" Width="280"
-                 Margin="17,10,0,0"
+                 Height="200" Width="280"
+                 
                  Grid.RowSpan="3" Grid.Row="3"
                  />
         <Button x:Name="ButtonPay" 
@@ -123,6 +131,8 @@
                 Click="Click_Pay" 
                 ToolTipService.ShowOnDisabled="True"
                 Grid.Column="2" Grid.Row="5"
+                Width="200"
+                Height="50"
                 />
         <Button x:Name="ButtonMoreDetails" 
                 Content="Więcej szczegółów" 
@@ -145,14 +155,14 @@
                Grid.Column="1" Grid.Row="1" 
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Ilość do kupienia" 
+        <Label Content="Ilość dostępna*" 
                Grid.Column="1" Grid.Row="2"
                Style="{DynamicResource MyLabel}"
                />
         <Label Content="Cena" 
                Grid.Column="1" Grid.Row="3"
                Style="{DynamicResource MyLabel}"/>
-        <Label Content="Label" 
+        <Label Content="Suma do zapłaty" 
                Grid.Column="1" Grid.Row="4" 
                Style="{DynamicResource MyLabel}"
                />
@@ -165,7 +175,7 @@
                Style="{DynamicResource MyLabel}"
                />
 
-        
+
         <Label Content="Początek" 
                Grid.Column="3" 
                Style="{DynamicResource MyLabel}" 
@@ -174,45 +184,95 @@
                Grid.Column="3" Grid.Row="1"
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
+        <Label Content="Zakończona" 
+               Foreground="Red"
+               x:Name="LabelEnd"
+               Visibility="Hidden"
                Grid.Column="3" Grid.Row="2"
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
+        <Label Content="VAT" 
                Grid.Column="3" Grid.Row="3"
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
+        <Label Content="Rodzaj dostawy" 
                Grid.Column="3" Grid.Row="4"
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
+        <Label Content="Stan produktu" 
                Grid.Column="3" Grid.Row="5"
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label"
+        <Label Content="Liczba wyświetleń"
                Grid.Column="3" Grid.Row="6"
                Style="{DynamicResource MyLabel}"
                />
 
         <ComboBox x:Name="ComboBoxAvailableQuantity"
                   Style="{DynamicResource MyComboBox}"
-            Grid.Column="2"  Grid.Row="2"/>
+                  Grid.Column="2"  Grid.Row="2"
+                  ToolTip="Wybierz ile chcesz kupić" SelectionChanged="ComboBoxSelectionChanged"
+                  
+                  />
         <TextBox x:Name="TextBoxPrice" 
                  Grid.Column="2" Grid.Row="3" 
                  Text="" 
                  Style="{DynamicResource MyTextBox}"
                  ToolTip="Cena produktu brutto" 
                  TextWrapping="Wrap"
+                 
                  />
         <DatePicker x:Name="DateStart" 
-                    Grid.Column="4" 
+                    Grid.Column="4"
+                    ToolTipService.ShowOnDisabled="True"
+                    ToolTip="Data rozpoczęcia sprzedaży"
                     />
         <DatePicker x:Name="DateEnding" 
                     Text=""
-                    
+                    ToolTipService.ShowOnDisabled="True"
+                    ToolTip="planowanie zakończenia sprzedaży"
                     Grid.Column="4" Grid.Row="1"
                     />
+        <DatePicker x:Name="DateEnd" 
+                    Text=""
+                    ToolTipService.ShowOnDisabled="True"
+                    Grid.Column="4" Grid.Row="2"
+                    Visibility="Hidden"
+                    />
+        <TextBox x:Name="TextBoxVat" 
+                 Grid.Column="4" Grid.Row="3" 
+                 ToolTip="Stawka VAT"
+                 Text="" 
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox  x:Name="TextBoxVisitors"
+                  Grid.Column="4" Grid.Row="6" 
+                  Style="{DynamicResource MyTextBox}"
+                  Text="Liczba"
+                  ToolTip="Liczba odwiedzających"
+                  />
+        <Label Content="*Obowiązkowe pola do wypełnienia by kupić" 
+               Grid.Row="6" 
+               Style="{DynamicResource MyLabel}"
+               Width="250"
+               />
+        <TextBox x:Name="TextBoxSumPay" 
+                 Grid.Column="2" Grid.Row="4" 
+                 Text="Cena*ilość" 
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox x:Name="TextBoxDelivery" 
+                 Grid.Column="4" Grid.Row="4" 
+                 Text="Dostawa" 
+                 ToolTip="Jaka jest dostawa"
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox x:Name="TextBoxCondition"
+                 Grid.Column="4" Grid.Row="5" 
+                 Text="Stan"
+                 ToolTip="Stan jakości produktu"
+                 Style="{DynamicResource MyTextBox}"
+                 />
 
     </Grid>
 </Window>

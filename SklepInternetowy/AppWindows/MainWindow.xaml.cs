@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,16 +27,16 @@ namespace SklepInternetowy
 		public MainWindow()
 		{
 			InitializeComponent();
+			sqlConnect = new SQLConnect();
+			sqlConnect.Refresh(DateTime.Today,"StartApp");
 			this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 			windowAuthentication = new Authentication(this);
 			userPanel = new UserPanel();
-			sqlConnect = new SQLConnect();
 			adminPanel = new AdminPanel();
 			windowProduct = new WindowProduct();
 			ButtonLog.Visibility = Visibility.Visible;
 			ButtonAdmin.Visibility = Visibility.Hidden;
 			ButtonUser.Visibility = Visibility.Hidden;
-
 			DataTable tempSales = sqlConnect.ReadTable("ViewMainSales");
 			MainGrid.ItemsSource = tempSales.DefaultView;
 
@@ -120,6 +121,7 @@ namespace SklepInternetowy
 				case "Image":
 				case "StatusTypePayment":
 				case "LimitString":
+				case "Id_RetailSales":
 					e.Column.Visibility = Visibility.Hidden;
 					break;
 				case "Name":
@@ -167,7 +169,33 @@ namespace SklepInternetowy
 				case "TypePayment":
 					e.Column.Header = "Typ Płatności";
 					break;
-
+				case "DateStartSales":
+					e.Column.Header = "Data startu sprzedaży";
+					break;
+				case "DateClosing":
+					e.Column.Header = "Data planowa zakończenia";
+					break;
+				case "DateClosed":
+					e.Column.Header = "Data zakończenia";
+					break;
+				case "DayDelivery":
+					e.Column.Header = "Dni dostawy";
+					break;
+				case "DayReturn":
+					e.Column.Header = "Czas na zwrot";
+					break;
+				case "Visitors":
+					e.Column.Header = "Ilość odwiedzin";
+					break;
+				case "NameDelivery":
+					e.Column.Header = "Sposób Dostawy";
+					break;
+				case "Quantity":
+					e.Column.Header = "Ilość wystawiona";
+					break;
+				case "StatusProduct":
+					e.Column.Header = "Status Produktu";
+					break;
 			}
 		}
 

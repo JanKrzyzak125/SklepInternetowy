@@ -42,6 +42,7 @@
                   CanUserDeleteRows="False" 
                   MouseEnter="MainGrid_MouseEnter"
                   IsReadOnly="True"
+                  AutoGeneratingColumn="mainDataGrid_AutoGeneratingColumn"
                   />
         <TextBox x:Name="TextSearch"
                  Background="Aqua" 

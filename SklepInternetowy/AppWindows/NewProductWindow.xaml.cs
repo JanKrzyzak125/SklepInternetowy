@@ -131,7 +131,7 @@ namespace SklepInternetowy.AppWindows
 			ImageProduct.Source = ConvertByteToImage(tempImageData);
 			LabelRating.Visibility = Visibility.Visible;
 			ButtonRating.Visibility = Visibility.Visible;
-			
+
 
 		}
 
@@ -220,7 +220,6 @@ namespace SklepInternetowy.AppWindows
 		}
 
 
-
 		private void ButtonAddImage_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog OpenDialog = new OpenFileDialog();
@@ -230,7 +229,6 @@ namespace SklepInternetowy.AppWindows
 
 			}
 			ImageProduct.Source = ConvertByteToImage(tempImageData);
-
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -319,7 +317,7 @@ namespace SklepInternetowy.AppWindows
 				TextBoxNetto.Background = System.Windows.Media.Brushes.Green;
 			}
 
-			//string tempBrutto = TextBoxBrutto.Text;
+
 			int tempQuantity = testNumeric(TextBoxQuantity);
 			if (tempQuantity == -1)
 			{
@@ -426,8 +424,8 @@ namespace SklepInternetowy.AppWindows
 			if (windowRating.IsVisible == false)
 			{
 				int tempId;
-				if (actualProduct!=null)  tempId = (int)actualProduct[0];
-				else 
+				if (actualProduct != null) tempId = (int)actualProduct[0];
+				else
 				{
 					tempId = currentProduct.Id_Product;
 				}

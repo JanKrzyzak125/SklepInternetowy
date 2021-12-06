@@ -154,7 +154,7 @@ namespace SklepInternetowy
 				case "DateStartSales":
 					e.Column.Header = "Data startu sprzedaży";
 					break;
-				case "DateClosings":
+				case "DateClosing":
 					e.Column.Header = "Data planowa zakończenia";
 					break;
 				case "DateClosed":
@@ -175,6 +175,10 @@ namespace SklepInternetowy
 				case "Quantity":
 					e.Column.Header = "Ilość wystawiona";
 					break;
+				case "StatusProduct":
+					e.Column.Header = "Status Produktu";
+					break;
+
 		
 			}
 		}

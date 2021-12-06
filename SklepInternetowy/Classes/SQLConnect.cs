@@ -304,6 +304,22 @@ namespace SklepInternetowy
 			}
 		}
 
+		public void Refresh(DateTime valueToday, string commandText)
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueToday", valueToday);
+					cmd.ExecuteNonQuery();
+				}
+				con.Close();
+			}
+		}
+
 		/// <summary>
 		/// universal methods that add to database
 		/// </summary>

@@ -56,10 +56,9 @@ namespace SklepInternetowy.AppWindows
 			windowNewProductWindow = new NewProductWindow();
 			makeList();
 			fillingDate();
-			
 			DateTime thisDay = DateTime.Today;
 			DateEnding.DataContext = thisDay.Date.ToShortDateString();
-
+			LabelVisitors.Visibility = Visibility.Hidden;
 			LabelStatus.Visibility = Visibility.Hidden;
 			CheckBoxStatus.Visibility = Visibility.Hidden;
 			DateEnd.Visibility = Visibility.Hidden;
@@ -92,10 +91,13 @@ namespace SklepInternetowy.AppWindows
 			ComboBoxQuantity.Text = actualSales[1].ToString();
 			ComboBoxQuantity.IsEnabled = false;
 
-			DateStart.Text = actualSales[2].ToString();
+			DateTime temp=new DateTime();
+			temp =(DateTime) actualSales[2];
+			DateStart.Text = temp.ToShortDateString();
 			DateStart.IsEnabled = false;
 
-			DateEnding.Text = actualSales[3].ToString();
+			temp = (DateTime)actualSales[3];
+			DateEnding.Text = temp.ToShortDateString();
 			DateEnding.IsEnabled = false;
 
 			TextBoxDaysReturn.Text = actualSales[5].ToString();
@@ -106,7 +108,8 @@ namespace SklepInternetowy.AppWindows
 
 			if ((int)actualSales[9] == 0)
 			{
-				DateEnd.Text = actualSales[4].ToString();
+				temp = (DateTime)actualSales[4];
+				DateEnd.Text = temp.ToShortDateString();
 				DateEnd.Visibility = Visibility.Visible;
 				LabelDateEnd.Visibility = Visibility.Visible;
 				TextBoxDaysReturn.IsEnabled = false;
