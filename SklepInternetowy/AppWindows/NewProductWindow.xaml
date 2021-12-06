@@ -246,7 +246,7 @@
 
 
         <Image x:Name="ImageProduct" 
-               ToolTip="Przykładowe zdjęcie" 
+               ToolTip="Pogląd zdjęcia" 
                Grid.Column="5" 
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="140" Margin="10,13,0,0" Width="241"  

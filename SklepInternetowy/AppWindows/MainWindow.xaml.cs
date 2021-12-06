@@ -177,6 +177,12 @@ namespace SklepInternetowy
 			{
 				DataRowView tempDataRow = MainGrid.SelectedItem as DataRowView;
 				object[] tempObject = tempDataRow.Row.ItemArray;
+				if (Users.LogUser != null)
+				{
+					int tempIdUser = Users.LogUser.Id_User;
+					int tempIdProduct = (int)tempObject[10];
+					sqlConnect.AddVisitor(tempIdUser, tempIdProduct, "AddVisitor");
+				}
 				windowProduct = new WindowProduct(this, tempObject);
 				windowProduct.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				windowProduct.Show();

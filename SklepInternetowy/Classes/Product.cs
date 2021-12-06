@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace SklepInternetowy.Classes
 {
-	class Product
+	public class Product
 	{
 		private int id_Product;
 		private int id_Seller;

@@ -24,7 +24,6 @@ namespace SklepInternetowy
 		/// </summary>
 		public SQLConnect()
 		{
-			//con = new SqlConnection(sqlConnection);//czy jest to w tym miejscu potrzebne?
 		}
 
 
@@ -61,7 +60,6 @@ namespace SklepInternetowy
 		/// </summary>
 		/// <param name="commandText"></param>
 		/// <returns></returns>
-
 		public object[] VerLogin(string valueNick, byte[] valueHash, string commandText)
 		{
 			object[] tempObject;
@@ -281,6 +279,31 @@ namespace SklepInternetowy
 			}
 
 		}
+
+		public int AvalilableProducts(int valueId,string commandText) 
+		{
+			int resultVar;
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueId", valueId);
+					var retValParam = new SqlParameter("resultVar", SqlDbType.Int)
+					{
+						Direction = ParameterDirection.ReturnValue
+					};
+					cmd.Parameters.Add(retValParam);
+					cmd.ExecuteScalar();
+					resultVar = (int)retValParam.Value;
+				}
+				con.Close();
+				return resultVar;
+			}
+		}
+
 		/// <summary>
 		/// universal methods that add to database
 		/// </summary>
@@ -320,6 +343,23 @@ namespace SklepInternetowy
 					cmd.CommandText = commandText;
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.AddWithValue("@value", value);
+					cmd.ExecuteNonQuery();
+				}
+				con.Close();
+			}
+		}
+
+		public void AddVisitor(int valueId,int valueIdProduct, string commandText) 
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueId", valueId);
+					cmd.Parameters.AddWithValue("@valueIdProduct", valueIdProduct);
 					cmd.ExecuteNonQuery();
 				}
 				con.Close();
@@ -553,7 +593,7 @@ namespace SklepInternetowy
 		}
 
 		public void AddUserProduct(int valueSeller, string valueName, string valueDescription,
-								   double valuePrice, int valueVat, string valueCondition,
+								   decimal valuePrice, int valueVat, string valueCondition,
 								   int valueMaxQuantity, string valueNameParameter,
 								   string valueParameter, string valueWarranty,
 								   int valueWarrantyDays, string valueBrand, string valueCategory,
@@ -1035,7 +1075,7 @@ namespace SklepInternetowy
 		}
 
 		public void UpdateProduct2(int valueId, int valueSeller, string valueName, string valueDescription,
-							  double valuePrice, int valueVat, string valueCondition,
+							  decimal valuePrice, int valueVat, string valueCondition,
 							  int valueMaxQuantity, string valueNameParameter,
 							  string valueParameter, string valueWarranty, int valueWarrantyDays,
 							  string valueBrand, string valueCategory, byte[] valueImage, int valueStatus, string commandText)
@@ -1175,41 +1215,5 @@ namespace SklepInternetowy
 
 			}
 		}
-
-		/* TODO dodać dodawanie zdjęcia do samego produktu oraz pomoc przy tworzeniu połączeń
-        public void AddImage()
-        {
-            using (con)
-            {
-                int number = 0;
-                string text = "DyskAdata";//TODO: dodać pole do wprowadzania 
-                using (var cmd = con.CreateCommand())
-                {
-                    cmd.CommandText = "ImageCount";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    var retValParam = new SqlParameter("RetVal", SqlDbType.Int)
-                    {
-                        Direction = ParameterDirection.ReturnValue
-                    };
-                    cmd.Parameters.Add(retValParam);
-                    cmd.ExecuteScalar();
-                    number = (int)retValParam.Value + 1;
-
-                    cmd.CommandText = "Add_Image";
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    OpenFileDialog OpenDialog = new OpenFileDialog();
-                    if (OpenDialog.ShowDialog() == true)
-                    {
-                        byte[] imageData = File.ReadAllBytes(OpenDialog.FileName);
-                        cmd.Parameters.AddWithValue("@IdImage", number);
-                        cmd.Parameters.AddWithValue("@NameImage", text);
-                        cmd.Parameters.AddWithValue("@ByteImage", imageData);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-        }
-        */
 	}
 }

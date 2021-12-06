@@ -96,11 +96,13 @@ namespace SklepInternetowy
 			{
 				case "Id_User":
 				case "Id_Payment":
+				case "Id_Seller":
 				case "Id_TypePayment":
 				case "Id_Product":
 				case "Image":
 				case "StatusTypePayment":
 				case "LimitString":
+				case "Id_RetailSales":
 					//case "Status":
 					e.Column.Visibility = Visibility.Hidden;
 					break;
@@ -149,7 +151,31 @@ namespace SklepInternetowy
 				case "TypePayment":
 					e.Column.Header = "Typ Płatności";
 					break;
-
+				case "DateStartSales":
+					e.Column.Header = "Data startu sprzedaży";
+					break;
+				case "DateClosings":
+					e.Column.Header = "Data planowa zakończenia";
+					break;
+				case "DateClosed":
+					e.Column.Header = "Data zakończenia";
+					break;
+				case "DayDelivery":
+					e.Column.Header = "Dni dostawy";
+					break;
+				case "DayReturn":
+					e.Column.Header = "Czas na zwrot";
+					break;
+				case "Visitors":
+					e.Column.Header = "Ilość odwiedzin";
+					break;
+				case "NameDelivery":
+					e.Column.Header = "Sposób Dostawy";
+					break;
+				case "Quantity":
+					e.Column.Header = "Ilość wystawiona";
+					break;
+		
 			}
 		}
 

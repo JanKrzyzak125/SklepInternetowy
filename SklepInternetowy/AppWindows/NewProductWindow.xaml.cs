@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using SklepInternetowy.Classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,6 +29,7 @@ namespace SklepInternetowy.AppWindows
 		private byte[] tempImageData;
 		private ImageSource defaultSource;
 		private object[] actualProduct;
+		private Product currentProduct;
 		private WindowRating windowRating;
 
 		public List<string> TempListVat
@@ -54,6 +56,7 @@ namespace SklepInternetowy.AppWindows
 		{
 			get => tempListWarranty;
 		}
+
 
 		public NewProductWindow(object[] Product)
 		{
@@ -86,6 +89,51 @@ namespace SklepInternetowy.AppWindows
 			if (ImageProduct.Source != null) defaultSource = ImageProduct.Source.Clone();
 		}
 
+		public NewProductWindow(Product CurrentProduct)
+		{
+			InitializeComponent();
+			makeList();
+			FillingDate();
+			windowRating = new WindowRating(CurrentProduct.Id_Product);
+
+			this.Title = "Edycja produktu";
+			ButtonProduct.Click -= NewButton_Click;
+			ButtonProduct.Click += EditButton_Click;
+			ButtonProduct.Content = "Edytuj produkt";
+			ButtonProduct.Visibility = Visibility.Hidden;
+			ButtonAddImage.Visibility = Visibility.Hidden;
+			currentProduct = CurrentProduct;
+			TextBoxNameProduct.Text = CurrentProduct.Name.ToString();
+			TextBoxNameProduct.IsEnabled = false;
+			TextBoxDescription.Text = CurrentProduct.Description.ToString();
+			TextBoxDescription.IsEnabled = false;
+			TextBoxNetto.Text = CurrentProduct.Price.ToString();
+			TextBoxNetto.IsEnabled = false;
+			ComboVAT.Text = CurrentProduct.Vat_rate.ToString() + "%";
+			ComboVAT.IsEnabled = false;
+			ComboCondition.Text = CurrentProduct.NameCondition.ToString();
+			ComboCondition.IsEnabled = false;
+			TextBoxQuantity.Text = CurrentProduct.Quantity.ToString();
+			TextBoxQuantity.IsEnabled = false;
+			TextBoxOptionalName.Text = CurrentProduct.NameParameter.ToString();
+			TextBoxOptionalName.IsEnabled = false;
+			TextBoxOptionalDescription.Text = CurrentProduct.Parameter.ToString();
+			TextBoxOptionalDescription.IsEnabled = false;
+			ComboWarranty.Text = CurrentProduct.TypeWarranty.ToString();
+			ComboWarranty.IsEnabled = false;
+			TextBoxDaysWarranty.Text = CurrentProduct.WarrantyDays.ToString();
+			TextBoxDaysWarranty.IsEnabled = false;
+			ComboBrand.Text = CurrentProduct.NameBrand.ToString();
+			ComboBrand.IsEnabled = false;
+			ComboCategory.Text = CurrentProduct.NameCategory.ToString();
+			ComboCategory.IsEnabled = false;
+			tempImageData = CurrentProduct.Image;
+			ImageProduct.Source = ConvertByteToImage(tempImageData);
+			LabelRating.Visibility = Visibility.Visible;
+			ButtonRating.Visibility = Visibility.Visible;
+			
+
+		}
 
 		public NewProductWindow()
 		{
@@ -157,7 +205,7 @@ namespace SklepInternetowy.AppWindows
 		/// </summary>
 		/// <param name="imageByteArray"></param>
 		/// <returns></returns>
-		private BitmapImage ConvertByteToImage(byte[] imageByteArray)
+		public static BitmapImage ConvertByteToImage(byte[] imageByteArray)
 		{
 			BitmapImage img = new BitmapImage();
 			using (MemoryStream memStream = new MemoryStream(imageByteArray))
@@ -204,8 +252,8 @@ namespace SklepInternetowy.AppWindows
 			string tempVAT = ComboVAT.Text;
 			tempVAT = tempVAT.Substring(0, tempVAT.Length - 1);
 			int tempVAT2 = int.Parse(tempVAT);
-			double tempNetto;
-			if (!double.TryParse(TextBoxNetto.Text, out tempNetto))
+			decimal tempNetto;
+			if (!decimal.TryParse(TextBoxNetto.Text, out tempNetto))
 			{
 				MessageBox.Show("Zły czas dostawy");
 				TextBoxNetto.Background = System.Windows.Media.Brushes.Red;
@@ -259,8 +307,8 @@ namespace SklepInternetowy.AppWindows
 			string tempVAT = ComboVAT.Text;
 			tempVAT = tempVAT.Substring(0, tempVAT.Length - 1);
 			int tempVAT2 = int.Parse(tempVAT);
-			double tempNetto;
-			if (!double.TryParse(TextBoxNetto.Text, out tempNetto))
+			decimal tempNetto;
+			if (!decimal.TryParse(TextBoxNetto.Text, out tempNetto))
 			{
 				MessageBox.Show("Zły czas dostawy");
 				TextBoxNetto.Background = System.Windows.Media.Brushes.Red;
@@ -333,11 +381,11 @@ namespace SklepInternetowy.AppWindows
 		}
 		private void MakeBrutto(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
-			double tempPrice, tempBrutto;
-			double.TryParse(TextBoxNetto.Text, out tempPrice);
+			decimal tempPrice, tempBrutto;
+			decimal.TryParse(TextBoxNetto.Text, out tempPrice);
 			string tempVAT = ComboVAT.Text;
 			tempVAT = tempVAT.Substring(0, tempVAT.Length - 1);
-			double tempVAT2 = int.Parse(tempVAT);
+			decimal tempVAT2 = int.Parse(tempVAT);
 			tempVAT2 /= 100;
 
 			tempBrutto = (tempPrice * tempVAT2) + tempPrice;
@@ -377,13 +425,16 @@ namespace SklepInternetowy.AppWindows
 		{
 			if (windowRating.IsVisible == false)
 			{
-				int tempId = (int)actualProduct[0];
+				int tempId;
+				if (actualProduct!=null)  tempId = (int)actualProduct[0];
+				else 
+				{
+					tempId = currentProduct.Id_Product;
+				}
 				windowRating = new WindowRating(tempId);
 				windowRating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				windowRating.Show();
 			}
-
-
 		}
 	}
 }

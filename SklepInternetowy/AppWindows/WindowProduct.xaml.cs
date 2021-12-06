@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using SklepInternetowy.AppWindows;
+using System;
+using System.Collections.Generic;
 
 namespace SklepInternetowy
 {
@@ -14,6 +16,8 @@ namespace SklepInternetowy
 		private MainWindow mainWindow;
 		private Product currentProduct;
 		private NewProductWindow newProductWindow;
+		private List<int> tempListQuantity;
+		private SQLConnect sqlConnect;
 		public WindowProduct()
 		{
 			InitializeComponent();
@@ -22,34 +26,81 @@ namespace SklepInternetowy
 		public WindowProduct(MainWindow tempMainWindow, object[] tempProduct)
 		{
 			InitializeComponent();
+			windowPay = new WindowPay();
+			sqlConnect = new SQLConnect();
+			tempListQuantity = new List<int>();
+			ComboBoxAvailableQuantity.ItemsSource = tempListQuantity;
+			this.Title = "Sprzedaż";
 			mainWindow = tempMainWindow;
 			newProductWindow = new NewProductWindow();
-			currentProduct = new Product(tempProduct);//TODO
+			currentProduct = new Product(tempProduct);
+			fillComboBox();
+			DateStart.Text = currentProduct.DateStartSales.ToShortDateString();
+			DateStart.IsEnabled = false;
+			DateEnding.Text = currentProduct.DateClosing.ToShortDateString();
+			DateEnding.IsEnabled = false;
+			TextBoxCategory.Text = currentProduct.NameCategory;
+			TextBoxCategory.IsEnabled = false;
+			TextBoxBrand.Text = currentProduct.NameBrand;
+			TextBoxBrand.IsEnabled = false;
+			TextBoxNameProduct.Text = currentProduct.Name;
+			TextBoxNameProduct.IsEnabled = false;
+			TextBoxDescription.Text = currentProduct.Description;
+			TextBoxDescription.IsEnabled = false;
+
+			byte[] tempImageData = currentProduct.Image;
+			ImageProduct.Source = NewProductWindow.ConvertByteToImage(tempImageData);
+
+			decimal tempPrice = currentProduct.Price;
+			tempPrice = tempPrice * (currentProduct.Vat_rate / 100) + tempPrice;
+			TextBoxPrice.Text = tempPrice.ToString();
+			TextBoxPrice.IsEnabled = false;
+			if (Users.LogUser == null)
+			{
+				ButtonPay.IsEnabled = false;
+				//ButtonPay.ToolTipService.ShowOnDisabled = "True";
+				ButtonPay.ToolTip = "Zaloguj się by kupić produkt";
+			}
+			else if (Users.LogUser.Id_User == currentProduct.Id_Seller) 
+			{
+				ButtonPay.IsEnabled = false;
+				ButtonPay.ToolTip = "Jesteś sprzedającym więc nie możesz kupić";
+			}
+			else
+			{
+				ButtonPay.IsEnabled = true;
+				ButtonPay.Content = "Kup produkt";
+			}
 		}
 
+		private void fillComboBox()
+		{
+			int tempIdProduct = currentProduct.Id_Product;
+			int selledQuantity = sqlConnect.AvalilableProducts(tempIdProduct, "AvalilableProducts");
+			int currentAvalilableQuantity = currentProduct.Quantity - selledQuantity;
 
+			for (int i = 1; i <= currentAvalilableQuantity; i++)
+			{
+				tempListQuantity.Add(i);
+			}
+
+		}
 
 		private void Click_Pay(object sender, RoutedEventArgs e)
 		{
-			windowPay = new WindowPay();
-			windowPay.Show();
-		}
-
-		void ShowBuyerProduct()
-		{
-			windowPay.Visibility = Visibility.Visible;
-		}
-
-		void ShowSellerProduct()
-		{
-			windowPay.Visibility = Visibility.Hidden;
+			if (windowPay.IsVisible == false)
+			{
+				windowPay = new WindowPay();
+				windowPay.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowPay.Show();
+			}
 		}
 
 		private void ButtonMoreDetails_Click(object sender, RoutedEventArgs e)
 		{
 			if (newProductWindow.IsVisible == false)
 			{
-				newProductWindow = new NewProductWindow();
+				newProductWindow = new NewProductWindow(currentProduct);
 				newProductWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				newProductWindow.Show();
 			}

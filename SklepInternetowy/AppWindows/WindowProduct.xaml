@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SklepInternetowy"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        ShowInTaskbar="false"
         Title="WindowProduct" 
-        Height="600" Width="1000">
+        Height="600" Width="1000"
+        ResizeMode="CanMinimize"
+        >
 
     <Window.Resources>
 
@@ -21,7 +23,20 @@
                 <Setter Property="Width" Value="100"/>
             </Style>
 
-            <Style TargetType="TextBox" x:Key="MyTextBox">
+            <Style TargetType="ComboBox" x:Key="MyComboBox">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Width" Value="130"/>
+                <Setter Property="Background" Value="Chocolate"/>
+                <Setter Property="BorderBrush" Value="Violet"/>
+                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                <Setter Property="Template" Value="{StaticResource MaterialDesignFloatingHintComboBoxTemplate}" />
+            </Style>
+                    <Style TargetType="TextBox" x:Key="MyTextBox">
                 
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -50,6 +65,7 @@
 
             </Style>
         </ResourceDictionary>
+        
     </Window.Resources>
 
     <Grid>
@@ -71,8 +87,7 @@
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
+
 
         </Grid.RowDefinitions>
         <Image x:Name="ImageProduct" 
@@ -81,7 +96,6 @@
                />
         <TextBox x:Name="TextBoxNameProduct" 
                  Style="{DynamicResource MyTextBox}" 
-
                  FontFamily="Century Gothic"
                  FontSize="12"
                  FontStretch="UltraExpanded"
@@ -90,20 +104,24 @@
                  Text="Nazwa Produktu" 
                  IsReadOnly="True" 
                  Cursor="IBeam" Width="274"/>
+        
         <TextBox x:Name="TextBoxCategory"  
                  Text="Nazwa Kategorii"
                  Grid.Column="2"
                  Style="{DynamicResource MyTextBox}"
                  />
-        <TextBox x:Name="Description"
+        <TextBox x:Name="TextBoxDescription"
+                 ToolTip="Szczegółowy Opis produktu"
                  Style="{DynamicResource MyTextBox}"
-                 Height="163"  Width="280"
-                 ToolTip="Opis Produktu" HorizontalAlignment="Left" Margin="17,10,0,0" Grid.RowSpan="3" Grid.Row="3" VerticalAlignment="Top"
+                 Height="163" Width="280"
+                 Margin="17,10,0,0"
+                 Grid.RowSpan="3" Grid.Row="3"
                  />
         <Button x:Name="ButtonPay" 
                 Content="Zapłać/Kup" 
                 Style="{DynamicResource MyButton}" 
                 Click="Click_Pay" 
+                ToolTipService.ShowOnDisabled="True"
                 Grid.Column="2" Grid.Row="5"
                 />
         <Button x:Name="ButtonMoreDetails" 
@@ -131,34 +149,28 @@
                Grid.Column="1" Grid.Row="2"
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
+        <Label Content="Cena" 
                Grid.Column="1" Grid.Row="3"
                Style="{DynamicResource MyLabel}"/>
         <Label Content="Label" 
                Grid.Column="1" Grid.Row="4" 
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
+        <Label Content="Opcje sprzedaży" 
                Grid.Column="1" Grid.Row="5" 
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
+        <Label Content="Produkt" 
                Grid.Column="1" Grid.Row="6" 
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
-               Grid.Column="1" Grid.Row="7" 
-               Style="{DynamicResource MyLabel}"
-               />
-        <Label Content="Label" 
-               Grid.Column="1" Grid.Row="8" 
-               Style="{DynamicResource MyLabel}"
-               />
-        <Label Content="Label" 
+
+        
+        <Label Content="Początek" 
                Grid.Column="3" 
                Style="{DynamicResource MyLabel}" 
                />
-        <Label Content="Label" 
+        <Label Content="Zakończenie" 
                Grid.Column="3" Grid.Row="1"
                Style="{DynamicResource MyLabel}"
                />
@@ -182,14 +194,25 @@
                Grid.Column="3" Grid.Row="6"
                Style="{DynamicResource MyLabel}"
                />
-        <Label Content="Label" 
-               Grid.Column="3" Grid.Row="7" 
-               Style="{DynamicResource MyLabel}" 
-               />
-        <Label Content="Label" 
-               Style="{DynamicResource MyLabel}"
-               Grid.Column="3" Grid.Row="8"
-               />
+
+        <ComboBox x:Name="ComboBoxAvailableQuantity"
+                  Style="{DynamicResource MyComboBox}"
+            Grid.Column="2"  Grid.Row="2"/>
+        <TextBox x:Name="TextBoxPrice" 
+                 Grid.Column="2" Grid.Row="3" 
+                 Text="" 
+                 Style="{DynamicResource MyTextBox}"
+                 ToolTip="Cena produktu brutto" 
+                 TextWrapping="Wrap"
+                 />
+        <DatePicker x:Name="DateStart" 
+                    Grid.Column="4" 
+                    />
+        <DatePicker x:Name="DateEnding" 
+                    Text=""
+                    
+                    Grid.Column="4" Grid.Row="1"
+                    />
 
     </Grid>
 </Window>
