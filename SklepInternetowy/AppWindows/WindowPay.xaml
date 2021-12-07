@@ -6,7 +6,196 @@
         xmlns:local="clr-namespace:SklepInternetowy"
         mc:Ignorable="d"
         Title="WindowPay" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Label" x:Key="MyLabel">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="ToolTipService.ShowDuration" Value="20000" />
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        </Style>
+
+        <Style TargetType="ComboBox" x:Key="MyComboBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="BorderBrush" Value="Violet"/>
+            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="Template" Value="{StaticResource MaterialDesignFloatingHintComboBoxTemplate}" />
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="MyTextBox">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="MyButton">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+
+        </Style>
+
+        <Style TargetType="CheckBox" x:Key="MyCheckBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+
+        </Style>
+
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+
+        </Grid.RowDefinitions>
+        <Label Content="Wybierz sposób płatności*" 
+               Style="{DynamicResource MyLabel}"
+               Grid.Row="0" Grid.Column="0"
+               />
+        <Label Content="Dodaj sposób płatności" 
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="1" 
+               />
+        <Label Content="Sposób płatności" 
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="2" 
+               />
+        <Label Content="Do zapłaty" 
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="3" 
+               />
+        <Label Content="Czy faktura" 
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="4" 
+               />
+        <Label Content="*Pola obowiązkowe"
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="5" Width="300" Grid.ColumnSpan="2" 
+               />
+
+
+        <Label Content="Kupujesz"
+               Style="{DynamicResource MyLabel}" 
+               Grid.Column="2" 
+               />
+        <Label Content="Ilość"
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="1" Grid.Column="2" 
+               />
+
+        <Label Content="Przybliżony czas dostawy"
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="2" Grid.Column="2" 
+               />
+        <Label Content="Cena Netto"
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="3" Grid.Column="2" 
+               />
+        <Label Content="Cena Brutto"
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="4" Grid.Column="2" 
+               />
+        <Label Content="Po Sprawdzeniu"
+               Style="{DynamicResource MyLabel}" 
+               Grid.Row="5" Grid.Column="2" 
+               />
+
+
+        <Button Content="Kup" 
+                Style="{DynamicResource MyButton}"
+                Grid.Column="3" Grid.Row="5" 
+                />
+        <DatePicker x:Name="DateDelivery"
+                    ToolTip="Około"
+                    IsEnabled="False"
+                    Grid.Column="3" Grid.Row="2" Margin="0,19,0,0" VerticalAlignment="Top" 
+                    />
+        <ComboBox x:Name="ComboBoxPayment" 
+                  Grid.Column="1" 
+                  Style="{DynamicResource MyComboBox}"
+                  />
+        <Button x:Name="ButtonChangePayment" 
+                Content="Dodaj/Zmień" 
+                ToolTip="Puste miejsce= nowe, wybrane edycja"
+                Style="{DynamicResource MyButton}"
+                Grid.Column="1" Grid.Row="2" 
+                />
+        <CheckBox x:Name="CheckBoxInvoice"
+                  Content="Dołączyć?" 
+                  
+                  Style="{DynamicResource MyCheckBox}"
+                  Grid.Column="1" Grid.Row="4" Margin="0,30,0,0" VerticalAlignment="Top" />
+        <CheckBox x:Name="CheckBoxNewPayment"  
+                  Content="Nowy" 
+                  ToolTip="Bez zaznaczenia znaczy edycja"
+                  Style="{DynamicResource MyCheckBox}"
+                  Grid.Column="1" Grid.Row="1" 
+                  />
+        <TextBox x:Name="TextBoxName" 
+                 Grid.Column="3"  
+                 Text="Produkt" 
+                 IsEnabled="False"
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox x:Name="TextBoxQuantity" 
+                 Grid.Column="3" Grid.Row="1" 
+                 Text="Ilość" 
+                 IsEnabled="False"
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox x:Name="TextBoxNetto" 
+                 Grid.Column="3" Grid.Row="3" 
+                 Text="Cena" 
+                 IsEnabled="False"
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox x:Name="TextBoxBrutto"
+                 Grid.Column="3" Grid.Row="4" 
+                 Text="Cena" 
+                 IsEnabled="False"
+                 Style="{DynamicResource MyTextBox}"
+                 />
+        <TextBox x:Name="TextBoxSumPay" 
+                 Grid.Column="1" Grid.Row="3" 
+                 Text="Cena" 
+                 Style="{DynamicResource MyTextBox}"
+                 />
+
+
+
     </Grid>
 </Window>

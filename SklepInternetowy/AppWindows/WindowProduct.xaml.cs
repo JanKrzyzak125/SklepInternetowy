@@ -103,11 +103,17 @@ namespace SklepInternetowy
 
 		private void Click_Pay(object sender, RoutedEventArgs e)
 		{
-			if (windowPay.IsVisible == false)
+			if (windowPay.IsVisible == false && ComboBoxAvailableQuantity.SelectedItem!=null)
 			{
-				windowPay = new WindowPay();
+				int tempSelectedQuantity;
+				int.TryParse( ComboBoxAvailableQuantity.Text, out tempSelectedQuantity);
+				windowPay = new WindowPay(currentProduct, tempSelectedQuantity);
 				windowPay.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				windowPay.Show();
+			}
+			else 
+			{
+				MessageBox.Show("Wybierz ilość by kupić");
 			}
 		}
 
