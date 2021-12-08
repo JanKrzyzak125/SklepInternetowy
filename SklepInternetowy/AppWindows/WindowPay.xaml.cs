@@ -23,5 +23,8 @@ namespace SklepInternetowy
             currentSelectQuantity = valueSelectQuantity;
 
         }
+
+
+
     }
 }

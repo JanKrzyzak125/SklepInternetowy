@@ -35,7 +35,7 @@ namespace SklepInternetowy.Classes
 		private byte[] image;
 		private int statusProduct;
 		private object[] currentProduct;
-		private object[] objectProduct;
+		//private object[] objectProduct;
 
 		public int Id_Product
 		{
@@ -199,10 +199,6 @@ namespace SklepInternetowy.Classes
 
 		}
 
-		public object[] ObjectProduct 
-		{
-			get => objectProduct;
-		}
 
 		public Product(object[] tempProduct)
 		{
@@ -233,6 +229,7 @@ namespace SklepInternetowy.Classes
 			nameCategory = (string)tempProduct[23];
 			image = (byte[])tempProduct[24];
 			statusProduct = (int)tempProduct[25];
+
 		}
 
 

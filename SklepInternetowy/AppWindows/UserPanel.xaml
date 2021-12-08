@@ -109,6 +109,7 @@
                 Style="{DynamicResource MyButton}"
                 Grid.Row="3" Grid.Column="2"
                 Click="ViewListBuyed_Click"
+                Visibility="Hidden"
                 />
         <Button x:Name="ButtonAdd2"
                 Content="Dodaj Sprzedaż" 
@@ -116,6 +117,7 @@
                 Grid.Row="2" Grid.Column="2" 
                 Cursor="Hand" 
                 Click="AddRetailSales_Click"
+                Visibility="Hidden"
      
                 />
     </Grid>
