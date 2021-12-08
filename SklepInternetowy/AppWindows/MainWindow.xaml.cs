@@ -39,7 +39,7 @@ namespace SklepInternetowy
 			ButtonUser.Visibility = Visibility.Hidden;
 			DataTable tempSales = sqlConnect.ReadTable("ViewMainSales");
 			MainGrid.ItemsSource = tempSales.DefaultView;
-
+			TextBoxMy.Text="test";
 		}
 
 

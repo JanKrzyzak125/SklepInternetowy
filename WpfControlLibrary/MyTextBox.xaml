@@ -13,10 +13,11 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Height" Value="52"/>
             <Setter Property="Width" Value="400"/>
+            <Setter Property="Text" Value="Test"/>
         </Style>
     </UserControl.Resources>
     
     <Grid>
-        <TextBox Style="{StaticResource TextBoxStyle}"/>
+        <TextBox Style="{StaticResource TextBoxStyle}"  />
     </Grid>
 </UserControl>

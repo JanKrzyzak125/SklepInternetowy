@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-           x:Class="SklepInternetowy.MainWindow"
         xmlns:local="clr-namespace:SklepInternetowy"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:WpfControlLibrary="clr-namespace:WpfControlLibrary;assembly=WpfControlLibrary"
+           x:Class="SklepInternetowy.MainWindow"
         fw:AcrylicWindow.Enabled="True"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
@@ -20,9 +21,8 @@
         Title="Sklep" Height="860" Width="1200" 
         Closing="CloseApp">
     <Grid>
-        <Grid.ColumnDefinitions>
+        
 
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
             <RowDefinition Height="44*"/>
@@ -94,6 +94,8 @@
             Height="44" Margin="879,0,0,0" Width="167"
             Grid.Row="1" 
             Cursor="Hand"/>
+        
+        
     </Grid>
 
 

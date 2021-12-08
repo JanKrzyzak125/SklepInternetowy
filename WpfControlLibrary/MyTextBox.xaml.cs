@@ -22,5 +22,7 @@ namespace WpfControlLibrary
 		{
 			InitializeComponent();
 		}
+
+		public string Text { get; set; }
 	}
 }
