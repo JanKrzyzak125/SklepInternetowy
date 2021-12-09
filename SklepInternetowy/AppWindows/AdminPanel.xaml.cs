@@ -78,7 +78,6 @@ namespace SklepInternetowy.AppWindows
 		{
 			int temp = DataGridAdmin.SelectedIndex;
 			MessageBox.Show("Element zawiera=" + DataGridAdmin);
-			//TODO: dla niektórych widoku pokazać szczegóły jak produkty,Faktury
 
 		}
 
