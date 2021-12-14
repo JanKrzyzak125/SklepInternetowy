@@ -250,7 +250,7 @@
                Grid.Column="5" 
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="140" Margin="10,13,0,0" Width="241"  
-               Source="/AppWindows/Brak.PNG" 
+               
                RenderTransformOrigin="3.074,2.824" Grid.RowSpan="3"
                Stretch="Fill"
                />

@@ -11,10 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="AppWindows\Brak.PNG" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
@@ -49,11 +45,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\WpfControlLibrary\WpfControlLibrary.csproj" />
-  </ItemGroup>
-
-  
-  <ItemGroup>
-    <Resource Include="AppWindows\Brak.PNG" />
   </ItemGroup>
 
 </Project>

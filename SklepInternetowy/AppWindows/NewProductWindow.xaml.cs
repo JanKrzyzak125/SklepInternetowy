@@ -87,7 +87,6 @@ namespace SklepInternetowy.AppWindows
 			ImageProduct.Source = ConvertByteToImage(tempImageData);
 			LabelRating.Visibility = Visibility.Visible;
 			ButtonRating.Visibility = Visibility.Visible;
-			if (ImageProduct.Source != null) defaultSource = ImageProduct.Source.Clone();
 		}
 
 		public NewProductWindow(Product CurrentProduct)
@@ -132,8 +131,6 @@ namespace SklepInternetowy.AppWindows
 			ImageProduct.Source = ConvertByteToImage(tempImageData);
 			LabelRating.Visibility = Visibility.Visible;
 			ButtonRating.Visibility = Visibility.Visible;
-
-
 		}
 
 		public NewProductWindow()
@@ -148,8 +145,8 @@ namespace SklepInternetowy.AppWindows
 			ButtonProduct.Content = "Dodaj produkt";
 			LabelRating.Visibility = Visibility.Hidden;
 			ButtonRating.Visibility = Visibility.Hidden;
-			if (ImageProduct.Source != null) tempImageData = File.ReadAllBytes("./Picture/Brak.PNG");
-			if (ImageProduct.Source != null) defaultSource = ImageProduct.Source.Clone();
+			tempImageData = File.ReadAllBytes("./Picture/Brak.PNG");
+			ImageProduct.Source = ConvertByteToImage(tempImageData);
 		}
 
 		private void makeList()
