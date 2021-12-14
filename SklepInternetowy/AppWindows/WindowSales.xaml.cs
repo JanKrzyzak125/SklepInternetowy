@@ -106,7 +106,8 @@ namespace SklepInternetowy.AppWindows
 			TextBoxViews.Text = actualSales[8].ToString();
 			TextBoxViews.Visibility = Visibility.Visible;
 
-			if ((int)actualSales[9] == 0)
+			DateTime fristDate=new DateTime();
+			if ((DateTime)actualSales[4] != fristDate.Date)
 			{
 				temp = (DateTime)actualSales[4];
 				DateEnd.Text = temp.ToShortDateString();

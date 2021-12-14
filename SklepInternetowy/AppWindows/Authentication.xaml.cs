@@ -105,7 +105,8 @@ namespace SklepInternetowy
 		private void PasswordChange_Open(object sender, RoutedEventArgs e)
 		{
 			string tempNick = NickText.Text;
-			int okey = sqlConnect.IsUserNick(tempNick, "IsUserNick");
+			byte[] tempHash = makeHash(PasswordBox.Password);
+			int okey = sqlConnect.IsUserNick(tempNick,tempHash, "IsUserNick");
 
 			if (registrationWindow.IsVisible == false && okey == 1)
 			{
@@ -114,7 +115,7 @@ namespace SklepInternetowy
 			}
 			else
 			{
-				MessageBox.Show("Nie ma takiego nicku");
+				MessageBox.Show("Nie ma takiego nicku lub złe hasło podane");
 			}
 		}
 

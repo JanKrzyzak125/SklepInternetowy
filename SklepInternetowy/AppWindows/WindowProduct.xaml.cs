@@ -51,6 +51,10 @@ namespace SklepInternetowy
 			TextBoxVat.IsEnabled = false;
 			TextBoxVisitors.Text = currentProduct.Visitors.ToString();
 			TextBoxVisitors.IsEnabled = false;
+			TextBoxDelivery.Text = currentProduct.NameDelivery;
+			TextBoxDelivery.IsEnabled = false;
+			TextBoxCondition.Text = currentProduct.NameCondition;
+			TextBoxCondition.IsEnabled = false;
 
 			byte[] tempImageData = currentProduct.Image;
 			ImageProduct.Source = NewProductWindow.ConvertByteToImage(tempImageData);

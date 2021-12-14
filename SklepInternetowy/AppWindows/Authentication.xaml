@@ -11,43 +11,54 @@
         ResizeMode="CanMinimize"
         >
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="101*"/>
+            <ColumnDefinition Width="99*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
         <Button x:Name="LoginButton" 
                 Content="Zalogować" 
                 HorizontalAlignment="Left"  VerticalAlignment="Top"
-                Height="53" Margin="54,195,0,0" Width="130" 
+                Height="53" Margin="54,11,0,0" Width="130" 
                 Click="LoginButton_Click" 
-                Cursor="Hand"
-                
+                Cursor="Hand" 
+                Grid.Row="3"
+                IsDefault="True"
                 />
         <Button x:Name="Registration" 
                 Content="Rejestracja" 
                 HorizontalAlignment="Left" VerticalAlignment="Top"
-                Height="53" Margin="216,195,0,0" Width="130" 
-                Click="Registration_Open"
+                Height="53" Margin="14,11,0,0" Width="130" 
+                Click="Registration_Open" Grid.Row="3" Grid.Column="1"
                 />
         <CheckBox Unchecked="Password_Uncheck" 
                   Checked="Password_Check" 
                   x:Name="CheckBoxPassword" 
-                  Content="Zapomniałem hasła" 
-                  HorizontalAlignment="Center" VerticalAlignment="Top"
-                  Height="24" Margin="0,142,0,0" Width="292"
+                  Content="Zmień hasło" 
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Height="24" Margin="54,2,0,0" Width="292" Grid.Row="2" Grid.ColumnSpan="2"
                   />
         <TextBox x:Name="NickText" 
-                 HorizontalAlignment="Center"  VerticalAlignment="Top"
-                 Height="41" Margin="0,18,0,0"  Width="293"
+                 HorizontalAlignment="Left"  VerticalAlignment="Top"
+                 Height="41" Margin="54,18,0,0"  Width="292"
                  Text="Nick" 
                  TextWrapping="Wrap" 
                  Background="AliceBlue" 
                  Cursor="IBeam"
                  IsKeyboardFocusWithinChanged="TextBoxAuthenticationIsKeyboardFocusWithinChanged"
-                 ToolTip="Wprowadź swój nick"
+                 ToolTip="Wprowadź swój nick" Grid.ColumnSpan="2"
                  />
         <PasswordBox x:Name="PasswordBox" 
-                     HorizontalAlignment="Center" VerticalAlignment="Top"
-                     Height="40" Margin="0,89,0,0"  Width="293"
+                     HorizontalAlignment="Left" VerticalAlignment="Top"
+                     Height="40" Margin="54,21,0,0"  Width="292"
                      Background="AliceBlue"
                      Cursor="IBeam"
-                     ToolTip="Wprowadź hasło"
+                     ToolTip="Wprowadź hasło" Grid.Row="1" Grid.ColumnSpan="2"
                      />
 
     </Grid>

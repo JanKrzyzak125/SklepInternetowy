@@ -8,10 +8,16 @@ using System.Windows;
 
 namespace SklepInternetowy
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-    }
+	/// <summary>
+	/// Interaction logic for App.xaml
+	/// </summary>
+	public partial class App : Application
+	{
+		private static string sqlConnection = @"Data source=GŁÓWNY\SQLEXPRESS;Initial Catalog=StoreDatabase;Integrated Security=True;";
+
+		public static string SQLConnection
+		{
+			get => sqlConnection;
+		}
+	}
 }

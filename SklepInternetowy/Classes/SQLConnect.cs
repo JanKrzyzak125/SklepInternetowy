@@ -12,7 +12,7 @@ namespace SklepInternetowy
 	class SQLConnect
 	{
 		private SqlConnection con;
-		private string sqlConnection = @"Data source=GŁÓWNY\SQLEXPRESS;Initial Catalog=StoreDatabase;Integrated Security=True;";
+		private string sqlConnection;
 
 		public SqlConnection Con
 		{
@@ -24,6 +24,7 @@ namespace SklepInternetowy
 		/// </summary>
 		public SQLConnect()
 		{
+			sqlConnection = App.SQLConnection;
 		}
 
 
@@ -88,7 +89,7 @@ namespace SklepInternetowy
 			}
 		}
 
-		public int IsUserNick(string valueNick, string commandText)
+		public int IsUserNick(string valueNick, byte[] valueHash, string commandText)
 		{
 			int resultVar;
 			using (con = new SqlConnection(sqlConnection))
@@ -99,6 +100,7 @@ namespace SklepInternetowy
 					cmd.CommandText = commandText;
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.AddWithValue("@valueNick", valueNick);
+					cmd.Parameters.AddWithValue("@valueHash",valueHash);
 					var retValParam = new SqlParameter("resultVar", SqlDbType.Int)
 					{
 						Direction = ParameterDirection.ReturnValue

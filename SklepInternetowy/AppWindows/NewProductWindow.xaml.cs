@@ -3,6 +3,7 @@ using SklepInternetowy.Classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -147,6 +148,7 @@ namespace SklepInternetowy.AppWindows
 			ButtonProduct.Content = "Dodaj produkt";
 			LabelRating.Visibility = Visibility.Hidden;
 			ButtonRating.Visibility = Visibility.Hidden;
+			if (ImageProduct.Source != null) tempImageData = File.ReadAllBytes("./Picture/Brak.PNG");
 			if (ImageProduct.Source != null) defaultSource = ImageProduct.Source.Clone();
 		}
 
@@ -218,6 +220,8 @@ namespace SklepInternetowy.AppWindows
 			}
 			return img;
 		}
+
+		
 
 
 		private void ButtonAddImage_Click(object sender, RoutedEventArgs e)
@@ -364,8 +368,7 @@ namespace SklepInternetowy.AppWindows
 
 		private int testNumeric(TextBox tempTextBox)
 		{
-			int temp;
-			if (!int.TryParse(tempTextBox.Text, out temp))
+			if (!int.TryParse(tempTextBox.Text, out int temp))
 			{
 				MessageBox.Show("Zły czas dostawy");
 				tempTextBox.Background = System.Windows.Media.Brushes.Red;
@@ -393,26 +396,20 @@ namespace SklepInternetowy.AppWindows
 
 		private string nameTextBox(string temp)
 		{
-			switch (temp)
+			return temp switch
 			{
-				case "TextBoxNameProduct":
-					return "Nazwa Produktu";
-				case "TextBoxOptionalName":
-					return "Opcjonalny Parametr";
-				case "TextBoxOptionalDescription":
-					return "Opcjonalny opis";
-				default:
-					return "";
-			}
+				"TextBoxNameProduct" => "Nazwa Produktu",
+				"TextBoxOptionalName" => "Opcjonalny Parametr",
+				"TextBoxOptionalDescription" => "Opcjonalny opis",
+				_ => "",
+			};
 		}
 
 		private void NameChange(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
 			TextBox temp = sender as TextBox;
 			if (temp.Text.Length < 1)
-			{
 				temp.CharacterCasing = CharacterCasing.Upper;
-			}
 			else
 			{
 				temp.CharacterCasing = CharacterCasing.Lower;
@@ -429,8 +426,10 @@ namespace SklepInternetowy.AppWindows
 				{
 					tempId = currentProduct.Id_Product;
 				}
-				windowRating = new WindowRating(tempId);
-				windowRating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowRating = new WindowRating(tempId)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
 				windowRating.Show();
 			}
 		}

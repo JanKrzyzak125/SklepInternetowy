@@ -258,7 +258,7 @@
                />
         <TextBox x:Name="TextBoxSumPay" 
                  Grid.Column="2" Grid.Row="4" 
-                 Text="Cena*ilość" 
+                 Text="0" 
                  Style="{DynamicResource MyTextBox}"
                  />
         <TextBox x:Name="TextBoxDelivery" 

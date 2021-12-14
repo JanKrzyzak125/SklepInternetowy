@@ -260,7 +260,6 @@ namespace SklepInternetowy
 
 		private void ClickChangeProfile(object sender, RoutedEventArgs e)
 		{
-
 			if (windowEditProfile.IsVisible == false)
 			{
 				windowEditProfile = new Registration();
