@@ -136,9 +136,13 @@ namespace SklepInternetowy
 		{
 			decimal tempPrice, tempSum;
 			decimal.TryParse(TextBoxPrice.Text, out tempPrice);
+			tempPrice = Math.Round(tempPrice, 2);
+			TextBoxPrice.Text = tempPrice.ToString();
 			int tempCurrentyQuantity;
 			int.TryParse(ComboBoxAvailableQuantity.SelectedValue.ToString(), out tempCurrentyQuantity);
-			tempSum = tempPrice * tempCurrentyQuantity;
+			decimal tempVat = (currentProduct.Vat_rate*(decimal)0.01)+1;
+			tempSum = (tempPrice*tempVat)* tempCurrentyQuantity;
+			tempSum = Math.Round(tempSum, 2);
 			TextBoxSumPay.Text = tempSum.ToString();
 		}
 	}

@@ -26,6 +26,39 @@ namespace SklepInternetowy.AppWindows
 			sqlConnect = null;
 		}
 
+		public WindowPayment(int valueId) 
+		{
+			InitializeComponent();
+			sqlConnect = new SQLConnect();
+			currentUser = valueId;
+			FillCombo();
+			this.Title = "Dodaj nową płatność";
+			ButtonAccept.Click -= EditPayment_Click;
+			ButtonAccept.Click += NewPayment_Click;
+			LabelStatus.Visibility = Visibility.Hidden;
+			CheckBoxStatus.Visibility = Visibility.Hidden;
+		}
+
+		public WindowPayment(object[] tempPayment)
+		{
+			InitializeComponent();
+			sqlConnect = new SQLConnect();
+			currentPayment = tempPayment;
+			FillCombo();
+			this.Title = "Zmień płatność";
+			ComboBoxTypePayment.Text = currentPayment[6].ToString();
+			TextBoxNameBank.Text = currentPayment[4].ToString();
+			TextBoxPaymentString.Text = currentPayment[3].ToString();
+			if ((int)currentPayment[5] == 0)
+			{
+				CheckBoxStatus.IsChecked = true;
+			}
+			ButtonAccept.Click -= NewPayment_Click;
+			ButtonAccept.Click += EditPayment_Click;
+			LabelStatus.Visibility = Visibility.Visible;
+			CheckBoxStatus.Visibility = Visibility.Visible;
+		}
+
 		public WindowPayment(UserPanel tempWindowUserPanel, int valueId)
 		{
 			InitializeComponent();

@@ -18,7 +18,6 @@ namespace SklepInternetowy.AppWindows
 	/// Logika interakcji dla klasy NewProductWindow.xaml
 	/// </summary>
 	/// 
-
 	public partial class NewProductWindow : Window
 	{
 		private SQLConnect sqlConnect = new SQLConnect();
@@ -28,7 +27,6 @@ namespace SklepInternetowy.AppWindows
 		private List<string> tempListCategory;
 		private List<string> tempListWarranty;
 		private byte[] tempImageData;
-		private ImageSource defaultSource;
 		private object[] actualProduct;
 		private Product currentProduct;
 		private WindowRating windowRating;
@@ -65,7 +63,6 @@ namespace SklepInternetowy.AppWindows
 			makeList();
 			FillingDate();
 			windowRating = new WindowRating();
-
 			this.Title = "Edycja produktu";
 			ButtonProduct.Click -= NewButton_Click;
 			ButtonProduct.Click += EditButton_Click;
@@ -95,8 +92,7 @@ namespace SklepInternetowy.AppWindows
 			makeList();
 			FillingDate();
 			windowRating = new WindowRating(CurrentProduct.Id_Product);
-
-			this.Title = "Edycja produktu";
+			this.Title = "Podgląd produktu";
 			ButtonProduct.Click -= NewButton_Click;
 			ButtonProduct.Click += EditButton_Click;
 			ButtonProduct.Content = "Edytuj produkt";
@@ -107,7 +103,9 @@ namespace SklepInternetowy.AppWindows
 			TextBoxNameProduct.IsEnabled = false;
 			TextBoxDescription.Text = CurrentProduct.Description.ToString();
 			TextBoxDescription.IsEnabled = false;
-			TextBoxNetto.Text = CurrentProduct.Price.ToString();
+			decimal tempNetto = CurrentProduct.Price;
+			tempNetto = Math.Round(tempNetto, 2);
+			TextBoxNetto.Text = tempNetto.ToString();
 			TextBoxNetto.IsEnabled = false;
 			ComboVAT.Text = CurrentProduct.Vat_rate.ToString() + "%";
 			ComboVAT.IsEnabled = false;
@@ -385,8 +383,8 @@ namespace SklepInternetowy.AppWindows
 			tempVAT = tempVAT.Substring(0, tempVAT.Length - 1);
 			decimal tempVAT2 = int.Parse(tempVAT);
 			tempVAT2 /= 100;
-
-			tempBrutto = (tempPrice * tempVAT2) + tempPrice;
+			tempVAT2 += 1;
+			tempBrutto = tempPrice * tempVAT2;
 			tempBrutto = Math.Round(tempBrutto, 2);
 			TextBoxBrutto.Text = tempBrutto.ToString();
 		}
