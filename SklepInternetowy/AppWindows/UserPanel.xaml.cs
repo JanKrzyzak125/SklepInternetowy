@@ -194,8 +194,8 @@ namespace SklepInternetowy
 				{
 					case "Widok zakupionych produktów":
 						actualView = 1;
-						//tempTable = sqlConnect.ShowProduct(tempidUser, "");
-						//UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserBuyed");
+						UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ComboBoxListBuyed.Visibility = Visibility.Visible;
 						ButtonViewListBuyed.Visibility = Visibility.Visible;
 						ButtonAdd2.Visibility = Visibility.Hidden;

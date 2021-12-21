@@ -9,6 +9,7 @@
         Title="WindowProduct" 
         Height="600" Width="1000"
         ResizeMode="CanMinimize"
+        Closing="Window_Closing"
         >
 
     <Window.Resources>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Windows;
@@ -13,12 +14,12 @@ namespace SklepInternetowy
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private string textSearch;
 		private Authentication windowAuthentication;
 		private SQLConnect sqlConnect;
 		private UserPanel userPanel;
 		private AdminPanel adminPanel;
 		private WindowProduct windowProduct;
+		private List<string> templistName;
 
 		/// <summary>
 		/// 
@@ -27,19 +28,26 @@ namespace SklepInternetowy
 		public MainWindow()
 		{
 			InitializeComponent();
+			startApp();
+			ButtonLog.Visibility = Visibility.Visible;
+			ButtonAdmin.Visibility = Visibility.Hidden;
+			ButtonUser.Visibility = Visibility.Hidden;
+			
+		}
+
+		private void startApp() 
+		{
+			templistName = new List<string>();
+			ComboBoxName.ItemsSource = templistName;
 			sqlConnect = new SQLConnect();
-			sqlConnect.Refresh(DateTime.Today,"StartApp");
+			sqlConnect.Refresh(DateTime.Today, "StartApp");
 			this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 			windowAuthentication = new Authentication(this);
 			userPanel = new UserPanel();
 			adminPanel = new AdminPanel();
 			windowProduct = new WindowProduct();
-			ButtonLog.Visibility = Visibility.Visible;
-			ButtonAdmin.Visibility = Visibility.Hidden;
-			ButtonUser.Visibility = Visibility.Hidden;
 			DataTable tempSales = sqlConnect.ReadTable("ViewMainSales");
 			MainGrid.ItemsSource = tempSales.DefaultView;
-			
 		}
 
 
@@ -58,6 +66,7 @@ namespace SklepInternetowy
 			}
 		}
 
+
 		private void Log_Close(object sender, RoutedEventArgs e)
 		{
 			MenuItemLoginOut.IsEnabled = false;
@@ -74,8 +83,26 @@ namespace SklepInternetowy
 		/// </summary>
 		private void Search_Click(object sender, RoutedEventArgs e)
 		{
-			textSearch = TextSearch.Text;
-			//TODO: zrobić wyszukiwanie produktów
+			if (!TextSearch.Text.Equals("") && ComboBoxName.SelectedItem!=null)
+			{
+				string tempTextSearch = TextSearch.Text;
+				string tempName = ComboBoxName.Text;
+				DataRow tempDataRow = (DataRow)MainGrid.ItemsSource;
+			}
+			else 
+			{
+				if (TextSearch.Text.Equals(""))
+				{
+					TextSearch.Background = System.Windows.Media.Brushes.Yellow;
+				}
+				else 
+				{
+					ComboBoxName.Background = System.Windows.Media.Brushes.Yellow;
+				}
+				MessageBox.Show("Proszę o wybranie rodzaju oraz nazwy by wyszukać");
+			}
+			
+
 		}
 
 		private void CloseApp(object sender, RoutedEventArgs e)
@@ -117,85 +144,108 @@ namespace SklepInternetowy
 				case "Id_User":
 				case "Id_Payment":
 				case "Id_TypePayment":
+				case "MaxQuantity":
 				case "Id_Product":
 				case "Image":
+				case "StatusProduct":
+				case "Status":
 				case "StatusTypePayment":
 				case "LimitString":
+				case "Id_Seller":
 				case "Id_RetailSales":
 					e.Column.Visibility = Visibility.Hidden;
 					break;
 				case "Name":
-					e.Column.Header = "Nazwa";
+					e.Column.Header = "Nazwa produktu";
+					e.Column.HeaderStyle = (Style)Resources[2];
+					e.Column.CellStyle= (Style)Resources[0];
+					templistName.Add(e.Column.Header.ToString());
+					e.Column.DisplayIndex = 0;
 					break;
 				case "Description":
 					e.Column.Header = "Opis";
+					templistName.Add(e.Column.Header.ToString());
+					e.Column.DisplayIndex = 1;
 					break;
 				case "Price":
 					e.Column.Header = "Cena bez Vatu";
+					e.Column.DisplayIndex = 2;
 					break;
 				case "Vat_rate":
 					e.Column.Header = "Procent Vat";
+					e.Column.DisplayIndex = 3;
 					break;
 				case "NameCondition":
 					e.Column.Header = "Stan produktu";
-					break;
-				case "MaxQuantity":
-					e.Column.Header = "Maks ilości";
-					break;
-				case "NameParameter":
-					e.Column.Header = "Nazwa parametru dodatkowego";
-					break;
-				case "Parameter":
-					e.Column.Header = "Zawartość dodatkowa parametru";
-					break;
-				case "TypeWarranty":
-					e.Column.Header = "Typ gwarancji";
-					break;
-				case "WarrantyDays":
-					e.Column.Header = "Dni Gwarancji";
-					break;
-				case "NameBrand":
-					e.Column.Header = "Marka";
+					e.Column.DisplayIndex = 4;
 					break;
 				case "NameCategory":
 					e.Column.Header = "Kategoria";
+					templistName.Add(e.Column.Header.ToString());
+					e.Column.DisplayIndex = 5;
 					break;
-				case "PaymentString":
-					e.Column.Header = "Numer";
+				case "NameBrand":
+					e.Column.Header = "Marka";
+					templistName.Add(e.Column.Header.ToString());
+					e.Column.DisplayIndex = 6;
 					break;
-				case "NameBank":
-					e.Column.Header = "Nazwa Banku";
+
+				case "Quantity":
+					e.Column.Header = "Ilość wystawiona";
+					e.Column.DisplayIndex = 7;
 					break;
-				case "TypePayment":
-					e.Column.Header = "Typ Płatności";
+				case "NameParameter":
+					e.Column.Header = "Nazwa parametru dodatkowego";
+					e.Column.DisplayIndex = 8;
 					break;
+				case "Parameter":
+					e.Column.Header = "Zawartość dodatkowa parametru";
+					e.Column.DisplayIndex = 9;
+					break;
+				case "TypeWarranty":
+					e.Column.Header = "Typ gwarancji";
+					e.Column.DisplayIndex = 10;
+					break;
+				case "WarrantyDays":
+					e.Column.Header = "Dni Gwarancji";
+					e.Column.DisplayIndex = 11;
+					break;
+				
+				
 				case "DateStartSales":
 					e.Column.Header = "Data startu sprzedaży";
+					e.Column.DisplayIndex = 12;
 					break;
 				case "DateClosing":
 					e.Column.Header = "Data planowa zakończenia";
+					e.Column.DisplayIndex = 13;
 					break;
 				case "DateClosed":
 					e.Column.Header = "Data zakończenia";
-					break;
-				case "DayDelivery":
-					e.Column.Header = "Dni dostawy";
-					break;
-				case "DayReturn":
-					e.Column.Header = "Czas na zwrot";
-					break;
-				case "Visitors":
-					e.Column.Header = "Ilość odwiedzin";
+
+					int temp= this.Resources.Keys.Count;
+					e.Column.HeaderStyle = (Style)Resources[0];
+
+
+					e.Column.DisplayIndex = 14;
 					break;
 				case "NameDelivery":
 					e.Column.Header = "Sposób Dostawy";
+					e.Column.DisplayIndex = 15;
 					break;
-				case "Quantity":
-					e.Column.Header = "Ilość wystawiona";
+				case "DayDelivery":
+					e.Column.Header = "Dni dostawy";
+					e.Column.DisplayIndex = 16;
 					break;
-				case "StatusProduct":
-					e.Column.Header = "Status Produktu";
+				case "DayReturn":
+					e.Column.Header = "Czas na zwrot";
+					e.Column.DisplayIndex = 17;
 					break;
+				case "Visitors":
+					e.Column.Header = "Ilość odwiedzin";
+					e.Column.DisplayIndex = 18;
+					break;
+
 			}
 		}
 
@@ -213,7 +263,7 @@ namespace SklepInternetowy
 				}
 				windowProduct = new WindowProduct(this, tempObject);
 				windowProduct.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-				windowProduct.Show();
+				windowProduct.ShowDialog();
 			}
 		}
 
@@ -241,5 +291,16 @@ namespace SklepInternetowy
 				ImageProduct.Source = ConvertByteToImage(tempImage);
 			}
 		}
+
+		private void TextBoxIsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			TextBox temp = sender as TextBox;
+
+			if (temp.Text.Equals("Wyszukaj"))
+			{
+				temp.Text = "";
+			}
+		}
+
 	}
 }

@@ -170,13 +170,6 @@ namespace SklepInternetowy.AppWindows
 			tempListQuantity.Add((int)actualSales[1]);
 		}
 
-
-		private void CheckBox_Checked(object sender, RoutedEventArgs e)
-		{
-			//Czy to potrzebne?
-		}
-
-
 		//TODO
 		private void ButtonAcceptEdit_Click(object sender, RoutedEventArgs e)
 		{

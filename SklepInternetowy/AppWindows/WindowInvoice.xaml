@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sklep.AppWindows"
         mc:Ignorable="d"
-        Title="WindowInvoice" Height="450" Width="800">
+        Title="WindowInvoice" Height="800" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="381*"/>
+            <ColumnDefinition Width="419*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="84*"/>
+            <RowDefinition Height="199*"/>
+            <RowDefinition Height="271*"/>
+            <RowDefinition Height="230*"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="1" 
+                BorderBrush="Black" 
+                HorizontalAlignment="Center"
+                Height="179" VerticalAlignment="Center" Width="290" Grid.Row="1">
+            <TextBlock x:Name="TextBlockSeller"  Text="TextBlock" Margin="1,1,-1,-1" />
+        </Border>
+        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="179" Margin="99,8,0,0" VerticalAlignment="Top" Width="268" Grid.Column="1" Grid.Row="1">
+            <TextBlock x:Name="TextBoxBuyed" Text="TextBlock" TextWrapping="Wrap" Margin="1,-1,-1,1"/>
+        </Border>
+        <DataGrid HorizontalAlignment="Left" Height="250" VerticalAlignment="Center" Width="724" Grid.Row="2" Grid.ColumnSpan="2" Margin="38,0,0,0"/>
+        <TextBox x:Name="TextBoxPay" Text="Do Zapłaty:" HorizontalAlignment="Left" Height="59" Margin="74,30,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Grid.Row="3" Grid.ColumnSpan="2"/>
+
     </Grid>
 </Window>

@@ -99,13 +99,13 @@
                Style="{DynamicResource MyLabel}" 
                Grid.Row="3" 
                />
-        <Label Content="Czy faktura" 
+        <Label Content="Przyblizona data zapłaty" 
                Style="{DynamicResource MyLabel}" 
                Grid.Row="4" 
                />
         <Label Content="*Pola obowiązkowe"
                Style="{DynamicResource MyLabel}" 
-               Grid.Row="5" Width="300" Grid.ColumnSpan="2" 
+               Grid.Row="5" 
                />
 
 
@@ -163,10 +163,11 @@
                 Click="ButtonChangePayment_Click"
                 />
         <CheckBox x:Name="CheckBoxInvoice"
-                  Content="Dołączyć?" 
+                  Content="Faktura" 
+                  ToolTip="Czy pokazać fakturę"
                   Style="{DynamicResource MyCheckBox}"
-                  Grid.Column="1" Grid.Row="4"/>
-        
+                  Grid.Column="1" Grid.Row="5"/>
+
         <TextBox x:Name="TextBoxName" 
                  Grid.Column="3"  
                  Text="Produkt" 
@@ -184,7 +185,7 @@
                     IsEnabled="False"
                     Grid.Column="3" Grid.Row="2"  
                     />
-        
+
         <TextBox x:Name="TextBoxNetto" 
                  Grid.Column="3" Grid.Row="3" 
                  Text="Cena" 
@@ -199,9 +200,15 @@
                  />
         <Button Content="Kup" 
                 x:Name="ButtonBuy"
+                Click="ButtonBuy_Click"
                 Style="{DynamicResource MyButton}"
                 Grid.Column="3" Grid.Row="5" 
                 />
+        <DatePicker x:Name="DatePay"
+                    ToolTip="Kiedy zamierzasz zapłacić"
+                    IsEnabled="true"
+                    Grid.Column="1" Grid.Row="4"  
+                    />
 
     </Grid>
 </Window>

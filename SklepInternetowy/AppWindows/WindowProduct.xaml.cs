@@ -96,11 +96,14 @@ namespace SklepInternetowy
 		{
 			int tempIdProduct = currentProduct.Id_Product;
 			int selledQuantity = sqlConnect.AvalilableProducts(tempIdProduct, "AvalilableProducts");
-			int currentAvalilableQuantity = currentProduct.Quantity - selledQuantity;
-
-			for (int i = 1; i <= currentAvalilableQuantity; i++)
+			if (selledQuantity != -1)
 			{
-				tempListQuantity.Add(i);
+				int currentAvalilableQuantity = currentProduct.Quantity - selledQuantity;
+
+				for (int i = 1; i <= currentAvalilableQuantity; i++)
+				{
+					tempListQuantity.Add(i);
+				}
 			}
 
 		}
@@ -144,6 +147,11 @@ namespace SklepInternetowy
 			tempSum = (tempPrice*tempVat)* tempCurrentyQuantity;
 			tempSum = Math.Round(tempSum, 2);
 			TextBoxSumPay.Text = tempSum.ToString();
+		}
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (sqlConnect!=null) sqlConnect.Refresh(DateTime.Today, "StartApp");
 		}
 	}
 }

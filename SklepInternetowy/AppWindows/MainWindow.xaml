@@ -20,8 +20,41 @@
         ResizeMode="CanMinimize"
         Title="Sklep" Height="860" Width="1200" 
         Closing="CloseApp">
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="DataGridColumnHeader" x:Key="MyDataGridColumnHeader">
+
+            <Setter Property="FontFamily" Value="console"/>
+            <Setter Property="Background" Value="Blue"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
+        </Style>
         
+        <Style TargetType="DataGrid" x:Key="MyDataGrid">
+            
+
+        </Style>
+
+        <Style TargetType="DataGridCell" x:Key="MyCell">
+            <Setter Property="Background" Value="#FF20DE20"/>
+            <Setter Property="FontWeight" Value="Heavy"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
+        </Style>
+
+        <DataTemplate x:Key="DataTemplateDateStartSales">
+            <DatePicker SelectedDate="{Binding DateStartSales}" IsEnabled="False"  />
+        </DataTemplate>
+        <DataTemplate x:Key="DateTemplateDateClosing">
+            <DatePicker SelectedDate="{Binding DateClosing}" IsEnabled="False"  />
+        </DataTemplate>
+
+        <DataTemplate x:Key="DateTemplateDateClosed">
+            <DatePicker SelectedDate="{Binding DateClosed}" IsEnabled="False"  />
+        </DataTemplate>
+        
+    </Window.Resources>
+    
+    <Grid>
+
 
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
@@ -30,28 +63,99 @@
 
         </Grid.RowDefinitions>
 
-        <Button Background="{x:Static fw:AccentColors.ImmersiveSystemAccentDark2Brush}" x:Name="ButtonLog" Content="Logowanie"  HorizontalAlignment="Left" Height="43" Margin="1051,0,0,0" VerticalAlignment="Center" Width="149" Click="Log_Open" Cursor="Hand" Grid.Row="1"/>
+        <Button Background="{x:Static fw:AccentColors.ImmersiveSystemAccentDark2Brush}"
+                x:Name="ButtonLog" 
+                Content="Logowanie"  
+                HorizontalAlignment="Left" VerticalAlignment="Center" 
+                Height="43" Margin="1051,0,0,0" Width="149" 
+                Click="Log_Open" 
+                Cursor="Hand" 
+                Grid.Row="1"
+                />
 
 
         <DataGrid x:Name="MainGrid" 
                   HorizontalAlignment="Left" VerticalAlignment="Top" 
                   Height="735" Width="834" Margin="356,10,0,0" 
                   Grid.Row="2"
+                  Style="{StaticResource MaterialDesignDataGrid}"
+                  ItemsSource="{Binding}"
                   MouseDoubleClick="MainGrid_MouseDoubleClick"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False" 
                   MouseEnter="MainGrid_MouseEnter"
                   IsReadOnly="True"
-                  AutoGeneratingColumn="mainDataGrid_AutoGeneratingColumn"
-                  />
+                  AutoGenerateColumns="false"
+                  >
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn Header="Nazwa produktu" 
+                                Binding="{Binding Name}"
+                                    HeaderStyle="{StaticResource MaterialDesignDataGridColumnHeader}"
+                                    CellStyle="{StaticResource MaterialDesignDataGridCell}"
+                                    />
+                <DataGridTextColumn Header="Opis"
+                                Binding="{Binding Description}" />
+                <DataGridTextColumn Header="Cena bez vatu"
+                                    Binding="{Binding Price}"
+                                    CellStyle="{StaticResource MyCell}"
+                                    HeaderStyle="{StaticResource MyDataGridColumnHeader}"
+                                    TextBlock.FontSize="20"
+                                    TextBlock.Foreground="Aqua"
+                                    />
+                <DataGridTextColumn Header="Procent Vat"
+                                    Binding="{Binding Vat_rate}"/>
+                <DataGridTextColumn Header="Stan Produktu"
+                                    Binding="{Binding NameCondition}"/>
+                <DataGridTextColumn Header="Kategoria"
+                                    Binding="{Binding Kategoria}"/>
+                <DataGridTextColumn Header="Marka"
+                                    Binding="{Binding NameBrand}"/>
+                <DataGridTextColumn Header="Ilość produktu"
+                                    Binding="{Binding Quantity}"/>
+
+                <DataGridTextColumn Header="Nazwa parametru"
+                                    Binding="{Binding NameParameter}"/>
+                <DataGridTextColumn Header="Dodatkowy parametr"
+                                    Binding="{Binding Parameter}"/>
+                <DataGridTextColumn Header="Typ gwarancji"
+                                    Binding="{Binding TypeWarranty}"/>
+                <DataGridTextColumn Header="Gwarancja ilość"
+                                    Binding="{Binding WarrantyDays}"/>
+                <DataGridTextColumn Header="Dostawa"
+                                    Binding="{Binding NameDelivery}"/>
+                <DataGridTextColumn Header="Dni dostawy"
+                                    Binding="{Binding DayDelivery}"/>
+                <DataGridTextColumn Header="Czas na zwrot"
+                                    Binding="{Binding DayReturn}"/>
+
+                <DataGridTemplateColumn Header="Data startu"
+                                        CellTemplate="{StaticResource DataTemplateDateStartSales}"
+                />
+                <DataGridTemplateColumn Header="Data zakończenia"
+                                        CellTemplate="{StaticResource DateTemplateDateClosing}"
+                                        />
+                <DataGridTemplateColumn Header="Zakończone w "
+                                    CellTemplate="{StaticResource DateTemplateDateClosed}"
+                                    TextBlock.Foreground="red"
+                                    />
+
+                <DataGridTextColumn Header="Odwiedziny"
+                                    Binding="{Binding Visitors}"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
         <TextBox x:Name="TextSearch"
                  Background="Aqua" 
                  Text="Wyszukaj" 
                  HorizontalAlignment="Left" VerticalAlignment="Center"
-                 Height="38" Width="590" 
-                 Margin="10,0,0,0" 
+                 Height="38" Width="416" 
+                 Margin="184,0,0,0" 
                  TextWrapping="Wrap"
-                 Grid.Row="1" />
+                 Grid.Row="1" Cursor="IBeam"
+                 IsKeyboardFocusWithinChanged="TextBoxIsKeyboardFocusWithinChanged"
+                 />
         <Button Style="{StaticResource ButtonRoundAccentRevealStyle}"  
                 x:Name="Search" 
                 Content="Szukaj" 
@@ -70,19 +174,37 @@
                 />
 
 
-        <Image x:Name="ImageProduct" HorizontalAlignment="Left" Height="143" Margin="66,54,0,0" Grid.Row="2" VerticalAlignment="Top" Width="179"/>
+        <Image x:Name="ImageProduct"
+               Stretch="Fill"
+               
+               HorizontalAlignment="Left" VerticalAlignment="Top"
+               Height="143" Margin="66,54,0,0" Width="179" 
+               Grid.Row="2"  />
+
 
 
 
         <DockPanel>
-            <Menu DockPanel.Dock="Top" Height="26" Margin="0,0,0,0">
+            <Menu DockPanel.Dock="Top" 
+                  Height="26" 
+                  Margin="0,0,0,0"
+                  Background="AliceBlue"
+                  >
                 <MenuItem Header="Profil" Height="26">
-                    <MenuItem x:Name="MenuItemLogin" Header="Zaloguj się" IsEnabled="True" Click="Log_Open"/>
-                    <MenuItem x:Name="MenuItemLoginOut" Header="Wyloguj się" IsEnabled="False" Click="Log_Close"/>
-                    <MenuItem Header="Close" Click="CloseApp"/>
+                    <MenuItem x:Name="MenuItemLogin" 
+                              Header="Zaloguj się" 
+                              IsEnabled="True" 
+                              Click="Log_Open"
+                              />
+                    <MenuItem x:Name="MenuItemLoginOut" 
+                              Header="Wyloguj się" 
+                              IsEnabled="False" 
+                              Click="Log_Close"
+                              />
+                    <MenuItem Header="Close" 
+                              Click="CloseApp"
+                              />
                 </MenuItem>
-                <MenuItem Header="Widok" Height="26"/>
-                <MenuItem Header="_Pomoc" Height="26"/>
             </Menu>
 
         </DockPanel>
@@ -94,8 +216,13 @@
             Height="44" Margin="879,0,0,0" Width="167"
             Grid.Row="1" 
             Cursor="Hand"/>
-        
-        
+        <ComboBox x:Name="ComboBoxName" 
+                  HorizontalAlignment="Left" 
+                  Height="31"  Margin="10,10,0,0"   Width="160"
+                  Grid.Row="1" 
+                  />
+
+
     </Grid>
 
 

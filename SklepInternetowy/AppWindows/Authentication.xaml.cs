@@ -14,8 +14,8 @@ namespace SklepInternetowy
 		private Registration registrationWindow;
 		private SQLConnect sqlConnect;
 		private MainWindow mainWindow;
-
 		private readonly string[] namePersmision = { "Użytkownik", "Administrator" };
+
 		public Authentication(MainWindow tempMainWindow)
 		{
 			InitializeComponent();
@@ -79,6 +79,11 @@ namespace SklepInternetowy
 			}
 		}
 
+		/// <summary>
+		/// Methods,which making hash transforms from string
+		/// </summary>
+		/// <param name="password"></param>
+		/// <returns></returns>
 		public byte[] makeHash(string password)
 		{
 			using (SHA256 sha256Hash = SHA256.Create())
@@ -110,11 +115,15 @@ namespace SklepInternetowy
 
 			if (registrationWindow.IsVisible == false && okey == 1)
 			{
+				NickText.Background = System.Windows.Media.Brushes.Green;
+				PasswordBox.Background = System.Windows.Media.Brushes.Green;
 				registrationWindow = new Registration(tempNick, this);
 				registrationWindow.Show();
 			}
 			else
 			{
+				NickText.Background=System.Windows.Media.Brushes.Red;
+				PasswordBox.Background= System.Windows.Media.Brushes.Red;
 				MessageBox.Show("Nie ma takiego nicku lub złe hasło podane");
 			}
 		}

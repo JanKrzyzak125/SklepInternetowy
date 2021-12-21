@@ -174,6 +174,29 @@ namespace SklepInternetowy
 			}
 		}
 
+		public object[] ShowUser(int valueId, string commandText) 
+		{
+			object[] temp;
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (SqlDataAdapter da = new SqlDataAdapter())
+				{
+					using (da.SelectCommand = con.CreateCommand())
+					{
+						da.SelectCommand.CommandText = commandText;
+						da.SelectCommand.CommandType = CommandType.StoredProcedure;
+						da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
+						DataTable ds = new DataTable();
+						da.Fill(ds);
+						temp = ds.Rows[0].ItemArray;
+						con.Close();
+						return temp;
+					}
+				}
+			}
+		}
+
 
 		public DataTable ShowRating(int valueId, string commandText)
 		{
@@ -191,6 +214,32 @@ namespace SklepInternetowy
 						da.Fill(ds);
 						con.Close();
 						return ds;
+					}
+				}
+			}
+		}
+
+		public List<object[]> Show(int valueId, string commandText) 
+		{
+			List<object[]> tempList= new List<object[]>();
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (SqlDataAdapter da = new SqlDataAdapter())
+				{
+					using (da.SelectCommand = con.CreateCommand())
+					{
+						da.SelectCommand.CommandText = commandText;
+						da.SelectCommand.CommandType = CommandType.StoredProcedure;
+						da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
+						DataTable ds = new DataTable();
+						da.Fill(ds);
+						foreach (DataRow item in ds.Rows) 
+						{
+							tempList.Add(item.ItemArray);
+						}
+						con.Close();
+						return tempList;
 					}
 				}
 			}
@@ -284,7 +333,7 @@ namespace SklepInternetowy
 
 		public int AvalilableProducts(int valueId,string commandText) 
 		{
-			int resultVar;
+			int resultVar=-1;
 			using (con = new SqlConnection(sqlConnection))
 			{
 				con.Open();
@@ -299,7 +348,7 @@ namespace SklepInternetowy
 					};
 					cmd.Parameters.Add(retValParam);
 					cmd.ExecuteScalar();
-					resultVar = (int)retValParam.Value;
+					if (retValParam.Value.Equals("")) resultVar = (int)retValParam.Value;
 				}
 				con.Close();
 				return resultVar;
@@ -688,7 +737,10 @@ namespace SklepInternetowy
 			}
 		}
 
-		public void AddTransation(int valuePayment, int valueIdUser, string commandText)
+		public void AddTransation(int valuePayment, int valueIdUser,DateTime valueDateTransation,
+								  decimal valueSumPay, int valueIdRetailSalers,int valueQuantity , 
+								  int valueIsInvoice ,DateTime valueDateOfMakeInvoice,DateTime valueDateOfPay,
+								  DateTime valueDateOfService ,int valueCodeInvoice , string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -699,6 +751,15 @@ namespace SklepInternetowy
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.AddWithValue("@valuePayment", valuePayment);
 					cmd.Parameters.AddWithValue("@valueIdUser", valueIdUser);
+					cmd.Parameters.AddWithValue("@valueDateTransation", valueDateTransation);
+					cmd.Parameters.AddWithValue("@valueSumPay", valueSumPay);
+					cmd.Parameters.AddWithValue("@valueIdRetailSalers", valueIdRetailSalers);
+					cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
+					cmd.Parameters.AddWithValue("@valueIsInvoice", valueIsInvoice);
+					cmd.Parameters.AddWithValue("@valueDateOfMakeInvoice", valueDateOfMakeInvoice);
+					cmd.Parameters.AddWithValue("@valueDateOfPay", valueDateOfPay);
+					cmd.Parameters.AddWithValue("@valueDateOfService", valueDateOfService);
+					cmd.Parameters.AddWithValue("@valueCodeInvoice", valueCodeInvoice);
 					cmd.ExecuteNonQuery();
 				}
 				con.Close();

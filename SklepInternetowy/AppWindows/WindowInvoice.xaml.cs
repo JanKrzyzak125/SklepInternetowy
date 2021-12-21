@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SklepInternetowy.Classes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,7 +18,24 @@ namespace Sklep.AppWindows
 	/// </summary>
 	public partial class WindowInvoice : Window
 	{
+		private object[] currentSeller;
+	 	private Product currentProduct;
+		private object[] currrentInvoice;
+
 		public WindowInvoice()
+		{
+			InitializeComponent();
+		}
+
+		public WindowInvoice(object[] tempSellerUser, Product product, object[] invoice) 
+		{
+			InitializeComponent();
+			currentSeller = tempSellerUser;
+			currrentInvoice = invoice;
+
+		}
+
+		public WindowInvoice(int invoice)
 		{
 			InitializeComponent();
 		}

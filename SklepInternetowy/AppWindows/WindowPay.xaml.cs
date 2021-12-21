@@ -1,4 +1,5 @@
-﻿using SklepInternetowy.AppWindows;
+﻿using Sklep.AppWindows;
+using SklepInternetowy.AppWindows;
 using SklepInternetowy.Classes;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace SklepInternetowy
 		private List<string> tempListNumberPayment;
 		private SQLConnect sqlConnect;
 		private WindowPayment windowPayment;
+		private WindowInvoice windowInvoice;
 
 		public WindowPay()
 		{
@@ -29,6 +31,7 @@ namespace SklepInternetowy
 		public WindowPay(Product product, int valueSelectQuantity)
 		{
 			InitializeComponent();
+			windowInvoice = new WindowInvoice();
 			windowPayment = new WindowPayment();
 			sqlConnect = new SQLConnect();
 			this.Title = "Kupowanie produktu";
@@ -46,7 +49,7 @@ namespace SklepInternetowy
 
 		}
 
-		private void makeComboBox() 
+		private void makeComboBox()
 		{
 			tempListPayment = new List<object[]>();
 			tempListNamePayment = new List<string>();
@@ -54,7 +57,7 @@ namespace SklepInternetowy
 
 			foreach (DataRow row in sqlConnect.ReadTable("ValuesTypePayment").Rows)
 			{
-				if ((int)row[2] == 1) 
+				if ((int)row[2] == 1)
 				{
 					tempListNamePayment.Add(row.ItemArray[0].ToString());
 				}
@@ -88,15 +91,79 @@ namespace SklepInternetowy
 
 		private void ButtonBuy_Click(object sender, RoutedEventArgs e)
 		{
-			
+			if (ComboBoxPayment.SelectedItem != null && ComboBoxNumberPayment.SelectedItem != null)
+			{
+				int tempIdUser = Users.LogUser.Id_User;
+				int tempPayment = -1;
+				string tempNamePayment = ComboBoxPayment.Text;
+				string tempNumberPayment = ComboBoxNumberPayment.Text;
+				foreach (object[] item in tempListPayment)
+				{
+					if ((item[6].ToString()).Equals(tempNamePayment) && (item[3].ToString()).Equals(tempNumberPayment))
+					{
+						tempPayment = (int)item[1];
+					}
+				}
+				decimal tempSumPay;
+				decimal.TryParse(TextBoxBrutto.Text, out tempSumPay);
+				tempSumPay = Math.Round(tempSumPay, 2);
+				DateTime tempToday = DateTime.Now;
+				int tempRetailSalers = currentProduct.Id_RetailSales;
+				int tempQuantity = currentSelectQuantity;
+				int tempIsInvoice = 0;
+				if (CheckBoxInvoice.IsChecked==true) tempIsInvoice = 1;
+				DateTime tempDayPay =(DateTime) DatePay.SelectedDate;
+				DateTime tempDateDelivery = (DateTime)DateDelivery.SelectedDate;
 
-			
+				if (tempPayment != -1)
+				{
+					sqlConnect.AddTransation(tempPayment, tempIdUser, tempToday, tempSumPay, tempRetailSalers, tempQuantity,
+											tempIsInvoice, tempToday, tempDayPay, tempDateDelivery, 1, "AddTransation");
+					MessageBox.Show("Udało się zakupić");
+
+					if (tempIsInvoice == 1) 
+					{
+						MessageBox.Show("Za chwile się włączy faktura");
+						if (windowInvoice.IsVisible == false) 
+						{
+							int idSeller=currentProduct.Id_Seller;
+							object[] tempSeller = sqlConnect.ShowUser(idSeller,"ViewSeller");
+							List<object[]> tempListInvoice = sqlConnect.Show(tempIdUser, "ViewCurrentInvoice");
+							object[] tempInvoice = tempListInvoice[tempListInvoice.Count-1];
+							foreach (object[] valueInvoice  in tempListInvoice) 
+							{
+								if ((DateTime)valueInvoice[3]==tempToday&&
+									(int)valueInvoice[12]==tempRetailSalers && (int)valueInvoice[13]==tempQuantity)
+								{
+									tempInvoice = valueInvoice;
+								}
+							}
+
+
+							windowInvoice = new WindowInvoice(tempSeller,currentProduct, tempInvoice);
+							windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+							windowInvoice.Show();
+						}
+
+
+					}
+					this.Close();
+				}
+				else
+				{
+					MessageBox.Show("Problem z płatnością");
+				}
+			}
+			else
+			{
+				MessageBox.Show("Wypełnij wszystkie potrzebne pola");
+			}
 		}
 
 
 		private void ButtonChangeAddPayment_Click(object sender, RoutedEventArgs e)
 		{
-			if (!windowPayment.IsVisible) 
+			if (!windowPayment.IsVisible)
 			{
 				int tempId = Users.LogUser.Id_User;
 				windowPayment = new WindowPayment(tempId);
@@ -149,16 +216,14 @@ namespace SklepInternetowy
 
 		private void ComboBoxPayment_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
-			ComboBox cmb = sender as ComboBox;
 			tempListNumberPayment = new List<string>();
-			if (e.AddedItems.Count!=0)
+			if (e.AddedItems.Count != 0)
 			{
 				string tempText = e.AddedItems[0].ToString();
-
 				for (int i = 0; i < tempListPayment.Count; i++)
 				{
 					string tempName = tempListPayment[i][6].ToString();
-					if (tempText.Equals(tempName)) 
+					if (tempText.Equals(tempName))
 					{
 						tempListNumberPayment.Add(tempListPayment[i][3].ToString());
 					}
@@ -166,7 +231,5 @@ namespace SklepInternetowy
 				ComboBoxNumberPayment.ItemsSource = tempListNumberPayment;
 			}
 		}
-
-		
 	}
 }
