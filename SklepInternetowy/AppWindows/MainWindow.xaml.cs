@@ -24,15 +24,13 @@ namespace SklepInternetowy
 		/// <summary>
 		/// 
 		/// </summary>
-
 		public MainWindow()
 		{
 			InitializeComponent();
 			startApp();
 			ButtonLog.Visibility = Visibility.Visible;
 			ButtonAdmin.Visibility = Visibility.Hidden;
-			ButtonUser.Visibility = Visibility.Hidden;
-			
+			ButtonUser.Visibility = Visibility.Hidden;		
 		}
 
 		private void startApp() 
@@ -48,6 +46,32 @@ namespace SklepInternetowy
 			windowProduct = new WindowProduct();
 			DataTable tempSales = sqlConnect.ReadTable("ViewMainSales");
 			MainGrid.ItemsSource = tempSales.DefaultView;
+
+
+			for (int i = 0; i < MainGrid.Columns.Count; i++)
+			{
+				string temp= MainGrid.Columns[i].Header.ToString();
+			  	if(deleteNameColumn(temp)) templistName.Add(temp);
+			} 
+			
+		}
+
+		private bool deleteNameColumn(string column) 
+		{
+			switch (column) 
+			{
+				case "Nazwa produktu":
+				case "Kategoria":
+				case "Marka":
+				case "Nazwa parametru":
+				case "Typ gwarancji":
+				case "Dostawa":
+					return true;
+				default:
+					return false;
+			}
+
+			
 		}
 
 
@@ -137,117 +161,6 @@ namespace SklepInternetowy
 			Application.Current.Shutdown();
 		}
 
-		private void mainDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-		{
-			switch (e.PropertyName)
-			{
-				case "Id_User":
-				case "Id_Payment":
-				case "Id_TypePayment":
-				case "MaxQuantity":
-				case "Id_Product":
-				case "Image":
-				case "StatusProduct":
-				case "Status":
-				case "StatusTypePayment":
-				case "LimitString":
-				case "Id_Seller":
-				case "Id_RetailSales":
-					e.Column.Visibility = Visibility.Hidden;
-					break;
-				case "Name":
-					e.Column.Header = "Nazwa produktu";
-					e.Column.HeaderStyle = (Style)Resources[2];
-					e.Column.CellStyle= (Style)Resources[0];
-					templistName.Add(e.Column.Header.ToString());
-					e.Column.DisplayIndex = 0;
-					break;
-				case "Description":
-					e.Column.Header = "Opis";
-					templistName.Add(e.Column.Header.ToString());
-					e.Column.DisplayIndex = 1;
-					break;
-				case "Price":
-					e.Column.Header = "Cena bez Vatu";
-					e.Column.DisplayIndex = 2;
-					break;
-				case "Vat_rate":
-					e.Column.Header = "Procent Vat";
-					e.Column.DisplayIndex = 3;
-					break;
-				case "NameCondition":
-					e.Column.Header = "Stan produktu";
-					e.Column.DisplayIndex = 4;
-					break;
-				case "NameCategory":
-					e.Column.Header = "Kategoria";
-					templistName.Add(e.Column.Header.ToString());
-					e.Column.DisplayIndex = 5;
-					break;
-				case "NameBrand":
-					e.Column.Header = "Marka";
-					templistName.Add(e.Column.Header.ToString());
-					e.Column.DisplayIndex = 6;
-					break;
-
-				case "Quantity":
-					e.Column.Header = "Ilość wystawiona";
-					e.Column.DisplayIndex = 7;
-					break;
-				case "NameParameter":
-					e.Column.Header = "Nazwa parametru dodatkowego";
-					e.Column.DisplayIndex = 8;
-					break;
-				case "Parameter":
-					e.Column.Header = "Zawartość dodatkowa parametru";
-					e.Column.DisplayIndex = 9;
-					break;
-				case "TypeWarranty":
-					e.Column.Header = "Typ gwarancji";
-					e.Column.DisplayIndex = 10;
-					break;
-				case "WarrantyDays":
-					e.Column.Header = "Dni Gwarancji";
-					e.Column.DisplayIndex = 11;
-					break;
-				
-				
-				case "DateStartSales":
-					e.Column.Header = "Data startu sprzedaży";
-					e.Column.DisplayIndex = 12;
-					break;
-				case "DateClosing":
-					e.Column.Header = "Data planowa zakończenia";
-					e.Column.DisplayIndex = 13;
-					break;
-				case "DateClosed":
-					e.Column.Header = "Data zakończenia";
-
-					int temp= this.Resources.Keys.Count;
-					e.Column.HeaderStyle = (Style)Resources[0];
-
-
-					e.Column.DisplayIndex = 14;
-					break;
-				case "NameDelivery":
-					e.Column.Header = "Sposób Dostawy";
-					e.Column.DisplayIndex = 15;
-					break;
-				case "DayDelivery":
-					e.Column.Header = "Dni dostawy";
-					e.Column.DisplayIndex = 16;
-					break;
-				case "DayReturn":
-					e.Column.Header = "Czas na zwrot";
-					e.Column.DisplayIndex = 17;
-					break;
-				case "Visitors":
-					e.Column.Header = "Ilość odwiedzin";
-					e.Column.DisplayIndex = 18;
-					break;
-
-			}
-		}
 
 		private void MainGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{

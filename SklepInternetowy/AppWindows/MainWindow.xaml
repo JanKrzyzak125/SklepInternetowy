@@ -18,15 +18,14 @@
         Background="CornflowerBlue"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="Sklep" Height="860" Width="1200" 
+        Title="Sklep"
+        Height="860" Width="1200" 
         Closing="CloseApp">
     <Window.Resources>
         <Style TargetType="DataGridColumnHeader" x:Key="MyDataGridColumnHeader">
 
-            <Setter Property="FontFamily" Value="console"/>
-            <Setter Property="Background" Value="Blue"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Algerian"/>
+
+
         </Style>
         
         <Style TargetType="DataGrid" x:Key="MyDataGrid">
@@ -35,9 +34,9 @@
         </Style>
 
         <Style TargetType="DataGridCell" x:Key="MyCell">
-            <Setter Property="Background" Value="#FF20DE20"/>
+            <Setter Property="Background" Value="Gold"/>
             <Setter Property="FontWeight" Value="Heavy"/>
-            <Setter Property="FontFamily" Value="Algerian"/>
+            
         </Style>
 
         <DataTemplate x:Key="DataTemplateDateStartSales">
@@ -90,7 +89,7 @@
             <DataGrid.Columns>
                 
                 <DataGridTextColumn Header="Nazwa produktu" 
-                                Binding="{Binding Name}"
+                                    Binding="{Binding Name}"
                                     HeaderStyle="{StaticResource MaterialDesignDataGridColumnHeader}"
                                     CellStyle="{StaticResource MaterialDesignDataGridCell}"
                                     />
@@ -108,7 +107,7 @@
                 <DataGridTextColumn Header="Stan Produktu"
                                     Binding="{Binding NameCondition}"/>
                 <DataGridTextColumn Header="Kategoria"
-                                    Binding="{Binding Kategoria}"/>
+                                    Binding="{Binding NameCategory}"/>
                 <DataGridTextColumn Header="Marka"
                                     Binding="{Binding NameBrand}"/>
                 <DataGridTextColumn Header="Ilość produktu"

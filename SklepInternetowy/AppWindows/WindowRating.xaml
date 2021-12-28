@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="WindowRating" 
         Height="450" Width="400"
-        Closing="Window_Closing"
         >
 
     <Window.Resources>
@@ -26,10 +25,10 @@
 
         </Style>
 
-        <Style TargetType="TextBlock" x:Key="MyTextBlock">
+        <Style TargetType="TextBlock" x:Key="MyTextBox">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="170"/> 
+            <Setter Property="Height" Value="170"/>
             <Setter Property="Width" Value="250"/>
         </Style>
 
@@ -94,10 +93,10 @@
                Style="{DynamicResource MyLabel}" 
                Grid.Row="4" 
                />
-        <TextBlock x:Name="TextBlockComment" 
+        <TextBox x:Name="TextBlockComment" 
                    Grid.Column="1" Grid.RowSpan="2" 
                    Text="" 
-                   Style="{DynamicResource MyTextBlock}"
+                   Style="{DynamicResource MyTextBox}"
                    />
         <Button x:Name="ButtonComment" Content="Zatwierdz" 
                 Grid.Column="1" Grid.Row="4" 
@@ -108,6 +107,11 @@
                   Grid.Column="1" Grid.Row="3" 
                   Style="{DynamicResource MyCheckBox}"
                   />
+        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="34,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
+        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="59,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
+        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="83,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
+        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="107,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
+        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="139,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
 
     </Grid>
 </Window>

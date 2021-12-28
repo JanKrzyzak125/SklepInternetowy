@@ -22,7 +22,6 @@ namespace SklepInternetowy.AppWindows
 		private int currentIdUser;
 		private object[] currentComment;
 		private SQLConnect sqlConnect;
-		private WindowProduct windowProduct;
 
 		public WindowRating()
 		{
@@ -39,30 +38,26 @@ namespace SklepInternetowy.AppWindows
 			FillingDataGrid();
 		}
 
-		public WindowRating(WindowProduct tempWindowProduct, int valueIdProduct, int valueIdUser)
+		public WindowRating(int valueIdProduct, int valueIdUser)
 		{
 			InitializeComponent();
 			sqlConnect = new SQLConnect();
 			currentIdProduct = valueIdProduct;
 			currentIdUser = valueIdUser;
-			windowProduct = tempWindowProduct;
 			DataGridRating.Visibility = Visibility.Hidden;
 			ShowElements();
-			tempWindowProduct.IsEnabled = false;
 			ButtonComment.Click -= ButonEditComment_Click;
 			ButtonComment.Click += ButtonAddComment_Click;
 		}
 
-		public WindowRating(WindowProduct tempWindowProduct, int valueIdProduct, int valueIdUser, object[] tempComment)
+		public WindowRating(int valueIdProduct, int valueIdUser, object[] tempComment)
 		{
 			InitializeComponent();
 			sqlConnect = new SQLConnect();
 			currentIdProduct = valueIdProduct;
 			currentIdUser = valueIdUser;
-			windowProduct = tempWindowProduct;
 			DataGridRating.Visibility = Visibility.Hidden;
 			ShowElements();
-			tempWindowProduct.IsEnabled = false;
 			currentComment = tempComment;
 			ButtonComment.Click -= ButtonAddComment_Click;
 			ButtonComment.Click += ButonEditComment_Click;
@@ -119,10 +114,5 @@ namespace SklepInternetowy.AppWindows
 		{
 		}
 
-
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			if (windowProduct != null) windowProduct.IsEnabled = true;
-		}
 	}
 }

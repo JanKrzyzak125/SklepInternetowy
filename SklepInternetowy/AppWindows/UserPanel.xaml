@@ -76,13 +76,18 @@
         />
         <Button Content="Edycja profilu" 
                 Style="{DynamicResource MyButton}"
-                Click="ClickChangeProfile" Cursor="Hand" Grid.Row="3" Grid.Column="3"
+                Width="100"
+                Click="ClickChangeProfile" 
+                Cursor="Pen" 
+                Grid.Row="3" Grid.Column="3"
                 />
-        <Button Content="Firma" 
+        <Button Content="Edycja Firma" 
                 x:Name="ButtonCompany"
                 Style="{DynamicResource MyButton}"
                 Click="CompanyClick" 
-                Cursor="Hand" Grid.Row="2" Grid.Column="3"
+                Width="100"
+                Cursor="Pen" 
+                Grid.Row="2" Grid.Column="3"
                 />
 
         <DockPanel Grid.ColumnSpan="4">
@@ -93,32 +98,15 @@
                     <MenuItem Header="Close"/>
                 </MenuItem>
                 <MenuItem Header="Widok" Height="26"/>
-                <MenuItem Header="_Pomoc" Height="26"/>
+                <MenuItem Header="Dodaj" Height="26"/>
             </Menu>
 
         </DockPanel>
-        <ComboBox x:Name="ComboBoxListBuyed" 
-                  Visibility="Hidden" 
-                  Background="Violet"
-                  Style="{DynamicResource MyComboBox}"
-                  Grid.Row="2"
-                  ToolTip="Pokazuje liste produktów konkretnej sprzedaży" Grid.Column="1"
-                  />
-        <Button x:Name="ButtonViewListBuyed"
-                Content="Zobacz wybraną listę" 
-                Style="{DynamicResource MyButton}"
-                Grid.Row="3" Grid.Column="2"
-                Click="ViewListBuyed_Click"
-                Visibility="Hidden"
-                />
         <Button x:Name="ButtonAdd2"
-                Content="Dodaj Sprzedaż" 
+                Content="Dodaj 2" 
                 Style="{DynamicResource MyButton}"
-                Grid.Row="2" Grid.Column="2" 
+                Grid.Row="3" Grid.Column="2" 
                 Cursor="Hand" 
-                Click="AddRetailSales_Click"
-                Visibility="Hidden"
-     
                 />
     </Grid>
 </Window>

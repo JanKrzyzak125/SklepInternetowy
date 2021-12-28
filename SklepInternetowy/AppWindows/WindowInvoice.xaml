@@ -5,29 +5,140 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sklep.AppWindows"
         mc:Ignorable="d"
-        Title="WindowInvoice" Height="800" Width="800">
-    <Grid>
+        Title="WindowInvoice" 
+        Height="800" Width="800"
+        ResizeMode="CanMinimize"
+        >
+    <Window.Resources>
+        <Style TargetType="Border" x:Key="MyBorder">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="220"/>
+            <Setter Property="Width" Value="280"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+
+        </Style>
+        <Style TargetType="Button" x:Key="MyButton">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="MyTextBox">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="FontWeight" Value="ExtraBlack"/>
+            <Setter Property="TextOptions.TextHintingMode" Value="Animated"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="381*"/>
-            <ColumnDefinition Width="419*"/>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="400*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="84*"/>
-            <RowDefinition Height="199*"/>
-            <RowDefinition Height="271*"/>
-            <RowDefinition Height="230*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="256*"/>
+
+            <RowDefinition Height="269*"/>
+            <RowDefinition Height="118*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
-        <Border BorderThickness="1" 
-                BorderBrush="Black" 
-                HorizontalAlignment="Center"
-                Height="179" VerticalAlignment="Center" Width="290" Grid.Row="1">
-            <TextBlock x:Name="TextBlockSeller"  Text="TextBlock" Margin="1,1,-1,-1" />
+        <Border Style="{StaticResource MyBorder}" 
+                Grid.Row="2"
+                >
+            <TextBox x:Name="TextBoxSeller" 
+                     Text="Strona kupująca" 
+                     />
         </Border>
-        <Border BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="179" Margin="99,8,0,0" VerticalAlignment="Top" Width="268" Grid.Column="1" Grid.Row="1">
-            <TextBlock x:Name="TextBoxBuyed" Text="TextBlock" TextWrapping="Wrap" Margin="1,-1,-1,1"/>
+        <Border Style="{StaticResource MyBorder}" 
+                Grid.Column="1" Grid.Row="2"
+                >
+            <TextBox x:Name="TextBoxBuyed" 
+                     Text="Strona sprzedająca"
+                     />
         </Border>
-        <DataGrid HorizontalAlignment="Left" Height="250" VerticalAlignment="Center" Width="724" Grid.Row="2" Grid.ColumnSpan="2" Margin="38,0,0,0"/>
-        <TextBox x:Name="TextBoxPay" Text="Do Zapłaty:" HorizontalAlignment="Left" Height="59" Margin="74,30,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Grid.Row="3" Grid.ColumnSpan="2"/>
+        <DataGrid x:Name="DataGridProducts"
+                  HorizontalAlignment="Left" VerticalAlignment="Center" 
+                  ItemsSource="{Binding}"
+                  Height="250" Width="636" 
+                  Grid.Row="3" Grid.ColumnSpan="2"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False" 
+                  IsReadOnly="True"
+                  
+                  AutoGenerateColumns="False" Margin="82,0,0,0"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa Produktu"
+                                    Binding="{Binding Name}"
+                                    />
+                <DataGridTextColumn Header="Cena Netto"
+                                    Binding="{Binding Price}"
+                                    />
+                <DataGridTextColumn Header="Ilość"
+                                    Binding="{Binding QuantityBuyed}"
+                                    />
+                <DataGridTextColumn Header="Vat(%)"
+                                    Binding="{Binding Vat_rate}"
+                                    />
+                <DataGridTextColumn x:Name="TextSumBrutto" Header="Suma do zapłaty Brutto"
+                                    Binding="{Binding SumPay}"
+                                    
+                                    />
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="TextBoxPay" 
+                 Style="{StaticResource MyTextBox}"
+                 Text="Do Zapłaty:" 
+                 Height="59"  Width="316" 
+                 Grid.Row="4"
+                 />
+        <Button Content="Drukuj" 
+                Style="{StaticResource MyButton}"
+                x:Name="ButtonPrint"
+                Grid.Column="1"  Grid.Row="6"  
+                Click="Button_Click"
+                Height="48" Width="130" 
+                />
+        <TextBox x:Name="TextBoxNameInvoice" 
+                 Style="{StaticResource MyTextBox}" 
+                 Text="Faktura nr." 
+                 Width="360" Height="64" 
+                 Grid.RowSpan="2"
+                 />
+        <TextBox x:Name="TextBoxDateMade"  
+                 Style="{StaticResource MyTextBox}"
+                 Grid.Column="1" 
+                 Text="Wystawiono w dniu: "
+                 Width="254" Height="33"
+                 />
+        <TextBox x:Name="TextBoxDateMaking" 
+                 Style="{StaticResource MyTextBox}"
+                 Grid.Column="1" Grid.Row="1" 
+                 Text="Dzień wykonania: " 
+                 Width="254" Height="33"/>
+        <TextBox x:Name="TextBoxPayment" 
+                 Style="{StaticResource MyTextBox}"
+                 Grid.Column="1" Grid.Row="4" 
+                 Text="Sposób Płatności:Termin Płatności:Numer Konta:" 
+                 Height="82" Width="320"
+                 />
+
 
     </Grid>
 </Window>

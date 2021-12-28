@@ -50,8 +50,6 @@
             </Style>
 
             <Style TargetType="TextBox" x:Key="MyTextBox">
-
-
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Height" Value="33"/>

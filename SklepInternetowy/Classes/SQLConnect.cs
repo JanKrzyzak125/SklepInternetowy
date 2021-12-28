@@ -100,7 +100,7 @@ namespace SklepInternetowy
 					cmd.CommandText = commandText;
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.AddWithValue("@valueNick", valueNick);
-					cmd.Parameters.AddWithValue("@valueHash",valueHash);
+					cmd.Parameters.AddWithValue("@valueHash", valueHash);
 					var retValParam = new SqlParameter("resultVar", SqlDbType.Int)
 					{
 						Direction = ParameterDirection.ReturnValue
@@ -174,7 +174,7 @@ namespace SklepInternetowy
 			}
 		}
 
-		public object[] ShowUser(int valueId, string commandText) 
+		public object[] ShowUser(int valueId, string commandText)
 		{
 			object[] temp;
 			using (con = new SqlConnection(sqlConnection))
@@ -219,9 +219,9 @@ namespace SklepInternetowy
 			}
 		}
 
-		public List<object[]> Show(int valueId, string commandText) 
+		public List<object[]> Show(int valueId, string commandText)
 		{
-			List<object[]> tempList= new List<object[]>();
+			List<object[]> tempList = new List<object[]>();
 			using (con = new SqlConnection(sqlConnection))
 			{
 				con.Open();
@@ -234,7 +234,7 @@ namespace SklepInternetowy
 						da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
 						DataTable ds = new DataTable();
 						da.Fill(ds);
-						foreach (DataRow item in ds.Rows) 
+						foreach (DataRow item in ds.Rows)
 						{
 							tempList.Add(item.ItemArray);
 						}
@@ -331,9 +331,9 @@ namespace SklepInternetowy
 
 		}
 
-		public int AvalilableProducts(int valueId,string commandText) 
+		public int AvalilableProducts(int valueId, string commandText)
 		{
-			int resultVar=-1;
+			int resultVar = -1;
 			using (con = new SqlConnection(sqlConnection))
 			{
 				con.Open();
@@ -416,7 +416,7 @@ namespace SklepInternetowy
 			}
 		}
 
-		public void AddVisitor(int valueId,int valueIdProduct, string commandText) 
+		public void AddVisitor(int valueId, int valueIdProduct, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -737,10 +737,10 @@ namespace SklepInternetowy
 			}
 		}
 
-		public void AddTransation(int valuePayment, int valueIdUser,DateTime valueDateTransation,
-								  decimal valueSumPay, int valueIdRetailSalers,int valueQuantity , 
-								  int valueIsInvoice ,DateTime valueDateOfMakeInvoice,DateTime valueDateOfPay,
-								  DateTime valueDateOfService ,int valueCodeInvoice , string commandText)
+		public void AddTransation(int valuePayment, int valueIdUser, DateTime valueDateTransation,
+								  decimal valueSumPay, int valueIdRetailSalers, int valueQuantity,
+								  int valueIsInvoice, DateTime valueDateOfMakeInvoice, DateTime valueDateOfPay,
+								  DateTime valueDateOfService, int valueCodeInvoice, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -1266,6 +1266,33 @@ namespace SklepInternetowy
 			}
 		}
 
+		public object[] Value(int valueId, string commandText)
+		{
+			object[] tempObject;
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (SqlDataAdapter da = new SqlDataAdapter())
+				{
+					using (da.SelectCommand = con.CreateCommand())
+					{
+						da.SelectCommand.CommandText = commandText;
+						da.SelectCommand.CommandType = CommandType.StoredProcedure;
+						da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
+						DataTable ds = new DataTable();
+						da.Fill(ds);
+						if (ds.Rows.Count == 0)
+						{
+							return null;
+						}
+						tempObject = ds.Rows[0].ItemArray;
+						con.Close();
+						return tempObject;
+					}
+				}
+			}
+		}
+
 		public object[] valueProduct(int valueId, string valueName, string commandText)
 		{
 			object[] tempObject;
@@ -1289,6 +1316,29 @@ namespace SklepInternetowy
 						tempObject = ds.Rows[0].ItemArray;
 						con.Close();
 						return tempObject;
+					}
+				}
+
+			}
+		}
+
+		public DataTable valueProduct2(int valueId, string valueName, string commandText)
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (SqlDataAdapter da = new SqlDataAdapter())
+				{
+					using (da.SelectCommand = con.CreateCommand())
+					{
+						da.SelectCommand.CommandText = commandText;
+
+						da.SelectCommand.Parameters.AddWithValue("@valueId", valueId);
+						da.SelectCommand.Parameters.AddWithValue("@valueName", valueName);
+						DataTable ds = new DataTable();
+						da.Fill(ds);
+						con.Close();
+						return ds;
 					}
 				}
 

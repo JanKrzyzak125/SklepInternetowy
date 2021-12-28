@@ -1,4 +1,5 @@
-﻿using SklepInternetowy.AppWindows;
+﻿using Sklep.AppWindows;
+using SklepInternetowy.AppWindows;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows;
@@ -12,7 +13,6 @@ namespace SklepInternetowy
 	/// </summary>
 	public partial class UserPanel : Window
 	{
-		//private WindowProduct windowProducts;
 		private List<string> tempListViews;
 		private SQLConnect sqlConnect;
 		private Registration windowEditProfile;
@@ -22,7 +22,8 @@ namespace SklepInternetowy
 		private WindowSales windowSales;
 		private MainWindow windowMainWindow;
 		private WindowPayment windowPayment;
-
+		private WindowInvoice windowInvoice;
+		private WindowRating windowRating;
 
 		public List<string> TempListViews
 		{
@@ -37,21 +38,20 @@ namespace SklepInternetowy
 		public UserPanel(MainWindow WindowMainWindow)
 		{
 			InitializeComponent();
+			ButtonAdd.Visibility = Visibility.Hidden;
+			ButtonAdd2.Visibility = Visibility.Hidden;
 			sqlConnect = new SQLConnect();
+			windowInvoice = new WindowInvoice();
 			windowEditProfile = new Registration((Authentication)null);
 			newProductWindow = new NewProductWindow();
 			windowRegistrationCompany = new RegistrationCompany();
+			windowRating = new WindowRating();
 			windowSales = new WindowSales();
 			windowPayment = new WindowPayment();
 			AddListViews();
 			if (Users.LogUser != null)
 			{
-				if (Users.LogUser.Company == null)
-					ButtonCompany.Content = "Dodaj firmę";
-				else
-				{
-					ButtonCompany.Content = "Edytuj firmę";
-				}
+				ButtonCompany.Content= Users.LogUser.Company == null? "Dodaj firmę": "Edytuj firmę";
 			}
 			actualView = -1;
 			windowMainWindow = WindowMainWindow;
@@ -82,6 +82,7 @@ namespace SklepInternetowy
 			tempListViews.Add("Widok dodanych produktów");
 			tempListViews.Add("Widok sprzedaży");
 			tempListViews.Add("Widok form płatności");
+			tempListViews.Add("Widok sprzedanych");
 
 		}
 
@@ -178,8 +179,6 @@ namespace SklepInternetowy
 				case "StatusProduct":
 					e.Column.Header = "Status Produktu";
 					break;
-
-		
 			}
 		}
 
@@ -196,57 +195,59 @@ namespace SklepInternetowy
 						actualView = 1;
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserBuyed");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
-						ComboBoxListBuyed.Visibility = Visibility.Visible;
-						ButtonViewListBuyed.Visibility = Visibility.Visible;
-						ButtonAdd2.Visibility = Visibility.Hidden;
-						ButtonAdd.Click -= AddRetailSales_Click;
-						ButtonAdd.Click -= AddPayment_Click;
-						ButtonAdd.Click -= AddProduct_Click;
+						ButtonAdd2.Visibility = Visibility.Visible;
+						ButtonAdd.Visibility = Visibility.Visible;
+						DeleteClick();
 						ButtonAdd.Click += AddInvoice_Click;
 						ButtonAdd.Content = "Dodaj Fakturę";
 						ButtonAdd.ToolTip = "Musisz wybrać sprzedaż do jakiej chcesz dodać fakturę";
+						ButtonAdd2.Click -= AddRetailSales_Click;
+						ButtonAdd2.Click += AddRating_Click;
+						ButtonAdd2.Content = "Dodaj/edytuj Ocenę";
+						ButtonAdd2.ToolTip = "Dodajesz lub edytujesz ocenę";
 						break;
 					case "Widok dodanych produktów":
 						actualView = 2;
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUsersProducts");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
-						ComboBoxListBuyed.Visibility = Visibility.Hidden;
 						ButtonAdd2.Visibility = Visibility.Visible;
-						ButtonViewListBuyed.Visibility = Visibility.Hidden;
-						ButtonAdd.Click -= AddRetailSales_Click;
-						ButtonAdd.Click -= AddPayment_Click;
-						ButtonAdd.Click -= AddInvoice_Click;
+						ButtonAdd.Visibility = Visibility.Visible;
+						DeleteClick();
 						ButtonAdd.Click += AddProduct_Click;
 						ButtonAdd.Content = "Dodaj Produkt";
 						ButtonAdd.ToolTip = "Dodaje Produkt";
+						ButtonAdd2.Click -= AddRating_Click;
+						ButtonAdd2.Click += AddRetailSales_Click;
+						ButtonAdd2.Content = "Dodaj Sprzedaż";
+						ButtonAdd2.ToolTip = "Dodajesz nową sprzedaż po wybraniu produktu";
+
 						break;
 					case "Widok sprzedaży":
 						actualView = 3;
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserSalers");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
-						ComboBoxListBuyed.Visibility = Visibility.Hidden;
 						ButtonAdd2.Visibility = Visibility.Hidden;
-						ButtonViewListBuyed.Visibility = Visibility.Hidden;
-						ButtonAdd.Click -= AddProduct_Click;
-						ButtonAdd.Click -= AddPayment_Click;
-						ButtonAdd.Click -= AddInvoice_Click;
-						ButtonAdd.Click += AddRetailSales_Click;
-						ButtonAdd.Content = "??";
-						ButtonAdd.ToolTip = "Musisz zaznaczyć jeszcze na widoku jaki produkt chcesz";
+						ButtonAdd.Visibility = Visibility.Hidden;
 						break;
 					case "Widok form płatności":
 						actualView = 4;
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserPayment");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
-						ComboBoxListBuyed.Visibility = Visibility.Hidden;
-						ButtonViewListBuyed.Visibility = Visibility.Hidden;
 						ButtonAdd2.Visibility = Visibility.Hidden;
-						ButtonAdd.Click -= AddRetailSales_Click;
-						ButtonAdd.Click -= AddProduct_Click;
-						ButtonAdd.Click -= AddInvoice_Click;
+						ButtonAdd.Visibility = Visibility.Visible;
+						DeleteClick();
 						ButtonAdd.Click += AddPayment_Click;
 						ButtonAdd.Content = "Dodaj Płatność";
 						ButtonAdd.ToolTip = "Dodaje Płatność";
+						break;
+
+					case "Widok sprzedanych":
+						actualView = 5;
+						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserSell");
+						UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						ButtonAdd2.Visibility = Visibility.Hidden;
+						ButtonAdd.Visibility= Visibility.Hidden;
+						DeleteClick();
 						break;
 					default:
 						break;
@@ -256,6 +257,15 @@ namespace SklepInternetowy
 			{
 				MessageBox.Show("Proszę wybrać z listy widok");
 			}
+		}
+
+		private void DeleteClick() 
+		{
+			ButtonAdd.Click -= AddRetailSales_Click;
+			ButtonAdd.Click -= AddProduct_Click;
+			ButtonAdd.Click -= AddInvoice_Click;
+			ButtonAdd.Click -= AddPayment_Click;
+			
 		}
 
 		private void ClickChangeProfile(object sender, RoutedEventArgs e)
@@ -273,7 +283,14 @@ namespace SklepInternetowy
 			switch (actualView)
 			{
 				case 1:
-
+					if (windowInvoice.IsVisible == false && UsersDataGrid.SelectedItem != null)
+					{
+						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
+						object[] tempObject = temp.Row.ItemArray as object[];
+						windowInvoice = new WindowInvoice(tempObject,false, temp);
+						windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+						windowInvoice.ShowDialog();
+					}
 
 					break;
 				case 2:
@@ -319,6 +336,16 @@ namespace SklepInternetowy
 						windowPayment.Show();
 					}
 					break;
+				case 5:
+					if(windowInvoice.IsVisible==false && UsersDataGrid.SelectedItem != null) 
+					{
+						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
+						object[] tempObject = temp.Row.ItemArray as object[];
+						windowInvoice = new WindowInvoice(tempObject,true, temp);
+						windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+						windowInvoice.ShowDialog();
+					}
+					break;
 				default:
 					MessageBox.Show("Brak wybranego widoku");
 					break;
@@ -340,6 +367,33 @@ namespace SklepInternetowy
 
 		private void AddInvoice_Click(object sender, RoutedEventArgs e)
 		{
+
+		}
+
+		private void AddRating_Click(object sender,RoutedEventArgs e ) 
+		{
+			if (windowRating.IsVisible == false && UsersDataGrid.SelectedItem!=null)
+			{
+				DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
+				object[] tempObject = temp.Row.ItemArray as object[];
+				int tempIdProduct = (int)tempObject[16];
+				int tempIdUser = Users.LogUser.Id_User;
+				List<object[]> tempComment = sqlConnect.Show(tempIdUser, "ValueComment");
+				if (tempComment.Count==0) 
+				{
+					windowRating = new WindowRating(tempIdProduct, tempIdUser);
+				}
+				else 
+				{
+					windowRating = new WindowRating(tempIdProduct, tempIdUser, tempComment[0]);
+				}
+				windowRating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowRating.ShowDialog();			
+			}
+			else 
+			{
+				MessageBox.Show("Musissz wybrać sprzedaż, która chcesz ocenić");
+			}
 
 		}
 
@@ -380,12 +434,5 @@ namespace SklepInternetowy
 				windowMainWindow.IsEnabled = true;
 		}
 
-		private void ViewListBuyed_Click(object sender, RoutedEventArgs e)
-		{
-			if (ComboBoxListBuyed.SelectedItem != null ) 
-			{
-
-			}
-		}
 	}
 }
