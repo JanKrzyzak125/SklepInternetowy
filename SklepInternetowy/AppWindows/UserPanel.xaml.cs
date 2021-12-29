@@ -51,7 +51,7 @@ namespace SklepInternetowy
 			AddListViews();
 			if (Users.LogUser != null)
 			{
-				ButtonCompany.Content= Users.LogUser.Company == null? "Dodaj firmę": "Edytuj firmę";
+				ButtonCompany.Content = Users.LogUser.Company == null ? "Dodaj firmę" : "Edytuj firmę";
 			}
 			actualView = -1;
 			windowMainWindow = WindowMainWindow;
@@ -246,7 +246,7 @@ namespace SklepInternetowy
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserSell");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ButtonAdd2.Visibility = Visibility.Hidden;
-						ButtonAdd.Visibility= Visibility.Hidden;
+						ButtonAdd.Visibility = Visibility.Hidden;
 						DeleteClick();
 						break;
 					default:
@@ -259,13 +259,13 @@ namespace SklepInternetowy
 			}
 		}
 
-		private void DeleteClick() 
+		private void DeleteClick()
 		{
 			ButtonAdd.Click -= AddRetailSales_Click;
 			ButtonAdd.Click -= AddProduct_Click;
 			ButtonAdd.Click -= AddInvoice_Click;
 			ButtonAdd.Click -= AddPayment_Click;
-			
+
 		}
 
 		private void ClickChangeProfile(object sender, RoutedEventArgs e)
@@ -287,7 +287,7 @@ namespace SklepInternetowy
 					{
 						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 						object[] tempObject = temp.Row.ItemArray as object[];
-						windowInvoice = new WindowInvoice(tempObject,false, temp);
+						windowInvoice = new WindowInvoice(tempObject, false, temp);
 						windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 						windowInvoice.ShowDialog();
 					}
@@ -331,17 +331,17 @@ namespace SklepInternetowy
 					{
 						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 						object[] tempObject = temp.Row.ItemArray as object[];
-						windowPayment = new WindowPayment(this,tempObject);
+						windowPayment = new WindowPayment(this, tempObject);
 						windowPayment.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 						windowPayment.Show();
 					}
 					break;
 				case 5:
-					if(windowInvoice.IsVisible==false && UsersDataGrid.SelectedItem != null) 
+					if (windowInvoice.IsVisible == false && UsersDataGrid.SelectedItem != null)
 					{
 						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 						object[] tempObject = temp.Row.ItemArray as object[];
-						windowInvoice = new WindowInvoice(tempObject,true, temp);
+						windowInvoice = new WindowInvoice(tempObject, true, temp);
 						windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 						windowInvoice.ShowDialog();
 					}
@@ -370,27 +370,27 @@ namespace SklepInternetowy
 
 		}
 
-		private void AddRating_Click(object sender,RoutedEventArgs e ) 
+		private void AddRating_Click(object sender, RoutedEventArgs e)
 		{
-			if (windowRating.IsVisible == false && UsersDataGrid.SelectedItem!=null)
+			if (windowRating.IsVisible == false && UsersDataGrid.SelectedItem != null)
 			{
 				DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 				object[] tempObject = temp.Row.ItemArray as object[];
 				int tempIdProduct = (int)tempObject[16];
 				int tempIdUser = Users.LogUser.Id_User;
 				List<object[]> tempComment = sqlConnect.Show(tempIdUser, "ValueComment");
-				if (tempComment.Count==0) 
+				if (tempComment.Count == 0)
 				{
 					windowRating = new WindowRating(tempIdProduct, tempIdUser);
 				}
-				else 
+				else
 				{
 					windowRating = new WindowRating(tempIdProduct, tempIdUser, tempComment[0]);
 				}
 				windowRating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-				windowRating.ShowDialog();			
+				windowRating.ShowDialog();
 			}
-			else 
+			else
 			{
 				MessageBox.Show("Musissz wybrać sprzedaż, która chcesz ocenić");
 			}

@@ -36,7 +36,7 @@ namespace Sklep.AppWindows
 			currentUser = Users.LogUser;
 			currrentInvoice = invoice;
 			currentProduct = product;
-			this.Name = "Podgląd faktury";
+			this.Title = "Podgląd faktury";
 		}
 
 
@@ -50,7 +50,7 @@ namespace Sklep.AppWindows
 			currentUser = Users.LogUser;
 			int tempIdUser2 = isSeller ? (int)invoice[2] : (int)invoice[15];
 			currentUser2 = sqlConnect.Value(tempIdUser2,"ValueUser");
-			this.Name = "Podgląd faktury";
+			this.Title = "Podgląd faktury";
 
 			string temp="";
 			for (int i = 0; i < currentUser2.Length; i++)

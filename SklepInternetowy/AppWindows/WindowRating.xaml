@@ -25,7 +25,7 @@
 
         </Style>
 
-        <Style TargetType="TextBlock" x:Key="MyTextBox">
+        <Style TargetType="TextBox" x:Key="MyTextBox">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="170"/>
@@ -45,8 +45,11 @@
         <Style TargetType="CheckBox" x:Key="MyCheckBox">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="130"/>
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="Content" Value=""/>
+            <EventSetter Event="Checked" Handler="CheckBoxStars_Checked"/>
+            <EventSetter Event="Unchecked" Handler="CheckBoxStars_Unchecked"/>
 
         </Style>
     </Window.Resources>
@@ -72,7 +75,24 @@
                   Margin="10,10,9,10" 
                   Grid.RowSpan="5"
                   IsReadOnly="True"
-            />
+                  AutoGenerateColumns="False"
+                  
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Komentarz" 
+                                    Binding="{Binding Comment}"
+                                    
+                                    />
+                <DataGridTextColumn Header="Ocena"
+                                    Binding="{Binding Stars}"
+                                    />
+                <DataGridTextColumn Header="Status"
+                                    Binding="{Binding Status}"/>
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
         <Label Content="Komenatrz" 
                x:Name="LabelComment"
                Style="{DynamicResource MyLabel}"
@@ -93,25 +113,64 @@
                Style="{DynamicResource MyLabel}" 
                Grid.Row="4" 
                />
-        <TextBox x:Name="TextBlockComment" 
+        <TextBox x:Name="TextBoxComment" 
                    Grid.Column="1" Grid.RowSpan="2" 
                    Text="" 
                    Style="{DynamicResource MyTextBox}"
                    />
-        <Button x:Name="ButtonComment" Content="Zatwierdz" 
+        <Button x:Name="ButtonComment" 
+                Content="Zatwierdź" 
                 Grid.Column="1" Grid.Row="4" 
                 Style="{DynamicResource MyButton}"
                 />
         <CheckBox x:Name="CheckBoxStatus" 
                   Content="Dezaktywuj" 
                   Grid.Column="1" Grid.Row="3" 
-                  Style="{DynamicResource MyCheckBox}"
+                  IsEnabled="false"
+                  TextBlock.FontStretch="Medium"
+                  TextBlock.Foreground="Red"
+                  TextBlock.FontStyle="Oblique"
+                  TextBlock.TextAlignment="Center"
+                  Style="{DynamicResource MyCheckBox}" Width="200"
                   />
-        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="34,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
-        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="59,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
-        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="83,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
-        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="107,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
-        <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="139,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="19"/>
+        <CheckBox x:Name="CheckBox1"
+                  Style="{StaticResource MyCheckBox}" 
+                  Grid.Column="1" 
+                  Grid.Row="2" 
+                  Margin="-100,0,0,0"
+                  />
+        <CheckBox x:Name="CheckBox2" 
+                  Style="{StaticResource MyCheckBox}" 
+                  Grid.Column="1" 
+                  Grid.Row="2" 
+                  
+                  Margin="-50,0,0,0"
+                  />
+        <CheckBox x:Name="CheckBox3" 
+                  Style="{StaticResource MyCheckBox}" 
+                  Grid.Column="1" 
+                  Grid.Row="2" 
+                  Margin="0,0,0,0"
+                  />
+        <CheckBox x:Name="CheckBox4" 
+                  Style="{StaticResource MyCheckBox}" 
+                  Grid.Column="1" 
+                  Grid.Row="2" 
+                  Margin="50,0,0,0"
+                  />
+        <CheckBox x:Name="CheckBox5" 
+                  Style="{StaticResource MyCheckBox}" 
+                  Grid.Column="1" 
+                  Grid.Row="2" 
+                  Margin="100,0,0,0"
+                  />
+        <TextBox x:Name="TextBoxStars"
+                 Style="{StaticResource MyTextBox}"
+                 Grid.Column="1" Grid.Row="2"
+                 Height="25" Margin="0,62,0,0"
+                 TextAlignment="Center"
+                 Text="Ocena=" 
+                 VerticalAlignment="Top" />
 
     </Grid>
 </Window>

@@ -474,7 +474,7 @@ namespace SklepInternetowy
 			}
 		}
 
-		public void AddComment(string valueComment, int valueStars, int valueIdUser, int valueIdProduct, string commandText)
+		public void AddComment(string valueComment, Int16 valueStars, int valueIdUser, int valueIdProduct, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
 			{
@@ -893,7 +893,7 @@ namespace SklepInternetowy
 					cmd.CommandText = commandText;
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.AddWithValue("@valueIdComment", valueIdComment);
-					cmd.Parameters.AddWithValue("@valueCommenty", valueComment);
+					cmd.Parameters.AddWithValue("@valueComment", valueComment);
 					cmd.Parameters.AddWithValue("@valueStars", valueStars);
 					cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
 					cmd.ExecuteNonQuery();
