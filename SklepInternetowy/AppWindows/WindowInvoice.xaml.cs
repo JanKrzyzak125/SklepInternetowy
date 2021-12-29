@@ -58,6 +58,7 @@ namespace Sklep.AppWindows
 				temp += tempName[i] + currentUser2[i].ToString()+"\n";
 			}
 
+
 			string temp2 = "";
 			temp2 += tempName[0] + currentUser.Name.ToString() + "\n";
 			temp2 += tempName[1] + currentUser.Surname.ToString() + "\n";
