@@ -7,76 +7,15 @@
         xmlns:local="clr-namespace:SklepInternetowy.AppWindows"
         xmlns:MyControl="clr-namespace:WpfControlLibrary;assembly=WpfControlLibrary"
         xmlns:Material="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+        xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+        xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
         mc:Ignorable="d"
         Title="WindowSales" 
         Height="450" Width="600"
         ResizeMode="CanMinimize"
         Closing="WindowSales_Closing"
-        
+        Background="AliceBlue"
         >
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="Label" x:Key="MyLabel">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Height" Value="33"/>
-                <Setter Property="Width" Value="130"/>
-            </Style>
-
-            <Style TargetType="DatePicker" x:Key="MyDatePicker">
-                <Setter Property="CalendarStyle" Value="{StaticResource MaterialDesignDatePickerCalendarPortrait}" />
-                <Setter Property="IsTodayHighlighted" Value="True" />
-                <Setter Property="SelectedDateFormat" Value="Short" />
-                <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
-                <Setter Property="BorderThickness" Value="0 0 0 1" />
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Height" Value="33"/>
-                <Setter Property="Width" Value="130"/>
-            </Style>
-
-            <Style TargetType="ComboBox" x:Key="MyComboBox">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Height" Value="33"/>
-                <Setter Property="Width" Value="130"/>
-
-            </Style>
-
-            <Style TargetType="TextBox" x:Key="MyTextBox">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Height" Value="33"/>
-                <Setter Property="Width" Value="130"/>
-            </Style>
-
-            <Style TargetType="Button" x:Key="MyButton">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Height" Value="33"/>
-                <Setter Property="Width" Value="130"/>
-
-                <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
-                <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
-
-            </Style>
-
-            <Style TargetType="CheckBox" x:Key="MyCheckBox">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Height" Value="20"/>
-                <Setter Property="Width" Value="130"/>
-
-            </Style>
-        </ResourceDictionary>
-    </Window.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="73*"/>
@@ -159,7 +98,6 @@
                   Grid.Column="1"       
                   Grid.Row="0"
                   />
-        <!-- Style="{StaticResource MaterialDesignDatePicker}" -->
         <DatePicker Grid.Column="1" 
                     x:Name="DateStart"
                     Style="{StaticResource MyDatePicker}"
@@ -202,13 +140,5 @@
                     Grid.Row="5"
                     IsEnabled="false"
                     />
-
-
-
-        <!-- <MyControl:UserControl1 Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,25,0,0" Grid.Row="3" VerticalAlignment="Top" Width="101"/>
--->
-
-
-
     </Grid>
 </Window>

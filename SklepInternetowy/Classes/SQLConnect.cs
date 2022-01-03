@@ -27,7 +27,6 @@ namespace SklepInternetowy
 			sqlConnection = App.SQLConnection;
 		}
 
-
 		public List<object> ReadUserPermision(int valueId, string commandText)
 		{
 			List<object> tempList = new List<object>();
@@ -275,37 +274,6 @@ namespace SklepInternetowy
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="commandText"></param>
-		/// <returns></returns>
-		public List<object> ReadTable2(string commandText)
-		{
-			List<object> tempList = new List<object>();
-			using (con = new SqlConnection(sqlConnection))
-			{
-				con.Open();
-				using (SqlDataAdapter da = new SqlDataAdapter())
-				{
-					using (da.SelectCommand = con.CreateCommand())
-					{
-						da.SelectCommand.CommandText = commandText;
-						DataTable ds = new DataTable();
-						da.Fill(ds);
-						foreach (DataRow item in ds.Rows)
-						{
-							tempList.Add(item.ItemArray);
-
-						}
-
-						con.Close();
-						return tempList;
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="valueIdUser"></param>
 		/// <param name="commandText"></param>
 		/// <returns></returns>
@@ -512,7 +480,7 @@ namespace SklepInternetowy
 			}
 		}
 
-
+		/*
 		public void AddInvoice(int valueIdTransation, DataSetDateTime valueDateOfMakeInvoice,
 							   DataSetDateTime valueDateOfPay, DataSetDateTime valueDateOfService,
 								int valueCodeInvoice, int valueStatus, string commandText)
@@ -535,7 +503,7 @@ namespace SklepInternetowy
 				con.Close();
 			}
 		}
-
+		*/
 		/// <summary>
 		/// 
 		/// </summary>
@@ -717,26 +685,6 @@ namespace SklepInternetowy
 			}
 		}
 
-
-		public void AddProductsBuyed(int valueIdRetailSalers, int valueIdTransation, int valueQuantity,
-									string commandText)
-		{
-			using (con = new SqlConnection(sqlConnection))
-			{
-				con.Open();
-				using (var cmd = con.CreateCommand())
-				{
-					cmd.CommandText = commandText;
-					cmd.CommandType = CommandType.StoredProcedure;
-					cmd.Parameters.AddWithValue("@valueIdRetailSalers", valueIdRetailSalers);
-					cmd.Parameters.AddWithValue("@valueIdTransation", valueIdTransation);
-					cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
-					cmd.ExecuteNonQuery();
-				}
-				con.Close();
-			}
-		}
-
 		public void AddTransation(int valuePayment, int valueIdUser, DateTime valueDateTransation,
 								  decimal valueSumPay, int valueIdRetailSalers, int valueQuantity,
 								  int valueIsInvoice, DateTime valueDateOfMakeInvoice, DateTime valueDateOfPay,
@@ -765,7 +713,7 @@ namespace SklepInternetowy
 				con.Close();
 			}
 		}
-
+		/*
 		public int valueStringBank(int valueId, string commandText)
 		{
 			using (con = new SqlConnection(sqlConnection))
@@ -789,6 +737,8 @@ namespace SklepInternetowy
 			}
 
 		}
+
+		*/
 
 		public object[] valueCompany(int valueIdCompany, string commandText)
 		{
@@ -1133,6 +1083,7 @@ namespace SklepInternetowy
 				con.Close();
 			}
 		}
+
 		public void Update(int valueId, string valuePaymentString, string valueNameBank, int valueStatus,
 						   string commandText)
 		{
@@ -1208,27 +1159,6 @@ namespace SklepInternetowy
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="valueId"></param>
-		/// <param name="commandText"></param>
-		public void Delete(int valueId, string commandText)
-		{
-			using (con = new SqlConnection(sqlConnection))
-			{
-				con.Open();
-				using (var cmd = con.CreateCommand())
-				{
-					cmd.CommandText = commandText;
-					cmd.CommandType = CommandType.StoredProcedure;
-					cmd.Parameters.AddWithValue("@valueId", valueId);
-					cmd.ExecuteNonQuery();
-				}
-				con.Close();
-			}
-		}
-
 		public List<string> listTables()
 		{
 			using (con = new SqlConnection(sqlConnection))
@@ -1292,7 +1222,7 @@ namespace SklepInternetowy
 				}
 			}
 		}
-
+		/*
 		public object[] valueProduct(int valueId, string valueName, string commandText)
 		{
 			object[] tempObject;
@@ -1344,5 +1274,6 @@ namespace SklepInternetowy
 
 			}
 		}
+		*/
 	}
 }

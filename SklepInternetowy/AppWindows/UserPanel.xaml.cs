@@ -32,7 +32,7 @@ namespace SklepInternetowy
 
 		public UserPanel()
 		{
-			InitializeComponent();
+			//InitializeComponent();
 		}
 
 		public UserPanel(MainWindow WindowMainWindow)

@@ -12,6 +12,7 @@
         ResizeMode="CanMinimize"
         Height="450" Width="1200"
     >
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="73*"/>
@@ -40,6 +41,7 @@
         <Label Content="Marka Produktu*" 
                HorizontalAlignment="Center"  VerticalAlignment="Center" 
                Height="28" Width="151"
+               Style="{StaticResource MyLabel}"
                Grid.Row="1" 
                />
         <Label Content="Kategoria*" 

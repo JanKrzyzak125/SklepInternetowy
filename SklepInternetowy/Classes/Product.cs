@@ -35,7 +35,6 @@ namespace SklepInternetowy.Classes
 		private byte[] image;
 		private int statusProduct;
 		private object[] currentProduct;
-		//private object[] objectProduct;
 
 		public int Id_Product
 		{

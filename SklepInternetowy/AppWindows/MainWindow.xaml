@@ -15,13 +15,14 @@
         fw:PointerTracker.Enabled="True"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         WindowStyle="SingleBorderWindow"
-        Background="CornflowerBlue"
+        
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
         Title="Sklep"
         Height="860" Width="1200" 
         Closing="CloseApp">
     <Window.Resources>
+      
         <Style TargetType="DataGridColumnHeader" x:Key="MyDataGridColumnHeader">
 
 
