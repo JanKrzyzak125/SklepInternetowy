@@ -7,39 +7,16 @@
         mc:Ignorable="d"
         Title="WindowRating" 
         Height="450" Width="400"
+        Background="AliceBlue"
         >
 
     <Window.Resources>
-        <Style TargetType="Label" x:Key="MyLabel">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="100"/>
-        </Style>
-
-        <Style TargetType="ComboBox" x:Key="MyComboBox">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="130"/>
-
-        </Style>
-
         <Style TargetType="TextBox" x:Key="MyTextBox">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="170"/>
             <Setter Property="Width" Value="250"/>
-        </Style>
-
-        <Style TargetType="Button" x:Key="MyButton">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
-
+            <Setter Property="Background" Value="#FF41DAD5"/>
         </Style>
 
         <Style TargetType="CheckBox" x:Key="MyCheckBox">
@@ -69,7 +46,6 @@
         </Grid.RowDefinitions>
 
         <DataGrid x:Name="DataGridRating"
-                  AutoGeneratingColumn="dataGridRating_AutoGeneratingColumn"
                   Visibility="Visible" 
                   Grid.ColumnSpan="2" 
                   Margin="10,10,9,10" 
@@ -95,33 +71,35 @@
         </DataGrid>
         <Label Content="Komenatrz" 
                x:Name="LabelComment"
-               Style="{DynamicResource MyLabel}"
+               Style="{StaticResource MyLabel}"
                 Grid.Row="0"
                />
 
         <Label Content="Gwiazdki" 
                x:Name="LabelStars"
-               Style="{DynamicResource MyLabel}"
+               Style="{StaticResource MyLabel}"
                Grid.Row="2"/>
         <Label Content="Status" 
                x:Name="LabelStatus"
-               Style="{DynamicResource MyLabel}" 
+               Style="{StaticResource MyLabel}" 
                Grid.Row="3" 
                />
         <Label Content="Akceptuj"
                x:Name="LabelAccept"
-               Style="{DynamicResource MyLabel}" 
+               Style="{StaticResource MyLabel}" 
                Grid.Row="4" 
                />
         <TextBox x:Name="TextBoxComment" 
                    Grid.Column="1" Grid.RowSpan="2" 
                    Text="" 
-                   Style="{DynamicResource MyTextBox}"
+                   Style="{StaticResource MyTextBox}"
                    />
         <Button x:Name="ButtonComment" 
                 Content="Zatwierdź" 
                 Grid.Column="1" Grid.Row="4" 
-                Style="{DynamicResource MyButton}"
+                Height="33"            
+                Width="200"
+                Style="{StaticResource MyButton}"
                 />
         <CheckBox x:Name="CheckBoxStatus" 
                   Content="Dezaktywuj" 
@@ -131,7 +109,8 @@
                   TextBlock.Foreground="Red"
                   TextBlock.FontStyle="Oblique"
                   TextBlock.TextAlignment="Center"
-                  Style="{DynamicResource MyCheckBox}" Width="200"
+                  Style="{StaticResource MyCheckBox}" 
+                  Width="200"
                   />
         <CheckBox x:Name="CheckBox1"
                   Style="{StaticResource MyCheckBox}" 
@@ -167,10 +146,11 @@
         <TextBox x:Name="TextBoxStars"
                  Style="{StaticResource MyTextBox}"
                  Grid.Column="1" Grid.Row="2"
-                 Height="25" Margin="0,62,0,0"
+                 Height="25" 
                  TextAlignment="Center"
+                 IsReadOnly="True"
                  Text="Ocena=" 
-                 VerticalAlignment="Top" />
+                 VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>

@@ -9,6 +9,7 @@
         Height="750" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Closing="WindowAdminClosing"
+        Background="AliceBlue"
         >
     <Grid Margin="0,0,0,-6">
         <Grid.RowDefinitions>
@@ -26,16 +27,19 @@
                   />
 
         <Button Content="Wyświetl" 
+                Style="{StaticResource MyButton}"
                 HorizontalAlignment="Left"  VerticalAlignment="Top"
                 Height="43" Width="186" Margin="10,126,0,0"
                 Click="ChangeCommandClick" Grid.Row="1"
                 />
         <Label Content="Wybierz tabele" 
+               Style="{StaticResource MyLabel}"
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="25" Margin="10,39,0,0" Width="186" 
                Grid.Row="1"
                />
         <ComboBox x:Name="ComboBoxTabs" 
+                  Style="{StaticResource MyComboBox}"
                   HorizontalAlignment="Left" VerticalAlignment="Top"
                   Height="43" Margin="10,64,0,0" Width="186" 
                   Grid.Row="1" 

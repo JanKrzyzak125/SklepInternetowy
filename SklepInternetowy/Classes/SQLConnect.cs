@@ -1026,6 +1026,33 @@ namespace SklepInternetowy
 			}
 		}
 
+		public void UpdateRetailSales(int valueId, int valueIdProduct, int valueQuantity, DateTime valueDateStartSales,
+								   DateTime valueDateClosing, DateTime valueDateClosed, int valueDayReturn,
+								   int valueDayDelivery, string valueNameDelivery, int valueVisitors, int valueStatus, string commandText)
+		{
+			using (con = new SqlConnection(sqlConnection))
+			{
+				con.Open();
+				using (var cmd = con.CreateCommand())
+				{
+					cmd.CommandText = commandText;
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.AddWithValue("@valueId", valueId);
+					cmd.Parameters.AddWithValue("@valueIdProduct", valueIdProduct);
+					cmd.Parameters.AddWithValue("@valueQuantity", valueQuantity);
+					cmd.Parameters.AddWithValue("@valueDateStartSales", valueDateStartSales);
+					cmd.Parameters.AddWithValue("@valueDateClosing", valueDateClosing);
+					cmd.Parameters.AddWithValue("@valueDateClosed", valueDateClosed);
+					cmd.Parameters.AddWithValue("@valueDayReturn", valueDayReturn);
+					cmd.Parameters.AddWithValue("@valueDayDelivery", valueDayDelivery);
+					cmd.Parameters.AddWithValue("@valueNameDelivery", valueNameDelivery);
+					cmd.Parameters.AddWithValue("@valueVisitors", valueVisitors);
+					cmd.Parameters.AddWithValue("@valueStatus", valueStatus);
+					cmd.ExecuteNonQuery();
+				}
+				con.Close();
+			}
+		}
 		public void UpdateUser(int valueId, Int16 valueIsActive, string valueNick, string valueName,
 						   string valueSurname, string valueEmail, long numberPhone, string valueAdress, string valueCity,
 						   int valueCountVisitors, string commandText)

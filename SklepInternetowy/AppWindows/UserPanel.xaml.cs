@@ -32,7 +32,6 @@ namespace SklepInternetowy
 
 		public UserPanel()
 		{
-			//InitializeComponent();
 		}
 
 		public UserPanel(MainWindow WindowMainWindow)
@@ -62,12 +61,7 @@ namespace SklepInternetowy
 		{
 			if (windowRegistrationCompany.IsVisible == false)
 			{
-				if (Users.LogUser.Company != null)
-					windowRegistrationCompany = new RegistrationCompany(Users.LogUser.Company.Id_Company);
-				else
-				{
-					windowRegistrationCompany = new RegistrationCompany();
-				}
+				windowRegistrationCompany = Users.LogUser.Company != null ? new RegistrationCompany(Users.LogUser.Company.Id_Company) : new RegistrationCompany();
 				windowRegistrationCompany.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				windowRegistrationCompany.Show();
 			}
@@ -198,7 +192,7 @@ namespace SklepInternetowy
 						ButtonAdd2.Visibility = Visibility.Visible;
 						ButtonAdd.Visibility = Visibility.Visible;
 						DeleteClick();
-						ButtonAdd.Click += AddInvoice_Click;
+						ButtonAdd.Visibility = Visibility.Hidden;
 						ButtonAdd.Content = "Dodaj Fakturę";
 						ButtonAdd.ToolTip = "Musisz wybrać sprzedaż do jakiej chcesz dodać fakturę";
 						ButtonAdd2.Click -= AddRetailSales_Click;
@@ -255,7 +249,7 @@ namespace SklepInternetowy
 			}
 			else
 			{
-				MessageBox.Show("Proszę wybrać z listy widok");
+				MessageBox.Show("Proszę wybrać z listy widok","Uwaga!",MessageBoxButton.OK);
 			}
 		}
 
@@ -263,18 +257,18 @@ namespace SklepInternetowy
 		{
 			ButtonAdd.Click -= AddRetailSales_Click;
 			ButtonAdd.Click -= AddProduct_Click;
-			ButtonAdd.Click -= AddInvoice_Click;
 			ButtonAdd.Click -= AddPayment_Click;
 
 		}
-
 		private void ClickChangeProfile(object sender, RoutedEventArgs e)
 		{
 			if (windowEditProfile.IsVisible == false)
 			{
-				windowEditProfile = new Registration();
-				windowEditProfile.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-				windowEditProfile.Show();
+				windowEditProfile = new Registration
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
+				windowEditProfile.ShowDialog();
 			}
 		}
 
@@ -287,8 +281,10 @@ namespace SklepInternetowy
 					{
 						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 						object[] tempObject = temp.Row.ItemArray as object[];
-						windowInvoice = new WindowInvoice(tempObject, false, temp);
-						windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+						windowInvoice = new WindowInvoice(tempObject, false, temp)
+						{
+							WindowStartupLocation = WindowStartupLocation.CenterScreen
+						};
 						windowInvoice.ShowDialog();
 					}
 
@@ -298,9 +294,11 @@ namespace SklepInternetowy
 					{
 						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 						object[] tempObject = temp.Row.ItemArray as object[];
-						newProductWindow = new NewProductWindow(tempObject);
-						newProductWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-						newProductWindow.Show();
+						newProductWindow = new NewProductWindow(tempObject)
+						{
+							WindowStartupLocation = WindowStartupLocation.CenterScreen
+						};
+						newProductWindow.ShowDialog();
 					}
 					break;
 
@@ -320,9 +318,11 @@ namespace SklepInternetowy
 						{
 							tempProduct[l] = tempObject[i];
 						}
-						windowSales = new WindowSales(this, tempProduct, tempSales);
-						windowSales.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-						windowSales.Show();
+						windowSales = new WindowSales(this, tempProduct, tempSales)
+						{
+							WindowStartupLocation = WindowStartupLocation.CenterScreen
+						};
+						windowSales.ShowDialog();
 					}
 					break;
 
@@ -331,9 +331,11 @@ namespace SklepInternetowy
 					{
 						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 						object[] tempObject = temp.Row.ItemArray as object[];
-						windowPayment = new WindowPayment(this, tempObject);
-						windowPayment.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-						windowPayment.Show();
+						windowPayment = new WindowPayment(this, tempObject)
+						{
+							WindowStartupLocation = WindowStartupLocation.CenterScreen
+						};
+						windowPayment.ShowDialog();
 					}
 					break;
 				case 5:
@@ -341,13 +343,15 @@ namespace SklepInternetowy
 					{
 						DataRowView temp = UsersDataGrid.SelectedItem as DataRowView;
 						object[] tempObject = temp.Row.ItemArray as object[];
-						windowInvoice = new WindowInvoice(tempObject, true, temp);
-						windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+						windowInvoice = new WindowInvoice(tempObject, true, temp)
+						{
+							WindowStartupLocation = WindowStartupLocation.CenterScreen
+						};
 						windowInvoice.ShowDialog();
 					}
 					break;
 				default:
-					MessageBox.Show("Brak wybranego widoku");
+					MessageBox.Show("Brak wybranego widoku","Uwaga!",MessageBoxButton.OK);
 					break;
 			}
 
@@ -358,15 +362,12 @@ namespace SklepInternetowy
 		{
 			if (newProductWindow.IsVisible == false)
 			{
-				newProductWindow = new NewProductWindow();
-				newProductWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-				newProductWindow.Show();
+				newProductWindow = new NewProductWindow
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
+				newProductWindow.ShowDialog();
 			}
-
-		}
-
-		private void AddInvoice_Click(object sender, RoutedEventArgs e)
-		{
 
 		}
 
@@ -379,20 +380,15 @@ namespace SklepInternetowy
 				int tempIdProduct = (int)tempObject[16];
 				int tempIdUser = Users.LogUser.Id_User;
 				List<object[]> tempComment = sqlConnect.Show(tempIdUser, "ValueComment");
-				if (tempComment.Count == 0)
-				{
-					windowRating = new WindowRating(tempIdProduct, tempIdUser);
-				}
-				else
-				{
-					windowRating = new WindowRating(tempIdProduct, tempIdUser, tempComment[0]);
-				}
+				windowRating = tempComment.Count == 0
+					? new WindowRating(tempIdProduct, tempIdUser)
+					: new WindowRating(tempIdProduct, tempIdUser, tempComment[0]);
 				windowRating.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				windowRating.ShowDialog();
 			}
 			else
 			{
-				MessageBox.Show("Musissz wybrać sprzedaż, która chcesz ocenić");
+				MessageBox.Show("Musisz wybrać sprzedaż, która chcesz ocenić", "Uwaga!", MessageBoxButton.OK);
 			}
 
 		}
@@ -402,9 +398,11 @@ namespace SklepInternetowy
 			if (windowPayment.IsVisible == false)
 			{
 				int tempId = Users.LogUser.Id_User;
-				windowPayment = new WindowPayment(this, tempId);
-				windowPayment.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-				windowPayment.Show();
+				windowPayment = new WindowPayment(this, tempId)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
+				windowPayment.ShowDialog();
 			}
 		}
 
@@ -417,22 +415,30 @@ namespace SklepInternetowy
 				object[] tempObject = temp.Row.ItemArray as object[];
 				if (windowSales.IsVisible == false)
 				{
-					windowSales = new WindowSales(this, tempObject);
-					windowSales.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-					windowSales.Show();
+					windowSales = new WindowSales(this, tempObject)
+					{
+						WindowStartupLocation = WindowStartupLocation.CenterScreen
+					};
+					windowSales.ShowDialog();
 				}
 			}
 			else
 			{
-				MessageBox.Show("Musi być wybrany produkt", "tralalala", MessageBoxButton.OK);
+				MessageBox.Show("Musi być wybrany produkt", "Uwaga!", MessageBoxButton.OK);
 			}
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (windowMainWindow != null)
+			{
 				windowMainWindow.IsEnabled = true;
+			}
 		}
 
+		private void MenuItemClose_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
 	}
 }

@@ -12,46 +12,7 @@
         Title="WindowPay"
         Background="AliceBlue"
         Height="450" Width="800">
-    <Window.Resources>
-        
-      
-
-       
-        <Style TargetType="TextBox" x:Key="MyTextBox">
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Background" Value="AliceBlue"/>
-            <Setter Property="Width" Value="130"/>
-            <Setter Property="IsReadOnly" Value="True"/>
-            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        </Style>
-
-        <Style TargetType="Button" x:Key="MyButton">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="130"/>
-            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
-            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        </Style>
-
-        <Style TargetType="CheckBox" x:Key="MyCheckBox">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Width" Value="130"/>
-            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-
-        </Style>
-
-        
-    </Window.Resources>
-
+   
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="73*"/>
@@ -71,6 +32,7 @@
         <Label Content="Wybierz sposób płatności*" 
                Style="{StaticResource MyLabel}"
                Grid.Row="0" Grid.Column="0"
+               Width="150"
                />
         <Label Content="Numer konta" 
                Style="{StaticResource MyLabel}" 
@@ -106,6 +68,7 @@
         <Label Content="Przybliżony czas dostawy"
                Style="{StaticResource MyLabel}" 
                Grid.Row="2" Grid.Column="2" 
+               Width="150"
                />
         <Label Content="Cena Netto"
                Style="{StaticResource MyLabel}" 
@@ -157,16 +120,19 @@
                  Grid.Column="3"  
                  Text="Produkt" 
                  IsEnabled="False"
+                 IsReadOnly="True"
                  Style="{StaticResource MyTextBox}"
                  />
         <TextBox x:Name="TextBoxQuantity" 
                  Grid.Column="3" Grid.Row="1" 
                  Text="Ilość" 
+                 IsReadOnly="True"
                  IsEnabled="False"
                  Style="{StaticResource MyTextBox}"
                  />
         <DatePicker x:Name="DateDelivery"
                     ToolTip="Około"
+                    
                     IsEnabled="False"
                     Style="{StaticResource MyDatePicker}"
                     Grid.Column="3" Grid.Row="2"  

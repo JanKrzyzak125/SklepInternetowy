@@ -9,6 +9,7 @@
         Height="300" Width="400"
         WindowStyle="SingleBorderWindow"
         ResizeMode="CanMinimize"
+        Background="AliceBlue"
         >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,6 +24,7 @@
         </Grid.RowDefinitions>
         <Button x:Name="LoginButton" 
                 Content="Zalogować" 
+                Style="{StaticResource MyButton}"
                 HorizontalAlignment="Left"  VerticalAlignment="Top"
                 Height="53" Margin="54,11,0,0" Width="130" 
                 Click="LoginButton_Click" 
@@ -32,21 +34,25 @@
                 />
         <Button x:Name="Registration" 
                 Content="Rejestracja" 
+                Style="{StaticResource MyButton}"
                 HorizontalAlignment="Left" VerticalAlignment="Top"
                 Height="53" Margin="14,11,0,0" Width="130" 
                 Click="Registration_Open" Grid.Row="3" Grid.Column="1"
                 />
         <CheckBox Unchecked="Password_Uncheck" 
                   Checked="Password_Check" 
+                  Style="{StaticResource MyCheckBox}"
                   x:Name="CheckBoxPassword" 
                   Content="Zmień hasło" 
                   HorizontalAlignment="Left" VerticalAlignment="Top"
-                  Height="24" Margin="54,2,0,0" Width="292" Grid.Row="2" Grid.ColumnSpan="2"
+                   Margin="54,2,0,0" Width="292" Grid.Row="2" Grid.ColumnSpan="2"
                   />
         <TextBox x:Name="NickText" 
                  HorizontalAlignment="Left"  VerticalAlignment="Top"
                  Height="41" Margin="54,18,0,0"  Width="292"
                  Text="Nick" 
+                 MaxLines="1"
+                 MaxLength="50"
                  TextWrapping="Wrap" 
                  Background="AliceBlue" 
                  Cursor="IBeam"

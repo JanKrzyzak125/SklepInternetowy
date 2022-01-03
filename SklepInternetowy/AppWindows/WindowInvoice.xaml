@@ -8,27 +8,10 @@
         Title="WindowInvoice" 
         Height="800" Width="800"
         ResizeMode="CanMinimize"
+
         >
     <Window.Resources>
-        <Style TargetType="Border" x:Key="MyBorder">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Height" Value="220"/>
-            <Setter Property="Width" Value="280"/>
-            <Setter Property="Background" Value="AliceBlue"/>
 
-        </Style>
-        <Style TargetType="Button" x:Key="MyButton">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="48"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkForegroundBrush}"/>
-        </Style>
         <Style TargetType="TextBox" x:Key="MyTextBox">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -38,7 +21,6 @@
             <Setter Property="TextOptions.TextHintingMode" Value="Animated"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
-
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
@@ -97,9 +79,6 @@
                                     Binding="{Binding SumPay}"
                                     
                                     />
-
-
-
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="TextBoxPay" 
@@ -113,7 +92,7 @@
                 x:Name="ButtonPrint"
                 Grid.Column="1"  Grid.Row="6"  
                 Click="Button_Click"
-                Height="48" Width="130" 
+                Height="48" Width="200" 
                 />
         <TextBox x:Name="TextBoxNameInvoice" 
                  Style="{StaticResource MyTextBox}" 

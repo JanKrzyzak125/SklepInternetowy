@@ -144,7 +144,7 @@ namespace SklepInternetowy.AppWindows
 				if ((int)row[1] == 1) tempListDelivery.Add(row[0].ToString());
 			}
 
-			int length = sqlConnect.ReadQuantity((int)actualObject[0], "ReadQuantity"); //TODO: do sprawdzenia
+			int length = sqlConnect.ReadQuantity((int)actualObject[0], "ReadQuantity"); 
 
 			for (int i = 0; i <= length; i++)
 			{
@@ -164,7 +164,6 @@ namespace SklepInternetowy.AppWindows
 			tempListQuantity.Add((int)actualSales[1]);
 		}
 
-		//TODO
 		private void ButtonAcceptEdit_Click(object sender, RoutedEventArgs e)
 		{
 			int codeFailed = 0;
@@ -192,9 +191,16 @@ namespace SklepInternetowy.AppWindows
 
 			if (codeFailed == 0)
 			{
-				int tempId = (int)actualObject[0];
-				//sqlConnect.UpdateRetailSales(tempId, tempQuantity, tempDateStartSales, tempDateClosingSales,
-				//						  tempDaysReturn, tempDaysDelivery, tempNameDelivery, "AddRetailSales");
+				int tempId = (int)actualSales[0];
+				int tempIdProduct = (int)actualObject[0];
+
+				int tempVisitors = (int)actualSales[8];
+				int tempStatus= CheckBoxStatus.IsChecked == true ? 0 : 1;
+
+				DateTime tempDateClosed=DateTime.Today;
+
+				sqlConnect.UpdateRetailSales(tempId, tempIdProduct, tempQuantity, tempDateStartSales, tempDateClosingSales, tempDateClosed,
+										  tempDaysReturn, tempDaysDelivery, tempNameDelivery, tempVisitors, tempStatus, "AddRetailSales2");
 				MessageBox.Show("Udało się zaktualizować sprzedaż");
 				this.Close();
 			}

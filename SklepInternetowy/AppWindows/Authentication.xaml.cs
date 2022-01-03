@@ -37,19 +37,16 @@ namespace SklepInternetowy
 				Users tempUser = new Users(tempUsers);
 				if (Users.LogUser.IsActive == 0)
 				{
-					MessageBox.Show("Konto nieaktywne. Spróbuj założyć nowe konto lub skonsultować się z administracja");
+					MessageBox.Show("Konto nieaktywne. Spróbuj założyć nowe konto lub skonsultować się z administracja", "Uwaga!", MessageBoxButton.OK);
 				}
 				else
 				{
-					MessageBox.Show("Udało się zalogować użytkownikowi" + Users.LogUser.Nick);
+					MessageBox.Show("Udało się zalogować użytkownikowi " + Users.LogUser.Nick,"Sukces");
 					List<object> tempPermission = sqlConnect.ReadUserPermision(Users.LogUser.Id_User, "ValueUserPermision");
 					makePermision(tempPermission);
-
-
 					mainWindow.ButtonLog.Visibility = Visibility.Hidden;
 					mainWindow.MenuItemLogin.IsEnabled = false;
 					mainWindow.MenuItemLoginOut.IsEnabled = true;
-
 					this.Close();
 				}
 			}
@@ -86,11 +83,9 @@ namespace SklepInternetowy
 		/// <returns></returns>
 		public byte[] makeHash(string password)
 		{
-			using (SHA256 sha256Hash = SHA256.Create())
-			{
-				byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-				return bytes;
-			}
+			using SHA256 sha256Hash = SHA256.Create();
+			byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+			return bytes;
 		}
 
 		/// <summary>
@@ -98,12 +93,10 @@ namespace SklepInternetowy
 		/// </summary>
 		private void Registration_Open(object sender, RoutedEventArgs e)
 		{
-
 			if (registrationWindow.IsVisible == false)
 			{
 				registrationWindow = new Registration(this);
-				registrationWindow.Show();
-				this.IsEnabled = false;
+				registrationWindow.ShowDialog();
 			}
 		}
 
@@ -111,7 +104,7 @@ namespace SklepInternetowy
 		{
 			string tempNick = NickText.Text;
 			byte[] tempHash = makeHash(PasswordBox.Password);
-			int okey = sqlConnect.IsUserNick(tempNick,tempHash, "IsUserNick");
+			int okey = sqlConnect.IsUserNick(tempNick, tempHash, "IsUserNick");
 
 			if (registrationWindow.IsVisible == false && okey == 1)
 			{
@@ -122,9 +115,9 @@ namespace SklepInternetowy
 			}
 			else
 			{
-				NickText.Background=System.Windows.Media.Brushes.Red;
-				PasswordBox.Background= System.Windows.Media.Brushes.Red;
-				MessageBox.Show("Nie ma takiego nicku lub złe hasło podane");
+				NickText.Background = System.Windows.Media.Brushes.Red;
+				PasswordBox.Background = System.Windows.Media.Brushes.Red;
+				MessageBox.Show("Nie ma takiego nicku lub złe hasło podane", "Uwaga!", MessageBoxButton.OK);
 			}
 		}
 
@@ -151,6 +144,5 @@ namespace SklepInternetowy
 				temp.Text = "";
 			}
 		}
-
 	}
 }

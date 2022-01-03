@@ -34,7 +34,6 @@ namespace SklepInternetowy.AppWindows
 			sqlConnect = new SQLConnect();
 			actualIdCompany = valueId;
 			Company tempCompany = Users.LogUser.Company;
-
 			TextBoxPhone.Text = tempCompany.Phone.ToString();
 			TextBoxNameCompany.Text = tempCompany.NameCompany;
 			TextBoxNIP.Text = tempCompany.NIP;
@@ -91,7 +90,7 @@ namespace SklepInternetowy.AppWindows
 			}
 			else
 			{
-				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów", "Uwaga!", MessageBoxButton.OK);
 			}
 
 		}
@@ -138,7 +137,7 @@ namespace SklepInternetowy.AppWindows
 			}
 			else
 			{
-				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów", "Uwaga!", MessageBoxButton.OK);
 			}
 		}
 		private bool testName(TextBox tempTextBox)
@@ -147,7 +146,7 @@ namespace SklepInternetowy.AppWindows
 			if (tempString.Length < 3 || tempString.Equals("Nazwa firmy") || tempString.Equals("NIP") ||
 				tempString.Equals("Email") || tempString.Equals("Adres") || tempString.Equals("Miasto"))
 			{
-				MessageBox.Show("Złe " + nameTextBox(tempTextBox.Name));
+				MessageBox.Show("Złe " + nameTextBox(tempTextBox.Name), "Uwaga!", MessageBoxButton.OK);
 				tempTextBox.Background = System.Windows.Media.Brushes.Red;
 				return false;
 			}
@@ -160,33 +159,21 @@ namespace SklepInternetowy.AppWindows
 
 		private string nameTextBox(string temp)
 		{
-			switch (temp)
+			return temp switch
 			{
-				case "TextBoxNameCompany":
-					return "Nazwa firmy";
-				case "TextBoxNIP":
-					return "NIP";
-				case "TextBoxEmail":
-					return "Email";
-				case "TextBoxAdress":
-					return "Adres";
-				case "TextBoxCity":
-					return "Miasto";
-				default:
-					return "";
-			}
+				"TextBoxNameCompany" => "Nazwa firmy",
+				"TextBoxNIP" => "NIP",
+				"TextBoxEmail" => "Email",
+				"TextBoxAdress" => "Adres",
+				"TextBoxCity" => "Miasto",
+				_ => "",
+			};
 		}
 
 		private void NameChange(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
 			TextBox temp = sender as TextBox;
-			if (temp.Text.Length < 1)
-			{
-				temp.CharacterCasing = CharacterCasing.Upper;
-			}
-			else
-				temp.CharacterCasing = CharacterCasing.Lower;
-
+			temp.CharacterCasing = temp.Text.Length < 1 ? CharacterCasing.Upper : CharacterCasing.Lower;
 		}
 
 		private void TextBoxNameIsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -205,7 +192,5 @@ namespace SklepInternetowy.AppWindows
 			Regex regex = new Regex("[^0-9]+");
 			e.Handled = regex.IsMatch(e.Text);
 		}
-
-
 	}
 }

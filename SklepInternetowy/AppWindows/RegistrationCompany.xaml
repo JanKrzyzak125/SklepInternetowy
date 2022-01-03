@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SklepInternetowy.AppWindows"
         mc:Ignorable="d"
         Title="RejestracjaFirmy" 
-        
+        Background="AliceBlue"
         Height="455" Width="420">
     <Grid>
         <TextBox x:Name="TextBoxNameCompany"
@@ -17,7 +17,9 @@
                  TextChanged="NameChange"
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
                  Cursor="IBeam"
-                 ToolTip="Podaj Nazwę firmy"
+                 ToolTip="Podaj Nazwę firmy[32 znaki max]"
+                 MaxLines="1"
+                 MaxLength="32"
                  />
 
         <TextBox x:Name="TextBoxPhone" 
@@ -25,6 +27,7 @@
                  Height="36" Margin="0,163,0,0" Width="380"
                  Text="Telefon" 
                  TextWrapping="Wrap" 
+                 MaxLines="1"
                  ToolTip="Podaj Numer Telefonu Firmy"
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
                  PreviewTextInput="OnlyNumeric"
@@ -38,17 +41,21 @@
                  TextChanged="NameChange"
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
                  Cursor="IBeam"
-                 ToolTip="Podaj Adres firmy"
+                 MaxLines="1"
+                 MaxLength="50"
+                 ToolTip="Podaj Adres firmy[max 50]"
                  />
         <TextBox x:Name="TextBoxCity"
-                  HorizontalAlignment="Center" VerticalAlignment="Top"
-                  Height="36" Margin="0,113,0,0" Width="380"
-                  Text="Miasto" 
-                  TextWrapping="Wrap" 
-                  TextChanged="NameChange"
-                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
-                  Cursor="IBeam"
-                  ToolTip="Podaj miasto firmy"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36" Margin="0,113,0,0" Width="380"
+                 Text="Miasto" 
+                 TextWrapping="Wrap" 
+                 TextChanged="NameChange"
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+                 Cursor="IBeam"
+                 ToolTip="Podaj miasto firmy"
+                 MaxLines="1"
+                 MaxLength="20"
                  />
         <TextBox x:Name="TextBoxEmail"
                  HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -57,7 +64,8 @@
                  TextWrapping="Wrap" 
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
                  Cursor="IBeam"
-                 
+                 MaxLines="1"
+                 MaxLength="40"
                  ToolTip="Podaj adres mailowy"
                  />
         <TextBox x:Name="TextBoxNIP"
@@ -68,19 +76,22 @@
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
                  Cursor="IBeam"
                  ToolTip="Podaj numer NIP" 
+                 MaxLines="1"
+                 MaxLength="10"
                  PreviewTextInput="OnlyNumeric"
                  />
         <CheckBox x:Name="CheckBoxIsActive" Content="Dezaktywować"
                   HorizontalAlignment="Center" VerticalAlignment="Top"
-                  Height="38" Margin="0,317,0,0" Width="380"
-                  Style="{StaticResource MaterialDesignFilterChipCheckBox}"
+                  Margin="0,317,0,0" Width="380"
+                  Style="{StaticResource MyCheckBox}" Cursor="Hand"
                   />
 
         <Button x:Name="RegisterButton"
                 Content="Rejestruj" 
                 HorizontalAlignment="Center" VerticalAlignment="Top" 
                 Height="52" Margin="0,360,0,0"  Width="380"
-                Cursor="Hand"/>
+                Style="{StaticResource MyButton}"
+                />
 
     </Grid>
 </Window>

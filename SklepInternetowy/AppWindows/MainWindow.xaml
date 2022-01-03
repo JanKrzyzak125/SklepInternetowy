@@ -8,30 +8,27 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:WpfControlLibrary="clr-namespace:WpfControlLibrary;assembly=WpfControlLibrary"
-           x:Class="SklepInternetowy.MainWindow"
+        x:Class="SklepInternetowy.MainWindow"
         fw:AcrylicWindow.Enabled="True"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         fw:PointerTracker.Enabled="True"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         WindowStyle="SingleBorderWindow"
-        
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
         Title="Sklep"
         Height="860" Width="1200" 
-        Closing="CloseApp">
+        Closing="CloseApp"
+        Background="AliceBlue"
+    >
     <Window.Resources>
-      
+
         <Style TargetType="DataGridColumnHeader" x:Key="MyDataGridColumnHeader">
-
-
-
         </Style>
         
         <Style TargetType="DataGrid" x:Key="MyDataGrid">
-            
-
+           
         </Style>
 
         <Style TargetType="DataGridCell" x:Key="MyCell">
@@ -52,7 +49,7 @@
         </DataTemplate>
         
     </Window.Resources>
-    
+
     <Grid>
 
 
@@ -65,6 +62,7 @@
 
         <Button Background="{x:Static fw:AccentColors.ImmersiveSystemAccentDark2Brush}"
                 x:Name="ButtonLog" 
+                Style="{StaticResource MyButton}"
                 Content="Logowanie"  
                 HorizontalAlignment="Left" VerticalAlignment="Center" 
                 Height="43" Margin="1051,0,0,0" Width="149" 
@@ -88,7 +86,7 @@
                   AutoGenerateColumns="false"
                   >
             <DataGrid.Columns>
-                
+
                 <DataGridTextColumn Header="Nazwa produktu" 
                                     Binding="{Binding Name}"
                                     HeaderStyle="{StaticResource MaterialDesignDataGridColumnHeader}"
@@ -147,7 +145,7 @@
 
         </DataGrid>
         <TextBox x:Name="TextSearch"
-                 Background="Aqua" 
+                 Style="{StaticResource MyTextBox}"
                  Text="Wyszukaj" 
                  HorizontalAlignment="Left" VerticalAlignment="Center"
                  Height="38" Width="416" 
@@ -156,8 +154,9 @@
                  Grid.Row="1" Cursor="IBeam"
                  IsKeyboardFocusWithinChanged="TextBoxIsKeyboardFocusWithinChanged"
                  />
-        <Button Style="{StaticResource ButtonRoundAccentRevealStyle}"  
+        <Button Style="{StaticResource MyButton}"  
                 x:Name="Search" 
+                Background="BlueViolet"
                 Content="Szukaj" 
                 HorizontalAlignment="Left" VerticalAlignment="Center" 
                 Height="44" Width="90"
@@ -165,6 +164,7 @@
                 Click="Search_Click" 
                 Grid.Row="1"/>
         <Button x:Name="ButtonUser" 
+                Style="{StaticResource MyButton}"
                 Content="Panel Uzytkownika" 
                 HorizontalAlignment="Left" VerticalAlignment="Center"
                 Height="44" Margin="710,0,0,0" Width="164" 
@@ -173,16 +173,12 @@
                 Cursor="Hand" 
                 />
 
-
         <Image x:Name="ImageProduct"
                Stretch="Fill"
-               
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="143" Margin="66,54,0,0" Width="179" 
-               Grid.Row="2"  />
-
-
-
+               Grid.Row="2"  
+               />
 
         <DockPanel>
             <Menu DockPanel.Dock="Top" 
@@ -208,22 +204,19 @@
             </Menu>
 
         </DockPanel>
-        <Button 
-            x:Name="ButtonAdmin"
-            Click="Admin_Open" 
-            Content="Panel Administatora" 
-            HorizontalAlignment="Left" VerticalAlignment="Center"
-            Height="44" Margin="879,0,0,0" Width="167"
-            Grid.Row="1" 
-            Cursor="Hand"/>
+        <Button x:Name="ButtonAdmin"
+                Style="{StaticResource MyButton}"
+                Click="Admin_Open" 
+                Content="Panel Administatora" 
+                HorizontalAlignment="Left" VerticalAlignment="Center"
+                Height="44" Margin="879,0,0,0" Width="167"
+                Grid.Row="1" 
+                Cursor="Hand"/>
         <ComboBox x:Name="ComboBoxName" 
+                  Style="{StaticResource MyComboBox}"
                   HorizontalAlignment="Left" 
-                  Height="31"  Margin="10,10,0,0"   Width="160"
+                  Margin="10,10,0,0" Width="160"
                   Grid.Row="1" 
                   />
-
-
     </Grid>
-
-
 </Window>

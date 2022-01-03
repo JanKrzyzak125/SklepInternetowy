@@ -78,7 +78,6 @@ namespace SklepInternetowy
 			TextBoxName.IsEnabled = false;
 			TextBoxPhone.IsEnabled = false;
 			TextBoxSurname.IsEnabled = false;
-
 		}
 
 		private void EditPassword_Click(object sender, RoutedEventArgs e)
@@ -94,14 +93,13 @@ namespace SklepInternetowy
 				byte[] tempHash = windowAuthentication.makeHash(tempHash1);
 				sqlConnect.NewPassword(tempNick, tempHash, "NewPassword");
 				MessageBox.Show("Udalo się zmienić hasło");
-
 				this.Close();
 			}
 			else
 			{
 				PasswordBox1.Background = System.Windows.Media.Brushes.Red;
 				PasswordBox2.Background = System.Windows.Media.Brushes.Red;
-				MessageBox.Show("Hasła się róznią lub za krótkie hasło");
+				MessageBox.Show("Hasła się róznią lub za krótkie hasło", "Uwaga!", MessageBoxButton.OK!);
 			}
 		}
 
@@ -160,7 +158,7 @@ namespace SklepInternetowy
 			else
 			{
 				codeFailed++;
-				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów","Uwaga!",MessageBoxButton.OK);
 			}
 
 		}
@@ -224,7 +222,7 @@ namespace SklepInternetowy
 				codeFailed++;
 				PasswordBox1.Background = System.Windows.Media.Brushes.Red;
 				PasswordBox2.Background = System.Windows.Media.Brushes.Red;
-				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów");
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów", "Uwaga!", MessageBoxButton.OK);
 			}
 		}
 
@@ -237,7 +235,7 @@ namespace SklepInternetowy
 				tempString.Equals("Nick") || tempString.Equals("Poczta Email") || tempString.Equals("Adres") ||
 				tempString.Equals("Miasto"))
 			{
-				MessageBox.Show("Złe " + nameTextBox(tempTextBox.Name));
+				MessageBox.Show("Złe " + nameTextBox(tempTextBox.Name), "Uwaga!", MessageBoxButton.OK);
 				tempTextBox.Background = System.Windows.Media.Brushes.Red;
 				return false;
 			}
@@ -251,36 +249,22 @@ namespace SklepInternetowy
 
 		private string nameTextBox(string temp)
 		{
-			switch (temp)
+			return temp switch
 			{
-				case "TextBoxName":
-					return "Imię";
-				case "TextBoxNick":
-					return "Nick";
-				case "TextBoxSurname":
-					return "Nazwisko";
-				case "TextBoxEmail":
-					return "Poczta Email";
-				case "TextBoxAdress":
-					return "Adres";
-				case "TextBoxCity":
-					return "Miasto";
-				default:
-					return "";
-			}
+				"TextBoxName" => "Imię",
+				"TextBoxNick" => "Nick",
+				"TextBoxSurname" => "Nazwisko",
+				"TextBoxEmail" => "Poczta Email",
+				"TextBoxAdress" => "Adres",
+				"TextBoxCity" => "Miasto",
+				_ => "",
+			};
 		}
 
 		private void NameChange(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
 			TextBox temp = sender as TextBox;
-			if (temp.Text.Length < 1)
-			{
-				temp.CharacterCasing = CharacterCasing.Upper;
-			}
-			else
-			{
-				temp.CharacterCasing = CharacterCasing.Lower;
-			}
+			temp.CharacterCasing = temp.Text.Length < 1 ? CharacterCasing.Upper : CharacterCasing.Lower;
 		}
 
 		private void TextBoxNameIsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -302,7 +286,10 @@ namespace SklepInternetowy
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (windowAuthentication != null) windowAuthentication.IsEnabled = true;
+			if (windowAuthentication != null)
+			{
+				windowAuthentication.IsEnabled = true;
+			}
 		}
 	}
 }

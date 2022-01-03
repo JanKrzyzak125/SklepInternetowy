@@ -8,10 +8,12 @@
         Title="Rejestracja" 
         Height="585" Width="420"
         Closing="Window_Closing"
+        Background="AliceBlue"
         >
     <Grid>
 
         <Button x:Name="RegisterButton"
+                Style="{StaticResource MyButton}"
                 Content="Rejestruj" 
                 HorizontalAlignment="Center" VerticalAlignment="Top" 
                 Height="52" Margin="0,492,0,0"  Width="380"
@@ -25,6 +27,8 @@
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
                  Cursor="IBeam"
                  ToolTip="Podaj nick"
+                 MaxLines="1"
+                 MaxLength="50"
                  />
         <PasswordBox x:Name="PasswordBox1"  
                      Password="Password" 
@@ -32,6 +36,7 @@
                      Height="31" Margin="0,59,0,0" Width="380"
                      Cursor="IBeam"
                      ToolTip="Podaj Hasło"
+                     
                      />
         <PasswordBox x:Name="PasswordBox2"  
                      Password="Password" 
@@ -50,11 +55,15 @@
                  TextChanged="NameChange"
                  ToolTip="Podaj imię"
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                 MaxLines="1"
+                 MaxLength="50"
                  />
         <TextBox x:Name="TextBoxSurname" 
                  HorizontalAlignment="Center" VerticalAlignment="Top"
                  Height="36"  Width="380" Margin="0,205,0,0" 
                  Text="Nazwisko" 
+                 MaxLines="1"
+                 MaxLength="50"
                  TextWrapping="Wrap"  
                  ToolTip="Podaj Nazwisko"
                  TextChanged="NameChange"
@@ -64,6 +73,8 @@
                  HorizontalAlignment="Center" VerticalAlignment="Top"
                  Height="36" Margin="0,256,0,0"  Width="380"
                  Text="Poczta Email" 
+                 MaxLines="1"
+                 MaxLength="50"
                  TextWrapping="Wrap"
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
                  ToolTip="Podaj Email"
@@ -72,6 +83,7 @@
                  HorizontalAlignment="Center" VerticalAlignment="Top" 
                  Height="36" Margin="0,308,0,0" Width="380"
                  Text="Telefon" 
+                 MaxLines="1"
                  TextWrapping="Wrap" 
                  ToolTip="Podaj Numer Telefonu"
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
@@ -81,6 +93,8 @@
                  HorizontalAlignment="Center" VerticalAlignment="Top"
                  Height="36" Margin="0,361,0,0" Width="380"
                  Text="Adres"
+                 MaxLines="1"
+                 MaxLength="50"
                  TextWrapping="Wrap" 
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
                  ToolTip="Podaj Adres"
@@ -89,12 +103,18 @@
                  HorizontalAlignment="Center" VerticalAlignment="Top"
                  Height="36" Margin="0,414,0,0" Width="380"
                  Text="Miasto" 
+                 MaxLines="1"
+                 MaxLength="50"
                  TextWrapping="Wrap" 
                  TextChanged="NameChange"
                   IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
                  ToolTip="Podaj Miasto"
                  />
-        <CheckBox x:Name="CheckBoxIsActive" Content="Dezaktywuj konto" HorizontalAlignment="Center" Height="37" Margin="0,455,0,0" VerticalAlignment="Top" Width="380"/>
+        <CheckBox x:Name="CheckBoxIsActive" 
+                  Content="Dezaktywuj konto" 
+                  HorizontalAlignment="Center" 
+                  Style="{StaticResource MyCheckBox}"
+                  Margin="0,455,0,0" VerticalAlignment="Top" Width="380"/>
 
 
 

@@ -105,20 +105,19 @@ namespace SklepInternetowy
 					tempListQuantity.Add(i);
 				}
 			}
-
 		}
 
 		private void Click_Pay(object sender, RoutedEventArgs e)
 		{
-			if (windowPay.IsVisible == false && ComboBoxAvailableQuantity.SelectedItem!=null)
+			if (windowPay.IsVisible == false && ComboBoxAvailableQuantity.SelectedItem != null)
 			{
 				int tempSelectedQuantity;
-				int.TryParse( ComboBoxAvailableQuantity.Text, out tempSelectedQuantity);
+				int.TryParse(ComboBoxAvailableQuantity.Text, out tempSelectedQuantity);
 				windowPay = new WindowPay(currentProduct, tempSelectedQuantity);
 				windowPay.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				windowPay.Show();
 			}
-			else 
+			else
 			{
 				MessageBox.Show("Wybierz ilość by kupić");
 			}
@@ -143,15 +142,18 @@ namespace SklepInternetowy
 			TextBoxPrice.Text = tempPrice.ToString();
 			int tempCurrentyQuantity;
 			int.TryParse(ComboBoxAvailableQuantity.SelectedValue.ToString(), out tempCurrentyQuantity);
-			decimal tempVat = (currentProduct.Vat_rate*(decimal)0.01)+1;
-			tempSum = (tempPrice*tempVat)* tempCurrentyQuantity;
+			decimal tempVat = (currentProduct.Vat_rate * (decimal)0.01) + 1;
+			tempSum = (tempPrice * tempVat) * tempCurrentyQuantity;
 			tempSum = Math.Round(tempSum, 2);
 			TextBoxSumPay.Text = tempSum.ToString();
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (sqlConnect!=null) sqlConnect.Refresh(DateTime.Today, "StartApp");
+			if (sqlConnect != null)
+			{
+				sqlConnect.Refresh(DateTime.Today, "StartApp");
+			}
 		}
 	}
 }

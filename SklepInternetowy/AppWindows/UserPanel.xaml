@@ -13,45 +13,8 @@
         Height="824" Width="1000"
         ResizeMode="CanMinimize"
         Closing="Window_Closing"
-        
+        Background="AliceBlue"
         >
-    <Window.Resources>
-        <Style TargetType="ComboBox" x:Key="MyComboBox">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="AliceBlue"/>
-            <Setter Property="BorderBrush" Value="Violet"/>
-            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-            <Setter Property="Template" Value="{StaticResource MaterialDesignFloatingHintComboBoxTemplate}" />
-            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-        </Style>
-
-
-        <Style TargetType="Button" x:Key="MyButton">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="16 4 16 4" />
-            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-
-        </Style>
-    </Window.Resources>
-
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -71,7 +34,7 @@
                   Height="620" Width="980" 
                   VerticalAlignment="Center"  
                   MouseDoubleClick="DoubleClickUsersDataGrid" 
-                  Background="PaleVioletRed"
+                  Background="LightBlue"
                   AutoGenerateColumns="True"
                   IsReadOnly="True"
                   AutoGeneratingColumn="dataGrid_AutoGeneratingColumn" 
@@ -80,35 +43,46 @@
                   
             />
 
-        <Button x:Name="ButtonAdd"
-                Content="Dodaj" 
-                Style="{DynamicResource MyButton}"
-                Grid.Row="3" Grid.Column="1" 
-     
-                />
         <ComboBox x:Name="ComboBoxViews" 
                   Background="Violet"
-                  Style="{DynamicResource MyComboBox}"
-                  BorderBrush="AliceBlue" Grid.Row="2"
-        />
+                  Style="{StaticResource MyComboBox}"
+                  BorderBrush="AliceBlue" 
+                  Grid.Row="2"
+                  Width="200"
+                 />
 
+        <Button x:Name="ButtonAdd"
+                Content="Dodaj" 
+                Style="{StaticResource MyButton}"
+                Grid.Row="3" Grid.Column="1" 
+                Width="175" Cursor="Hand"
+                />
+        <Button x:Name="ButtonAdd2"
+                Content="Dodaj 2" 
+                Style="{StaticResource MyButton}"
+                Grid.Row="3" Grid.Column="2" 
+                Width="175"
+                />
+    
+        
         <Button x:Name="ButtonChangeViews" 
                 Click="ClickChangeViews"
                 Style="{StaticResource MyButton}"
-                Content="Zmiana widoku" Grid.Row="3" Cursor="Hand"
+                Content="Zmiana widoku"
+                Grid.Row="3" 
+                Width="200"
         />
         <Button Content="Edycja profilu" 
-                Style="{DynamicResource MyButton}"
-                Width="100"
+                x:Name="ButtonUser"
+                Style="{StaticResource MyButton}"
                 Click="ClickChangeProfile" 
                 Cursor="Pen" 
                 Grid.Row="3" Grid.Column="3"
                 />
         <Button Content="Edycja Firma" 
                 x:Name="ButtonCompany"
-                Style="{DynamicResource MyButton}"
+                Style="{StaticResource MyButton}"
                 Click="CompanyClick" 
-                Width="100"
                 Cursor="Pen" 
                 Grid.Row="2" Grid.Column="3"
                 />
@@ -116,20 +90,12 @@
         <DockPanel Grid.ColumnSpan="4">
             <Menu DockPanel.Dock="Top" Height="26" Margin="0,0,0,0">
                 <MenuItem Header="Profil" Height="26">
-                    <MenuItem x:Name="MenuItemLogin"/>
-                    <MenuItem x:Name="MenuItemLoginOut" />
-                    <MenuItem Header="Close"/>
+                    <MenuItem Header="Close" Click="MenuItemClose_Click"/>
                 </MenuItem>
-                <MenuItem Header="Widok" Height="26"/>
                 <MenuItem Header="Dodaj" Height="26"/>
             </Menu>
 
         </DockPanel>
-        <Button x:Name="ButtonAdd2"
-                Content="Dodaj 2" 
-                Style="{DynamicResource MyButton}"
-                Grid.Row="3" Grid.Column="2" 
-                Cursor="Hand" 
-                />
+        
     </Grid>
 </Window>

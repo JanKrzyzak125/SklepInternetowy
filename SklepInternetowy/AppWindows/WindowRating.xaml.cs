@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SklepInternetowy.AppWindows
 {
@@ -28,7 +19,6 @@ namespace SklepInternetowy.AppWindows
 
 		public WindowRating()
 		{
-
 		}
 
 		public WindowRating(int valueIdProduct)
@@ -72,13 +62,13 @@ namespace SklepInternetowy.AppWindows
 			ButtonComment.Click -= ButtonAddComment_Click;
 			ButtonComment.Click += ButonEditComment_Click;
 			CheckBoxStatus.IsEnabled = true;
-			currentIdComment =(int) tempComment[0];
+			currentIdComment = (int)tempComment[0];
 			currentIdProduct = (int)tempComment[1];
 			TextBoxComment.Text = (string)tempComment[2];
 			TextBoxComment.ToolTip = "Stary komentarz wyglądał tak= \n" + (string)tempComment[2];
-			TextBoxStars.Text= tempStars+(Int16)tempComment[3];
+			TextBoxStars.Text = tempStars + (Int16)tempComment[3];
 			TextBoxStars.ToolTip = "Stara ocena=" + (Int16)tempComment[3];
-			CheckBoxStatus.IsChecked = (int)tempComment[4]==0 ? true:false;
+			CheckBoxStatus.IsChecked = (int)tempComment[4] == 0 ? true : false;
 		}
 
 		private void HiddenElements()
@@ -121,26 +111,12 @@ namespace SklepInternetowy.AppWindows
 			DataGridRating.ItemsSource = tempTable.DefaultView;
 		}
 
-		private void dataGridRating_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-		{
-			switch (e.PropertyName)
-			{
-				case "Id_User":
-				case "Id_Comment":
-					e.Column.Visibility = Visibility.Hidden;
-					break;
-				case "Comment":
-					e.Column.Header = "Komentarz";
-
-					break;
-			}
-		}
 
 		private void ButtonAddComment_Click(object sender, RoutedEventArgs e)
 		{
 			string tempComment = TextBoxComment.Text;
 			string tempStar = TextBoxStars.Text;
-			Int16 tempNumberStar =Int16.Parse( tempStar[tempStar.Length - 1].ToString());
+			Int16 tempNumberStar = Int16.Parse(tempStar[tempStar.Length - 1].ToString());
 			int tempIdUser = Users.LogUser.Id_User;
 			sqlConnect.AddComment(tempComment, tempNumberStar, tempIdUser, currentIdProduct, "AddComment");
 			MessageBox.Show("Udało się dodać komentarz");
@@ -154,7 +130,7 @@ namespace SklepInternetowy.AppWindows
 			string tempStar = TextBoxStars.Text;
 			Int16 tempNumberStar = Int16.Parse(tempStar[tempStar.Length - 1].ToString());
 			int tempStatus = CheckBoxStatus.IsChecked == true ? 1 : 0;
-			sqlConnect.UpdateComment(tempIdComment,tempComment,tempNumberStar, tempStatus, "UpdateComment");
+			sqlConnect.UpdateComment(tempIdComment, tempComment, tempNumberStar, tempStatus, "UpdateComment");
 			MessageBox.Show("Udało się zmienić komentarz");
 			this.Close();
 		}
@@ -168,7 +144,7 @@ namespace SklepInternetowy.AppWindows
 				int tempLocation = tempName.Length - 1;
 				int tempNumeric = int.Parse(tempName[tempLocation].ToString());
 				string tempStars2 = tempStars;
-				
+
 				switch (tempNumeric)
 				{
 					case 1:
@@ -211,7 +187,7 @@ namespace SklepInternetowy.AppWindows
 				string tempName = tempCheckBox.Name;
 				int tempLocation = tempName.Length - 1;
 				int tempNumeric = int.Parse(tempName[tempLocation].ToString());
-				string tempStars2= tempStars;
+				string tempStars2 = tempStars;
 				switch (tempNumeric)
 				{
 					case 1:

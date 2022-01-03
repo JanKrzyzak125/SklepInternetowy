@@ -4,23 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SklepInternetowy.AppWindows"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:FluentWPF="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF" x:Class="SklepInternetowy.AppWindows.NewProductWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:FluentWPF="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF" 
+        x:Class="SklepInternetowy.AppWindows.NewProductWindow"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Nowy produkt"
-    xmlns:o="clr-namespace:SklepInternetowy"
+        Background="AliceBlue"
+        xmlns:o="clr-namespace:SklepInternetowy"
         ResizeMode="CanMinimize"
         Height="450" Width="1200"
     >
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="146*"/>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="343*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
@@ -35,170 +38,146 @@
         </Grid.RowDefinitions>
 
         <Label Content="Nazwa Produktu*" 
-               HorizontalAlignment="Center"  VerticalAlignment="Center" 
-               Height="28" Width="151"
+               Style="{StaticResource MyLabel}" 
                />
         <Label Content="Marka Produktu*" 
-               HorizontalAlignment="Center"  VerticalAlignment="Center" 
-               Height="28" Width="151"
                Style="{StaticResource MyLabel}"
-               Grid.Row="1" 
+               Grid.Row="1"
                />
         <Label Content="Kategoria*" 
-               HorizontalAlignment="Center" VerticalAlignment="Center"
-               Height="28" Width="151" 
-               Grid.Row="2"
+              Style="{StaticResource MyLabel}"
+               Grid.Row="2" 
                />
 
         <Label Content="Stan produktu*" 
-               HorizontalAlignment="Center" VerticalAlignment="Center"
-               Height="28" Width="151"
-               Grid.Row="3" 
+               Style="{StaticResource MyLabel}"
+               Grid.Row="3"  
                />
         <Label Content="Ilość produktu*" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="28"  Width="152" Grid.Row="4" />
+               Style="{StaticResource MyLabel}"
+               Grid.Row="4"  
+               />
         <Label Content="Typ Gwarancji*" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="29" Width="152" 
+               Style="{StaticResource MyLabel}"
                Grid.Row="5" 
                />
         <Label Content="Ilość gwarancji" 
-               HorizontalAlignment="Center" VerticalAlignment="Top"
-               Height="28"  Width="152"
-               Grid.Row="6" Margin="0,8,0,0"
+               Style="{StaticResource MyLabel}"
+               Grid.Row="6" 
                />
         <Label Content="*-Trzeba obowiązkowo uzupełnić lub wybrać" 
-               HorizontalAlignment="Left" VerticalAlignment="Center"
-               Height="28"  Width="323" Margin="12,0,0,0"
-               Grid.Row="7"  Grid.ColumnSpan="2"
+               Style="{StaticResource MyLabel}"
+               Width="323"
+               Grid.Row="7"  Grid.ColumnSpan="2" 
                />
 
         <Label Content="Podatek VAT*" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="29" Width="161" 
-               Grid.Column="2"/>
-
-        <Label Content="Cena Netto*" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="28" Grid.Row="1" Width="151" 
+               Style="{StaticResource MyLabel}"
                Grid.Column="2"
                />
 
+        <Label Content="Cena Netto*" 
+               Style="{StaticResource MyLabel}"
+               Grid.Row="1" Grid.Column="2" 
+               />
+
         <Label Content="Cena Brutto" 
-               HorizontalAlignment="Center" VerticalAlignment="Top" 
-               Height="28"  Width="151" Margin="0,12,0,0"
-               Grid.Row="2"  Grid.Column="2" 
+               Style="{StaticResource MyLabel}"
+               Grid.Row="2"  Grid.Column="2"
                />
 
         <Label Content="Parametr nazwa"
-               HorizontalAlignment="Center" VerticalAlignment="Top"
-               Height="28"  Width="151" 
-               Grid.Column="2"  Grid.Row="3" Margin="0,8,0,0"/>
+               Style="{StaticResource MyLabel}" 
+               Grid.Column="2"  Grid.Row="3"
+               />
         <Label Content="Parametr Dodatkowy" 
-               HorizontalAlignment="Center" VerticalAlignment="Top" 
-               Height="28" Width="151" 
-               Grid.Column="2" Grid.Row="4" Margin="0,10,0,0"/>
+               Style="{StaticResource MyLabel}"
+               Grid.Column="2" Grid.Row="4"
+               />
         <Label Content="Zobacz oceny" 
                x:Name="LabelRating"
-               HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Height="28" Width="151" 
-              Grid.Column="2" Grid.Row="5"/>
+               Style="{StaticResource MyLabel}" 
+               Grid.Column="2" Grid.Row="5"
+               />
 
         <Label Content="Zdjęcie" 
-               HorizontalAlignment="Center" VerticalAlignment="Center"  
-               Height="28" Width="140" 
-               RenderTransformOrigin="0.485,-0.046"
-               Grid.Column="4" />
+               Style="{StaticResource MyLabel}"
+               Grid.Column="4"  
+               />
         <Label Content="Opis" 
-               HorizontalAlignment="Center" VerticalAlignment="Top"  
-               Height="28" Width="140" Margin="0,12,0,0"
-               Grid.Row="2" Grid.Column="4"/>
+               Style="{StaticResource MyLabel}"
+               Grid.Row="2" Grid.Column="4" 
+               />
 
         <TextBox x:Name="TextBoxNameProduct" 
-                 HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top"
-                 Height="28" Width="152"  Margin="0,8,0,0"
-                 Cursor="IBeam"
+                 Style="{StaticResource MyTextBox}"
                  Text=""
-                 ToolTip="Podaj nazwę produktu"
-                 Grid.Column="1"
-                 
+                 ToolTip="Nazwa nie większa niż 26"
+                 Grid.Column="1" 
+                 MaxLength="25"
+                 MaxLines="1"
                  />
         <ComboBox x:Name="ComboBrand" 
-                  Background="AliceBlue" 
-                  ToolTip="Wybierz markę " 
-                  Height="28" Margin="10,6,10,0" 
+                  Style="{StaticResource MyComboBox}"
+                  ToolTip="Wybierz markę" 
                   Grid.Column="1" Grid.Row="1" 
-                  VerticalAlignment="Top"
                   />
         <ComboBox x:Name="ComboCategory" 
-                  Background="AliceBlue" 
+                  Style="{StaticResource MyComboBox}"
                   ToolTip="Wybierz Kategorie" 
-                  Height="28" Margin="8,0,8,0" 
                   Grid.Column="1" Grid.Row="2"
                   />
         <ComboBox x:Name="ComboCondition" 
+                  Style="{StaticResource MyComboBox}"
                   ItemsSource="{Binding Path=TempListCondition}"  
-                  Background="AliceBlue" 
                   ToolTip="Wybrać stan produktu" 
-                  Height="28" Margin="8,0,8,0" 
                   Grid.Column="1" Grid.Row="3"
                   />
         <TextBox  x:Name="TextBoxQuantity"
+                  Style="{StaticResource MyTextBox}"
                   ToolTip="podać tylko liczbę w szt" 
                   Grid.Column="1" 
-                  HorizontalAlignment="Center"  VerticalAlignment="Center" 
-                  Height="30" Width="151" 
                   Grid.Row="4"
-                  TextWrapping="Wrap"
-                  Cursor="IBeam"
                   PreviewTextInput="OnlyNumeric"
+                  MaxLines="1"
                   />
 
         <ComboBox x:Name="ComboWarranty" 
-                  Background="AliceBlue" 
+                  Style="{StaticResource MyComboBox}"
                   ToolTip="Wybierz typ gwarancji" 
-                  Height="28" Margin="5,0,10,0" 
                   Grid.Column="1" Grid.Row="5"
                   />
 
         <TextBox x:Name="TextBoxDaysWarranty"
+                 Style="{StaticResource MyTextBox}"
                  ToolTip="podać tylko liczbę" 
                  Text="" 
-                 HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" 
-                 Height="30"   Width="159" Margin="5,7,0,0"
                  Grid.Column="1" Grid.Row="6"
                  PreviewTextInput="OnlyNumeric"
+                 MaxLines="1"
                  />
         <ComboBox ItemsSource="{Binding Path=TempListVat}" 
                   x:Name="ComboVAT" 
-                  Background="AliceBlue" 
-                  Height="28" Margin="11,8,8,0" 
+                  Style="{StaticResource MyComboBox}"
                   Grid.Column="3" 
-                  VerticalAlignment="Top"
                   ToolTip="Wybrać opodatkowanie"
                   />
 
         <TextBox Grid.Column="3" 
                  x:Name="TextBoxNetto"
-                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Height="28" Grid.Row="1" 
+                 Style="{StaticResource MyTextBox}"
+                 Grid.Row="1" 
                  Text="" 
-                 TextWrapping="Wrap" 
-                  Width="154" 
-                 Cursor="IBeam"
                  ToolTip="Podaj cenę netto"
                  PreviewTextInput="OnlyNumeric"
                  TextChanged="MakeBrutto"
+                 MaxLines="1"
                  />
 
-        <TextBox Grid.Column="3" 
-                 x:Name="TextBoxBrutto"
-                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Height="28" Grid.Row="2" 
+        <TextBox x:Name="TextBoxBrutto"
+                 Style="{StaticResource MyTextBox}"
+                 Grid.Row="2" Grid.Column="3" 
                  Text="" 
-                 TextWrapping="Wrap" 
-                  Width="154" 
                  Cursor="IBeam"
                  ToolTip="Wygeneruje się cena z Vat"
                  IsEnabled="False"
@@ -206,72 +185,64 @@
 
 
 
-        <TextBox Grid.Column="3"
-                 x:Name="TextBoxOptionalName"
-                 HorizontalAlignment="Left" VerticalAlignment="Top"
-                 Height="29" Width="152" Margin="9,7,0,0"
-                 Grid.Row="3" 
+        <TextBox x:Name="TextBoxOptionalName"
+                 Style="{StaticResource MyTextBox}"
+                 Grid.Row="3" Grid.Column="3"
                  Text="" 
-                 TextWrapping="Wrap" 
+                 MaxLength="50"
+                 ToolTip="Maksymalna długość 50"
                  TextChanged="NameChange"
+                 MaxLines="1"
                  />
 
-        <TextBox Grid.Column="3" 
-                  x:Name="TextBoxOptionalDescription"
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
-                 Height="29" Width="151"
-                 Grid.Row="4"
+        <TextBox x:Name="TextBoxOptionalDescription"
+                 Grid.Row="4" Grid.Column="3" 
+                 Style="{StaticResource MyTextBox}"
                  Text="" 
-                 TextWrapping="Wrap" 
-                 TextChanged="NameChange" Margin="9,0,0,0"
+                 TextChanged="NameChange" 
+                 MaxLength="50"
+                 MaxLines="1"
                  />
         <Button x:Name="ButtonRating" 
+                Style="{StaticResource MyButton}"
                 Content="Pokaż oceny"
                 Grid.Column="3" Grid.Row="5"
-                Height="39"  Width="151"
                 ToolTip="Zobacz komentarze na produkt"
-                Click="Rating_Click"
+                Click="Rating_Click" 
                 />
 
-        <TextBox Background="AliceBlue" 
-                 x:Name="TextBoxDescription"
+        <TextBox x:Name="TextBoxDescription"
+                 Style="{StaticResource MyTextBox}"
                  ToolTip="Tutaj wstawić dokładny opis produktu" 
-                 Grid.Column="4" 
-                 HorizontalAlignment="Left"  VerticalAlignment="Top" 
-                 Height="251" Margin="10,7,0,0" Width="494" 
-                 Grid.Row="3" 
+                 Grid.Column="4" Grid.Row="3"
+                 Grid.ColumnSpan="2" Grid.RowSpan="5"
+                 Height="251"  Width="494"   
                  Text="" 
-                 TextWrapping="Wrap" 
-                 Cursor="IBeam" Grid.ColumnSpan="2" Grid.RowSpan="5"
+                 MaxLength="100"
                  />
-
-
-
         <Image x:Name="ImageProduct" 
                ToolTip="Pogląd zdjęcia" 
                Grid.Column="5" 
+               
                HorizontalAlignment="Left" VerticalAlignment="Top"
                Height="140" Margin="10,13,0,0" Width="241"  
-               
                RenderTransformOrigin="3.074,2.824" Grid.RowSpan="3"
                Stretch="Fill"
                />
         <Button x:Name="ButtonAddImage" 
                 Click="ButtonAddImage_Click" 
                 Content="Wprowadz" 
+                Style="{StaticResource MyButton}"
                 Grid.Column="4" Grid.Row="1"
-                HorizontalAlignment="Center" VerticalAlignment="Top" 
-                Height="39"  Width="151" Margin="0,6,0,0"
                 />
-        <Button Content="Wystaw" 
-                x:Name="ButtonProduct"
-                Grid.Column="2" 
-                HorizontalAlignment="Center" VerticalAlignment="Top" 
-                Grid.Row="6" 
-                Width="323" Height="73" Margin="0,14,0,0"  
-                Cursor="Hand"
+        <Button x:Name="ButtonProduct"
+                Content="Dodaj produkt"
+                Grid.Column="2" Grid.Row="6" 
                 Grid.ColumnSpan="2" Grid.RowSpan="2"
+                Style="{StaticResource MyButton}" 
+                Width="323" Height="73" 
+                Cursor="Pen"
+       
                 />
-
     </Grid>
 </Window>

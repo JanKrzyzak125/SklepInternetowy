@@ -34,18 +34,13 @@ namespace SklepInternetowy.AppWindows
 
 		public AdminPanel()
 		{
-
 			InitializeComponent();
-
 			isChangeDataGridAdmin = false;
 			sqlConnect = new SQLConnect();
-
 			tempListTabs = sqlConnect.listTables();
 			ComboBoxTabs.ItemsSource = tempListTabs;
-
 			tempListViews = sqlConnect.listViews();
 			ComboBoxViews.ItemsSource = tempListViews;
-
 		}
 
 		public void ChangeCommandClick(object sender, RoutedEventArgs e)
@@ -55,7 +50,6 @@ namespace SklepInternetowy.AppWindows
 				SelectUpdateDataBase();
 				isChangeDataGridAdmin = false;
 			}
-
 			currentTab = ComboBoxTabs.Text;
 			string tempCommand = "values" + currentTab;
 			currentDataTable = sqlConnect.ReadTable(tempCommand);
@@ -76,9 +70,6 @@ namespace SklepInternetowy.AppWindows
 
 		private void DataGridAdminMouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			int temp = DataGridAdmin.SelectedIndex;
-			MessageBox.Show("Element zawiera=" + DataGridAdmin);
-
 		}
 
 		private void SelectUpdateDataBase()
@@ -267,7 +258,7 @@ namespace SklepInternetowy.AppWindows
 				}
 				else
 				{
-					MessageBox.Show("Administartor nie może dodawać płatności");
+					MessageBox.Show("Administartor nie może dodawać płatności", "Uwaga!", MessageBoxButton.OK);
 				}
 				i++;
 			}
@@ -295,7 +286,7 @@ namespace SklepInternetowy.AppWindows
 				}
 				else
 				{
-					MessageBox.Show("Administartor nie może dodawać firm");
+					MessageBox.Show("Administartor nie może dodawać firm","Uwaga!",MessageBoxButton.OK);
 				}
 				i++;
 			}
@@ -322,7 +313,7 @@ namespace SklepInternetowy.AppWindows
 				}
 				else
 				{
-					MessageBox.Show("Administartor nie może dodawać Komentarzy");
+					MessageBox.Show("Administartor nie może dodawać Komentarzy", "Uwaga!", MessageBoxButton.OK);
 				}
 				i++;
 			}
@@ -349,7 +340,7 @@ namespace SklepInternetowy.AppWindows
 				}
 				else
 				{
-					MessageBox.Show("Administartor nie moze dodawać nowych Faktur");
+					MessageBox.Show("Administartor nie moze dodawać nowych Faktur", "Uwaga!", MessageBoxButton.OK);
 				}
 				i++;
 			}
@@ -403,7 +394,7 @@ namespace SklepInternetowy.AppWindows
 				}
 				else
 				{
-					MessageBox.Show("Administrator nie może dodawać nowych zakupionych produktów");
+					MessageBox.Show("Administrator nie może dodawać nowych zakupionych produktów", "Uwaga!", MessageBoxButton.OK);
 				}
 				i++;
 			}
@@ -429,7 +420,7 @@ namespace SklepInternetowy.AppWindows
 				}
 				else
 				{
-					MessageBox.Show("Administrator nie może dodawać nowych zakupionych produktów");
+					MessageBox.Show("Administrator nie może dodawać nowych zakupionych produktów", "Uwaga!", MessageBoxButton.OK);
 				}
 				i++;
 			}
@@ -477,7 +468,6 @@ namespace SklepInternetowy.AppWindows
 					{
 						sqlConnect.Add((int)item[0], "Add" + currentTab);
 					}
-
 				}
 				i++;
 			}
