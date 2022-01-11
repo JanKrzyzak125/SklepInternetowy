@@ -21,7 +21,6 @@ namespace SklepInternetowy
 		private List<string> tempListNumberPayment;
 		private SQLConnect sqlConnect;
 		private WindowPayment windowPayment;
-		private WindowInvoice windowInvoice;
 
 		public WindowPay()
 		{
@@ -31,7 +30,6 @@ namespace SklepInternetowy
 		public WindowPay(Product product, int valueSelectQuantity)
 		{
 			InitializeComponent();
-			windowInvoice = new WindowInvoice();
 			windowPayment = new WindowPayment();
 			sqlConnect = new SQLConnect();
 			this.Title = "Kupowanie produktu";
@@ -72,10 +70,8 @@ namespace SklepInternetowy
 
 				}
 			}
-
 			ComboBoxPayment.ItemsSource = tempListNamePayment;
 			ComboBoxPayment.SelectedItem = null;
-
 		}
 
 		private void makeVat()
@@ -110,53 +106,25 @@ namespace SklepInternetowy
 				DateTime tempToday = DateTime.Now;
 				int tempRetailSalers = currentProduct.Id_RetailSales;
 				int tempQuantity = currentSelectQuantity;
-				int tempIsInvoice = 0;
-				if (CheckBoxInvoice.IsChecked==true) tempIsInvoice = 1;
-				DateTime tempDayPay =(DateTime) DatePay.SelectedDate;
+
+				DateTime tempDayPay = (DateTime)DatePay.SelectedDate;
 				DateTime tempDateDelivery = (DateTime)DateDelivery.SelectedDate;
 
 				if (tempPayment != -1)
 				{
 					sqlConnect.AddTransation(tempPayment, tempIdUser, tempToday, tempSumPay, tempRetailSalers, tempQuantity,
-											tempIsInvoice, tempToday, tempDayPay, tempDateDelivery, 1, "AddTransation");
-					MessageBox.Show("Udało się zakupić");
-
-					if (tempIsInvoice == 1) 
-					{
-						MessageBox.Show("Za chwile się włączy faktura");
-						if (windowInvoice.IsVisible == false) 
-						{
-							int idSeller=currentProduct.Id_Seller;
-							object[] tempSeller = sqlConnect.ShowUser(idSeller,"ViewSeller");
-							List<object[]> tempListInvoice = sqlConnect.Show(tempIdUser, "ViewCurrentInvoice");
-							object[] tempInvoice = tempListInvoice[tempListInvoice.Count-1];
-							foreach (object[] valueInvoice  in tempListInvoice) 
-							{
-								if ((DateTime)valueInvoice[3]==tempToday&&
-									(int)valueInvoice[12]==tempRetailSalers && (int)valueInvoice[13]==tempQuantity)
-								{
-									tempInvoice = valueInvoice;
-								}
-							}
-
-
-							windowInvoice = new WindowInvoice(tempSeller,currentProduct, tempInvoice);
-							windowInvoice.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-							windowInvoice.Show();
-						}
-
-
-					}
+											1, tempToday, tempDayPay, tempDateDelivery, 1, "AddTransation");
+					MessageBox.Show("Udało się zakupić","Powiadomienie",MessageBoxButton.OK);
 					this.Close();
 				}
 				else
 				{
-					MessageBox.Show("Problem z płatnością");
+					MessageBox.Show("Problem z płatnością","Uwaga!",MessageBoxButton.OK);
 				}
 			}
 			else
 			{
-				MessageBox.Show("Wypełnij wszystkie potrzebne pola");
+				MessageBox.Show("Wypełnij wszystkie potrzebne pola", "Uwaga!", MessageBoxButton.OK);
 			}
 		}
 
@@ -166,8 +134,10 @@ namespace SklepInternetowy
 			if (!windowPayment.IsVisible)
 			{
 				int tempId = Users.LogUser.Id_User;
-				windowPayment = new WindowPayment(tempId);
-				windowPayment.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowPayment = new WindowPayment(tempId)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
 				windowPayment.ShowDialog();
 				makeComboBox();
 			}
@@ -190,8 +160,10 @@ namespace SklepInternetowy
 
 				if (actualPayment != null)
 				{
-					windowPayment = new WindowPayment(actualPayment);
-					windowPayment.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+					windowPayment = new WindowPayment(actualPayment)
+					{
+						WindowStartupLocation = WindowStartupLocation.CenterScreen
+					};
 					windowPayment.ShowDialog();
 					makeComboBox();
 				}

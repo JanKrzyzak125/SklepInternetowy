@@ -20,6 +20,7 @@ namespace SklepInternetowy
 		private AdminPanel adminPanel;
 		private WindowProduct windowProduct;
 		private List<string> templistName;
+		private DataTable tempSales;
 
 		/// <summary>
 		/// 
@@ -30,13 +31,14 @@ namespace SklepInternetowy
 			startApp();
 			ButtonLog.Visibility = Visibility.Visible;
 			ButtonAdmin.Visibility = Visibility.Hidden;
-			ButtonUser.Visibility = Visibility.Hidden;		
+			ButtonUser.Visibility = Visibility.Hidden;
 		}
 
-		private void startApp() 
+		private void startApp()
 		{
 			templistName = new List<string>();
 			ComboBoxName.ItemsSource = templistName;
+
 			sqlConnect = new SQLConnect();
 			sqlConnect.Refresh(DateTime.Today, "StartApp");
 			this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -44,21 +46,37 @@ namespace SklepInternetowy
 			userPanel = new UserPanel();
 			adminPanel = new AdminPanel();
 			windowProduct = new WindowProduct();
-			DataTable tempSales = sqlConnect.ReadTable("ViewMainSales");
+			tempSales = sqlConnect.ReadTable("ViewMainSales");
+
+
+			for (int i = 0; i < tempSales.Rows.Count; i++)
+			{
+				object[] tempObject = tempSales.Rows[i].ItemArray;
+				decimal tempNumber = Math.Round((decimal)tempSales.Rows[i].ItemArray[14], 2);
+				tempObject[14] = tempNumber;
+				tempSales.Rows[i].ItemArray = tempObject;
+			}
 			MainGrid.ItemsSource = tempSales.DefaultView;
+
 
 
 			for (int i = 0; i < MainGrid.Columns.Count; i++)
 			{
-				string temp= MainGrid.Columns[i].Header.ToString();
-			  	if(deleteNameColumn(temp)) templistName.Add(temp);
-			} 
-			
+				string temp = MainGrid.Columns[i].Header.ToString();
+				if (deleteNameColumn(temp))
+				{
+					templistName.Add(temp);
+
+				}
+			}
+
 		}
 
-		private bool deleteNameColumn(string column) 
+
+
+		private bool deleteNameColumn(string column)
 		{
-			switch (column) 
+			switch (column)
 			{
 				case "Nazwa produktu":
 				case "Kategoria":
@@ -71,7 +89,21 @@ namespace SklepInternetowy
 					return false;
 			}
 
-			
+
+		}
+
+		private string nameColumnEng(string column)
+		{
+			return column switch
+			{
+				"Nazwa produktu" => "Name",
+				"Kategoria" => "NameCondition",
+				"Marka" => "NameBrand",
+				"Nazwa parametru" => "NameParameter",
+				"Typ gwarancji" => "TypeWarranty",
+				"Dostawa" => "NameDelivery",
+				_ => "",
+			};
 		}
 
 
@@ -84,8 +116,10 @@ namespace SklepInternetowy
 		{
 			if (windowAuthentication.IsVisible == false)
 			{
-				windowAuthentication = new Authentication(this);
-				windowAuthentication.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowAuthentication = new Authentication(this)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
 				windowAuthentication.Show();
 			}
 		}
@@ -107,25 +141,16 @@ namespace SklepInternetowy
 		/// </summary>
 		private void Search_Click(object sender, RoutedEventArgs e)
 		{
-			if (!TextSearch.Text.Equals("") && ComboBoxName.SelectedItem!=null)
+			if (!TextSearch.Equals("") && ComboBoxName.SelectedItem != null)
 			{
-				string tempTextSearch = TextSearch.Text;
-				string tempName = ComboBoxName.Text;
-				DataRow tempDataRow = (DataRow)MainGrid.ItemsSource;
+
 			}
-			else 
+			else
 			{
-				if (TextSearch.Text.Equals(""))
-				{
-					TextSearch.Background = System.Windows.Media.Brushes.Yellow;
-				}
-				else 
-				{
-					ComboBoxName.Background = System.Windows.Media.Brushes.Yellow;
-				}
-				MessageBox.Show("Proszę o wybranie rodzaju oraz nazwy by wyszukać");
+				ComboBoxName.Background = System.Windows.Media.Brushes.Yellow;
+				MessageBox.Show("Proszę o wybranie rodzaju oraz nazwy by wyszukać", "Uwaga!", MessageBoxButton.OK);
 			}
-			
+
 
 		}
 
@@ -139,8 +164,10 @@ namespace SklepInternetowy
 		{
 			if (adminPanel.IsVisible == false)
 			{
-				adminPanel = new AdminPanel();
-				adminPanel.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				adminPanel = new AdminPanel
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
 				adminPanel.Show();
 			}
 		}
@@ -149,8 +176,10 @@ namespace SklepInternetowy
 		{
 			if (userPanel.IsVisible == false)
 			{
-				userPanel = new UserPanel(this);
-				userPanel.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				userPanel = new UserPanel(this)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
 				userPanel.Show();
 			}
 		}
@@ -174,8 +203,10 @@ namespace SklepInternetowy
 					int tempIdProduct = (int)tempObject[10];
 					sqlConnect.AddVisitor(tempIdUser, tempIdProduct, "AddVisitor");
 				}
-				windowProduct = new WindowProduct(this, tempObject);
-				windowProduct.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowProduct = new WindowProduct(this, tempObject)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
 				windowProduct.ShowDialog();
 			}
 		}
@@ -205,15 +236,35 @@ namespace SklepInternetowy
 			}
 		}
 
+
+
 		private void TextBoxIsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			TextBox temp = sender as TextBox;
-
 			if (temp.Text.Equals("Wyszukaj"))
 			{
 				temp.Text = "";
 			}
+
 		}
 
+		private void TextSearch_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			TextBox temp = sender as TextBox;
+			DataView tempDataView = MainGrid.ItemsSource as DataView;
+			if (ComboBoxName != null)
+				if (ComboBoxName.SelectedItem != null && temp.Text.Length > 2)
+				{
+					string tempSearch = ComboBoxName.Text;
+					string tempNameColumn = nameColumnEng(tempSearch);
+					tempDataView.RowFilter = tempNameColumn + " LIKE'" + temp.Text + "%'";
+					MainGrid.RowBackground = System.Windows.Media.Brushes.Green;
+				}
+				else
+				{
+					MainGrid.RowBackground = null;
+					tempDataView.RowFilter = null;
+				}
+		}
 	}
 }

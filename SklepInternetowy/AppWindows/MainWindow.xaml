@@ -20,21 +20,19 @@
         Title="Sklep"
         Height="860" Width="1200" 
         Closing="CloseApp"
-        Background="AliceBlue"
     >
     <Window.Resources>
 
         <Style TargetType="DataGridColumnHeader" x:Key="MyDataGridColumnHeader">
         </Style>
-        
+
         <Style TargetType="DataGrid" x:Key="MyDataGrid">
-           
+
         </Style>
 
         <Style TargetType="DataGridCell" x:Key="MyCell">
             <Setter Property="Background" Value="Gold"/>
-            <Setter Property="FontWeight" Value="Heavy"/>
-            
+
         </Style>
 
         <DataTemplate x:Key="DataTemplateDateStartSales">
@@ -47,7 +45,7 @@
         <DataTemplate x:Key="DateTemplateDateClosed">
             <DatePicker SelectedDate="{Binding DateClosed}" IsEnabled="False"  />
         </DataTemplate>
-        
+
     </Window.Resources>
 
     <Grid>
@@ -99,9 +97,8 @@
                                     CellStyle="{StaticResource MyCell}"
                                     HeaderStyle="{StaticResource MyDataGridColumnHeader}"
                                     TextBlock.FontSize="20"
-                                    TextBlock.Foreground="Aqua"
                                     />
-                <DataGridTextColumn Header="Procent Vat"
+                <DataGridTextColumn Header="Procent Vat[zł]"
                                     Binding="{Binding Vat_rate}"/>
                 <DataGridTextColumn Header="Stan Produktu"
                                     Binding="{Binding NameCondition}"/>
@@ -111,7 +108,6 @@
                                     Binding="{Binding NameBrand}"/>
                 <DataGridTextColumn Header="Ilość produktu"
                                     Binding="{Binding Quantity}"/>
-
                 <DataGridTextColumn Header="Nazwa parametru"
                                     Binding="{Binding NameParameter}"/>
                 <DataGridTextColumn Header="Dodatkowy parametr"
@@ -147,11 +143,12 @@
         <TextBox x:Name="TextSearch"
                  Style="{StaticResource MyTextBox}"
                  Text="Wyszukaj" 
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 TextChanged="TextSearch_TextChanged"
+                 HorizontalAlignment="Left"
                  Height="38" Width="416" 
                  Margin="184,0,0,0" 
-                 TextWrapping="Wrap"
-                 Grid.Row="1" Cursor="IBeam"
+                 ToolTip="Przynajmniej trzeba wpisać trzy znaki"
+                 Grid.Row="1" 
                  IsKeyboardFocusWithinChanged="TextBoxIsKeyboardFocusWithinChanged"
                  />
         <Button Style="{StaticResource MyButton}"  
@@ -211,12 +208,13 @@
                 HorizontalAlignment="Left" VerticalAlignment="Center"
                 Height="44" Margin="879,0,0,0" Width="167"
                 Grid.Row="1" 
-                Cursor="Hand"/>
+                />
         <ComboBox x:Name="ComboBoxName" 
                   Style="{StaticResource MyComboBox}"
                   HorizontalAlignment="Left" 
-                  Margin="10,10,0,0" Width="160"
-                  Grid.Row="1" 
+                  Margin="10,0,0,0" Width="160"
+                  Grid.Row="1" Height="38" 
                   />
+
     </Grid>
 </Window>

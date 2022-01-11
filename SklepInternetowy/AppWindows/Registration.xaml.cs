@@ -14,6 +14,7 @@ namespace SklepInternetowy
 	{
 		private Authentication windowAuthentication;
 		private SQLConnect sqlConnect;
+		private string message="";
 
 		/// <summary>
 		/// Constructor for edit user data
@@ -82,6 +83,7 @@ namespace SklepInternetowy
 
 		private void EditPassword_Click(object sender, RoutedEventArgs e)
 		{
+			
 			string tempHash1 = PasswordBox1.Password;
 			string tempHash2 = PasswordBox2.Password;
 			string tempNick = TextBoxNick.Text;
@@ -92,7 +94,7 @@ namespace SklepInternetowy
 				PasswordBox2.Background = System.Windows.Media.Brushes.Green;
 				byte[] tempHash = windowAuthentication.makeHash(tempHash1);
 				sqlConnect.NewPassword(tempNick, tempHash, "NewPassword");
-				MessageBox.Show("Udalo się zmienić hasło");
+				MessageBox.Show("Udalo się zmienić hasło","Powiadomienie",MessageBoxButton.OK);
 				this.Close();
 			}
 			else
@@ -105,6 +107,7 @@ namespace SklepInternetowy
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
+			message = "";
 			int codeFailed = 0;
 			string tempNick = TextBoxNick.Text;
 			if (!testName(TextBoxNick)) codeFailed++;
@@ -121,13 +124,21 @@ namespace SklepInternetowy
 			long tempPhone;
 			if (!long.TryParse(TextBoxPhone.Text, out tempPhone))
 			{
-				MessageBox.Show("Zły numer Telefonu");
+				message += "Zły numer Telefonu\n";
 				TextBoxPhone.Background = System.Windows.Media.Brushes.Red;
 				codeFailed++;
 			}
 			else
 			{
-				TextBoxPhone.Background = System.Windows.Media.Brushes.Green;
+				if (TextBoxPhone.Text.Length == 0)
+				{
+					message += "brak numeru telefonu\n";
+					TextBoxPhone.Background = System.Windows.Media.Brushes.Red;
+				}
+				else
+				{
+					TextBoxPhone.Background = System.Windows.Media.Brushes.Green;
+				}
 			}
 
 			string tempAdress = TextBoxAdress.Text;
@@ -158,7 +169,7 @@ namespace SklepInternetowy
 			else
 			{
 				codeFailed++;
-				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów","Uwaga!",MessageBoxButton.OK);
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów:\n"+message,"Uwaga!",MessageBoxButton.OK);
 			}
 
 		}
@@ -171,6 +182,7 @@ namespace SklepInternetowy
 		/// <param name="e"></param>
 		private void RegisterButton_Click(object sender, RoutedEventArgs e)
 		{
+			message = "";
 			int codeFailed = 0;
 			string tempNick = TextBoxNick.Text;
 			if (!testName(TextBoxNick)) codeFailed++;
@@ -185,18 +197,26 @@ namespace SklepInternetowy
 			if (!testName(TextBoxSurname)) codeFailed++;
 
 			string tempEmail = TextBoxEmail.Text;
-			if (!testName(TextBoxAdress)) codeFailed++;
+			if (!testName(TextBoxEmail)) codeFailed++;
 
 			long tempPhone;
 			if (!long.TryParse(TextBoxPhone.Text, out tempPhone))
 			{
-				MessageBox.Show("Zły numer Telefonu");
+				message += "Zły numer telefonu\n";
 				TextBoxPhone.Background = System.Windows.Media.Brushes.Red;
 				codeFailed++;
 			}
 			else
 			{
-				TextBoxPhone.Background = System.Windows.Media.Brushes.Green;
+				if (TextBoxPhone.Text.Length == 0)
+				{
+					message += "brak numeru telefonu\n";
+					TextBoxPhone.Background = System.Windows.Media.Brushes.Red;
+				}
+				else
+				{
+					TextBoxPhone.Background = System.Windows.Media.Brushes.Green;
+				}
 			}
 
 			string tempAdress = TextBoxAdress.Text;
@@ -222,7 +242,7 @@ namespace SklepInternetowy
 				codeFailed++;
 				PasswordBox1.Background = System.Windows.Media.Brushes.Red;
 				PasswordBox2.Background = System.Windows.Media.Brushes.Red;
-				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów", "Uwaga!", MessageBoxButton.OK);
+				MessageBox.Show("Wystąpiło w formularzu=" + codeFailed + " błędów:\n" + message, "Uwaga!", MessageBoxButton.OK);
 			}
 		}
 
@@ -232,10 +252,10 @@ namespace SklepInternetowy
 		{
 			string tempString = tempTextBox.Text;
 			if (tempString.Length < 2 || tempString.Equals("Imię") || tempString.Equals("Nazwisko") ||
-				tempString.Equals("Nick") || tempString.Equals("Poczta Email") || tempString.Equals("Adres") ||
+				tempString.Equals("Nick") || tempString.Equals("Email") || tempString.Equals("Adres") ||
 				tempString.Equals("Miasto"))
 			{
-				MessageBox.Show("Złe " + nameTextBox(tempTextBox.Name), "Uwaga!", MessageBoxButton.OK);
+				message += "Złe " + nameTextBox(tempTextBox.Name)+"\n";
 				tempTextBox.Background = System.Windows.Media.Brushes.Red;
 				return false;
 			}
@@ -271,7 +291,7 @@ namespace SklepInternetowy
 		{
 			TextBox temp = sender as TextBox;
 			if (temp.Text.Equals("Imię") || temp.Text.Equals("Nazwisko") ||
-				temp.Text.Equals("Nick") || temp.Text.Equals("Poczta Email") ||
+				temp.Text.Equals("Nick") || temp.Text.Equals("Email") ||
 				temp.Text.Equals("Adres") || temp.Text.Equals("Miasto") ||
 				temp.Text.Equals("Telefon"))
 			{

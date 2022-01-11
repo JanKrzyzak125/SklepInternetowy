@@ -96,14 +96,21 @@ namespace SklepInternetowy
 		{
 			int tempIdProduct = currentProduct.Id_Product;
 			int selledQuantity = sqlConnect.AvalilableProducts(tempIdProduct, "AvalilableProducts");
-			if (selledQuantity != -1)
-			{
-				int currentAvalilableQuantity = currentProduct.Quantity - selledQuantity;
 
-				for (int i = 1; i <= currentAvalilableQuantity; i++)
-				{
-					tempListQuantity.Add(i);
-				}
+			if (selledQuantity == -1) 
+			{
+				selledQuantity = 0;
+			}
+			int currentAvalilableQuantity = currentProduct.Quantity - selledQuantity;
+
+			for (int i = 1; i <= currentAvalilableQuantity; i++)
+			{
+				tempListQuantity.Add(i);
+			}
+			if (tempListQuantity.Count == 0) 
+			{
+				ButtonPay.IsEnabled = false;
+				ComboBoxAvailableQuantity.ToolTip = "Zabrakło towaru";
 			}
 		}
 
@@ -113,13 +120,15 @@ namespace SklepInternetowy
 			{
 				int tempSelectedQuantity;
 				int.TryParse(ComboBoxAvailableQuantity.Text, out tempSelectedQuantity);
-				windowPay = new WindowPay(currentProduct, tempSelectedQuantity);
-				windowPay.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+				windowPay = new WindowPay(currentProduct, tempSelectedQuantity)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
 				windowPay.Show();
 			}
 			else
 			{
-				MessageBox.Show("Wybierz ilość by kupić");
+				MessageBox.Show("Wybierz ilość by kupić","Uwaga!",MessageBoxButton.OK);
 			}
 		}
 
@@ -127,9 +136,11 @@ namespace SklepInternetowy
 		{
 			if (newProductWindow.IsVisible == false)
 			{
-				newProductWindow = new NewProductWindow(currentProduct);
-				newProductWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-				newProductWindow.Show();
+				newProductWindow = new NewProductWindow(currentProduct)
+				{
+					WindowStartupLocation = WindowStartupLocation.CenterScreen
+				};
+				newProductWindow.ShowDialog();
 			}
 		}
 

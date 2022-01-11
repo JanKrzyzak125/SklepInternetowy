@@ -12,7 +12,7 @@
         Title="WindowPay"
         Background="AliceBlue"
         Height="450" Width="800">
-   
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="73*"/>
@@ -52,7 +52,7 @@
                />
         <Label Content="*Pola obowiązkowe"
                Style="{StaticResource MyLabel}" 
-               Grid.Row="5" 
+               Grid.Row="5" Width="380" Grid.ColumnSpan="2" 
                />
 
 
@@ -110,11 +110,6 @@
                 Grid.Column="1" Grid.Row="3" 
                 Click="ButtonChangePayment_Click"
                 />
-        <CheckBox x:Name="CheckBoxInvoice"
-                  Content="Faktura" 
-                  ToolTip="Czy pokazać fakturę"
-                  Style="{StaticResource MyCheckBox}"
-                  Grid.Column="1" Grid.Row="5"/>
 
         <TextBox x:Name="TextBoxName" 
                  Grid.Column="3"  

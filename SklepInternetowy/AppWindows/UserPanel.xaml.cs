@@ -90,6 +90,7 @@ namespace SklepInternetowy
 			switch (e.PropertyName)
 			{
 				case "Id_User":
+				case "Id_Transation":
 				case "Id_Payment":
 				case "Id_Seller":
 				case "Id_TypePayment":
@@ -98,7 +99,12 @@ namespace SklepInternetowy
 				case "StatusTypePayment":
 				case "LimitString":
 				case "Id_RetailSales":
-					//case "Status":
+			    case "Id_ListProductsBuyed":
+				case "Id_Invoice":
+				case "Id_RetailSalers":
+				case "Code_Invoice":
+				case "StatusTransation":
+				case "StatusInvoice":
 					e.Column.Visibility = Visibility.Hidden;
 					break;
 				case "Name":
@@ -173,6 +179,27 @@ namespace SklepInternetowy
 				case "StatusProduct":
 					e.Column.Header = "Status Produktu";
 					break;
+				case "Date_Transation":
+					e.Column.Header = "Data kupienia";
+					break;
+				case "SumPay":
+					e.Column.Header = "Suma Brutto";
+					break;
+				case "QuantityBuyed":
+					e.Column.Header = "Ilość";
+					break;
+				case "Date_Of_Make_Invoice":
+					e.Column.Header = "Data utworzenia faktury";
+					break;
+				case "Date_Of_Pay":
+					e.Column.Header = "Data zapłaty";
+					break;
+				case "Date_Of_Service":
+					e.Column.Header = "Data wykonania";
+					break;
+
+				
+
 			}
 		}
 
@@ -191,6 +218,8 @@ namespace SklepInternetowy
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ButtonAdd2.Visibility = Visibility.Visible;
 						ButtonAdd.Visibility = Visibility.Visible;
+						ButtonAdd2.Click -= AddRating_Click;
+						ButtonAdd2.Click -= AddRetailSales_Click;
 						DeleteClick();
 						ButtonAdd.Visibility = Visibility.Hidden;
 						ButtonAdd.Content = "Dodaj Fakturę";
@@ -211,6 +240,8 @@ namespace SklepInternetowy
 						ButtonAdd.Content = "Dodaj Produkt";
 						ButtonAdd.ToolTip = "Dodaje Produkt";
 						ButtonAdd2.Click -= AddRating_Click;
+						ButtonAdd2.Click -= AddRetailSales_Click;
+						ButtonAdd2.Click -= AddRetailSales_Click;
 						ButtonAdd2.Click += AddRetailSales_Click;
 						ButtonAdd2.Content = "Dodaj Sprzedaż";
 						ButtonAdd2.ToolTip = "Dodajesz nową sprzedaż po wybraniu produktu";
@@ -220,6 +251,8 @@ namespace SklepInternetowy
 						actualView = 3;
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserSalers");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						ButtonAdd2.Click -= AddRating_Click;
+						ButtonAdd2.Click -= AddRetailSales_Click;
 						ButtonAdd2.Visibility = Visibility.Hidden;
 						ButtonAdd.Visibility = Visibility.Hidden;
 						break;
@@ -229,6 +262,8 @@ namespace SklepInternetowy
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
 						ButtonAdd2.Visibility = Visibility.Hidden;
 						ButtonAdd.Visibility = Visibility.Visible;
+						ButtonAdd2.Click -= AddRating_Click;
+						ButtonAdd2.Click -= AddRetailSales_Click;
 						DeleteClick();
 						ButtonAdd.Click += AddPayment_Click;
 						ButtonAdd.Content = "Dodaj Płatność";
@@ -239,6 +274,8 @@ namespace SklepInternetowy
 						actualView = 5;
 						tempTable = sqlConnect.ShowProduct(tempidUser, "ViewUserSell");
 						UsersDataGrid.ItemsSource = tempTable.DefaultView;
+						ButtonAdd2.Click -= AddRating_Click;
+						ButtonAdd2.Click -= AddRetailSales_Click;
 						ButtonAdd2.Visibility = Visibility.Hidden;
 						ButtonAdd.Visibility = Visibility.Hidden;
 						DeleteClick();
@@ -438,7 +475,7 @@ namespace SklepInternetowy
 
 		private void MenuItemClose_Click(object sender, RoutedEventArgs e)
 		{
-			Close();
+			Application.Current.Shutdown();
 		}
 	}
 }

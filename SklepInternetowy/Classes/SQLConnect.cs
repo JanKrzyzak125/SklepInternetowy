@@ -316,7 +316,7 @@ namespace SklepInternetowy
 					};
 					cmd.Parameters.Add(retValParam);
 					cmd.ExecuteScalar();
-					if (retValParam.Value.Equals("")) resultVar = (int)retValParam.Value;
+					resultVar = retValParam.Value.ToString().Length!=0 ? (int)retValParam.Value : 0;
 				}
 				con.Close();
 				return resultVar;

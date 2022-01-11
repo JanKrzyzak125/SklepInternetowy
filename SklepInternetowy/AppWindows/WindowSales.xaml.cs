@@ -101,22 +101,25 @@ namespace SklepInternetowy.AppWindows
 			TextBoxViews.Visibility = Visibility.Visible;
 
 			DateTime fristDate=new DateTime();
-			if ((DateTime)actualSales[4] != fristDate.Date)
+			if (actualSales[4] == null)
 			{
-				temp = (DateTime)actualSales[4];
-				DateEnd.Text = temp.ToShortDateString();
-				DateEnd.Visibility = Visibility.Visible;
-				LabelDateEnd.Visibility = Visibility.Visible;
-				TextBoxDaysReturn.IsEnabled = false;
-				ComboBoxDelivery.IsEnabled = false;
-				TextBoxDaysDelivery.IsEnabled = false;
-				CheckBoxStatus.IsChecked = true;
-				CheckBoxStatus.IsEnabled = false;
-				this.Title = "Pogląd zakończonej sprzedaży";
-				ButtonAccept.IsEnabled = false;
-				ButtonAccept.ToolTip = "Nie mozna zaakceptować bo sprzedaż zakończona";
+				if ((DateTime)actualSales[4] != fristDate.Date)
+				{
+					temp = (DateTime)actualSales[4];
+					DateEnd.Text = temp.ToShortDateString();
+					DateEnd.Visibility = Visibility.Visible;
+					LabelDateEnd.Visibility = Visibility.Visible;
+					TextBoxDaysReturn.IsEnabled = false;
+					ComboBoxDelivery.IsEnabled = false;
+					TextBoxDaysDelivery.IsEnabled = false;
+					CheckBoxStatus.IsChecked = true;
+					CheckBoxStatus.IsEnabled = false;
+					this.Title = "Pogląd zakończonej sprzedaży";
+					ButtonAccept.IsEnabled = false;
+					ButtonAccept.ToolTip = "Nie mozna zaakceptować bo sprzedaż zakończona";
+				}
 			}
-			else 
+			else
 			{
 				DateEnd.Visibility = Visibility.Hidden;
 				LabelDateEnd.Visibility = Visibility.Hidden;

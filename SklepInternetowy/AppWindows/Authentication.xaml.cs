@@ -96,6 +96,7 @@ namespace SklepInternetowy
 			if (registrationWindow.IsVisible == false)
 			{
 				registrationWindow = new Registration(this);
+				registrationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 				registrationWindow.ShowDialog();
 			}
 		}

@@ -15,9 +15,9 @@
         <Button x:Name="RegisterButton"
                 Style="{StaticResource MyButton}"
                 Content="Rejestruj" 
-                HorizontalAlignment="Center" VerticalAlignment="Top" 
+                VerticalAlignment="Top" 
                 Height="52" Margin="0,492,0,0"  Width="380"
-                Click="RegisterButton_Click"
+                
                 Cursor="Hand"/>
         <TextBox x:Name="TextBoxNick"
                  HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -72,7 +72,7 @@
         <TextBox x:Name="TextBoxEmail" 
                  HorizontalAlignment="Center" VerticalAlignment="Top"
                  Height="36" Margin="0,256,0,0"  Width="380"
-                 Text="Poczta Email" 
+                 Text="Email" 
                  MaxLines="1"
                  MaxLength="50"
                  TextWrapping="Wrap"
