@@ -19,23 +19,11 @@
                  Cursor="IBeam"
                  ToolTip="Podaj Nazwę firmy[32 znaki max]"
                  MaxLines="1"
-                 MaxLength="32"
+                 MaxLength="32" RenderTransformOrigin="0.274,0.696"
                  />
-
-        <TextBox x:Name="TextBoxPhone" 
-                 HorizontalAlignment="Center" VerticalAlignment="Top" 
-                 Height="36" Margin="0,163,0,0" Width="380"
-                 Text="Telefon" 
-                 TextWrapping="Wrap" 
-                 MaxLines="1"
-                 ToolTip="Podaj Numer Telefonu Firmy"
-                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
-                 PreviewTextInput="OnlyNumeric"
-                 />
-
         <TextBox x:Name="TextBoxAdress"
                  HorizontalAlignment="Center" VerticalAlignment="Top"
-                 Height="36" Margin="0,60,0,0" Width="380"
+                 Height="36" Margin="0,63,0,0" Width="380"
                  Text="Adres" 
                  TextWrapping="Wrap" 
                  TextChanged="NameChange"
@@ -47,7 +35,7 @@
                  />
         <TextBox x:Name="TextBoxCity"
                  HorizontalAlignment="Center" VerticalAlignment="Top"
-                 Height="36" Margin="0,113,0,0" Width="380"
+                 Height="36" Margin="0,117,0,0" Width="380"
                  Text="Miasto" 
                  TextWrapping="Wrap" 
                  TextChanged="NameChange"
@@ -56,6 +44,32 @@
                  ToolTip="Podaj miasto firmy"
                  MaxLines="1"
                  MaxLength="20"
+                 />
+
+        <TextBox x:Name="TextBoxPhone" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top" 
+                 Height="36" Margin="0,168,0,0" Width="380"
+                 Text="Telefon" 
+                 TextWrapping="Wrap" 
+                 MaxLines="1"
+                 ToolTip="Podaj Numer Telefonu Firmy"
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
+                 PreviewTextInput="OnlyNumeric"
+                 />
+
+       
+        
+        <TextBox x:Name="TextBoxNIP"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Height="36" Width="380" Margin="0,220,0,0"
+                 Text="NIP" 
+                 TextWrapping="Wrap" 
+                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
+                 Cursor="IBeam"
+                 ToolTip="Podaj numer NIP" 
+                 MaxLines="1"
+                 MaxLength="10"
+                 PreviewTextInput="OnlyNumeric"
                  />
         <TextBox x:Name="TextBoxEmail"
                  HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -68,29 +82,15 @@
                  MaxLength="40"
                  ToolTip="Podaj adres mailowy"
                  />
-        <TextBox x:Name="TextBoxNIP"
-                 HorizontalAlignment="Center" VerticalAlignment="Top"
-                 Height="36" Width="380" Margin="0,217,0,0"
-                 Text="NIP" 
-                 TextWrapping="Wrap" 
-                 IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged" 
-                 Cursor="IBeam"
-                 ToolTip="Podaj numer NIP" 
-                 MaxLines="1"
-                 MaxLength="10"
-                 PreviewTextInput="OnlyNumeric"
-                 />
-        <CheckBox x:Name="CheckBoxIsActive" Content="Dezaktywować"
-                  HorizontalAlignment="Center" VerticalAlignment="Top"
+        <CheckBox x:Name="CheckBoxIsActive" Content="Dezaktywować" VerticalAlignment="Top"
                   Margin="0,317,0,0" Width="380"
                   Style="{StaticResource MyCheckBox}" Cursor="Hand"
                   />
 
         <Button x:Name="RegisterButton"
-                Content="Rejestruj" 
-                HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Content="Rejestruj" VerticalAlignment="Top" 
                 Height="52" Margin="0,360,0,0"  Width="380"
-                Style="{StaticResource MyButton}"
+                Style="{StaticResource MyButton}" Cursor="Hand"
                 />
 
     </Grid>

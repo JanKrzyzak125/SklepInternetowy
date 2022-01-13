@@ -97,7 +97,7 @@ namespace SklepInternetowy
 			return column switch
 			{
 				"Nazwa produktu" => "Name",
-				"Kategoria" => "NameCondition",
+				"Kategoria" => "NameCategory",
 				"Marka" => "NameBrand",
 				"Nazwa parametru" => "NameParameter",
 				"Typ gwarancji" => "TypeWarranty",

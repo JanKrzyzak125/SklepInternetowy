@@ -12,13 +12,7 @@
         >
     <Grid>
 
-        <Button x:Name="RegisterButton"
-                Style="{StaticResource MyButton}"
-                Content="Rejestruj" 
-                VerticalAlignment="Top" 
-                Height="52" Margin="0,492,0,0"  Width="380"
-                
-                Cursor="Hand"/>
+       
         <TextBox x:Name="TextBoxNick"
                  HorizontalAlignment="Center" VerticalAlignment="Top"
                  Height="36" Margin="0,10,0,0" Width="380"
@@ -84,10 +78,11 @@
                  Height="36" Margin="0,308,0,0" Width="380"
                  Text="Telefon" 
                  MaxLines="1"
+                 MaxLength="10"
                  TextWrapping="Wrap" 
                  ToolTip="Podaj Numer Telefonu"
                  IsKeyboardFocusWithinChanged="TextBoxNameIsKeyboardFocusWithinChanged"
-                  PreviewTextInput="OnlyNumeric"
+                  PreviewTextInput="OnlyNumeric" Cursor="IBeam"
                  />
         <TextBox x:Name="TextBoxAdress" 
                  HorizontalAlignment="Center" VerticalAlignment="Top"
@@ -114,9 +109,16 @@
                   Content="Dezaktywuj konto" 
                   HorizontalAlignment="Center" 
                   Style="{StaticResource MyCheckBox}"
-                  Margin="0,455,0,0" VerticalAlignment="Top" Width="380"/>
+                  Margin="0,455,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="380"
+                  />
 
-
-
+        <Button x:Name="RegisterButton"
+                Style="{StaticResource MyButton}"
+                Content="Rejestruj" 
+                VerticalAlignment="Top" 
+                Height="52" Margin="0,492,0,0"  Width="380"
+                Cursor="Hand"/>
     </Grid>
 </Window>
